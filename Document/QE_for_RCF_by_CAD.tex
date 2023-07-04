@@ -3,8 +3,12 @@
 
 \usepackage{amsmath,amssymb}
 \usepackage{amsthm}
+\usepackage{algorithmic}
+\usepackage{algorithm}
 
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\psc}{\mathrm{psc}}
+\newcommand{\PROJ}{\mathrm{PROJ}}
 
 \theoremstyle{definition}
 \newtheorem{definition}{定義}[section]
@@ -13,7 +17,7 @@
 \newtheorem{theorem}{定理}[section]
 \newtheorem{corollary}{系}[section]
 \newtheorem*{claim*}{主張}
-
+\newtheorem{remark}{注意}[section]
 \renewcommand{\proofname}{\textbf{証明}}
 
 
@@ -122,11 +126,137 @@ $S \subset \R^{n-1}$を弧状連結部分集合とし, $F \subset \R[x_1,\dots, 
 \end{itemize}
 \end{corollary}
 
+よって, $F$-符号不変な$\R^n$の分割を与えるには, 系.1.1.の条件を満たすような$\R^{n-1}$の分割を構成すればよい.
+一つ目の条件を満たすような$\R^{n-1}$の分割を与えるには, 各$f \in F$について, $x_n$係数が符号不変になるような分割を構成すればよい.
+しかし, 二つ目と三つ目の条件を満たすような$\R^{n-1}$の分割を与えるのは少し難しい. 
+なぜなら, 多項式$f, g \in \R[x_1, \dots, x_n]$について, $a \in \R^{n-1}$を固定したとき, $\gcd(f,g)(a)$と$\gcd(f(a),g(a))$は必ずしも等しくないからである.
+
+よって, 二つ目と三つ目の条件も満たすような$\R^{n-1}$の分割を与えることができるように次の節で準備をする.
+
+
+
 \subsection{主部分終結式係数(Principal Subresultant Coefficient)}
 
-ここで書くこと. $\gcd(f(a),g(a))$の次数が$\mathrm{psc}(f(a),g(a))$から決まるということ.
+\begin{definition}
+$\mathrm{R}$を可換環とし, $A(x), B(x) \in \mathrm{R}[x]$ を, $\deg A(x) = m, \deg B(x) = n$ とする. ただし, $\deg 0 = 0$と解釈する.
+
+$j = 0, \dots, \min\{n, m\}$に対し, 多項式$A(x), B(x)$の$j$-部分終結式$S_j(A, B)$を次のように定義する.
+\begin{align*}
+A(x) = a_m x^m + \dots + a_1 x + a_0, \\
+B(x) = b_n x^n + \dots + b_1 x + b_0 
+\end{align*}
+として, $j = 0, \dots, \min\{n,m\}$に対し, 
+\begin{align*}
+M_j = 
+\begin{pmatrix}
+a_m & a_{m-1} & \cdots & a_1 & a_0 &    &  \\
+     &  a_m     & \cdots & a_2 & a_1& a_0 &  \\
+     &   & \ddots &  & & \\
+b_n & b_{n-1} & \cdots & b_1 & b_0 &    & \\
+     &  b_n     & \cdots & b_2 & b_1& b_0 & \\
+     &   & \ddots &  & & 
+\end{pmatrix}
+\in \mathrm{M}_{m+n-2j, m+n-j}(\mathrm{R})
+\end{align*}
+とする. ここで, 行列の空白部分はすべて0であり, また, 行列の上側は$n-j$行, 行列の下側は$m-j$行である.
+
+また, $j = 0, \dots, \min\{m,n\}$, $i = 0, \dots, j$に対し, 
+\begin{align*}
+M_{j,i} = (\text{$M_j$の第$1$列}, \text{$M_j$の第$2$列}, \dots ,\text{$M_j$の第$m+n-2j-1$列}, \text{$M_j$の第$m+n-i-j$列})
+\in \mathrm{M}_{m+n-2j, m+n-2j}(\mathrm{R})
+\end{align*}
+とする. $j = 0, \dots, \min\{n, m\}$に対し, 
+\begin{align*}
+S_j(A, B) = \sum_{i=0}^j \det M_{j, i} \cdot x^i 
+\end{align*}
+を, 多項式$A(x), B(x)$の$j$-部分終結式$S_j(A, B)$という.
+
+この$j$-部分終結式の先頭項係数を, $\psc_j(A,B)$とかき, 多項式$A(x), B(x)$の$j$-主部分終結式係数という.
+\end{definition}
+
+
+主部分終結式係数は, 多項式$A(x), B(x)$の係数, 及び次数に依存して定まる.
+
+\begin{remark}
+$m,n$のどちらかが0のとき, 
+$S_0(A,B) = 0, \psc_0(A,B) = 0$とする.
+
+また, $\psc_0(A,B)$は, 多項式$A(x), B(x)$の終結式に一致する.
+\end{remark}
+
+
+\begin{proposition}
+$\mathrm{R}$を体とし, $A(x), B(x) \in \mathrm{R}[x] \setminus \{0\}$とすると, 次が成立する.
+\begin{align*}
+\deg(\gcd(A, B)) = \min \{ j  \in \{0,1, \dots, \min\{n,m\}\}\mid \psc_j(A,B) \neq 0\}
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+後で書く.
+方針: 部分終結式がユークリッドの互除法で出てくる多項式の列の定数倍になることが分かる.
+
+
+\end{proof}
 
 
 \subsection{符号不変な分割の存在とCADアルゴリズム}
-符号不変な分割の存在を示し，CADアルゴリズムについて明記する. 
+\begin{definition}
+$F \subset \R[x_1, \dots, x_n]$を有限部分集合とする. $\PROJ(F) \subset \R[x_1, \dots, x_{n-1}]$を, 次のように定める.
+
+まず,  $B(F) := \{ \mathrm{red}^k(f) \mid f \in F, k=1, \dots, \deg(f) \}$とする. ただし, $\mathrm{red}(f) = f - \mathrm{LT}(f; x_n)$である.
+次に, 
+\begin{align*}
+	\PROJ_1(F) &:= \{\mathrm{LC}(f;x_n) \mid f \in B\}\\
+	\PROJ_2(F) &:= \{\psc_j(f, \frac{\partial f}{\partial x_n}; x_n) \mid f \in B, j =0, \dots, \deg(\frac{\partial f}{\partial x_n};x_n) \}\\
+	\PROJ_3(F) &:= \{\psc_j(f,g;x_n) \mid f,g \in B, j = 0, \dots, \min\{\deg(f;x_n), \deg(g;x_n)\}\}
+\end{align*}
+とし, 以上を用いて
+\begin{align*}
+	\PROJ(F) &:= \PROJ_1(F) \cup \PROJ_2(F) \cup \PROJ_3(F)
+\end{align*}
+と定める.
+\end{definition}
+\begin{corollary}
+$F \subset \R[x_1, \dots, x_n]$を有限部分集合とし, $S \subset \R^{n-1}$を弧状連結部分集合とする.
+
+$S$が$\PROJ(F)$-符号不変ならば, $S$は$F$-描画可能である.
+\end{corollary}
+
+\begin{proof}
+命題1.1.及び命題1.2.から従う.
+\end{proof}
+
+\begin{definition}
+$ F \subset \mathbb{R}[x_1,\dots,x_n] $ を有限部分集合とする. $ S \subset \mathbb{R}^{n-1} $ が $ F $-描画可能とする.
+このとき, $ S $ 上の $ F $ の解を$ f_1(x)< \dots <f_k(x) $とし, $ f_0(x) := -\infty $ , $ f_{k+1}(x) := \infty $ とするとき,
+\begin{align*}
+  C_{2i} &:= \{(x,y) \mid  x \in S, f_i(x) = y \} \quad i = 1,\dots, k,\\
+  C_{2i+1} &:= \{(x,y) \mid x \in S, f_{i}(x)<y<f_{i+1}(x) \} \quad i = 0,1, \dots, k 
+\end{align*}
+
+とすれば, $\{C_j\}_{j=1}^{2k+1}$ は $ S \times \mathbb{R} $ の$F$-符号不変な分割を与える.
+この $ S \times \mathbb{R} $ の分割 $ \{C_j\}_{j=1}^{2k+1} $ を, $ S $ の持ち上げといい, $ \mathfrak{L}(S) $ と書く.
+
+また, $\mathfrak{D}$が$\R^{n-1}$の分割であるとき, $\mathfrak{L}(\mathfrak{D}) := \bigcup_{D \in \mathfrak{D}}\mathfrak{L}(D)$を$\mathfrak{D}$の持ち上げという.
+\end{definition}
+
+以上より, 有限部分集合$F \subset \R[x_1, \dots, x_n]$が与えられたとき, $F$の符号不変な分割を取得するアルゴリズムは次のように表現される.
+
+\begin{algorithm}
+    \caption{CADアルゴリズム}
+    \begin{algorithmic}[1]
+    \REQUIRE $n \geq 1$:自然数, $F \subset \R[x_1, \dots, x_n]$: 有限部分集合
+    \ENSURE $\mathfrak{D}$: $\R^n$の$F$-符号不変な分割
+    \STATE $\mathfrak{D} \leftarrow \text{$\PROJ^{n-1}(F)$-符号不変な$\R^1$の分割}$
+    \STATE $k \leftarrow 1$
+    \WHILE{$k < n$}
+    \STATE $\mathfrak{D} \leftarrow \text{$\mathfrak{L}(\mathfrak{D})$: $\mathfrak{D}$の持ち上げ}$
+    \STATE $k \leftarrow k+1$
+    \ENDWHILE
+    \end{algorithmic}
+\end{algorithm}
+
+このアルゴリズムを実際にコンピュータ上に実装するには, $\R^n$の分割でなく, 分割の各セルから代表元を取得したものを得る. 
+
 \end{document}
