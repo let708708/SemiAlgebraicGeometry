@@ -7,6 +7,10 @@ __pycache__/
 *.aux
 *.log
 *.synctex.gz
+*.dvi
+*.pdf
+*.fls
+*.fdb_latexmk
 
 # C extensions
 *.so
