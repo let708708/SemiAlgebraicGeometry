@@ -1,4 +1,4 @@
-\documentclass[dvipdfmx]{jsarticle}
+\documentclass[uplatex, dvipdfmx]{jsarticle}
 
 \usepackage{amsmath,amssymb}
 \usepackage{amsthm}
@@ -7,8 +7,10 @@
 \usepackage{cleveref}
 
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\Qua}{\mathfrak{Q}}
 \newcommand{\psc}{\mathrm{psc}}
 \newcommand{\PROJ}{\mathrm{PROJ}}
+\newcommand{\sign}{\mathrm{sign}}
 
 \theoremstyle{definition}
 \newtheorem{definition}{定義}[section]
@@ -20,18 +22,72 @@
 \newtheorem{theorem}{定理}[section]
 \crefname{theorem}{定理}{定理}%
 \newtheorem{corollary}{系}[section]
-\crefname{corollary}{系}{系}%
+\crefname{corollary}{系}{系}%S
 \newtheorem*{claim*}{主張}
 \newtheorem{remark}{注意}[section]
+\newtheorem{example}{例}[section]
+
 \renewcommand{\proofname}{\textbf{証明}}
 
 \begin{document}
 
-\title{QE for RCF by CAD}
+\title{柱状代数分解による量化子消去}
 \author{富永 直弥}
 \maketitle
 
-\section{CADアルゴリズム}
+\section{量化子消去}
+\begin{definition}
+     代数的命題文を以下の条件で定義する．
+     \begin{enumerate}
+          \item 実係数多項式$f(x, y, \dots)$に対し, $f(x,y, \dots) > 0$, $f(x,y, \dots) = 0$, $f(x,y, \dots) < 0$は代数的命題文である.
+          \item $\phi_1, \phi_2$ が代数的命題文であるとき，$\phi_1 \lor \phi_2$, $\phi_1 \land \phi_2$は代数的命題文である．
+          \item $\phi$ が代数的命題文であるとき，$\lnot \phi$は代数的命題文である．
+          \item 上記の規則により生成される命題文だけが代数的命題文である．
+     \end{enumerate}
+     このとき，代数的命題文$\phi$に対し，$\phi$の変数が自然に定まる．明示的に変数を記述するときは，代数的命題文$\phi(x,y,\dots)$等とかく．
+\end{definition}
+
+\begin{definition}
+     タルスキー文を以下の条件で定義する．
+     \begin{enumerate}
+          \item 代数的命題文$\phi$はタルスキー文である．
+          \item $\phi(x,y,\dots)$がタルスキー文であるとき，$\exists x \phi(x,y,\dots)$, $\forall x \phi(x,y,\dots)$はタルスキー文である．
+          \item $\phi_1, \phi_2$ がタルスキー文であるとき，$\phi_1 \lor \phi_2$, $\phi_1 \land \phi_2$はタルスキー文である．
+          \item $\phi$ がタルスキー文であるとき，$\lnot \phi$はタルスキー文である．
+          \item 上記の規則により生成される命題文だけがタルスキー文である．
+     \end{enumerate}
+     このとき, タルスキー文$\phi$に対し，$\phi$の自由変数が自然に定まる．明示的に自由変数を記述するときは, タルスキー文$\phi(x, y, \dots)$等とかく． 
+\end{definition}
+任意のタルスキー文$\phi(x_1, \dots, x_n)$は次のような冠頭標準形
+\begin{equation*}
+     \Qua_1 y_1 \Qua_2 y_2 \dots \Qua_k y_k \psi(x_1, \dots, x_n, y_1, \dots, y_k)
+\end{equation*}
+に書き替えることができる．ただし，$\Qua_i \in \{\exists, \forall\}$であり, $\psi(x_1, \dots, x_n, y_1, \dots, y_k)$は代数的命題文である． 
+
+\begin{theorem}
+     任意のタルスキー文$\phi(x_1, \dots, x_n)$に対して，同値な代数的命題文$\psi(x_1, \dots, x_n)$が存在する．
+\end{theorem}
+
+\begin{example}
+     タルスキー文
+     \begin{equation*}
+          \forall x (x^2 + ax + a + 3 > 0)
+     \end{equation*}
+     と同値な代数的命題文を求める．
+
+     この命題が成立することは, 二次方程式$x^2 + ax + a + 3 = 0$が実数解を持たないことに同値であるから，判別式$D = a^2 - 4(a+3)$は負である．すなわち元のタルスキー文は，代数的命題文
+     \begin{equation*}
+          a^2 - 4a - 12 < 0
+     \end{equation*}
+     に同値である．
+\end{example}
+
+実は, 任意のタルスキー文に対して同値な代数的命題文が存在する．
+さらに, 任意の冠頭標準形であるタルスキー文に対して，同値な代数的命題文を導出するアルゴリズムが存在する．
+そのようなアルゴリズムの存在を示すために，次の章ではCADについて準備をする．
+
+
+\section{CAD}
 CADとは，ユークリッド空間の分割で，各分割の上で複数の多項式を符号不変にするものである．Collinsにより提唱されたCADアルゴリズムについてかく．
 \begin{definition}
 $\R^n$の有限部分集合族$\mathfrak{D}$が，
@@ -259,5 +315,38 @@ $ F \subset \mathbb{R}[x_1,\dots,x_n] $ を有限部分集合とする．$ S \su
 \end{algorithm}
 
 このアルゴリズムを実際にコンピュータ上に実装するには，$\R^n$の分割でなく，分割の各セルから代表元を取得したものを得る．
+
+\section{QEとCADアルゴリズム}
+有限部分集合$F \subset \R[x_1, \dots, x_n]$が与えられたとき，
+前節では$\R^n$の$F$符号不変な分割$\mathfrak{D}$を構成することができることを示した．
+実はこのCADアルゴリズムによる分割は半代数的集合となっているのだが，各セルの定義式がどのようになっているかは記述できていない．
+量化子消去を行うには実際に各セル$D \in \mathfrak{D}$について，$D$の定義式が必要である．
+
+そのため，まず始めに定義式まで明示できるようにCADアルゴリズムを改良する．
+
+\subsection{増補射影}
+
+\begin{definition}
+     次数$m$の実係数多項式$f(x) \in \R[x] \setminus \{0\}$に対し，
+     \begin{align*}
+          F_0(x) &:= f(x),\\
+          F_i(x) &:= \frac{d^i f}{dx^i}(x) \quad i = 1, \dots, m
+     \end{align*}
+     とする．この多項式の列$\{F_i\}_{i=0}^m$を，$f(x)$のフーリエ列という．
+\end{definition}
+
+\begin{theorem}[トムの補題]
+     次数$m$の実係数多項式$f(x) \in \R[x] \setminus \{0\}$をとる．
+     このとき，各$\sigma \in \{-1, 0, +1\}^{m+1}$に対して，
+     \begin{align*}
+          \mathfrak{R}_f(\sigma) := \{x \in \R \mid \sign(F_i(x)) = \sigma_i, \, i = 1, \dots, m \}
+     \end{align*}
+     とすると, $\mathfrak{R}_f(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
+\end{theorem}
+
+\begin{proof}
+     後で書く．帰納法で示せる．
+\end{proof}
+
 
 \end{document}
