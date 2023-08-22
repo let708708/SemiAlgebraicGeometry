@@ -31,70 +31,85 @@
 
 \begin{document}
 
-\title{柱状代数分解による量化子消去}
+\title{実閉体上の柱状代数分解による量化子消去}
 \author{富永 直弥}
 \maketitle
 
 \section{量化子消去}
+実閉体$R$をとる．多項式を考えるとき，係数体は$R$とする．
+
+% 参考文献[Anai, QEの計算アルゴリズムとその応用]に乗っ取り用語を定義する．
+
 \begin{definition}
      代数的命題文を以下の条件で定義する．
      \begin{enumerate}
-          \item 実係数多項式$f(x, y, \dots)$に対し, $f(x,y, \dots) > 0$, $f(x,y, \dots) = 0$, $f(x,y, \dots) < 0$は代数的命題文である.
+          \item 任意の多項式$f(x, y, \dots)$に対し, $f(x,y, \dots) > 0$, $f(x,y, \dots) = 0$, $f(x,y, \dots) < 0$は代数的命題文である.
           \item $\phi_1, \phi_2$ が代数的命題文であるとき，$\phi_1 \lor \phi_2$, $\phi_1 \land \phi_2$は代数的命題文である．
           \item $\phi$ が代数的命題文であるとき，$\lnot \phi$は代数的命題文である．
           \item 上記の規則により生成される命題文だけが代数的命題文である．
      \end{enumerate}
-     このとき，代数的命題文$\phi$に対し，$\phi$の変数が自然に定まる．明示的に変数を記述するときは，代数的命題文$\phi(x,y,\dots)$等とかく．
+     このとき，代数的命題文$\phi$に対し，$\phi$の自由変数が自然に定まる．明示的に自由変数を記述するときは，代数的命題文$\phi(x,y,\dots)$等とかく．
 \end{definition}
 
 \begin{definition}
      タルスキー文を以下の条件で定義する．
      \begin{enumerate}
           \item 代数的命題文$\phi$はタルスキー文である．
-          \item $\phi(x,y,\dots)$がタルスキー文であるとき，$\exists x \phi(x,y,\dots)$, $\forall x \phi(x,y,\dots)$はタルスキー文である．
+          \item $\phi(x,y,\dots)$がタルスキー文であるとき，$\exists x \in R \phi(x,y,\dots)$, $\forall x \in R \phi(x,y,\dots)$はタルスキー文である．
           \item $\phi_1, \phi_2$ がタルスキー文であるとき，$\phi_1 \lor \phi_2$, $\phi_1 \land \phi_2$はタルスキー文である．
           \item $\phi$ がタルスキー文であるとき，$\lnot \phi$はタルスキー文である．
           \item 上記の規則により生成される命題文だけがタルスキー文である．
      \end{enumerate}
      このとき, タルスキー文$\phi$に対し，$\phi$の自由変数が自然に定まる．明示的に自由変数を記述するときは, タルスキー文$\phi(x, y, \dots)$等とかく． 
 \end{definition}
-任意のタルスキー文$\phi(x_1, \dots, x_n)$は次のような冠頭標準形
-\begin{equation*}
-     \Qua_1 y_1 \Qua_2 y_2 \dots \Qua_k y_k \psi(x_1, \dots, x_n, y_1, \dots, y_k)
-\end{equation*}
-に書き替えることができる．ただし，$\Qua_i \in \{\exists, \forall\}$であり, $\psi(x_1, \dots, x_n, y_1, \dots, y_k)$は代数的命題文である． 
-
-\begin{theorem}
-     任意のタルスキー文$\phi(x_1, \dots, x_n)$に対して，同値な代数的命題文$\psi(x_1, \dots, x_n)$が存在する．
-\end{theorem}
 
 \begin{example}
-     タルスキー文
+     次のタルスキー文に対して同値な代数的命題文が存在する．
      \begin{equation*}
-          \forall x (x^2 + ax + a + 3 > 0)
+          \forall x \in \R (x^2 + ax + a + 3 > 0)
      \end{equation*}
-     と同値な代数的命題文を求める．
 
-     この命題が成立することは, 二次方程式$x^2 + ax + a + 3 = 0$が実数解を持たないことに同値であるから，判別式$D = a^2 - 4(a+3)$は負である．すなわち元のタルスキー文は，代数的命題文
+     実際, $a$についての条件は，2次方程式$x^2 + ax + a + 3 = 0$の判別式が0より大きいことに必要十分であるから，上記のタルスキー文は，代数的命題文
      \begin{equation*}
-          a^2 - 4a - 12 < 0
+          (a < -1) \lor (1 < a)
      \end{equation*}
      に同値である．
 \end{example}
 
-実は, 任意のタルスキー文に対して同値な代数的命題文が存在する．
-さらに, 任意の冠頭標準形であるタルスキー文に対して，同値な代数的命題文を導出するアルゴリズムが存在する．
-そのようなアルゴリズムの存在を示すために，次の章ではCADについて準備をする．
+
+\begin{definition}
+上記の例のように，タルスキー文と同値な代数的命題文を導出する手続きを量化子消去という．
+また，タルスキー文$\phi$に対し，同値な代数的命題文が存在するとき，タルスキー文$\phi$は量化子消去可能という．
+\end{definition}
+
+実は，実閉体上の任意のタルスキー文は量化子消去可能であることが示されている．すなわち，次が成り立つ．
+
+\begin{theorem}(Tarski-Seidenberg)
+     任意のタルスキー文$\phi$に対し，$\phi$と同値な代数的命題文$\psi$が存在する．
+\end{theorem}
+
+しかし，上記の定理は，任意のタルスキー文が与えられたとき，それに同値な代数的命題文を導出する手続きを示しているわけではない．
+よりアルゴリズミックに導出する手続きとして，Collinsにより提唱された柱状代数分解による量化子消去の方法が知られている．
+
+この方法は，次のような形式で与えられたタルスキー文
+\begin{equation*}
+     \Qua_1 y_1 \Qua_2 y_2 \dots \Qua_k y_k \psi(x_1, \dots, x_n, y_1, \dots, y_k)
+\end{equation*}
+に対して同値な代数的命題文を求める手続きを与えている．
+ここで，$\Qua_i \in \{\exists, \forall\}$であり, $\psi(x_1, \dots, x_n, y_1, \dots, y_k)$は代数的命題文である． 
+
+次の節では，その柱状代数分解について解説する．
 
 
-\section{CAD}
-CADとは，ユークリッド空間の分割で，各分割の上で複数の多項式を符号不変にするものである．Collinsにより提唱されたCADアルゴリズムについてかく．
+% この節はまだEuclid空間(実数体)で書いているので訂正する．
+\section{柱状代数分解}
+柱状代数分解とは，ユークリッド空間の分割で，各分割の上で複数の多項式を符号不変にするものである．Collinsにより提唱されたCADアルゴリズムについてかく．
 \begin{definition}
 $\R^n$の有限部分集合族$\mathfrak{D}$が，
 
 \begin{itemize}
 	\item 任意の$D \in \mathfrak{D}$は空でない弧状連結集合，
-	\item 任意の$D_1$, $D_2 \in \mathfrak{D}$について，$D_1 \neq D_2$ならば$D_1 \cup D_2 = \emptyset$,
+	\item 任意の$D_1$, $D_2 \in \mathfrak{D}$について，$D_1 \neq D_2$ならば$D_1 \cap D_2 = \emptyset$,
 	\item $\bigcup_{D \in \mathfrak{D}}D = \R^n$
 \end{itemize}
 
@@ -151,7 +166,7 @@ $A \in \R[x_1, \dots, x_n]$とし，$S \subset \R^{n-1}$を弧状連結部分集
 \item $S$上$A$の重複度込みの複素数根の数は一定．
 \item $S$上$A$の相異なる複素数根の数は一定．
 \end{itemize}
-この時，$S$は$\{A\}$描画可能である．
+このとき，$S$は$\{A\}$描画可能である．
 \end{lemma}
 
 \begin{proof}
