@@ -11,6 +11,7 @@
 \newcommand{\psc}{\mathrm{psc}}
 \newcommand{\PROJ}{\mathrm{PROJ}}
 \newcommand{\sign}{\mathrm{sign}}
+\newcommand{\map}[3]{{#1}:{#2}\rightarrow{#3}}
 
 \theoremstyle{definition}
 \newtheorem{definition}{定義}[section]
@@ -35,17 +36,18 @@
 \author{富永 直弥}
 \maketitle
 
-\section{量化子消去}
+\section{基礎的な定義}
 % コンピュータによって「具体的な問題の」量化子消去を行うというモチベーションで議論を進める．
 % すると実数体を扱えないことから，実数体の公理を抜き出す動機が生まれそう？
 
-\subsection{順序体}
+\subsection{実閉体}
 % このセクションでは，実数体の公理を抜き出し，順序体を定義する．一階述語論理でも「順序体の言語」を用いる．
 % また，実数体の公理を抜き出すことで，実体および実閉体を定義する．
 
 \subsection{一階述語論理}
 %このセクションでは，一階述語論理の用語を定義する．
-%必要なもの：言語，モデル，項，論理式，理論，解釈…………
+%必要なもの：項，論理式，モデル(ここまで書いた)，理論，解釈…………
+
 一階述語論理式(first-order logic)は，
 変数記号，論理記号 ($=, \lnot, \lor, \land, \rightarrow$), 量化記号($\forall, \exists$)
 と，言語$L$で記述される．
@@ -56,21 +58,59 @@
 $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n$個の変数を受け取る関数記号を$n$変数関数記号という．
 
 \begin{example}[順序体の言語]
-次の記号からなる言語$L_\mathrm{OR}$を，順序体の言語という．
-\begin{itemize}
-     \item 2変数述語記号 $<$,
-     \item 2変数関数記号 $+$, $\cdot$,
-     \item 定数記号 1, 0
-\end{itemize}
+     次の記号からなる言語$L_\mathrm{OR}$を，順序体の言語という．
+     \begin{itemize}
+          \item 2変数述語記号 $<$,
+          \item 2変数関数記号 $+$, $\cdot$,
+          \item 定数記号 $1$, $0$.
+     \end{itemize}
 \end{example}
 
-% 置き換えについての面倒臭さは言及しなくてよい．
-% 我々は閉論理式の場合しか扱わないので．
-% 言語$L$が定まると，項，原子論理式，述語論理式などが順に定義される．
+言語$L$が定義されると，順に項，原子論理式，論理式が順に定義される．
 
+\begin{definition}[項の定義]
+     言語$L$に対して，項が帰納的に定義される．
+     \begin{enumerate}
+          \item 変数記号，定数記号は項である．
+          \item $t_1, \dots, t_n$がいずれも項とする．任意の$n$変数関数記号$f \in L$に対し，$f(t_1, \dots, t_n)$は項である．
+          \item 以上の規則により定まる記号列のみが項である．
+     \end{enumerate}
+\end{definition}
+
+\begin{definition}[論理式の定義]
+     言語$L$に対して，原子論理式を，次のいずれかの形をした記号列で定義する．
+     \begin{enumerate}
+          \item $t_1, t_2$を項として，$(t_1=t_2)$.
+          \item $R \in L$を$n$変数述語記号，$t_1, \dots, t_n$を項として，$(R(t_1, \dots, t_n))$.
+     \end{enumerate}
+     
+     さらに，言語$L$に対して，論理式が帰納的に定義される．
+     \begin{enumerate}
+          \item 原子論理式は論理式である．
+          \item $\phi$が論理式であるとすると，$(\lnot \phi)$は論理式である．
+          \item $\phi$,$\psi$が論理式であるとすると，$(\phi \lor \psi)$, $(\phi \land \psi)$, $(\phi \rightarrow \psi)$はいずれも論理式である．
+          \item $\phi$が論理式であるとすると，任意の変数記号$x$に対して$(\forall x \phi)$, $(\exists x \phi)$は論理式である．
+          \item 以上の規則により定まる記号列のみが論理式である．
+     \end{enumerate}
+\end{definition}
+
+% ここで自由変数の定義をする．
+% 順序体の例を用いてモデルを導入するとよりよさそう．
+
+\begin{definition}[モデルの定義]
+     言語$L$のモデルとは，空でない集合$M$と，次のようなデータの組$\mathfrak{M}=(M,\dots)$である．
+     \begin{itemize}
+          \item 各$n$変数述語記号$R \in L$に対応する部分集合$R^\mathfrak{M} \subset M^n$．
+          \item 各$n$変数関数記号$f \in L$に対応する写像$\map{f^\mathfrak{M}}{M^n}{M}$.
+          \item 各定数記号$c \in L$に対応する元$c^\mathfrak{M} \in M$．
+     \end{itemize}
+\end{definition}
+
+\section{量化子消去}
 実閉体$R$をとる．多項式を考えるとき，係数体は$R$とする．
 
 % 参考文献[Anai, QEの計算アルゴリズムとその応用]に乗っ取り用語を定義する．
+% と思ったけど，モデル理論の用語を用いたほうが良さそうなので直す．
 
 \begin{definition}
      代数的命題文を以下の条件で定義する．
@@ -362,7 +402,6 @@ $ F \subset \mathbb{R}[x_1,\dots,x_n] $ を有限部分集合とする．$ S \su
 \end{algorithm}
 
 このアルゴリズムを実際にコンピュータ上に実装するには，$\R^n$の分割でなく，分割の各セルから代表元を取得したものを得る．
-
 \section{QEとCADアルゴリズム}
 有限部分集合$F \subset \R[x_1, \dots, x_n]$が与えられたとき，
 前節では$\R^n$の$F$符号不変な分割$\mathfrak{D}$を構成することができることを示した．
