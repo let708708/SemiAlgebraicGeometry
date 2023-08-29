@@ -46,7 +46,7 @@
 
 \subsection{一階述語論理}
 %このセクションでは，一階述語論理の用語を定義する．
-%必要なもの：項，論理式，モデル(ここまで書いた)，理論，解釈…………
+%必要なもの：項，論理式，構造(ここまで書いた)，理論，解釈…………
 
 一階述語論理式(first-order logic)は，
 変数記号，論理記号 ($=, \lnot, \lor, \land, \rightarrow$), 量化記号($\forall, \exists$)
@@ -95,10 +95,10 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
 \end{definition}
 
 % ここで自由変数の定義をする．
-% 順序体の例を用いてモデルを導入するとよりよさそう．
+% 順序体の例を用いて構造を導入するとよりよさそう．
 
-\begin{definition}[モデルの定義]
-     言語$L$のモデルとは，空でない集合$M$と，次のようなデータの組$\mathfrak{M}=(M,\dots)$である．
+\begin{definition}[構造の定義]
+     言語$L$の構造とは，空でない集合$M$と，次のようなデータの組$\mathfrak{M}=(M,\dots)$である．
      \begin{itemize}
           \item 各$n$変数述語記号$R \in L$に対応する部分集合$R^\mathfrak{M} \subset M^n$．
           \item 各$n$変数関数記号$f \in L$に対応する写像$\map{f^\mathfrak{M}}{M^n}{M}$.
