@@ -7,6 +7,7 @@
 \usepackage{cleveref}
 
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Qua}{\mathfrak{Q}}
 \newcommand{\psc}{\mathrm{psc}}
 \newcommand{\PROJ}{\mathrm{PROJ}}
@@ -41,8 +42,42 @@
 % すると実数体を扱えないことから，実数体の公理を抜き出す動機が生まれそう？
 
 \subsection{実閉体}
-% このセクションでは，実数体の公理を抜き出し，順序体を定義する．一階述語論理でも「順序体の言語」を用いる．
-% また，実数体の公理を抜き出すことで，実体および実閉体を定義する．
+% この節では，Artin-Schreierにより導入された実閉体の理論を復習する．
+% 実閉体の概念はArtinが1927年にHilbertの第17問題を解くのにあたり導入された．
+
+% また，この説では参考文献\cite{Arai}に従い定義を書く．
+
+\begin{definition}[順序体と実体の定義]
+     体$F$と$F$上の全順序構造$<$の組$(F,<)$が次の性質を満たすとき，$(F,<)$を順序体(ordered field)という．
+     \begin{enumerate}
+          \item 任意の$x,y,z\in F$に対し，$x \leq y$ならば$x + z \leq y + z$である．
+          \item 任意の$x,y \in F$に対し，$x \geq 0$, $y \geq 0$ならば$x \cdot y \geq 0$である．
+     \end{enumerate}
+
+     また，体$F$が，任意の有限個の$F$の元$x_1, \dots, x_n \in F$について, $-1 \neq \sum_{i=1}^k x_i^2$を満たすとき，実体(real field)であるという．
+\end{definition}
+
+順序体と実体について，次の命題が成り立つ．
+
+\begin{proposition}
+     $F$を体とする．$F$が実体であることと，$F$が順序体となるような全順序構造$<$を持つことは同値である．
+\end{proposition}
+
+例えば，実数体$\R$や有理数体$\Q$は，通常の全順序構造を入れることにより順序体となる．したがって，$\R$および$\Q$は実体である．
+
+\begin{definition}[実閉体の定義]
+     実体$F$が実閉体(real closed field)であるとは，$F$の代数拡大で実体になるものは$F$自身に限ることである．
+\end{definition}
+
+\begin{theorem}[E. Artin]
+     順序体$(F,<)$は，次の二つの性質を満たせば実閉体である．
+     \begin{enumerate}
+          \item 任意の$x \in F$に対し, $x>0$ならば$x^2 = y$を満たす$y \in F$が存在する．
+          \item 奇数次数の$F$係数$1$変数多項式は，$F$上に少なくとも$1$つの解を持つ．
+     \end{enumerate}
+\end{theorem}
+
+この定理により，$実閉体$の理論は一階述語論理で公理化することができる．
 
 \subsection{一階述語論理}
 %このセクションでは，一階述語論理の用語を定義する．
@@ -57,8 +92,8 @@
 同様に各関数記号$f \in L$は，何個の変数を受け取るか定まっているものとする．
 $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n$個の変数を受け取る関数記号を$n$変数関数記号という．
 
-\begin{example}[順序体の言語]
-     次の記号からなる言語$L_\mathrm{OR}$を，順序体の言語という．
+\begin{example}[順序環の言語]
+     次の記号からなる言語$L_\mathrm{OR}$を，順序環の言語という．
      \begin{itemize}
           \item 2変数述語記号 $<$,
           \item 2変数関数記号 $+$, $\cdot$,
@@ -434,5 +469,10 @@ $ F \subset \mathbb{R}[x_1,\dots,x_n] $ を有限部分集合とする．$ S \su
      後で書く．帰納法で示せる．
 \end{proof}
 
+
+\begin{thebibliography}{9}
+     \bibitem{Arai} 新井敏康，『数学基礎論』，岩波書店(2016)
+     \bibitem{Itai} 板井昌典, 『モデル理論』, 森北出版(2023)
+\end{thebibliography}
 
 \end{document}
