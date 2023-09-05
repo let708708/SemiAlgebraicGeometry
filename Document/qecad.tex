@@ -5,10 +5,16 @@
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{cleveref}
+\usepackage{enumerate}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Ralg}{\mathbb{R}_\mathrm{alg}}
 \newcommand{\Qua}{\mathfrak{Q}}
+\newcommand{\M}{\mathfrak{M}}
+\newcommand{\defiff}{ :\Leftrightarrow}
+\newcommand{\RCF}{\mathrm{RCF}}
+\newcommand{\Var}{\mathrm{Var}}
 \newcommand{\psc}{\mathrm{psc}}
 \newcommand{\PROJ}{\mathrm{PROJ}}
 \newcommand{\sign}{\mathrm{sign}}
@@ -77,12 +83,13 @@
      \end{enumerate}
 \end{theorem}
 
-この定理により，$実閉体$の理論は一階述語論理で公理化することができる．
+この定理により，実閉体の理論は一階述語論理で公理化することができる．
+
+例えば，実数体$\R$は実閉体である．
+また，代数的数全体(すなわち, 有理数体$\Q$の代数的閉包)$\bar{\Q}$と実数体$\R$の共通部分$\Ralg := \bar{\Q} \cap \R$は実閉体である．
+$\Ralg$に属する元を実代数的数という．
 
 \subsection{一階述語論理}
-%このセクションでは，一階述語論理の用語を定義する．
-%必要なもの：項，論理式，構造(ここまで書いた)，理論，解釈…………
-
 一階述語論理式(first-order logic)は，
 変数記号，論理記号 ($=, \lnot, \lor, \land, \rightarrow$), 量化記号($\forall, \exists$)
 と，言語$L$で記述される．
@@ -104,7 +111,7 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
 言語$L$が定義されると，順に項，原子論理式，論理式が順に定義される．
 
 \begin{definition}[項の定義]
-     言語$L$に対して，項が帰納的に定義される．
+     言語$L$に対して，項(term)が帰納的に定義される．
      \begin{enumerate}
           \item 変数記号，定数記号は項である．
           \item $t_1, \dots, t_n$がいずれも項とする．任意の$n$変数関数記号$f \in L$に対し，$f(t_1, \dots, t_n)$は項である．
@@ -113,13 +120,13 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
 \end{definition}
 
 \begin{definition}[論理式の定義]
-     言語$L$に対して，原子論理式を，次のいずれかの形をした記号列で定義する．
+     言語$L$に対して，原子論理式(atomic formula)を，次のいずれかの形をした記号列で定義する．
      \begin{enumerate}
           \item $t_1, t_2$を項として，$(t_1=t_2)$.
           \item $R \in L$を$n$変数述語記号，$t_1, \dots, t_n$を項として，$(R(t_1, \dots, t_n))$.
      \end{enumerate}
      
-     さらに，言語$L$に対して，論理式が帰納的に定義される．
+     さらに，言語$L$に対して，論理式(formula)が帰納的に定義される．
      \begin{enumerate}
           \item 原子論理式は論理式である．
           \item $\phi$が論理式であるとすると，$(\lnot \phi)$は論理式である．
@@ -129,17 +136,147 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
      \end{enumerate}
 \end{definition}
 
-% ここで自由変数の定義をする．
-% 順序体の例を用いて構造を導入するとよりよさそう．
+論理式$\phi := \forall x (x^2 + y > 0)$について観察する．ここで，$x,y$はいずれも変数記号である．
+
+これは，「全ての$x$に対して$x^2 + y > 0$が成り立つ」というように読むことができるが，$y$の値は自由に設定することができ，$y$の値が定まらない限りは真であるか偽であるかははっきりしない．
+この$y$のように，自由な状態にある変数記号を論理式$\phi$の自由変数といい，一方$x$のように自由な状態にない変数記号を論理式$\phi$の束縛変数という．
+
+厳密には，次のように定義する．
+
+\begin{definition}[自由変数の定義]
+     言語$L$を一つとる．
+     項$t$に登場する全ての変数記号を$\Var(t)$で表す．
+
+     論理式$\phi$の自由変数(free variable)全体$\Var(\phi)$を，次のように論理記号及び量化記号の数に関して帰納的に定義する．
+     \begin{enumerate}
+          \item $t_1, t_2$を項とするとき，$\Var((t_1=t_2)):=\Var(t_1)\cup\Var(t_2)$と定義する．
+          \item $R \in L$を$n$変数述語記号，$t_1, \dots, t_n$を項とするとき，$\Var(R(t_1, \dots, t_n)):= \bigcup_{i=1}^n \Var(t_i)$と定義する．
+          \item 論理式$\phi$に対して$\Var(\phi)$が定義されているとき，$\Var((\lnot \phi)):=\Var(\phi)$と定義する．
+          \item 論理式$\phi, \psi$に対して$\Var(\phi), \Var(\psi)$が定義されているとき，
+          $\Var((\phi \lor \psi)):=\Var(\phi)\cup\Var(\psi)$,
+          $\Var((\phi \land \psi)):=\Var(\phi)\cup\Var(\psi)$,
+          $\Var((\phi \rightarrow \psi)):=\Var(\phi)\cup\Var(\psi)$
+          と定義する．
+          \item 論理式$\phi$に対して，$\Var(\phi)$が定義されているとき，変数記号$x$に対して
+          $\Var((\forall x\phi)):=\Var(\phi) \setminus \{x\}$,
+          $\Var((\exists x\phi)):=\Var(\phi) \setminus \{x\}$
+          と定義する．
+     \end{enumerate}
+
+     論理式$\phi$に登場する自由変数が高々$x_1, \dots, x_n$である事を明示したいとき，$\phi(x_1, \dots, x_n)$と書く．ただし，登場しない自由変数があっても良い．
+
+     項$t$が自由変数を持たないとき，すなわち$\Var(t)=\emptyset$であるとき，$t$を閉項(closed term)という．
+     また，論理式$\phi$が自由変数を持たないとき，すなわち$\Var(\phi)=\emptyset$であるとき，$\phi$を閉論理式(closed formula)という．
+\end{definition}
+
+\begin{definition}[理論]
+     言語$L$に対して，閉論理式からなる集合を理論(theory)という．
+\end{definition}
+
+\begin{example}[実閉体の理論]
+     順序環の言語$L_\mathrm{OR}=\{<, +, \cdot, 1, 0\}$上の実閉体の理論$\RCF$を，次のように定義する．
+     
+     \begin{itemize}
+          \item 体の公理
+          \begin{enumerate}
+               \item $\forall x \forall y(x + y = y + x)$
+               \item $\forall x \forall y \forall z((x + y) + z = x + (y + z))$
+               \item $\forall x (x + 0 = x)$
+               \item $\forall x \exists y (x + y = 0)$
+               \item $\forall x \forall y(x \cdot y = y \cdot x)$
+               \item $\forall x \forall y \forall z((x \cdot y) \cdot z = x \cdot (y \cdot z))$
+               \item $\forall x (x \cdot 1 = x)$
+               \item $\forall x \exists y ((x=0) \lor (x \cdot y = 1))$
+               \item $\lnot(0 = 1)$
+          \end{enumerate}
+          \item 全順序の公理
+          \begin{enumerate}
+               \item $\forall x (\lnot(x<x))$
+               \item $\forall x \forall y \forall z((x < y \land y < z) \rightarrow x < z)$
+               \item $\forall x \forall y (\lnot(x = y) \rightarrow (x<y \lor y<x))$
+          \end{enumerate}
+          \item 順序体の公理
+          \begin{enumerate}
+               \item $\forall x \forall y \forall z (x \leq y \rightarrow x + z \leq y + z)$
+               \item $\forall x \forall y ((0 < x \land 0 < y) \rightarrow 0 < x \cdot y )$
+          \end{enumerate}
+          \item 実数体の公理
+          \begin{enumerate}
+               \item $\forall x \exists y (0<x \rightarrow x=y^2)$
+               \item $\forall a_{2n-1} \dots \forall a_1 \forall a_0 \exists x(\lnot(a_{2n-1} = 0) \land (a_{2n-1}\cdot x^{2n-1} + \dots a_1 \cdot x + a_0 = 0)) \quad (n=1,2,\dots)$ 
+          \end{enumerate}
+     \end{itemize}
+
+     ただし，項$t_1, t_2$に対し，$t_1 \leq t_2$は$(t_1 < t_2)\lor(t_1 = t_2)$の省略記号とする．
+     また，項$t$と$n=1,2,\dots$に対し，$t^n$は，$t^n:=t \cdot t^{n-1}$, $t^1:=t$により帰納的に定義された省略記号とする．
+\end{example}
+
+理論$\RCF$の閉論理式をすべて満たすような数学的構造を，実閉体とよびたい．
+このような定義を正当化させるには，この数学的構造が，言語$L_\mathrm{OR}$で書かれた閉論理式を真か偽か判定できることが必要である．
+そのために，まず言語を解釈する数学的構造を定義する．
 
 \begin{definition}[構造の定義]
-     言語$L$の構造とは，空でない集合$M$と，次のようなデータの組$\mathfrak{M}=(M,\dots)$である．
+     言語$L$の構造(structure)とは，空でない集合$M$と，次のようなデータの組$\M=(M,\dots)$である．
      \begin{itemize}
-          \item 各$n$変数述語記号$R \in L$に対応する部分集合$R^\mathfrak{M} \subset M^n$．
-          \item 各$n$変数関数記号$f \in L$に対応する写像$\map{f^\mathfrak{M}}{M^n}{M}$.
-          \item 各定数記号$c \in L$に対応する元$c^\mathfrak{M} \in M$．
+          \item 各$n$変数述語記号$R \in L$に対応する部分集合$R^\M \subset M^n$.
+          \item 各$n$変数関数記号$f \in L$に対応する写像$\map{f^\M}{M^n}{M}$.
+          \item 各定数記号$c \in L$に対応する元$c^\M \in M$.
      \end{itemize}
 \end{definition}
+
+言語$L$の構造$\M$が与えられたとき，
+言語$L$上の論理式$\phi$が構造$\M$で成り立つかどうか，すなわち充足関係があるかどうかを定義できる．
+
+\begin{definition}
+     言語$L$上の構造$\M = (M,\dots)$をとる．
+     言語$L$に形式的な定数記号$\{c_m \mid m \in M\}$を追加した言語を$L(\M)$とする．
+     ここで，各$m \in M$に対し, $c_m^{\M}:=m$とすることで，
+     $\M$は言語$L(\M)$の構造に拡張できる．
+     \begin{itemize}
+          \item $L(\M)$上の閉項$t$の解釈$t^\M$を帰納的に定義する．
+          \begin{enumerate}
+               \item $f$を$n$変数関数記号とし, 閉項$t_1$, \dots $t_n$のそれぞれの解釈$t_1^\M,\dots,t_n^\M$が定まっているとする．
+               このとき，$(f(t_1,\dots,t_n))^\M:=f^\M(t_1^\M,\dots,t_m^\M)$と定める．
+          \end{enumerate}
+          \item $L(\M)$上の閉論理式$\phi$に対し, 充足関係(satisfaction relation)があること（$\M \models \phi$とかく）を帰納的に定義する．
+          \begin{enumerate}
+               \item $t_1,t_2$を$L(\M)$上の閉項とするとき, 
+               \[
+                    \M \models (t_1 = t_2) \defiff t_1^\M = t_2^\M,
+               \]
+               \item $t_1,\dots t_n$を$L(\M)$上の閉項，$R$を$n$変数述語記号とするとき，
+               \[
+                    \M \models (R(t_1, \dots, t_n)) \defiff (t_1^\M, \dots, t_n^\M) \in R^\M,
+               \]
+               \item $L(\M)$上の閉論理式$\phi$に対し
+               \[
+                    \M \models (\lnot \phi) \defiff \M \not\models \phi,
+               \]
+               \item $L(\M)$上の閉論理式$\phi, \psi$に対し
+               \begin{align*}
+                    &\M \models (\phi \lor \psi) \defiff \M \models \phi \text{または} \M \models \psi,\\
+                    &\M \models (\phi \land \psi) \defiff \M \models \phi \text{かつ} \M \models \psi,\\
+                    &\M \models (\phi \rightarrow \psi) \defiff \M \not\models \phi \text{または} \M \models \psi,
+               \end{align*}
+               \item $L(\M)$上の変数記号が高々$x$のみである論理式$\phi(x)$に対し
+               \begin{align*}
+                    &\M \models (\forall x \phi(x)) \defiff \text{任意の$m \in M$に対し}\M \models \phi(c_m),\\
+                    &\M \models (\exists x \phi(x)) \defiff \text{ある$m \in M$に対し}\M \models\phi(c_m).
+               \end{align*}
+          \end{enumerate}
+     \end{itemize}
+\end{definition}
+
+\begin{definition}
+     $L$を言語とし，$T$を$L$上の理論とする．
+     $L$上の構造$\M$が任意の$\phi \in T$に対して$\M\models \phi$であるとき，構造$\M$を$T$のモデル(model)といい，$\M \models T$とかく．
+\end{definition}
+
+言語$L_\mathrm{OR}$上の構造$\R=(\R,<,+,\cdot,1,0)$や$\Ralg=(\Ralg,<,+,\cdot,1,0)$は，いずれも実閉体である．したがって，
+\[
+     \R \models \RCF, \quad \Ralg \models \RCF
+\]
+であり，構造$\R$,$\Ralg$はいずれも実閉体の理論$\RCF$のモデルである．
 
 \section{量化子消去}
 実閉体$R$をとる．多項式を考えるとき，係数体は$R$とする．
