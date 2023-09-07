@@ -5,7 +5,6 @@
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{cleveref}
-\usepackage{enumerate}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Q}{\mathbb{Q}}
@@ -78,7 +77,7 @@
 \begin{theorem}[E. Artin]
      順序体$(F,<)$は，次の二つの性質を満たせば実閉体である．
      \begin{enumerate}
-          \item 任意の$x \in F$に対し, $x>0$ならば$x^2 = y$を満たす$y \in F$が存在する．
+          \item 任意の$x \in F$に対し, $x>0$ならば$x = y^2$を満たす$y \in F$が存在する．
           \item 奇数次数の$F$係数$1$変数多項式は，$F$上に少なくとも$1$つの解を持つ．
      \end{enumerate}
 \end{theorem}
@@ -307,7 +306,7 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
 %      このとき, タルスキー文$\phi$に対し，$\phi$の自由変数が自然に定まる．明示的に自由変数を記述するときは, タルスキー文$\phi(x, y, \dots)$等とかく． 
 % \end{definition}
 
-% この節では，実閉体の理論$RCF$が量化記号消去可能であることについて述べる．
+% この節では，実閉体の理論$\RCF$が量化記号消去可能であることについて述べる．
 
 \begin{example}
      言語$L_\mathrm{OR}$上の次のような論理式を考える．
@@ -338,7 +337,7 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
 
 
 \begin{definition}
-$T$を言語$L$上の理論とし，$\phi$を$L$上の論理式とする．
+$T$を言語$L$上の理論とし，$\phi$を$L$上の論理式とする．% semantic consequences じゃないの？ vs syntax consequences
 全ての$T$のモデル$\M$に対して$\M \models \phi$が成り立つとき，$\phi$は$T$の論理的帰結(logical consequences)であるといい，$T \models \phi$とかく．
 
 理論$T$で量化記号消去(quantifier elimination)ができるとは，
@@ -354,7 +353,7 @@ $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号を含�
 実は，実閉体の理論は量化記号消去ができることが示されている．すなわち，次が成り立つ．
 
 \begin{theorem}(Tarski-Seidenberg)
-     実閉体の理論$RCF$は量化記号消去ができる．
+     実閉体の理論$\RCF$は量化記号消去ができる．
 \end{theorem}
 
 しかし，上記の定理は，任意の論理式が与えられたとき，それに同値な$\Delta_0$-論理式を導出する手続きを示しているわけではない．
@@ -370,8 +369,9 @@ $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号を含�
 次の節では，その柱状代数分解について解説する．
 
 
-% この節はまだEuclid空間(実数体)で書いているので訂正する．
 \section{柱状代数分解}
+% この節はまだEuclid空間(実数体)で書いているので訂正する．
+
 柱状代数分解とは，ユークリッド空間の分割で，各分割の上で複数の多項式を符号不変にするものである．Collinsにより提唱されたCADアルゴリズムについてかく．
 \begin{definition}
 $\R^n$の有限部分集合族$\mathfrak{D}$が，
