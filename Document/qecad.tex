@@ -350,7 +350,6 @@ $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号を含�
 が成り立つことと定義する．
 \end{definition}
 
-以下では量化記号を含まない論理式を，$\Delta_0$-論理式とよぶことにする．
 
 実は，実閉体の理論は量化記号消去ができることが示されている．すなわち，次が成り立つ．
 
@@ -358,15 +357,15 @@ $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号を含�
      実閉体の理論$\RCF$は量化記号消去ができる．
 \end{theorem}
 
-% しかし，上記の定理は，任意の論理式が与えられたとき，それに同値な$\Delta_0$-論理式を導出する手続きを示しているわけではない．
+% しかし，上記の定理は，任意の論理式が与えられたとき，それに同値な量化記号を含まない論理式を導出する手続きを示しているわけではない．
 % よりアルゴリズミックに導出する手続きとして，Collinsにより提唱された柱状代数分解による量化記号消去の方法が知られている．
 
 % この方法は，次のような形式で与えられた論理式
 % \begin{equation*}
 %      \Qua_1 y_1 \Qua_2 y_2 \dots \Qua_k y_k \psi(x_1, \dots, x_n, y_1, \dots, y_k)
 % \end{equation*}
-% に対して同値な$\Delta_0$-論理式を求める手続きを与えている．
-% ここで，$\Qua_i \in \{\exists, \forall\}$であり, $\psi(x_1, \dots, x_n, y_1, \dots, y_k)$は$\Delta_0$-論理式である． 
+% に対して同値な$量化記号を含まない論理式を求める手続きを与えている．
+% ここで，$\Qua_i \in \{\exists, \forall\}$であり, $\psi(x_1, \dots, x_n, y_1, \dots, y_k)$は量化記号を含まない論理式である． 
 
 % 次の節では，その柱状代数分解について解説する．
 
@@ -383,14 +382,14 @@ $R$を実閉体とする．
 
 まず始めに，$R^n$の柱状代数分解を定義する．この定義は，参考文献\cite{Basu}による．
 
-\begin{definition} %柱状代数分解の定義
+\begin{definition} \label{definition:cad}
      $i=1, \dots, n$に対し，$\calS_i$を$R^i$の分解とする．
      $\{\calS_i\}_{i=1}^n$が$R^n$の柱状代数分解(cylindrical algebraic decomposition)であるとは，
      以下の条件を満たすことをいう．
      \begin{enumerate}
           \item $S \in \calS_1$は，$R$上の点か，開区間かのいずれかである．
           \item $n\geq 2$の場合，任意の$i=1, \dots, k-1$と任意の$S \in \calS_i$に対し，
-          有限個の連続半代数関数
+          有限個の連続な半代数的関数
           \[
                \map{\xi_{S,1}< \dots <\xi_{S,l_S}}{S}{R}
           \]
@@ -401,7 +400,7 @@ $R$を実閉体とする．
                     \{(x,x_{i+1}) \mid x \in S, \xi_{S,j}(x)=x_{i+1} \} \subset R^{i+1}
                \]
                は，$\calS_{i+1}$の元である．
-               \item $\xi_{S,0}=-\infty$, $\xi_{S,l_S+1}=\infty$とするとき，各$j=0, \dots, l_S$に対し，
+               \item $\xi_{S,0}=-\infty$, $\xi_{S,l_S+1}=\infty$とするとき，各$j=0, \dots, l_S$に対し，\label{cad_condition1}
                \[
                     \{(x,x_{i+1}) \mid x \in S, \xi_{S,j}(x)<x_{i+1}<\xi_{S,j+1} \} \subset R^{i+1}
                \]
@@ -409,6 +408,12 @@ $R$を実閉体とする．
           \end{itemize}
      \end{enumerate}
 \end{definition}
+
+定義より，任意の$k=1, \dots, n$に対して，$\{\calS_i\}_{i=1}^k$は$R^k$の柱状代数分解である．
+逆に，$R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$が与えられているとき，各$S \in \calS_{n-1}$に対して
+\cref{definition:cad}の条件\ref{cad_condition1}を満たすような有限個の連続半代数関数$\xi_{S,1}<\dots<\xi_{S,l_S}$が与えられれば，
+$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を構成することができる．
+このように，柱状代数分解は再帰的な構造である．
 
 \begin{definition}
      $F \subset R[X_1, \dots, x_n]$を有限部分集合とする．
@@ -427,33 +432,56 @@ $R$を実閉体とする．
      $F$に適合した$R^n$の柱状代数分解が存在する．
 \end{theorem}
 
+この定理は，柱状代数分解を再帰的に構成することで証明される．
+まず初めに$R^1$の柱状代数分解$\{\calS_1\}$を与え，
+それを基に順に$R^k$の柱状代数分解$\{\calS_i\}_{i=1}^k$を構成していく．（ただし$k=2, \dots, n$.）
+
+問題になるのは，$F$に適合した$R^n$の柱状代数分解を構成することである．
+以下の節では，各$k=1, \dots, n-1$で$R^k$の柱状代数分解$\{\calS_i\}_{i=1}^k$を構成するにあたり
+どのような条件を満たす必要があるかを述べていく．
+
 \subsection{描画可能}
+$F$に適合した$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を$R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^n$から構成するとき，
+各$S \in \calS_{n-1}$は次に定義する性質を満たしてほしい．
 
-% この節はまだEuclid空間(実数体)で書いているので訂正する．
+なお，次の定義は参考文献\cite{Collins}によって導入されたものである．
 
-\begin{definition}
-$F \subset \R^n[x_1, \dots, x_n]$を有限部分集合とする．空でない弧状連結部分集合$S \subset \R^{n-1}$が$F$描画可能であるとは，
-\begin{itemize}
-	\item 任意の$ x \in S $に対し，$ F $の解の個数，すなわち$ \{y \in \mathbb{R} \mid \text{ある$f \in F$に対し$f(x,y) = 0$} \} $の元の個数が一定であり，
-	\item 各$ x \in S $の$F$の解を$ f_1(x) < f_2(x) < \dots < f_k(x) $と書くとき，各$ f_i $は$ S $上の実数値連続関数
-\end{itemize}
-であることと定義する．
+\begin{definition} 
+     $F \subset R^n[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を空でない半代数的連結な半代数的集合とする．
+     $S$が$F$描画可能($F$-delineable)であるとは，$k$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_k}{S}{R}$が存在し，次を満たすことと定義する．
+     \begin{itemize}
+          \item 任意の$ x \in S $に対し，
+          \[
+               \{\xi_i\}_{i=1}^k = \{y \in R \mid \prod_{f \in F'}f(x,y)=0\}
+          \]
+          である．ただし，$F' = \{f \in F \mid \text{$f$は$S$上恒等的に0でない}\}$とする．
+          \item 各$i=1, \dots, k$および$f \in F'$に対し，多項式$f(x,X_n)$における根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
+     \end{itemize}
 \end{definition}
 
+$R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^n$で，
+各$S \in \calS_{n-1}$が$F$描画可能であるとき，定義より得られる連続な半代数関数$\map{\xi_1<\dots<\xi_k}{S}{R}$を
+各$S$に対して取ることにより，$F$適合な$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を得ることができる．
+
+$F$描画可能であることの必要条件は，次のように与えられる．
+
 \begin{proposition}\label{proposition:del}
-$S \subset \R^{n-1}$を空でない弧状連結部分集合とし，$F \subset \R[x_1, \dots, x_n]$を有限部分集合とする．
-次の3条件を満たすとき，$S$は$F$描画可能である．
-\begin{itemize}
-     \item 任意の$f \in F$に対し，$S$上$f$の複素数根の数は重複度込みで一定である．
-     \item 任意の$f \in F$に対し，$S$上$f$の相異なる複素数根の数は一定である．
-     \item 相異なる任意の$f, g \in F$に対し，$S$上$f$, $g$に共通する複素数根の数は重複度込みで一定である．
-\end{itemize}
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset \R^{n-1}$を半代数的連結な半代数的集合とする．
+     さらに，以下を満たすとする．
+     \begin{enumerate}
+          \item 任意の$f \in F$に対し，$S$上$f$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定である．
+          \item 任意の$f \in F$に対し，$S$上$f$の$R[\sqrt{-1}]$上の相異なる根の数は一定である．
+          \item 任意の$f, g \in F$に対し，$S$上$f$, $g$に共通する$R[\sqrt{-1}]$上の根の数は重複度込みで一定である．
+     \end{enumerate}
+     このとき，$S$は$F$描画可能である．
 \end{proposition}
 
-この命題を示すために次の二つの補題を用意する．
+\cref{proposition:del}を示すために，次の二つの補題を用意する．
+
+% ここからは実閉体上で書いているため，チェックをしておく．
 
 \begin{lemma}\label{lemma:del_1}
-$S \subset \R^{n-1}$を空でない弧状連結部分集合とし，$f_1$, $f_2 \in \R[x_1, \dots, x_n]$が次を満たすとする.
+$S \subset R^{n-1}$を空でない半代数的連結な半代数的集合部分集合とし，$f_1$, $f_2 \in \R[x_1, \dots, x_n]$が次を満たすとする.
 \begin{itemize}
 \item 各$i=1, 2$に対し，$S$上$f_i$の重複度込みの複素数根の数は一定．
 \item 各$i=1, 2$に対し，$S$上$f_i$の相異なる複素数根の数は一定．
@@ -511,8 +539,6 @@ $S \subset \R^{n-1}$を弧状連結部分集合とし，$F \subset \R[x_1,\dots,
 なぜなら，多項式$f, g \in \R[x_1, \dots, x_n]$について，$a \in \R^{n-1}$を固定したとき，$\gcd(f,g)(a)$と$\gcd(f(a),g(a))$は必ずしも等しくないからである．
 
 よって，二つ目と三つ目の条件も満たすような$\R^{n-1}$の分割を与えることができるように次の節で準備をする．
-
-
 
 \subsection{主部分終結式係数(Principal Subresultant Coefficient)}
 
@@ -577,7 +603,6 @@ $\mathrm{R}$を体とし，$A(x), B(x) \in \mathrm{R}[x] \setminus \{0\}$とす�
 
 \end{proof}
 
-
 \subsection{符号不変な分割の存在とCADアルゴリズム}
 \begin{definition}
 $F \subset \R[x_1, \dots, x_n]$を有限部分集合とする．$\PROJ(F) \subset \R[x_1, \dots, x_{n-1}]$を，次のように定める．
@@ -637,7 +662,6 @@ $ F \subset \mathbb{R}[x_1,\dots,x_n] $ を有限部分集合とする．$ S \su
 
 このアルゴリズムを実際にコンピュータ上に実装するには，$\R^n$の分割でなく，分割の各セルから代表元を取得したものを得る．
 
-
 \section{QEとCADアルゴリズム}
 有限部分集合$F \subset \R[x_1, \dots, x_n]$が与えられたとき，
 前節では$\R^n$の$F$符号不変な分割$\mathfrak{D}$を構成することができることを示した．
@@ -672,9 +696,11 @@ $ F \subset \mathbb{R}[x_1,\dots,x_n] $ を有限部分集合とする．$ S \su
 
 
 \begin{thebibliography}{99}
-     \bibitem{Arai} 新井敏康，『数学基礎論』，岩波書店(2016)
-     \bibitem{Itai} 板井昌典, 『モデル理論』, 森北出版(2023)
-     \bibitem{Basu} Saugata Basu, Richard Pollack, Marie-Fran\c{c}oise Roy, Algorithms in Real Algebraic Geometry, Springer(2003)
+     \bibitem{Arai} 新井敏康，『数学基礎論』(2016).
+     \bibitem{Itai} 板井昌典，『モデル理論』(2023).
+     \bibitem{Basu} Saugata Basu, Richard Pollack, Marie-Fran\c{c}oise Roy, Algorithms in Real Algebraic Geometry(2003).
+     \bibitem{Collins} George E. Collins, Quantifier elimination for real closed fields by cylindrical algebraic decomposition(1975).
+     \bibitem{} Scott McCallum, An Improved Projection Operation for Cylindrical Algebraic Decomposition(1998)
 \end{thebibliography}
 
 \end{document}
