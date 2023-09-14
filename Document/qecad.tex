@@ -478,49 +478,89 @@ $F$描画可能であることの必要条件は，次のように与えられ�
 
 \cref{proposition:del}を示すために，次の二つの補題を用意する．
 
-% ここからは実閉体上で書いているため，チェックをしておく．
-
 \begin{lemma}\label{lemma:del_1}
-$S \subset R^{n-1}$を空でない半代数的連結な半代数的集合部分集合とし，$f_1$, $f_2 \in \R[x_1, \dots, x_n]$が次を満たすとする.
-\begin{itemize}
-\item 各$i=1, 2$に対し，$S$上$f_i$の重複度込みの複素数根の数は一定．
-\item 各$i=1, 2$に対し，$S$上$f_i$の相異なる複素数根の数は一定．
-\item $S$上$f_1, f_2$の重複度込みの複素数共通根の数は一定．
-\end{itemize}
-このとき，$S$上$f_1$, $f_2$の相異なる複素数共通根の数は一定．
+     $S \subset R^{n-1}$を空でない半代数的連結な半代数的集合部分集合とし，
+     $f_1, f_2 \in R[x_1, \dots, x_n]$を$S$上恒等的に$0$でない多項式とする．
+     $f_1, f_2$が次を満たすとする．
+     \begin{enumerate}
+          \item 各$i=1, 2$に対し，$S$上$f_i$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定．
+          \item 各$i=1, 2$に対し，$S$上$f_i$の$R[\sqrt{-1}]$上の相異なる根の数は一定．
+          \item $S$上$f_1, f_2$の$R[\sqrt{-1}]$上の共通根の数は重複度込みで一定．
+     \end{enumerate}
+     このとき，$S$上$f_1, f_2$の相異なる$R[\sqrt{-1}]$上の共通根の数は一定である．
 \end{lemma}
 \begin{proof}
-方針: $S_k = \{a \in S \mid \text{$f_1(a)$, $f_2(a)$の相異なる複素数共通根がk個} \}$が開集合であることを示す．（多項式の解の，係数についての連続性から示せる．）
+     簡単のため，$Y:=X_n$, $X:=(X_1, \dots, X_{n-1})$と表す．
+     このとき，$f_1, f_2$は$f_1(X,Y), f_2(X,Y)$と表すことができる．
+     $x \in S$に対して，$f_1(x,Y), f_2(x,Y)$の$R[\sqrt{-1}]$上の相異なる共通根の数を$N(x)$と定義する．
+     すると，$\map{N}{S}{R}$は半代数的関数である．
+     \footnote{$N$が半代数的関数であることは，$N$のグラフを以下のように書き表すことができるためである：
+     \[
+          \{(x,z) \mid \bigvee_{n}(z = n \text{ and } \exists y_1, \dots, y_n \text{ s.t. } y_i \neq y_j( i\neq j) \text{ and } \forall y(f_1(x,y)=f_2(x,y) \leftrightarrow \bigvee_{i=1}^n (y = y_i)))\}
+     \]
+     ここで，論理和の$n$は，$0$から$gcd(P,Q)$の$Y$に関する次数までをとる．
+     この主張はすでに$\RCF$において$量化記号消去$が可能であることを用いてしまっているが，
+     それは別の方法で示すことができる．(例えば新井\cite{Arai}を参照．)
+     }
 
+     次の主張を示せば，$N$は$S$上の局所定数半代数的関数であるため，$N$は定数関数となり，証明が完了する．
+     \begin{claim*}
+          任意の$x \in S$に対し，$x$の開近傍$V$で，
+          $S\cap V$上$f_1(X,Y), f_2(X,Y)$の$R[\sqrt{-1}]$上の相異なる共通根の数が一定となるようなものが存在する．
+     \end{claim*}
+     以降は主張を示す．
+% メモ：
+% この後は，方程式の解が係数に関して連続であることから示される．
+%（実閉体の場合も同様に示すことができる，証明は逆関数定理を経由する．）
 \end{proof}
 
 \begin{lemma}\label{lemma:del_2}
-$A \in \R[x_1, \dots, x_n]$とし，$S \subset \R^{n-1}$を弧状連結部分集合とする．
-\begin{itemize}
-\item $S$上$A$の重複度込みの複素数根の数は一定．
-\item $S$上$A$の相異なる複素数根の数は一定．
-\end{itemize}
-このとき，$S$は$\{A\}$描画可能である．
+     $S \subset R^{n-1}$を半代数的連結な半代数的集合とし，     
+     $A \in R[x_1, \dots, x_n]$を$S$上恒等的に$0$でない多項式とする．
+     さらに，次を満たすとする．
+     \begin{itemize}
+          \item $S$上$A$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定．
+          \item $S$上$A$の$R[\sqrt{-1}]$上の相異なる根の数は一定．
+     \end{itemize}
+     このとき，$S$は$\{A\}$描画可能である．
 \end{lemma}
 
 \begin{proof}
-方針:次の二つのことを示さなければならない．\\
-1.  $S$上実根の数は一定．\\
-2.  $S$上実根は連続である．\\
-いずれも多項式の根の係数に対する連続性から示せる．
+     実根の数が一定であることは
 \end{proof}
 
+% ここからは実閉体上で書いているため，チェックをしておく．
+
+% \begin{lemma}\label{lemma:del_2}
+% $A \in \R[x_1, \dots, x_n]$とし，$S \subset \R^{n-1}$を弧状連結部分集合とする．
+% \begin{itemize}
+% \item $S$上$A$の重複度込みの複素数根の数は一定．
+% \item $S$上$A$の相異なる複素数根の数は一定．
+% \end{itemize}
+% このとき，$S$は$\{A\}$描画可能である．
+% \end{lemma}
+
+% \begin{proof}
+% 方針:次の二つのことを示さなければならない．\\
+% 1.  $S$上実根の数は一定．\\
+% 2.  $S$上実根は連続である．\\
+% いずれも多項式の根の係数に対する連続性から示せる．
+% \end{proof}
+
 \begin{proof}[{\bf \cref{proposition:del}の証明}]
+任意の$f \in F$は$S$上恒等的に$0$でないとしてよい．
+
 \cref{lemma:del_2}より，各$f \in F$に対して，$S$は$\{f\}$描画可能である．
 よって，$S$上の連続関数$\alpha_{1,f}(a) < \dots \alpha_{n_f, f}(a)$を，各$a \in S$で$f(a)(x) \in \R[x]$の解であるようにとれる．
+
+次の主張が成り立てばよい．
 
 \begin{claim*}
 $f, g \in F$が，$f \neq g$であるとする．
 ある$a \in S$において$\alpha_{k,f}(a) = \alpha_{l,g}(a)$であるならば，任意の$a \in S$に対して$\alpha_{k,f}(a) = \alpha_{l,g}(a)$である．
 \end{claim*}
 
-この主張は，$S$が弧状連結であることと，\cref{lemma:del_1}から従う．
-この主張より，$F$の解の個数は$S$上一定である．よって，命題が示された．
+この主張は，$S$が半代数的連結であることと，\cref{lemma:del_1}から従う．よって，命題が示された．
 \end{proof}
 
 \begin{corollary}\label{corollary:del}
@@ -700,7 +740,6 @@ $ F \subset \mathbb{R}[x_1,\dots,x_n] $ を有限部分集合とする．$ S \su
      \bibitem{Itai} 板井昌典，『モデル理論』(2023).
      \bibitem{Basu} Saugata Basu, Richard Pollack, Marie-Fran\c{c}oise Roy, Algorithms in Real Algebraic Geometry(2003).
      \bibitem{Collins} George E. Collins, Quantifier elimination for real closed fields by cylindrical algebraic decomposition(1975).
-     \bibitem{} Scott McCallum, An Improved Projection Operation for Cylindrical Algebraic Decomposition(1998)
 \end{thebibliography}
 
 \end{document}
