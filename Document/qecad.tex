@@ -6,6 +6,19 @@
 \usepackage{algorithm}
 \usepackage{cleveref}
 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item\relax
+  {\bfseries
+  #1\@addpunct{.}}\hspace\labelsep\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Ralg}{\mathbb{R}_\mathrm{alg}}
@@ -427,7 +440,7 @@ $R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を構成することができる
 
 この節の目的は，次の定理を示すことである．
 
-\begin{theorem} %Collins
+\begin{theorem} \label{theorem:cad}
      任意の有限部分集合$F \subset R[X_1, \dots, x_n]$に対して，
      $F$に適合した$R^n$の柱状代数分解が存在する．
 \end{theorem}
@@ -526,7 +539,7 @@ $F$描画可能であることの必要条件は，次のように与えられ�
 \end{lemma}
 
 \begin{proof}
-     実根の数が一定であることは
+     
 \end{proof}
 
 % ここからは実閉体上で書いているため，チェックをしておく．
@@ -639,20 +652,25 @@ $\mathrm{R}$を体とし，$A(x), B(x) \in \mathrm{R}[x] \setminus \{0\}$とす�
 \begin{proof}
 後で書く．
 方針: 部分終結式がユークリッドの互除法で出てくる多項式の列の定数倍になることが分かる．
-
-
 \end{proof}
 
-\subsection{符号不変な分割の存在とCADアルゴリズム}
-\begin{definition}
-$F \subset \R[x_1, \dots, x_n]$を有限部分集合とする．$\PROJ(F) \subset \R[x_1, \dots, x_{n-1}]$を，次のように定める．
+\subsection{符号不変な分割の存在}
+ここでは\cref{theorem:cad}を証明する．
+そのために，与えられた有限部分集合$F \subset R[X_1, \dots, X_n]$に対して，
+帰納的な議論で$R^n$の$F$適合な柱状代数分解の存在を示す．
 
-まず，$B(F) := \{ \mathrm{red}^k(f) \mid f \in F, k=1, \dots, \deg(f) \}$とする．ただし，$\mathrm{red}(f) = f - \mathrm{LT}(f; x_n)$である．
+まず，帰納的な議論のために，次のような記号を定義する．
+
+\begin{definition}
+$F \subset R[X_1, \dots, X_n]$を有限部分集合とする．ただし，$n \geq 2$とする．
+$\PROJ(F) \subset R[X_1, \dots, X_{n-1}]$を，次のように定める．
+
+まず，$B(F) := \{ \mathrm{red}^k(f) \mid f \in F, k=1, \dots, \deg(f) \}$とする．ただし，$\mathrm{red}(f) = f - \mathrm{LT}(f; X_n)$である．
 次に，
 \begin{align*}
-	\PROJ_1(F) &:= \{\mathrm{LC}(f;x_n) \mid f \in B\},\\
-	\PROJ_2(F) &:= \{\psc_j(f, \frac{\partial f}{\partial x_n}; x_n) \mid f \in B, j =0, \dots, \deg(\frac{\partial f}{\partial x_n};x_n) \},\\
-	\PROJ_3(F) &:= \{\psc_j(f,g;x_n) \mid f,g \in B, j = 0, \dots, \min\{\deg(f;x_n), \deg(g;x_n)\}\}
+	\PROJ_1(F) &:= \{\mathrm{LC}(f;X_n) \mid f \in B\},\\
+	\PROJ_2(F) &:= \{\psc_j(f, \frac{\partial f}{\partial X_n}; X_n) \mid f \in B, j =0, \dots, \deg(\frac{\partial f}{\partial X_n};X_n) \},\\
+	\PROJ_3(F) &:= \{\psc_j(f,g;X_n) \mid f,g \in B, j = 0, \dots, \min\{\deg(f;X_n), \deg(g;X_n)\}\}
 \end{align*}
 とし，以上を用いて
 \begin{align*}
@@ -660,8 +678,11 @@ $F \subset \R[x_1, \dots, x_n]$を有限部分集合とする．$\PROJ(F) \subse
 \end{align*}
 と定める．
 \end{definition}
-\begin{corollary}
-$F \subset \R[x_1, \dots, x_n]$を有限部分集合とし，$S \subset \R^{n-1}$を弧状連結部分集合とする．
+
+この記号のもとで，次の系が成り立つ．
+
+\begin{corollary}\label{corollary:inv-deline}
+$F \subset \R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset \R^{n-1}$を半代数連結な半代数的集合とする．
 
 $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
 \end{corollary}
@@ -670,39 +691,82 @@ $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
 \cref{proposition:del}及び\cref{proposition:psc}から従う．
 \end{proof}
 
-\begin{definition}
-$ F \subset \mathbb{R}[x_1,\dots,x_n] $ を有限部分集合とする．$ S \subset \mathbb{R}^{n-1} $が$ F $描画可能とする．
-このとき，$ S $上の$ F $の解を$ f_1(x)< \dots <f_k(x) $とし，$ f_0(x) := -\infty $ , $ f_{k+1}(x) := \infty $とするとき，
-\begin{align*}
-  C_{2i} &:= \{(x,y) \mid  x \in S, f_i(x) = y \} \quad i = 1,\dots, k,\\
-  C_{2i+1} &:= \{(x,y) \mid x \in S, f_{i}(x)<y<f_{i+1}(x) \} \quad i = 0,1, \dots, k 
-\end{align*}
+それでは，\cref{definition:cad}の証明を述べる．
 
-とすれば，$\{C_j\}_{j=1}^{2k+1}$は$ S \times \mathbb{R} $の$F$符号不変な分割を与える．
-この$ S \times \mathbb{R} $の分割$ \{C_j\}_{j=1}^{2k+1} $を，$ S $の持ち上げといい，$ \mathfrak{L}(S) $と書く．
+\begin{proof}[\cref{theorem:cad}の証明]
+     $n$についての帰納法によって示す．
 
-また，$\mathfrak{D}$が$\R^{n-1}$の分割であるとき，$\mathfrak{L}(\mathfrak{D}) := \bigcup_{D \in \mathfrak{D}}\mathfrak{L}(D)$を$\mathfrak{D}$の持ち上げという．
-\end{definition}
+     $n=1$の場合，$F$の$R$上の根を$a_1 < \dots, a_k$とする．
+     $a_0 = -\infty$, $a_{k+1} = \infty$とすれば，
+     \[
+          \calS_1 = \{(a_i, a_{i+1})\}_{i=0}^k \cup \{a_i\}_{i=1}^k
+     \]
+     が$F$-適合な柱状代数分解を与える．よって，定理は成り立つ．
 
-以上より，有限部分集合$F \subset \R[x_1, \dots, x_n]$が与えられたとき，$F$の符号不変な分割を取得するアルゴリズムは次のように表現される．
+     $n\geq 2$の場合，$n-1$までで主張が成り立つとする．
+     このとき，帰納法の仮定により$\PROJ(F)$適合な$R^{n-1}$の柱状代数分解を$\{\calS_i\}_{i=1}^{n-1}$がとれる．
 
-\begin{algorithm}
-    \caption{CADアルゴリズム}
-    \begin{algorithmic}[1]
-    \REQUIRE $n \geq 1$: 自然数，$F \subset \R[x_1, \dots, x_n]$: 有限部分集合
-    \ENSURE $\mathfrak{D}$: $\R^n$の$F$符号不変な分割
-    \STATE $\mathfrak{D} \leftarrow \text{$\PROJ^{n-1}(F)$-符号不変な$\R^1$の分割}$
-    \STATE $k \leftarrow 1$
-    \WHILE{$k < n$}
-    \STATE $\mathfrak{D} \leftarrow \text{$\mathfrak{L}(\mathfrak{D})$: $\mathfrak{D}$の持ち上げ}$
-    \STATE $k \leftarrow k+1$
-    \ENDWHILE
-    \end{algorithmic}
-\end{algorithm}
+     ここで，各$S \in \calS_{n-1}$は$\PROJ(F)$不変であるから，\cref{corollary:inv-deline}より，$S$は$F$描画可能である．
 
-このアルゴリズムを実際にコンピュータ上に実装するには，$\R^n$の分割でなく，分割の各セルから代表元を取得したものを得る．
+     従って，各$S \in \calS_{n-1}$に対して，有限個の半代数的連続関数$\map{\xi_{S,1}< \dots < \xi_{S,l_S}}{S}{R}$が存在し，
+     \begin{itemize}
+          \item 任意の$ x \in S $に対し，
+          \[
+               \{\xi_{S,i}\}_{i=1}^{l_S} = \{y \in R \mid \prod_{f \in F'}f(x,y)=0\}
+          \]
+          である．ただし，$F' = \{f \in F \mid \text{$f$は$S$上恒等的に0でない}\}$とする．
+          \item 各$i=1, \dots, l_S$および$f \in F'$に対し，多項式$f(x,X_n)$における根$\xi_{S,i}(x)$の重複度は，$x\in S$によらず一定．
+     \end{itemize}
+     であるようにとれる．
+     また，$\xi_{S,0} := -\infty$, $\xi_{S,l_S} := \infty$としておく．
 
-\section{QEとCADアルゴリズム}
+     このとき，
+     \begin{align*}
+          C_{S,2i} &:= \{(x,y) \mid  x \in S, \xi_{S,i}(x) = y \} \quad i = 1,\dots, l_S,\\
+          C_{S,2i+1} &:= \{(x,y) \mid x \in S, \xi_{S,i}(x)<y<\xi_{S,i+1}(x) \} \quad i = 0,1, \dots, l_S 
+     \end{align*}
+     とし，
+     \[
+          \calS_n := \{C_{S,i} \mid S \in \calS_{n-1}, i=1, \dots, 2l_S+1\}
+     \]
+     とすれば，$\{\calS_i\}_{i=1}^n$は，$R^n$の$F$適合な柱状代数分解を与える．
+
+     よって，帰納法により示された．
+\end{proof}
+
+% \begin{definition}
+% $ F \subset \mathbb{R}[x_1,\dots,x_n] $ を有限部分集合とする．$ S \subset \mathbb{R}^{n-1} $が$ F $描画可能とする．
+% このとき，$ S $上の$ F $の解を$ f_1(x)< \dots <f_k(x) $とし，$ f_0(x) := -\infty $ , $ f_{k+1}(x) := \infty $とするとき，
+% \begin{align*}
+%   C_{2i} &:= \{(x,y) \mid  x \in S, f_i(x) = y \} \quad i = 1,\dots, k,\\
+%   C_{2i+1} &:= \{(x,y) \mid x \in S, f_{i}(x)<y<f_{i+1}(x) \} \quad i = 0,1, \dots, k 
+% \end{align*}
+
+% とすれば，$\{C_j\}_{j=1}^{2k+1}$は$ S \times \mathbb{R} $の$F$符号不変な分割を与える．
+% この$ S \times \mathbb{R} $の分割$ \{C_j\}_{j=1}^{2k+1} $を，$ S $の持ち上げといい，$ \mathfrak{L}(S) $と書く．
+
+% また，$\mathfrak{D}$が$\R^{n-1}$の分割であるとき，$\mathfrak{L}(\mathfrak{D}) := \bigcup_{D \in \mathfrak{D}}\mathfrak{L}(D)$を$\mathfrak{D}$の持ち上げという．
+% \end{definition}
+
+% 以上より，有限部分集合$F \subset \R[x_1, \dots, x_n]$が与えられたとき，$F$の符号不変な分割を取得するアルゴリズムは次のように表現される．
+
+% \begin{algorithm}
+%     \caption{CADアルゴリズム}
+%     \begin{algorithmic}[1]
+%     \REQUIRE $n \geq 1$: 自然数，$F \subset \R[x_1, \dots, x_n]$: 有限部分集合
+%     \ENSURE $\mathfrak{D}$: $\R^n$の$F$符号不変な分割
+%     \STATE $\mathfrak{D} \leftarrow \text{$\PROJ^{n-1}(F)$-符号不変な$\R^1$の分割}$
+%     \STATE $k \leftarrow 1$
+%     \WHILE{$k < n$}
+%     \STATE $\mathfrak{D} \leftarrow \text{$\mathfrak{L}(\mathfrak{D})$: $\mathfrak{D}$の持ち上げ}$
+%     \STATE $k \leftarrow k+1$
+%     \ENDWHILE
+%     \end{algorithmic}
+% \end{algorithm}
+
+% このアルゴリズムを実際にコンピュータ上に実装するには，$\R^n$の分割でなく，分割の各セルから代表元を取得したものを得る．
+
+\section{柱状代数分解による量化記号消去}
 有限部分集合$F \subset \R[x_1, \dots, x_n]$が与えられたとき，
 前節では$\R^n$の$F$符号不変な分割$\mathfrak{D}$を構成することができることを示した．
 実はこのCADアルゴリズムによる分割は半代数的集合となっているのだが，各セルの定義式がどのようになっているかは記述できていない．
