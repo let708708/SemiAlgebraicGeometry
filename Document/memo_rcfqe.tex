@@ -46,14 +46,42 @@
 
 \begin{document}
 
-\title{実閉体上の量化記号消去のアルゴリズム}
+\title{実閉体上の量化記号消去のアルゴリズムに関するメモ}
 \author{富永 直弥}
 \maketitle
 
-歴史的順序．
-Alfred Tarski, "A Decision Method for Elementary Algebra and Geometry"によって示されたのが歴史的には最初だろう．
-Seidenbergは，"A New Decision Method for Elementary Algebra"という論文を書いている．
+\section{歴史的な経緯のまとめ}
+\subsection{Alfred Tarski, "A Decision Method for Elementary Algebra and Geometry(1951)"}
+\subsection{Seidenberg, "A new Decision Method for Elementary Algebra(1954)"}
+Tarskiは，初等代数学における決定方法(decision method)が与えられた．
+それは，本質的には，所与の多項式の不等式からなる有限集合が，解を持つかどうかを決定するアルゴリズムが与えられたことから達成された．
 
+以下では，Tarskiの結果を別の手法で示す証明を述べる．
+私たちの証明で重要な点は，与えられた有理数体係数2変数多項式$f(x,y) > 0$が，
+実閉体$K$上零点をもつかどうかを決定する方法を示すことで達成される．
+
+この手続きは，\S 2 で行われるが，帰納法のために，$f(x,y)$の係数にパラメータを含む場合の議論も必要である．
+この注意は\S 3 で．この点について十分であることを見る．
+そして，\S 1 では，この問題が等号の決定問題に帰着される．しかし，帰納法が等号だけでは回らない．
+なので，私たちは等号$f(x,y)=0$と不等号$F(x) \neq 0$が同時に成立する系を考慮する．
+もしこの場合に対して決定が成立すれば，帰納法が即座に従う．
+
+その議論は，一様にすべて実閉体$K$で進行する．
+これにより，"Pricnciple of Lefschetz"として知られる原理に類似する実閉体の原理を得る．
+この原理は，ある種の結果を主張する，その結果は，複素数体では自動的に成り立つようなことが，任意の標数0の代数的閉体でも成り立つということだ．
+
+対応する実閉体の原理は，"Principle of Tarski"と呼ぶことにするが，
+それは任意の代数的な基本的文が，一つの実閉体で成り立つのであれば，すべての実閉体で成り立つということである．
+特に，任意の多項式$f(x_1, \dots, x_k) \in K[x_1, \dots, x_k]$,$K$は実閉体，は，任意の$n$次元閉区間の上で最大値と最小値を示すことが示せる．
+
+\S 6(b)では，私たちは，もし実代数多様体が，任意の点の近傍で$K$座標に近似できるとき，そのときそのような点を原点に近似できる事を示すことで，その原理について説明する．
+$\leftarrow$は？
+
+
+私たちの証明は，実際に決定機(decision machine)を構成することに関係があるだろう．
+この点に関するいくつかの注意が\S 6(e)でなされている．
+
+\subsection{George E. Collins, "Quantifier Elimination for Real Closed Fields by Cylindrical Algebraic Decomposition(1975)"}
 
 \section{第一の証明（Bochnask, Coste, Royによる証明）}
 まず第一の方法は，新井敏康「数学基礎論」にて紹介されているアルゴリズムである．
@@ -120,7 +148,7 @@ Seidenbergは，"A New Decision Method for Elementary Algebra"という論文を
 まず，つぎのような省略記号を導入する．
 \begin{definition}
     $1$以上の自然数$s,m$に対して，$P_{s,m}$を，
-    $P$成分の$s'$行$l$列行列( $1 \leq s' \leq s, 1 \leq l \leq 2sm+1$ )全体を表すとする．
+    $P$成分の$s$行$l$列行列( $1 \leq l \leq 2sm+1$ )全体を表すとする．
 
     $X$についての最高次数が高々$n$である多項式列$g_1,\dots,g_t \in \Z[\vec{Y}][X]$と，
     $t$行$(2N+1)$列行列$A=(a_{i,j}) \in P_{t,n}$($0 \leq N \leq sn$)について，
@@ -162,20 +190,16 @@ Seidenbergは，"A New Decision Method for Elementary Algebra"という論文を
 $\vec{g} = g_1, \dots, g_t \in \Z[\vec{Y}][X]$に対して，
 多項式列$\mathcal{S}(\vec{g})$を次のように定義する．
 
-\begin{enumerate}
-    \item $\vec{g}$が全て定数項，すなわち$\Z[\vec{Y}]$の元からなるとき，$\mathcal{S}(\vec{g}):=\vec{g}$とする．
-    \item そうでない場合を考える．
-    $\vec{g}$の中で，$X$の次数が最大のものの中で，添え字が最大なものを取り，これを$g_s(X,\vec{Y})$とする．
-    $g_1, \dots, g_s, \dots, g_t$の中で，定数項でないものを，順に$g_{i_1}, \dots, g_s, \dots, g_{i_k}$とする．
-    $g_s$を，$g_{i_1}, \dots, g_s', \dots, g_{i_k}$のうち定数項以外で割り算し，
-    その余りをそれぞれ$r_{i_1}, \dots, (r_s,)\dots, r_{i_k}$とする．このとき，
-    \[
-        \mathcal{S}(\vec{g}) := g_1, \dots, g_{s-1}, g_s',g_{s+1},\dots, g_t, r_{i_1}, \dots, (r_s,) \dots, r_{i_k}  
-    \]
-    と定める．
-\end{enumerate}
+$\vec{g}$のなかで，$X$の次数が最大なもののなかで，さらに添え字が最大なものを取り，これを$g_s$とする．
+$g_s$を，$g_1, \dots, g_{s-1}, g_s', g_{s+1}, \dots, g_t$のそれぞれで割り算をし，それぞれの余りを$r_1, \dots, r_s, \dots, r_t$とする．
+このとき，
+\[
+    \mathcal{S}(\vec{g}):= g_1, \dots, g_{s-1},g_s',g_{s+1},\dots, g_t, r_1, \dots, r_s, \dots, r_t
+\]
+と定める．
 
-ここで，$f \in \Z[\vec{Y}][X]$の$g \in \Z[\vec{Y}][X]$で割った余り$r \in \Z[\vec{Y}][X]$は，次のように定義している：
+
+ここで，$f \in \Z[\vec{Y}][X]$の$g \in \Z[\vec{Y}][X] \setminus \{0\}$で割った余り$r \in \Z[\vec{Y}][X]$は，次のように定義している：
 $X$の係数環を$\Z(\vec{Y})$と同一視して，$f$を$g$で割った商を$q \in \Z(\vec{Y})$, $r_0 \in \Z(\vec{Y})$とする．
 \[ 
     f = q g + r_0 \quad \text{$r_0=0$または$\deg_X(g)>\deg_X(r_0)$}
@@ -189,8 +213,11 @@ $X$の係数環を$\Z(\vec{Y})$と同一視して，$f$を$g$で割った商を$
     r = b_m^2 \cdots  b_1^2 b_0^2 \cdot r
 \]
 と定義する．\footnote{このような$r$は一意性がないが，どのように$b_0,\dots, b_m$を取ってきても，$\sign(r)$には影響を及ぼさない．}
+また，$f \in \Z[\vec{Y}][X]$を$0$で割ったあまりは$r=0$としておく．
 
-この$\mathcal{S}(\vec{g})$について，列の長さは高々$2t$である．また，最高次数は$\vec{g}$の最高次数に比べて小さくなっているか，同じであっても最高次数の多項式の数は一つ減っている．
+
+この$\mathcal{S}(\vec{g})$について，列の長さは$2t$である．
+また，最高次数は$\vec{g}$の最高次数に比べて小さくなっているか，同じであっても最高次数の多項式の数は一つ減っている．
 
 \begin{lemma} \label{main}
     行列$A \in P_{2t,n}$に対して行列$\mathcal{T}(A) \in P_{t,n}$を返すアルゴリズム$\mathcal{T}$が存在して次を満たす：
@@ -205,7 +232,7 @@ $X$の係数環を$\Z(\vec{Y})$と同一視して，$f$を$g$で割った商を$
 多項式列の列$\{\vec{f}_k\}_{k\leq M}$を，
 \begin{enumerate}
     \item $\vec{f}_0 := \vec{f}$
-    \item $k \geq 0$であり，$\mathcal{S}(\vec{f}_k) \neq \vec{f}_k$ならば$\vec{f}_{k+1}:=\mathcal{S}(\vec{f}_k)$
+    \item $k \geq 0$であり，$\vec{f}_k$が全て定数項でないならば$\vec{f}_{k+1}:=\mathcal{S}(\vec{f}_k)$
 \end{enumerate}
 と定義する．これは有限列である．
 \footnote{数列$L(s,k)$を，$L(s,0):=s$, $L(s,k+1):=L(s,k)\cdot 2^L(s,k)$とする．
@@ -233,8 +260,7 @@ $X$の係数環を$\Z(\vec{Y})$と同一視して，$f$を$g$で割った商を$
 \begin{proof}[補題\ref{main}の証明]
     % この証明を読んで考えたこと：
     % \mathcal{T}は$f_i$の次数を参照している．(\mathcal{S}もだが)．
-    % これはあまり良くない気がするので，次元を参照しないアルゴリズムを書いた方が理解しやすい気がする．
-    % (その分計算量は明確に多くなるが，証明は読みやすくなる気がする．)
-    % アルゴリズムはある程度分かったので，$\mathcal{S}, \mathcal{T}, P_{t,n}$の定義を直しつつ書き直す．
+    % でも冷静にこれ，次数を参照したほうがよさそう．
+    
 \end{proof}
 \end{document}
