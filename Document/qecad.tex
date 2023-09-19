@@ -24,6 +24,7 @@
 \newcommand{\Ralg}{\mathbb{R}_\mathrm{alg}}
 \newcommand{\Qua}{\mathfrak{Q}}
 \newcommand{\M}{\mathfrak{M}}
+\newcommand{\calL}{\mathcal{L}}
 \newcommand{\calS}{\mathcal{S}}
 \newcommand{\calP}{\mathcal{P}}
 \newcommand{\defiff}{ :\Leftrightarrow}
@@ -31,6 +32,8 @@
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\psc}{\mathrm{psc}}
 \newcommand{\PROJ}{\mathrm{PROJ}}
+\newcommand{\APROJ}{\mathrm{APROJ}}
+\newcommand{\der}{\mathrm{der}}
 \newcommand{\sign}{\mathrm{sign}}
 \newcommand{\map}[3]{{#1}:{#2}\rightarrow{#3}}
 
@@ -465,7 +468,7 @@ $F$に適合した$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を$R^{n-1}$の
      \begin{itemize}
           \item 任意の$ x \in S $に対し，
           \[
-               \{\xi_i\}_{i=1}^k = \{y \in R \mid \prod_{f \in F'}f(x,y)=0\}
+               \{\xi_i(x)\}_{i=1}^k = \{y \in R \mid \prod_{f \in F'}f(x,y)=0\}
           \]
           である．ただし，$F' = \{f \in F \mid \text{$f$は$S$上恒等的に0でない}\}$とする．
           \item 各$i=1, \dots, k$および$f \in F'$に対し，多項式$f(x,X_n)$における根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
@@ -748,62 +751,110 @@ $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
 % また，$\mathfrak{D}$が$\R^{n-1}$の分割であるとき，$\mathfrak{L}(\mathfrak{D}) := \bigcup_{D \in \mathfrak{D}}\mathfrak{L}(D)$を$\mathfrak{D}$の持ち上げという．
 % \end{definition}
 
-% 以上より，有限部分集合$F \subset \R[x_1, \dots, x_n]$が与えられたとき，$F$の符号不変な分割を取得するアルゴリズムは次のように表現される．
-
-% \begin{algorithm}
-%     \caption{CADアルゴリズム}
-%     \begin{algorithmic}[1]
-%     \REQUIRE $n \geq 1$: 自然数，$F \subset \R[x_1, \dots, x_n]$: 有限部分集合
-%     \ENSURE $\mathfrak{D}$: $\R^n$の$F$符号不変な分割
-%     \STATE $\mathfrak{D} \leftarrow \text{$\PROJ^{n-1}(F)$-符号不変な$\R^1$の分割}$
-%     \STATE $k \leftarrow 1$
-%     \WHILE{$k < n$}
-%     \STATE $\mathfrak{D} \leftarrow \text{$\mathfrak{L}(\mathfrak{D})$: $\mathfrak{D}$の持ち上げ}$
-%     \STATE $k \leftarrow k+1$
-%     \ENDWHILE
-%     \end{algorithmic}
-% \end{algorithm}
-
-% このアルゴリズムを実際にコンピュータ上に実装するには，$\R^n$の分割でなく，分割の各セルから代表元を取得したものを得る．
-
 \section{柱状代数分解による量化記号消去}
-有限部分集合$F \subset \R[x_1, \dots, x_n]$が与えられたとき，
-前節では$\R^n$の$F$符号不変な分割$\mathfrak{D}$を構成することができることを示した．
-実はこのCADアルゴリズムによる分割は半代数的集合となっているのだが，各セルの定義式がどのようになっているかは記述できていない．
-量化記号消去を行うには実際に各セル$D \in \mathfrak{D}$について，$D$の定義式が必要である．
+有限部分集合$F \subset R[x_1, \dots, x_n]$が与えられたとき，
+前節では$\R^n$の$F$適合な柱状代数分解$\mathfrak{D}$が存在することを示した．
+この節では，柱状代数分解による量化記号消去のアルゴリズムについて示す．
 
-そのため，まず始めに定義式まで明示できるようにCADアルゴリズムを改良する．
+冠頭標準形の論理式
+\[
+     \Qua_1 X_1 \dots \Qua_1 X_k \phi(Y_1, \dots, Y_l, X_1, \dots, X_k)
+\]
+が与えられたとき，
+$R^{k+l}$の柱状代数分解$\{\calS_i\}_{i=1}^{k+l}$を用いて量化記号消去を行うことを考える．
+
+そのためには，$\calS_l$に属する各$S \in \calS_l$の定義式が与えられている必要がある．
+しかし，前節で示した柱状代数分解の構成では，各$S \in \calS_l$の定義式は与えられない．
+
+そのため，柱状代数分解のアルゴリズムを改良し，
+$\{\calS_i\}_{i=1}^l$に属する各$S \in \calS_i$の定義式を与えるようにする必要がある．
+そのために，まずは増補射影について定義する．
 
 \subsection{増補射影}
+     多項式の有限部分集合$F \subset R[X]$が，微分について閉じている(closed under differentiation)
+     とは，任意の$f \in F$に対して，$f' \in F$または$f'=0$となることと定義する．
 
-\begin{definition}
-     次数$m$の実係数多項式$f(x) \in \R[x] \setminus \{0\}$に対し，
-     \begin{align*}
-          F_0(x) &:= f(x),\\
-          F_i(x) &:= \frac{d^i f}{dx^i}(x) \quad i = 1, \dots, m
-     \end{align*}
-     とする．この多項式の列$\{F_i\}_{i=0}^m$を，$f(x)$のフーリエ列という．
-\end{definition}
-
-\begin{theorem}[トムの補題]
-     次数$m$の実係数多項式$f(x) \in \R[x] \setminus \{0\}$をとる．
-     このとき，各$\sigma \in \{-1, 0, +1\}^{m+1}$に対して，
-     \begin{align*}
-          \mathfrak{R}_f(\sigma) := \{x \in \R \mid \sign(F_i(x)) = \sigma_i, \, i = 1, \dots, m \}
-     \end{align*}
-     とすると, $\mathfrak{R}_f(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
+\begin{theorem}[Thomの補題]
+     $F = \{f_1, \dots, f_s\} \subset R[X]$を，微分について閉じた有限部分集合とする．
+     このとき， 任意の$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対し，
+     \[
+          A_\sigma := \{x \in R \mid \text{任意の$i=1, \dots, s$に対し，} \sign(f_i(x)) = \sigma(i)\}
+     \]
+     と定義する．
+     このとき，$A_\sigma$は空集合，一点からなる集合，開区間のいずれかである．
 \end{theorem}
 
 \begin{proof}
-     後で書く．帰納法で示せる．
+     $s$に関する帰納法で示す．
+     $s = 0$のときは明らかである．
+     
+     次に，$s$において主張が成り立つとする．
+     $F = \{f_1, \dots, f_{s+1}\}$とする．ここで，順番を並び替えて$f_{s+1}$の次数が最大であるとする．
+
+     任意に$\map{\sigma}{\{1, \dots, s, s+1\}}{\{-1,0,1\}}$をとる．
+     $\map{\sigma_0}{\{1, \dots, s\}}{\{-1,0,1\}}$を$\sigma$の制限，すなわち
+     \[
+          \sigma_0(i) := \sigma(i), \quad i=1, \dots, s
+     \]
+     とする．
+
+     このとき，$F_0 := \{f_1, \dots, f_{s}\}$は微分について閉じているので，帰納法の仮定より
+     \[
+          A_{\sigma_0}:=\{x \in R \mid \text{任意の$i=1, \dots, s$に対し，} \sign(f_i(x)) = \sigma_0(i)\}
+     \]
+     は，空集合，一点からなる集合，開区間のいずれかである．
+
+     $A_\sigma = A_{\sigma_0} \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(s+1)\}$であるから，
+     $A_{\sigma_0}$が空集合，あるいは一点からなる集合の場合には，$A_\sigma$は空集合か一点からなる集合になるので主張は成り立つ．
+     したがって，$A_{\sigma_0}$が開区間である場合を考える．
+     $f_{s+1}$の微分$f_{s+1}'$は，$f_1, \dots, f_s$のいずれかであるから，$A_{\sigma_0}$上符号は一定である．
+     $f_{s+1}'$の符号が$A_{\sigma_0}$上常に$0$である場合，$f_{s+1}$は$A_{\sigma_0}$上定数であるから，主張は成り立つ．
+     $f_{s+1}'$の符号が$A_{\sigma_0}$上常に$-1$(あるいは$1$)の場合を考える．
+     このとき$f$は$A_{\sigma_0}$上狭義単調増加(あるいは競技単調減少)であるから，$A_{\sigma}$は空集合，一点からなる集合，開区間のいずれかである．
+
+     以上より，主張は示された．
 \end{proof}
 
+\begin{definition}[増補射影]
+     後で書く．
+
+\end{definition}
+
+増補射影を用いることで，帰納的に定義式が分かっているような分割を得ることができる．
+
+\begin{theorem}
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$n \geq 2$とする．
+     $S \subset R^{n-1}$を，半代数的連結な半代数的部分集合とする．
+     $S$が$\APROJ(F)$不変ならば，$S$は$\der(F)$描画可能である．
+
+     特に，$\map{\sigma}{\{1,\dots, s\}}{\{-1, 0, 1\}}$と$g_1, \dots g_s \in R[X_1, \dots, X_{n-1}]$を用いて，
+     \[
+          S = \{(x_1, \dots, x_{n-1}) \in R^{n-1} \mid \sign(g_i(x_1, \dots, x_{n-1}))= \sigma_i\}
+     \]
+     であるならば，
+     $\der(F)$による$S$の持ち上げ$\calL(S)$の定義式は，$\{g_1, \dots,g_s\} \cup \der(F)$で記述できる．
+\end{theorem}
+
+\subsection{柱状代数分解による量化記号消去のアルゴリズム}
+
+柱状代数分解による量化記号消去のアルゴリズムは，次のように述べられる．
+
+\begin{algorithm}
+     \caption{QE}
+     \begin{algorithmic}[1]
+     \REQUIRE 
+     \ENSURE 
+     \STATE pass
+     \end{algorithmic}
+\end{algorithm}
 
 \begin{thebibliography}{99}
      \bibitem{Arai} 新井敏康，『数学基礎論』(2016).
      \bibitem{Itai} 板井昌典，『モデル理論』(2023).
+     \bibitem{Bochnak}Jacek Bochnak, Michel Coste, Marie-Fran\c{c}oise Roy, Real Algebraic Geometry, Springer(1998).
      \bibitem{Basu} Saugata Basu, Richard Pollack, Marie-Fran\c{c}oise Roy, Algorithms in Real Algebraic Geometry(2003).
      \bibitem{Collins} George E. Collins, Quantifier elimination for real closed fields by cylindrical algebraic decomposition(1975).
+     \bibitem{Anai} 穴井宏和，横山和弘，『QEの計算アルゴリズムとその応用 数式処理による最適化』(2011).
 \end{thebibliography}
 
 \end{document}
