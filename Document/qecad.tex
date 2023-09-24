@@ -436,37 +436,78 @@ $\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意してお�
 一つの存在量化記号$\exists$を消去できればいいことに帰着した．
 
 さらに，次のような省略記号を用意する．
-まず，$1$以上の自然数$s, m$に対して，$P_{s,m}$を，$P$成分の$s$行$l$列行列($1 \leq l \leq 2sm + 1$)全体を表すとする．
+まず，$1$以上の自然数$s, m$に対して，$P_{s,m}$を，$P$成分の$s$行$(2l+1)$列行列($0 \leq l \leq sm$)全体を表すとする．
 
-$X$についての最高次数が高々$n$である多項式列$g_1, \dots, g_t \in \Z[Y_1, \dots, Y_n][X]$と，
-$t$行$(2N+1)$列行列$A = (a_{i,j}) \in P_{t, n}$($0 \leq N \leq sn$)について，
+$X$についての最高次数が高々$m$である多項式列$f_1, \dots, f_s \in \Z[Y_1, \dots, Y_n][X]$と，
+$s$行$(2N+1)$列行列$A = (a_{i,j}) \in P_{s, m}$($0 \leq N \leq sm$)について，
 \[
-     \SIGN(g_1, \dots, g_t) = A
+     \SIGN(f_1, \dots, f_s) = A
 \]
-を，以下の事を書き表した論理式の省略であるとする．（$A$を，$g_1, \dots, g_t$の符号表という．）
+を，以下の事を書き表した論理式の省略であるとする．（$A$を，$f_1, \dots, f_s$の符号表という．）
+また，この論理式の自由変数は高々$Y_1, \dots, Y_n$のみである．
 
-ある$X_1<\dots<X_N$が存在して，
+ある$x_1<\dots<x_N$が存在して，
 \begin{enumerate}
-    \item $\{X_1, \dots, X_N\} = \{X \mid \text{$X$はある$g_i \notin \Z[\vec{Y}]の解$}\}$，
-    \item $X_0 := -\infty$, $X_{N+1} := \infty$として，区間$I_k = (X_k, X_{k+1}) (0 \leq k \leq N)$と$p \in P$に対して，($I_k$上では各$g_i$は定符号であるので)
+    \item $\{x_1, \dots, x_N\} = \{x \mid \text{$x$は$\Z[Y_1, \dots, Y_n]$に属さないようなある$f_i$の解}\}$，
+    \item $x_0 := -\infty$, $x_{N+1} := \infty$として，区間$I_k = (x_k, x_{k+1}) (0 \leq k \leq N)$と$p \in P$に対して，($I_k$上では各$f_i$は定符号であるので\footnote{この事実は，実閉体の場合の中間値の定理を用いている．})
     \[
-          \sign(g_i(I_k))=p \defiff \exists x (x \in I_k \land \sign(g_i(x) = p))
+          \sign(f_i(I_k))=p \defiff \exists x (x \in I_k \land \sign(f_i(x) = p))
     \]
-    とおく．このとき，どんな$1 \leq i \leq t$と，どんな$0 \leq k \leq N$に対しても
+    とおく．このとき，どんな$1 \leq i \leq s$と，どんな$0 \leq k \leq N$に対しても
     \[
-          \sign(g_i(I_k))=a_{i,2k+1} \land (k>0 \rightarrow \sign(g_i(X_k))=a_{i,2k})
+          \sign(f_i(I_k))=a_{i,2k+1} \land (k>0 \rightarrow \sign(f_i(X_k))=a_{i,2k})
     \]
     である．
 \end{enumerate}
 
 このとき，次が成り立つ．
-\begin{lemma}
+\begin{lemma}\label{lemma:qe_1ststep}
      与えられた$\map{\sigma}{\{1, \dots, t\}}{P}$に対して，部分集合$P(\sigma) \subset P_{s,m}$を，次を満たすように取れる．
      最高次数は高々$m$である任意の多項式列$f_1, \dots, f_s \in \Z[Y_1, \dots, Y_n][X]$に対し，
      \[
           \SIGN(f_1, \dots, f_s) \in P(\sigma) \leftrightarrow \exists X(\bigwedge_i(\sign(f_i(X, Y_1, \dots, Y_n)) = \sigma(i)))
      \]
+
+     ここで，$\SIGN(f_1, \dots, f_s) \in P(\sigma)$は，論理式
+     \[
+          \bigvee_{A \in P(\sigma)} (\SIGN(f_1, \dots, f_s) = A)
+     \]
+     の省略である．
 \end{lemma}
+
+\begin{proof}
+     \[
+          P(\sigma):=\{A \in P_{s,m} \mid \text{行列$A$のある列が$(\sigma(i))_{i=1}^s$である}\}
+     \]
+     とすればよい．
+\end{proof}
+
+% ここで，多項式の符号表を微分により次数下げを行った多項式の符号表により計算するアルゴリズムを導入する．
+% 符号表に関する条件が最終的に定数の符号表に関する条件に帰着され，量化記号のない論理式に同地であることが示せる．
+
+% 最後に，\cref{theorem:Tarski}を示すための重要な仕組みである二つのアルゴリズムを導入する．
+
+% 一つは，長さが$s$である多項式の列$f_1, \dots, f_s \in \Z[X, Y_1, \dots, Y_n]$に対して，
+% 長さが$2s$である多項式の列$\calS(f_1, \dots, f_s) = (g_1, \dots, g_{2s})$を返すアルゴリズム$\calS$である．
+
+% もう一つが，行列$A \in P_s,m$及び$s列$のベクトル(n_1, \dots, )
+
+以上の準備をもとに，\cref{theorem:Tarski}を示す．
+
+\begin{proof}[\cref{theorem:Tarski}の証明]
+     まず，\cref{lemma:qe_simplify}により，任意に与えられた$f_1, \dots, f_s \in \Z[X, Y_1, \dots, Y_n]$および$\map{\sigma}{\{1, \dots, s\}}{P}$に対して，
+     量化記号のない論理式$\theta(Y_1, \dots, Y_n)$が存在し，
+     \[
+          \RCF \models \theta(Y_1, \dots, Y_n) \leftrightarrow \exists X(\bigwedge_i(\sign(f_i(X,Y_1, \dots, Y_n)) = \sigma(i)))
+     \]
+     を満たせばよい．ここで，\cref{lemma:qe_1ststep}より，
+     \[
+          \RCF \models \SIGN(f_1, \dots, f_s) \in P(\sigma ) \leftrightarrow \exists X(\bigwedge_i(\sign(f_i(X,Y_1, \dots, Y_n)) = \sigma(i)))
+     \]
+     が成り立つ．
+
+     % まだ証明の途中
+\end{proof}
 
 
 % しかし，上記の定理は，任意の論理式が与えられたとき，それに同値な量化記号を含まない論理式を導出する手続きを示しているわけではない．
