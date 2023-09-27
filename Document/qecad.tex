@@ -464,7 +464,7 @@ $\SIGN_R(f_1, \dots, f_s)$を次のように定める．
 この時，$s$行$2N+1$列行列$\SIGN_R(f_1, \dots, f_s) = (c_{i,j})_{i=1, \dots, s, j=1, \dots, 2N+1}$を，
 \begin{align*}
      c_{i,2k} &= \sign_R(f_i(x_k)) \quad k=1, \dots, N\\
-     c_{i,2k+1} &= \sign_R(f_i((x_k, x_k+1))) \quad k=0, \dots, N
+     c_{i,2k+1} &= \sign_R(f_i((x_k, x_{k+1}))) \quad k=0, \dots, N
 \end{align*}
 と定める．
 
@@ -487,7 +487,7 @@ $\SIGN_R(f_1, \dots, f_s) \in P_{s,m}$である．
      とすればよい．
 \end{proof}
 
-次の補題は，\cref{theorem:Tarski}の証明の中心となる補題である．
+次の補題は，\cref{theorem:weak_Tarski}の証明の中心となる補題である．
 
 \begin{lemma}\label{lemma:qe_lowering}
      ある$\map{\phi}{P_{2s,m}}{P_{s,m}}$が存在し，次をみたす．
@@ -499,6 +499,93 @@ $\SIGN_R(f_1, \dots, f_s) \in P_{s,m}$である．
      \]
      である．
 \end{lemma}
+
+この補題は，具体的に多項式$f_1, \dots, f_s \in R[X, Y_1, \dots, Y_s]$が与えられた際に，
+$w:=\SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s)$の行列成分に関する情報のみから
+$\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい． 
+
+\begin{proof}
+     まず，$x_1 < \dots < x_N$を，$f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s$のうち恒等的に$0$でないものの$R$上の根全体とする．
+     この部分列$x_{i_1} < \dots < x_{i_M}$を，$f_1, \dots, f_{s-1}, f_s'$の$R$上の根全体とする．
+     この部分列$\{i_k\}_{k=1}^M$は，行列$w$の情報のみから構成できる．
+
+     ここで，$i_0 = 0, i_{M+1} = N+1$としておき，また，$x_0= -\infty, x_{N+1} = \infty$としておく．
+
+     $\map{\theta}{\{1, \dots, M\}}{\{1, \dots, s\}}$を，
+     $\theta(k) \in \{1, \dots, s-1\}$かつ$f_{\theta(k)}(x_{i_k}) = 0$，
+     または$\theta(k)=s$かつ$f_{s}'(x_{i_k})=0$であるようにとる．
+     この$\theta$も，行列$w$の情報のみから構成できる．
+
+     この$\theta$に対して，各$k=1, \dots, M$で$f_s(x_{i_k}) = g_\theta(k)(x_{i_k})$が成り立つ．
+
+     これで，各$x_{i_k}$における$f_s(x_{i_k})$の符号については情報が得られた．
+     次に問題になるのは，各$k=1,\dots, k_s$に対し，区間$(x_{i_k},x_{i_{k+1}})$における$f_s(X)$の符号についてである．
+     多項式$f_s(X)$は，区間$(x_{i_k},x_{i_{k+1}})$において$f_s'(X)$の符号が$0$でない一定の符号であることから，
+     この区間の上では狭義単調増加または狭義単調減少である．
+     \footnote{この事実は，実数体の場合には明らかであるが，実閉体の場合にも成立する．}
+     よって，区間$(x_{i_k},x_{i_{k+1}})$上の$f_s(X)$の根の数は高々$1$つである．
+
+     各区間に$f_s(X)$が根を持つことの必要十分条件は，次のように述べれる．
+     \begin{itemize}
+          \item $M\neq0$で，$k=1, \dots, M-1$に対して，$f_s(X)$が区間$(x_{i_k}, x_{i_{k+1}})$上に解を持つことの必要十分条件は
+          \[
+               \sign_R(g_\theta(k)(x_{i_k}))\sign_R(g_\theta(k+1)(x_{i_{k+1}})) = -1.
+          \]
+          \item $M\neq0$で，$(-\infty, x_1)$に解を持つことの必要条件は，
+          \[
+               \sign_R(f_s'((-\infty, x_1))) \sign_R(g_\theta(1)(x_1)) = 1.
+          \]
+          \item $M\neq0$で，$(x_M, \infty)$に解を持つことの必要条件は，
+          \[
+               \sign_R(f_s'((x_M, \infty))) \sign_R(g_\theta(M)(x_M)) = -1.
+          \]
+          \item $M = 0$の場合は，$(\infty, \infty)$上に必ず解を持つ．
+     \end{itemize}
+     いずれの条件も，行列$w$の情報のみで記述されることに注意する．
+
+     いま，$y_1 < \dots < y_L$を，$f_1, \dots, f_{s-1}, f_s$の$R$上の根とし，$y_0 = -\infty$, $y_0$ = 0とする．
+     $\map{\rho}{\{0, \dots, L+1\}}{\{0, \dots, M+1\} \cup \{(k,k+1) \mid k=0, \dots, M\}}$を，
+     \[
+          \rho(l) := \begin{cases} 
+               k & y_l = x_{i_k},\\
+               (k, k+1) & y_l \in (x_{i_k}, x_{i_{k+1}})
+          \end{cases}
+     \]
+     と定める．$\rho$の定義は，行列$w$の情報だけに依存する．
+
+     それでは，$\SIGN_R(f_1, \dots, f_s)$が$w$の情報のみに依存して定まる事を示す．
+     
+     まず，$i=1, \dots, s-1$に対しては，
+     \[
+          \sign_R(f_i(y_l)) = \begin{cases}
+               \sign_R(f_j(x_{i_k})) & \rho(l) = k,\\
+               \sign_R(f_j((x_{i_k}, x_{i_{k+1}}))) & \rho(l) = (k, k+1)
+          \end{cases}
+     \]
+     であり，また，
+     \[
+          \sign_R(f_i((y_l,y_{l+1}))) = \sign_R(f_i((x_{i_k}, x_{i_{k+1}}))) \quad \text{$\rho(l)=k$または$\rho(l)=(k,k+1)$}
+     \]
+     である．さらに，$i=s$に対しては，
+     \[
+          \sign_R(f_s(y_l)) = \begin{cases}
+               \sign_R(g_{\theta(k)}(x_{i_k})) & \rho(l) = k,\\
+               0 & \rho(l) = (k, k+1)
+          \end{cases}
+     \]
+     であり，また，
+     \[
+          \sign_R(f_s((y_l,y_{l+1}))) = \begin{cases}
+               \sign_R(g_{\theta(k)}(x_{i_k})) & \rho(l) = k, l \neq 0, g_{\theta(k)}(x_{i_k})\neq 0\\
+               \sign_R(f_s'((x_{i_k},x_{i_{k+1}}))) & \rho(l)=k, l \neq 0, g_{\theta(k)}(x_{i_k}) = 0 \\
+               \sign_R(f_s'((x_{i_k}, x_{i_{k+1}}))) & \rho(l) = (k, k+1), l \neq 0\\
+               -\sign_R(f_s'((-\infty, x_1))) & l=0
+          \end{cases}
+     \]
+     である．
+
+     以上により$\SIGN_R(f_1, \dots, f_s)$が$w$の情報飲みに依存して定まることが示せ，よって証明が完了した．
+\end{proof}
 
 以上の準備をもとに，\cref{theorem:weak_Tarski}を示す．
 
@@ -723,7 +810,7 @@ $F$描画可能であることの必要条件は，次のように与えられ�
      \[
           \{(x,z) \mid \bigvee_{n}(z = n \text{ and } \exists y_1, \dots, y_n \text{ s.t. } y_i \neq y_j( i\neq j) \text{ and } \forall y(f_1(x,y)=f_2(x,y) \leftrightarrow \bigvee_{i=1}^n (y = y_i)))\}
      \]
-     ここで，論理和の$n$は，$0$から$gcd(P,Q)$の$Y$に関する次数までをとる．
+     ここで，論理和の$n$は，$0$から$\gcd(P,Q)$の$Y$に関する次数までをとる．
      この主張はすでに$\RCF$において$量化記号消去$が可能であることを用いてしまっているが，
      それは別の方法で示すことができる．(例えば新井\cite{Arai}を参照．)
      }
