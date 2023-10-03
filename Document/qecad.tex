@@ -130,7 +130,7 @@ $\Ralg$に属する元を実代数的数という．
 \]
 のようにかくことにする．
 
-実閉体$R$を係数とする一変数多項式について，実数$\R$上の連続関数，または可微分関数と同様の性質が成り立つ．
+実閉体$R$を係数とする一変数多項式について，実数$\R$上の連続関数，可微分関数と同様の性質が成り立つ．
 
 \begin{proposition}\label{proposition:intermediate}
      $R$を実閉体とし，$f \in R[X]$とする．
@@ -202,12 +202,13 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
 言語$L$が定義されると，順に項，原子論理式，論理式が順に定義される．
 
 \begin{definition}[項の定義]
-     順序環の言語$L$に対して，項(term)が帰納的に定義される．
+     言語$L$に対して，項(term)が帰納的に定義される．
      \begin{enumerate}
           \item 変数記号，定数記号は項である．
           \item $t_1, \dots, t_n$がいずれも項とする．任意の$n$変数関数記号$f \in L$に対し，$f(t_1, \dots, t_n)$は項である．
           \item 以上の規則により定まる記号列のみが項である．
      \end{enumerate}
+     言語$L$上の項であることを強調したいとき，$L$項($L$-term)と呼ぶ．
 \end{definition}
 
 \begin{definition}[論理式の定義]
@@ -217,7 +218,7 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
           \item $R \in L$を$n$変数述語記号，$t_1, \dots, t_n$を項として，$(R(t_1, \dots, t_n))$.
      \end{enumerate}
      
-     また，原子論理式$\phi$またはその否定$(\lnot \phi)$を，リテラル(literal)とよぶ．
+     また，原子論理式$\phi$またはその否定$(\lnot \phi)$を，リテラル(literal)と呼ぶ．
      さらに，言語$L$に対して，論理式(formula)が帰納的に定義される．
      \begin{enumerate}
           \item 原子論理式は論理式である．
@@ -226,6 +227,7 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
           \item $\phi$が論理式であるとすると，任意の変数記号$x$に対して$(\forall x \phi)$, $(\exists x \phi)$は論理式である．
           \item 以上の規則により定まる記号列のみが論理式である．
      \end{enumerate}
+     言語$L$の論理式であることを強調したいときは，$L$論理式($L$-formula)と呼ぶ．
 \end{definition}
 
 論理式$\phi := \forall x (x^2 + y > 0)$について観察する．ここで，$x,y$はいずれも変数記号である．
@@ -262,7 +264,7 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
 \end{definition}
 
 \begin{definition}[理論]
-     言語$L$に対して，閉論理式からなる集合を理論(theory)という．
+     言語$L$に対して，閉論理式からなる集合を$L$理論($L$-theory)，あるいは単純に理論(theory)という．
 \end{definition}
 
 \begin{example}[実閉体の理論]
@@ -303,12 +305,12 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
      また，項$t$と$n=1,2,\dots$に対し，$t^n$は，$t^n:=t \cdot t^{n-1}$, $t^1:=t$により帰納的に定義された省略記号とする．
 \end{example}
 
-理論$\RCF$の閉論理式をすべて満たすような数学的構造を，実閉体とよびたい．
-このような定義を正当化させるには，この数学的構造が，言語$L_\mathrm{OR}$で書かれた閉論理式を真か偽か判定できることが必要である．
-そのために，まず言語を解釈する数学的構造を定義する．
+理論$\RCF$の閉論理式をすべて満たすような「数学的構造」を，実閉体とよびたい．
+このような定義を正当化させるには，この「数学的構造」が，言語$L_\mathrm{OR}$で書かれた閉論理式を，真か偽か判定できることが必要である．
+そのために，言語を解釈することのできる「数学的構造」を定義する．
 
 \begin{definition}[構造の定義]
-     言語$L$の構造(structure)とは，空でない集合$M$と，次のようなデータの組$\M=(M,\dots)$である．
+     言語$L$において，$L$構造($L$-structure)とは，空でない集合$M$と，次のようなデータの組$\M=(M,\dots)$である．
      \begin{itemize}
           \item 各$n$変数述語記号$R \in L$に対応する部分集合$R^\M \subset M^n$.
           \item 各$n$変数関数記号$f \in L$に対応する写像$\map{f^\M}{M^n}{M}$.
@@ -316,41 +318,41 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
      \end{itemize}
 \end{definition}
 
-言語$L$の構造$\M$が与えられたとき，
-言語$L$上の論理式$\phi$が構造$\M$で成り立つかどうか，すなわち充足関係があるかどうかを定義できる．
+$L$構造$\M$が与えられたとき，
+$L$論理式$\phi$が$L$構造$\M$で成り立つかどうか，すなわち充足関係があるかどうかを定義できる．
 
 \begin{definition}
-     言語$L$上の構造$\M = (M,\dots)$をとる．
+     $L$-構造$\M = (M,\dots)$をとる．
      言語$L$に形式的な定数記号$\{c_m \mid m \in M\}$を追加した言語を$L(\M)$とする．
      ここで，各$m \in M$に対し, $c_m^{\M}:=m$とすることで，
-     $\M$は言語$L(\M)$の構造に拡張できる．
+     $\M$は$L(\M)$構造に拡張できる．
      \begin{itemize}
-          \item $L(\M)$上の閉項$t$の解釈$t^\M$を帰納的に定義する．
+          \item $L(\M)$閉項$t$の解釈$t^\M$を帰納的に定義する．
           \begin{enumerate}
                \item $f$を$n$変数関数記号とし, 閉項$t_1$, \dots $t_n$のそれぞれの解釈$t_1^\M,\dots,t_n^\M$が定まっているとする．
                このとき，$(f(t_1,\dots,t_n))^\M:=f^\M(t_1^\M,\dots,t_m^\M)$と定める．
           \end{enumerate}
-          \item $L(\M)$上の閉論理式$\phi$に対し, 充足関係(satisfaction relation)があること（$\M \models \phi$とかく）を帰納的に定義する．
+          \item $L(\M)$閉論理式$\phi$に対し, 充足関係(satisfaction relation)があること（$\M \models \phi$とかく）を帰納的に定義する．
           \begin{enumerate}
                \item $t_1,t_2$を$L(\M)$上の閉項とするとき, 
                \[
                     \M \models (t_1 = t_2) \defiff t_1^\M = t_2^\M,
                \]
-               \item $t_1,\dots t_n$を$L(\M)$上の閉項，$R$を$n$変数述語記号とするとき，
+               \item $t_1,\dots t_n$を$L(\M)$閉項，$R$を$n$変数述語記号とするとき，
                \[
                     \M \models (R(t_1, \dots, t_n)) \defiff (t_1^\M, \dots, t_n^\M) \in R^\M,
                \]
-               \item $L(\M)$上の閉論理式$\phi$に対し
+               \item $L(\M)$閉論理式$\phi$に対し
                \[
                     \M \models (\lnot \phi) \defiff \M \not\models \phi,
                \]
-               \item $L(\M)$上の閉論理式$\phi, \psi$に対し
+               \item $L(\M)$閉論理式$\phi, \psi$に対し
                \begin{align*}
                     &\M \models (\phi \lor \psi) \defiff \M \models \phi \text{または} \M \models \psi,\\
                     &\M \models (\phi \land \psi) \defiff \M \models \phi \text{かつ} \M \models \psi,\\
                     &\M \models (\phi \rightarrow \psi) \defiff \M \not\models \phi \text{または} \M \models \psi,
                \end{align*}
-               \item $L(\M)$上の変数記号が高々$x$のみである論理式$\phi(x)$に対し
+               \item 変数記号が高々$x$のみである$L(\M)$論理式$\phi(x)$に対し
                \begin{align*}
                     &\M \models (\forall x \phi(x)) \defiff \text{任意の$m \in M$に対し}\M \models \phi(c_m),\\
                     &\M \models (\exists x \phi(x)) \defiff \text{ある$m \in M$に対し}\M \models\phi(c_m).
@@ -360,11 +362,11 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
 \end{definition}
 
 \begin{definition}
-     $L$を言語とし，$T$を$L$上の理論とする．
-     $L$上の構造$\M$が任意の$\phi \in T$に対して$\M\models \phi$であるとき，構造$\M$を$T$のモデル(model)といい，$\M \models T$とかく．
+     $L$を言語とし，$T$を$L$理論とする．
+     $L$構造$\M$が任意の$\phi \in T$に対して$\M\models \phi$であるとき，$L$構造$\M$を$T$のモデル(model)といい，$\M \models T$とかく．
 \end{definition}
 
-言語$L_\mathrm{OR}$上の構造$\R=(\R,<,+,\cdot,1,0)$や$\Ralg=(\Ralg,<,+,\cdot,1,0)$は，いずれも実閉体である．したがって，
+順序環の言語$L_{\mathrm{OR}}$において，$L_\mathrm{OR}$構造$\R=(\R,<,+,\cdot,1,0)$や$\Ralg=(\Ralg,<,+,\cdot,1,0)$は，
 \[
      \R \models \RCF, \quad \Ralg \models \RCF
 \]
@@ -376,12 +378,12 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
 \begin{example}
      言語$L_\mathrm{OR}$上の次のような論理式を考える．
      \begin{equation*}
-          \phi(a) := \forall (x^2 + ax + a + 3 > 0)
+          \phi(a) := \forall x (x^2 + ax + a + 3 > 0)
      \end{equation*}
 
      簡単のため，実閉体のモデルである実数体$\R$をとって考える．すなわち，上記の論理式は次のように言い換えられる．
      \begin{equation*}
-          \text{全ての実数$x \in \R$に対して} x^2 + ax + a + 3 > 0
+          \text{全ての実数$x \in \R$に対して$x^2 + ax + a + 3 > 0$をみたす．}  
      \end{equation*}
      これを，変数記号$a$についての条件と解釈すると，2次方程式$x^2 + ax + a + 3 = 0$の判別式が0より大きいことに必要十分であるから，
      \begin{equation*}
@@ -403,10 +405,10 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
 
 \begin{definition}
 $T$を言語$L$上の理論とし，$\phi$を$L$上の論理式とする．% semantic consequences じゃないの？ vs syntax consequences
-全ての$T$のモデル$\M$に対して$\M \models \phi$が成り立つとき，$\phi$は$T$の論理的帰結(logical consequences)であるといい，$T \models \phi$とかく．
+全ての$T$のモデル$\M$に対して$\M \models \phi$が成り立つとき，$\phi$は$T$の帰結(consequence)であるといい，$T \models \phi$とかく．
 
 理論$T$で量化記号消去(quantifier elimination)ができるとは，
-$L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号を含まない論理式$\psi(x_1,\dots, x_n)$が存在し，
+$L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号のない論理式$\psi(x_1,\dots, x_n)$が存在し，
 \begin{equation*}
      T \models \forall x_1 \dots \forall x_n(\phi(x_1,\dots,x_n) \leftrightarrow \psi(x_1, \dots, x_n))
 \end{equation*}
@@ -414,17 +416,19 @@ $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号を含�
 \end{definition}
 
 
-実は，実閉体の理論は量化記号消去ができることが示されている．すなわち，次が成り立つ．
+実閉体の理論は量化記号消去ができる．すなわち，次が成り立つ．
 
 \begin{theorem}[Tarski]\label{theorem:Tarski}
      実閉体の理論$\RCF$は量化記号消去ができる．
 \end{theorem}
 
+以降この節は\cref{theorem:Tarski}の証明を述べる．
+
 この定理の証明および後々の議論のため，言語$L_\mathrm{OR} = \{<, +, \cdot, 1, 0\}$上の原子論理式について注意をしておく．
 
-まず，$1$以上の自然数の記号$n$を，$1$の$n$個の和$(1 + (1 + \dots + 1 ))$の省略記号であるとする．
+まず，正整数の記号$n$を，$1$の$n$個の和$(1 + (1 + \dots + 1 ))$の省略記号であるとする．
 
-さらに，$x_1, \dots, x_n$を変数記号として，多項式$f \in \Z[x_1, \dots, x_n]$が，$a_1, \dots, a_k, b_1, \dots, b_l$を$1$以上の自然数として，
+さらに，$x_1, \dots, x_n$を変数記号として，多項式$f \in \Z[x_1, \dots, x_n]$が，$a_1, \dots, a_k, b_1, \dots, b_l$を正整数として，
 \[
      f(x_1, \dots, x_n) = \sum_{i=1}^k a_i x_1^{\alpha_{i,1}} \cdots x_n^{\alpha_{i,n}} - \sum_{j=1}^l b_j x_1^{\beta_{j,1}} \cdots x_n^{\beta_{j,n}}
 \]
@@ -437,7 +441,7 @@ $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号を含�
      \sign (f(x_1, \dots, x_n)) = -1 &\defiff \sum_{i=1}^k a_i x_1^{\alpha_{i,1}} \cdots x_n^{\alpha_{i,n}} < \sum_{j=1}^l b_j x_1^{\beta_{j,1}} \cdots x_n^{\beta_{j,n}}
 \end{align*}
 
-このとき，理論$\RCF$において，任意の原子論理式$\phi(x_1, \dots, x_n)$は，ある多項式$f \in \Z[x_1, \dots, x_n]$及び$\sigma \in \{-1, 0, 1\}$を用いて，
+このとき，$\RCF$において，任意の原子論理式$\phi(x_1, \dots, x_n)$は，ある多項式$f \in \Z[x_1, \dots, x_n]$及び$\sigma \in \{-1, 0, 1\}$を用いて，
 $\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意しておく．
 また，$P = \{-1, 0, 1\}$としておく．
 
@@ -467,9 +471,7 @@ $\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意してお�
           \]
           をみたす．
      \end{enumerate}
-
-     まずは\ref{qe_1}より\ref{qe_2}を示す．
-     任意に与えられた量化記号のない論理式$\phi(X, Y_1, \dots, Y_n)$は，多項式$f_{i,j} \in \Z[X, Y_1, \dots, Y_n]$($i=1, \dots, k, j=1, \dots, l_i$)
+     実際，任意に与えられた量化記号のない論理式$\phi(X, Y_1, \dots, Y_n)$は，多項式$f_{i,j} \in \Z[X, Y_1, \dots, Y_n]$($i=1, \dots, k, j=1, \dots, l_i$)
      と$\map{\sigma_i}{\{1, \dots, l_i\}}{P}$を用いて，和積標準形
      \[
           \phi(X, Y_1, \dots, Y_n) \leftrightarrow \bigvee_i \bigwedge_j (\sign(f_{i,j}(X, Y_1, \dots, Y_n)) = \sigma_i(j))
@@ -540,7 +542,7 @@ $\SIGN_R(f_1, \dots, f_s)$を次のように定める．
 \end{align*}
 と定める．
 
-このとき，$1$以上の自然数$s, m$に対して，$P_{s,m}$を，$P$成分の$s$行$(2l+1)$列行列($0 \leq l \leq sm$)全体を表すとすると，
+このとき，正整数$s, m$に対して，$P_{s,m}$を，$P$成分の$s$行$(2l+1)$列行列($0 \leq l \leq sm$)全体を表すとすると，
 $\SIGN_R(f_1, \dots, f_s) \in P_{s,m}$である．
 
 \begin{lemma}\label{lemma:qe_1ststep}
