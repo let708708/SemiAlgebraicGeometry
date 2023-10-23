@@ -66,10 +66,14 @@
 \section{基礎的な定義}
 
 \subsection{実閉体}
-まず，1926年にArtinとSchreierにより導入された，実閉体の概念についてまとめる．
+
+% どの論文で導入されたかの引用をするべき．論文の定理番号も可能なら引用する．
+% 順序体・実体の概念がいつ頃導入されたものなのかはよくわからないです．
+まず，\cite{Artin}でArtinとSchreierにより導入された，実閉体の概念についてまとめる．
 実閉体は，実数体を拡張して定義される概念であり，実閉体上でも実数体と類似した解析的な性質が成り立つ．
 
 まず始めに，順序体と実体の定義を述べる．
+
 \begin{definition}[順序体と実体の定義]
      体$F$と$F$上の全順序構造$<$の組$(F,<)$が次の性質を満たすとき，$(F,<)$を順序体(ordered field)という．
      \begin{enumerate}
@@ -77,114 +81,165 @@
           \item 任意の$x,y \in F$に対し，$x \geq 0$, $y \geq 0$ならば$x \cdot y \geq 0$である．
      \end{enumerate}
 
-     また，体$F$が，任意の有限個の$F$の元$x_1, \dots, x_k \in F$について, $-1 \neq \sum_{i=1}^k x_i^2$を満たすとき，実体(real field)であるという．
+     また，体$F$が，任意の有限個の$F$の元$x_1, \dots, x_k \in F$について，
+     $-1 \neq \sum_{i=1}^k x_i^2$を満たすとき，実体(real field)であるという．
 \end{definition}
 
 順序体と実体について，次の命題が成り立つ．
 
-\begin{proposition}
+% ここは命題であったが，定理に修正した．
+% 証明を付けるか，引用するかどちらかすべき．
+\begin{theorem}
      $F$を体とする．このとき，以下は同値である．
      \begin{enumerate}
           \item $F$が実体である．
           \item $F$が順序体となるような全順序構造$<$を持つ．
      \end{enumerate}
-\end{proposition}
+\end{theorem}
 
-例えば，実数体$\R$や有理数体$\Q$，また有理数体$Q$に$\sqrt{2}$を添加した体$\Q(\sqrt{2})$は，
+% $\Q(\sqrt{2})$を$\Q\left(\sqrt{2}\right)$に修正．以下同様．
+例えば，実数体$\R$や有理数体$\Q$，有理数体$\Q$に$\sqrt{2}$を添加した体$\Q\left(\sqrt{2}\right)$は，
 通常の全順序構造を入れることにより順序体となる．
-したがって，$\R, \Q, \Q(\sqrt{2})$はいずれも実体である．
+したがって，$\R, \Q, \Q\left(\sqrt{2}\right)$はいずれも実体である．
 
+% $\C$が順序体の構造を持たないことは命題として述べてもいいのでは．(まだ直してない)
 一方で，複素数体$\C$は順序体の構造を持たない．よって，$\C$は実体ではない．
 
-有理数体$\Q$は，実体$\Q(\sqrt{2})$を代数拡大にもつが，
-実数体$\R$は実体の代数拡大を自分以外には持たない．
+有理数体$\Q$は，実体$\Q\left(\sqrt{2}\right)$を代数拡大にもつが，
+実数体$\R$は代数拡大で実体になるものは自分以外には持たない．
 そのような特徴に注目し，実閉体の概念を導入する．
 
-\begin{definition}[実閉体の定義]
+% 引用の書き方が分からないのですが，これでいいでしょうか？
+実閉体は\cite{Artin}により初めて定義された．
+なお，\cite[Definition1.2.1]{Bochnak}の定義を参照している．
+
+\begin{definition}[実閉体の定義] \label{definition:RCF}
      実体$F$が実閉体(real closed field)であるとは，$F$の代数拡大で実体になるものは$F$自身に限ることである．
 \end{definition}
 
 先ほど述べたように，有理数体$\Q$は実閉体ではないが，実数体$\R$は実閉体である．
-また，代数的数全体(すなわち, 有理数体$\Q$の代数的閉包)$\bar{\Q}$と実数体$\R$の共通部分$\Ralg := \bar{\Q} \cap \R$は実閉体である．
+また，代数的数全体(すなわち, 有理数体$\Q$の代数的閉包)$\overline{\Q}$と実数体$\R$の共通部分$\Ralg := \overline{\Q} \cap \R$は実閉体である．
 $\Ralg$に属する元を実代数的数という．
 
-この実閉体の定義では，後に述べる一階述語論理を用いて実閉体の理論を定式化することができない．
-しかし，次の定理を用いることで，一階述語論理で実閉体の理論を定式化することができる．
+% 一階述語論理で書けない～というところを，消去しました．
+この実閉体の\cref{definition:RCF}は，次の定理を用いることで，一階述語論理で実閉体の理論を定式化することができる．
 
-\begin{theorem}[Artin]
+%以下の定理の引用を加えました．(これでよい？)
+% 1⇒2, 3は示されているようだが，ぱっと見，逆が示されていなそう．
+次の定理は，\cite{Artin}において示された．
+また，\cite[Theorem.1.2.2.]{Bochnak}を参照した．
+\begin{theorem}
      体$F$について，以下は同値である．
      \begin{enumerate}
           \item 体$F$は実閉体である．\label{proposition:rcf_1}
           \item 次を満たす$F$の順序体の構造$<$がただ一つ存在する．
                \begin{itemize}
                     \item 任意の$x \in F$に対し, $x>0$ならば$x = y^2$を満たす$y \in F$が存在する．
-                    \item 奇数次数の$F$係数$1$変数多項式は，$F$上に少なくとも$1$つの解を持つ．
+                    \item 奇数次数の$F$係数$1$変数多項式は，$F$において少なくとも$1$つの根を持つ．
                \end{itemize}
-          \item $F[\sqrt{-1}] := F[X]/(X^2 + 1)$は代数的閉体である．\label{proposition:rcf_2}
+          \item $F\left[\sqrt{-1}\right] := F[X]/(X^2 + 1)$は代数的閉体である．\label{proposition:rcf_2}
      \end{enumerate}
 \end{theorem}
 
-以降は，実閉体$R$上の区間について，
-\[
+% 以降 → これ以下では に訂正．
+これ以下では，実閉体$R$上の区間を，
+\begin{equation}
      [a,b]:=\{x \in R \mid a \leq x \leq b\}, \quad (a,b):=\{x \in R \mid a < x < b\}
-\]
+\end{equation}
 のようにかくことにする．
 
 実閉体$R$を係数とする一変数多項式について，実数$\R$上の連続関数，可微分関数と同様の性質が成り立つ．
 
 \begin{proposition}\label{proposition:intermediate}
      $R$を実閉体とし，$f \in R[X]$とする．
-     また，$a,b \in R$を$a<b$とする．
-     $f(a)f(b)<0$であるとすれば，ある$x \in (a,b)$が存在し，$f(x)=0$を満たす．
+     また，$a<b$を満たす$a,b \in R$をとる．
+     $f(a)f(b)<0$であれば，ある$x \in (a,b)$が存在し，$f(x)=0$を満たす．
 \end{proposition}
 \begin{proof}
      $R[\sqrt{-1}]$が代数的閉体であるから，
      $f(X)$の既約因子は，
-     \begin{align*}
+     \begin{align}
           &X-\alpha, \\
           &(X-\beta)^2 + \gamma^2 = (X-\beta-\gamma\sqrt{-1})(X-\beta+\gamma\sqrt{-1})
-     \end{align*}
-     の形のどちらかである($\alpha, \beta, \gamma \in R$)．
-     $f(a)f(b)<0$であるから，ある$f(X)$の既約因子$g(X) = X - \alpha$について，
-     $g(a)g(b)<0$である．従って，$g(X)$は$(a,b)$の中に根を持つ．
+     \end{align}
+     の形のどちらかである($\alpha, \beta, \gamma \in R$, $\gamma \neq 0$)．
+     % 証明にギャップがあったので直した．
+     このとき，$(X-\beta)^2 + \gamma^2$の形の既約因子は，$\gamma \neq 0$であるから$R$上で常に$0$より大きいことに注意する．
+     $f(a)f(b)<0$であることから，$f(X)$のある既約因子$g(X)$について，$g(a)g(b)<0$となる．
+     実際，もしすべての$f(X)$の既約因子$g(X)$について，$g(a)g(b) \geq 0$であれば，$f(a)f(b)\geq0$となり仮定に反する．
+     ここで，先に述べた注意から，$g(a)g(b)<0$となるような$f(X)$の既約因子$g(X)$は，$g(X) = X - \alpha$とかける．
+     $g(a)g(b) < 0$であることから，$a<\alpha<b$であり，このとき$f(\alpha)=0$である．
+     したがって，命題が示された．
 \end{proof}
 
-\begin{proposition}[Rolleの定理]\label{proposition:Rolle}
+\begin{proposition}\label{proposition:Rolle}
      $R$を実閉体とし，$f \in R[X]$とする．
      また，$a, b \in R$を$a<b$とする．
      $f(a)=f(b)=0$であるとき，ある$x \in (a,b)$が存在し，$f'(x)=0$である．
 \end{proposition}
 \begin{proof}
-     $(a,b)$上に$f(X)$の根がない場合について示せばよい．
-     \[
+     % 以下の主張において，「十分である」ことの説明を加えた．
+     $(a,b)$上に$f(X)$の根がない場合について示せば十分である．
+     実際，もし$(a,b)$上に$f(X)$の根が存在するとき，それらの根を$a < x_1 < \dots < x_k < b$とすれば，
+     $x_1$を改めて$b$とすることで$(a,b)$上に$f(X)$の根がない場合に帰着する．
+
+     よって以下では，$(a,b)$上に$f(X)$の根がないとする．
+     \begin{equation}
      f(X) = (X-a)^m(X-b)^ng(X), \, g(a)\neq0,\, g(b)\neq0
-     \]
+     \end{equation}
      とする．このとき，$(a,b)$上$f(X)$の根がないことから，\cref{proposition:intermediate}より，$g(a)g(b)>0$である．
      
      $g_1(X) := m(X-b)g(X)+n(X-a)g(X)+(X-a)(X-b)g'(X)$とおくと．
-     \[
+     \begin{equation}
           f'(X) = (X-a)^{m-1}(X-b)^{n-1}g_1(X)
-     \]
+     \end{equation}
      である．
      このとき，$g_1(a) = m(a-b)g(a)$, $g_1(b)=n(b-a)g(b)$であるから，$g_1(a)g_1(b)<0$である．
      よって，\cref{proposition:intermediate}より，ある$x \in (a, b)$が存在し$g_1(x)=0$である．
      この$x \in (a,b)$に対して$f'(x)=0$である．
 \end{proof}
 
+% この系と証明を追加した．
+\begin{corollary}\label{corollary:mean-value}
+     $R$を実閉体とし，$f \in R[X]$とする．また，$a, b \in R$を$a<b$とする．
+     このとき，ある$c \in (a,b)$が存在して，$f(b)-f(a) = (b-a)f'(c)$を満たす．
+\end{corollary}
+
+\begin{proof}
+     $F(X) \in R[X]$を，
+     \begin{equation}
+          F(X) := f(X) - \left\{\frac{f(b)-f(a)}{b-a}(X-a) + f(a)\right\}
+     \end{equation}
+     と定義すると，$F(a)=F(b)=0$であるから，\cref{proposition:Rolle}より，
+     ある$c \in (a,b)$が存在して，$F'(c)=0$を満たす．
+     この$c$に対して，$f(b)-f(a)=f'(c)(b-a)$が成り立つ．
+\end{proof}
+
+% この系の証明を追加した．
 \begin{corollary}\label{corollary:monotone}
      $R$を実閉体とし，$f \in R[X]$とする．また，$a, b \in R$を$a<b$とする．
      このとき，任意の$x \in (a,b)$について$f'(x)>0$ならば，$f(X)$は$[a,b]$上狭義単調増加である．
      また，任意の$x \in (a,b)$について$f'(x)<0$ならば，$f(X)$は$[a,b]$上狭義単調減少である．
 \end{corollary}
-
-% 実閉体における解析的な性質について言及するべきである．
-% 中間地の定理や平均値の定理について述べておくべき．
+\begin{proof}
+     後半も同様に示せるので，前半の主張を示す．
+     $f(X)$が$[a,b]$上狭義単調増加でないとすると，ある$x \in (a,b)$について$f'(x) \leq 0$となることを示す．
+     $f(X)$が$[a,b]$上狭義単調増加でないとすると，
+     $a \leq x_0 < x_1 \leq b$である$x_0, x_1 \in R$が存在して，$f(x_0) \geq f(x_1)$を満たす．
+     このとき，\cref{corollary:mean-value}より，$x_0 < x < x_1$である$x \in (a,b)$が存在し，
+     $f(x_1) - f(x_0) = f'(x)(x_1 - x_0)$を満たす．
+     この$x \in (a,b)$に対して$f'(x) \leq 0$となり，前半の主張の証明が完了した．
+\end{proof}
 
 \subsection{一階述語論理}
 一階述語論理式(first-order logic)は，
+% 変数記号，論理記号，量化記号を英語でも何というかを書くべき．
 変数記号，論理記号 ($=, \lnot, \lor, \land, \rightarrow$), 量化記号($\forall, \exists$)
 と，言語$L$で記述される．
  
+% 言語も何と書くか書くべき，
+% 述語記号，定数記号，関数記号の集合を区別するべき．
+% このあたりはよく検討するべき．というかまあ合わせたほうが良さそう．(富永：なにかしら基礎論の本を参照して書くのはどうでしょうか)
 ここで，言語$L$とは，述語記号，関数記号，定数記号からなる集合である．
 ただし，各述語記号$R \in L$は，何個の変数を受け取るか定まっているものとし，
 同様に各関数記号$f \in L$は，何個の変数を受け取るか定まっているものとする．
@@ -199,7 +254,8 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
      \end{itemize}
 \end{example}
 
-言語$L$が定義されると，順に項，原子論理式，論理式が順に定義される．
+% 「順に」が二つある．→修正しました．
+言語$L$が定義されると，順に項，原子論理式，論理式が定義される．
 
 \begin{definition}[項の定義]
      言語$L$に対して，項(term)が帰納的に定義される．
@@ -211,6 +267,8 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
      言語$L$上の項であることを強調したいとき，$L$項($L$-term)と呼ぶ．
 \end{definition}
 
+% Rを$n$変数述語記号とする．のように書くべき，
+% $R \in L$のような書き方を避けるべき．
 \begin{definition}[論理式の定義]
      言語$L$に対して，原子論理式(atomic formula)を，次のいずれかの形をした記号列で定義する．
      \begin{enumerate}
@@ -267,6 +325,13 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
      言語$L$に対して，閉論理式からなる集合を$L$理論($L$-theory)，あるいは単純に理論(theory)という．
 \end{definition}
 
+% ここは信頼できる文献を参照して書いたほうがいいんじゃない．
+% 最後の主張が正しくない．
+% 引用：文献の引用をしてうつす．
+% AxiomScheme(公理図式)なので，そもそも公理じゃない．
+
+\cite{Arai}に従い，実閉体の理論$RCF$を定義する．
+
 \begin{example}[実閉体の理論]
      順序環の言語$L_\mathrm{OR}=\{<, +, \cdot, 1, 0\}$上の実閉体の理論$\RCF$を，次のように定義する．
      
@@ -296,8 +361,8 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
           \end{enumerate}
           \item 実数体の公理
           \begin{enumerate}
-               \item $\forall x \exists y (0<x \rightarrow x=y^2)$
-               \item $\forall a_{2n-1} \dots \forall a_1 \forall a_0 \exists x(\lnot(a_{2n-1} = 0) \land (a_{2n-1}\cdot x^{2n-1} + \dots a_1 \cdot x + a_0 = 0)) \quad (n=1,2,\dots)$ 
+               \item $\forall x \exists y (x=y^2 \lor -x=y^2)$
+               \item $\forall a_{2n} \dots \forall a_1 \forall a_0 \exists x(x^{2n+1} + a_{2n}\cdot x^{2n} + \dots +  a_1 \cdot x + a_0 = 0)) \quad (n=0,1,2,\dots)$ 
           \end{enumerate}
      \end{itemize}
 
@@ -321,6 +386,7 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
 $L$構造$\M$が与えられたとき，
 $L$論理式$\phi$が$L$構造$\M$で成り立つかどうか，すなわち充足関係があるかどうかを定義できる．
 
+% 定義については引用した方がいいんじゃないか？ということをほのめかされた．
 \begin{definition}
      $L$-構造$\M = (M,\dots)$をとる．
      言語$L$に形式的な定数記号$\{c_m \mid m \in M\}$を追加した言語を$L(\M)$とする．
@@ -335,28 +401,29 @@ $L$論理式$\phi$が$L$構造$\M$で成り立つかどうか，すなわち充�
           \item $L(\M)$閉論理式$\phi$に対し, 充足関係(satisfaction relation)があること（$\M \models \phi$とかく）を帰納的に定義する．
           \begin{enumerate}
                \item $t_1,t_2$を$L(\M)$上の閉項とするとき, 
-               \[
+               \begin{equation}
                     \M \models (t_1 = t_2) \defiff t_1^\M = t_2^\M,
-               \]
+               \end{equation}
                \item $t_1,\dots t_n$を$L(\M)$閉項，$R$を$n$変数述語記号とするとき，
-               \[
+               \begin{equation}
                     \M \models (R(t_1, \dots, t_n)) \defiff (t_1^\M, \dots, t_n^\M) \in R^\M,
-               \]
+               \end{equation}
+               % \not\modelsは定義されていないが？
                \item $L(\M)$閉論理式$\phi$に対し
-               \[
+               \begin{equation}
                     \M \models (\lnot \phi) \defiff \M \not\models \phi,
-               \]
+               \end{equation}
                \item $L(\M)$閉論理式$\phi, \psi$に対し
-               \begin{align*}
+               \begin{align}
                     &\M \models (\phi \lor \psi) \defiff \M \models \phi \text{または} \M \models \psi,\\
                     &\M \models (\phi \land \psi) \defiff \M \models \phi \text{かつ} \M \models \psi,\\
                     &\M \models (\phi \rightarrow \psi) \defiff \M \not\models \phi \text{または} \M \models \psi,
-               \end{align*}
+               \end{align}
                \item 変数記号が高々$x$のみである$L(\M)$論理式$\phi(x)$に対し
-               \begin{align*}
+               \begin{align}
                     &\M \models (\forall x \phi(x)) \defiff \text{任意の$m \in M$に対し}\M \models \phi(c_m),\\
                     &\M \models (\exists x \phi(x)) \defiff \text{ある$m \in M$に対し}\M \models\phi(c_m).
-               \end{align*}
+               \end{align}
           \end{enumerate}
      \end{itemize}
 \end{definition}
@@ -367,61 +434,64 @@ $L$論理式$\phi$が$L$構造$\M$で成り立つかどうか，すなわち充�
 \end{definition}
 
 順序環の言語$L_{\mathrm{OR}}$において，$L_\mathrm{OR}$構造$\R=(\R,<,+,\cdot,1,0)$や$\Ralg=(\Ralg,<,+,\cdot,1,0)$は，
-\[
+\begin{equation}
      \R \models \RCF, \quad \Ralg \models \RCF
-\]
+\end{equation}
 であり，構造$\R$,$\Ralg$はいずれも実閉体の理論$\RCF$のモデルである．
 
 \section{量化記号消去}
-% この節では，実閉体の理論$\RCF$が量化記号消去可能であることについて述べる．
 
 \begin{example}
      言語$L_\mathrm{OR}$上の次のような論理式を考える．
-     \begin{equation*}
+     \begin{equation}
           \phi(a) := \forall x (x^2 + ax + a + 3 > 0)
-     \end{equation*}
+     \end{equation}
 
      簡単のため，実閉体のモデルである実数体$\R$をとって考える．すなわち，上記の論理式は次のように言い換えられる．
-     \begin{equation*}
+     \begin{equation}
           \text{全ての実数$x \in \R$に対して$x^2 + ax + a + 3 > 0$をみたす．}  
-     \end{equation*}
+     \end{equation}
      これを，変数記号$a$についての条件と解釈すると，2次方程式$x^2 + ax + a + 3 = 0$の判別式が0より大きいことに必要十分であるから，
-     \begin{equation*}
+     \begin{equation}
           \psi(a) := (a < -2) \lor (6 < a)
-     \end{equation*}
+     \end{equation}
      に同値である．すなわち，次が成り立つ．
-     \begin{equation*}
+     \begin{equation}
           \R \models \forall a (\phi(a) \leftrightarrow \psi(a)).
-     \end{equation*}
+     \end{equation}
 \end{example}
 
 上記の例は，実数体$\R$についてのみ考察しているが，実は，全ての$\RCF$のモデル$R$に対して
-\begin{equation*}
+\begin{equation}
      R \models \forall a (\phi(a) \leftrightarrow \psi(a))
-\end{equation*}
+\end{equation}
 が成り立つ．ここで，$\phi$には束縛変数$x$が現れており，一方で$\psi$に登場する変数記号は全て自由変数である．
 つまり，$\phi$に登場する量化記号を消去し，自由変数のみの論理式$\psi$で記述できている．このような現象を扱うために，「量化記号を消去する」概念を定義する．
 
 
 \begin{definition}
-$T$を言語$L$上の理論とし，$\phi$を$L$上の論理式とする．% semantic consequences じゃないの？ vs syntax consequences
+$T$を言語$L$上の理論とし，$\phi$を$L$上の論理式とする．
 全ての$T$のモデル$\M$に対して$\M \models \phi$が成り立つとき，$\phi$は$T$の帰結(consequence)であるといい，$T \models \phi$とかく．
 
+% 理論$T$が量化記号消去を「持つ」と書くべきか？
+% 検討してください．以降の表現も気を付けてください．
 理論$T$で量化記号消去(quantifier elimination)ができるとは，
 $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号のない論理式$\psi(x_1,\dots, x_n)$が存在し，
-\begin{equation*}
+\begin{equation}
      T \models \forall x_1 \dots \forall x_n(\phi(x_1,\dots,x_n) \leftrightarrow \psi(x_1, \dots, x_n))
-\end{equation*}
+\end{equation}
 が成り立つことと定義する．
 \end{definition}
 
 
 実閉体の理論は量化記号消去ができる．すなわち，次が成り立つ．
 
+% これは論文を引用するべき．discordに挙げてくれた．
 \begin{theorem}[Tarski]\label{theorem:Tarski}
      実閉体の理論$\RCF$は量化記号消去ができる．
 \end{theorem}
 
+% 「以降この節は」「この節の残りでは」等に直すべき．でもそれも砕けすぎている．
 以降この節は\cref{theorem:Tarski}の証明を述べる．
 
 この定理の証明および後々の議論のため，言語$L_\mathrm{OR} = \{<, +, \cdot, 1, 0\}$上の原子論理式について注意をしておく．
@@ -429,35 +499,38 @@ $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号のな�
 まず，正整数の記号$n$を，$1$の$n$個の和$(1 + (1 + \dots + 1 ))$の省略記号であるとする．
 
 さらに，$x_1, \dots, x_n$を変数記号として，多項式$f \in \Z[x_1, \dots, x_n]$が，$a_1, \dots, a_k, b_1, \dots, b_l$を正整数として，
-\[
+\begin{equation}
      f(x_1, \dots, x_n) = \sum_{i=1}^k a_i x_1^{\alpha_{i,1}} \cdots x_n^{\alpha_{i,n}} - \sum_{j=1}^l b_j x_1^{\beta_{j,1}} \cdots x_n^{\beta_{j,n}}
-\]
+\end{equation}
 で与えられているとする．
 
 このとき，以下のように原子論理式の省略記号を導入する．
-\begin{align*}
+\begin{align}
      \sign (f(x_1, \dots, x_n)) = 1 &\defiff \sum_{i=1}^k a_i x_1^{\alpha_{i,1}} \cdots x_n^{\alpha_{i,n}} > \sum_{j=1}^l b_j x_1^{\beta_{j,1}} \cdots x_n^{\beta_{j,n}}\\
      \sign (f(x_1, \dots, x_n)) = 0 &\defiff \sum_{i=1}^k a_i x_1^{\alpha_{i,1}} \cdots x_n^{\alpha_{i,n}} = \sum_{j=1}^l b_j x_1^{\beta_{j,1}} \cdots x_n^{\beta_{j,n}}\\
      \sign (f(x_1, \dots, x_n)) = -1 &\defiff \sum_{i=1}^k a_i x_1^{\alpha_{i,1}} \cdots x_n^{\alpha_{i,n}} < \sum_{j=1}^l b_j x_1^{\beta_{j,1}} \cdots x_n^{\beta_{j,n}}
-\end{align*}
+\end{align}
 
+% を用いて→に対して
+% ～しておくは砕けた表現．注意する，とする，というようにする．
 このとき，$\RCF$において，任意の原子論理式$\phi(x_1, \dots, x_n)$は，ある多項式$f \in \Z[x_1, \dots, x_n]$及び$\sigma \in \{-1, 0, 1\}$を用いて，
 $\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意しておく．
 また，$P = \{-1, 0, 1\}$としておく．
 
 それでは，\cref{theorem:Tarski}を示していく．そのために，まずは次の補題を準備する．
 
+% 補題番号をローマ数字にしてフォントをかえる，アルファベットに直すとかが適切です．「1.より」とかはだめ．
 \begin{lemma}\label{lemma:qe_simplify}
      言語$L_\mathrm{OR}$上の理論$\RCF$において，次の主張が成り立てば．理論$\RCF$は量化記号消去できる．
 
      \begin{enumerate}
           \item \label{qe_1}
           任意の$f_1, \dots, f_s \in \Z[X, Y_1, \dots, Y_n]$および$\map{\sigma}{\{1,\dots, s\}}{P}$に対して，量化記号のない論理式$\theta(Y_1, \dots, Y_n)$が存在し，
-          \[
+          \begin{equation}
                \RCF \models \forall Y_1 \dots \forall Y_n ( \theta(Y_1, \dots, Y_n) \leftrightarrow \exists X(\bigwedge_i (\sign(f_i(X,Y_1, \dots, Y_n))= \sigma(i))) )
-          \]
+          \end{equation}
+          を満たす．
      \end{enumerate}
-     を満たす．
 \end{lemma}
 
 \begin{proof}
@@ -466,25 +539,27 @@ $\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意してお�
           \setcounter{enumi}{1}
           \item \label{qe_2}
           任意の量化記号のない論理式$\phi(X, Y_1, \dots, Y_n)$に対し，ある量化記号のない論理式$\theta(Y_1, \dots, Y_n)$が存在し，
-          \[
+          \begin{equation}
                \RCF \models \forall Y_1 \dots \forall Y_n(\theta(Y_1, \dots, Y_n) \leftrightarrow \exists X \phi(X, Y_1, \dots, Y_n))
-          \]
+          \end{equation}
           をみたす．
      \end{enumerate}
      実際，任意に与えられた量化記号のない論理式$\phi(X, Y_1, \dots, Y_n)$は，多項式$f_{i,j} \in \Z[X, Y_1, \dots, Y_n]$($i=1, \dots, k, j=1, \dots, l_i$)
-     と$\map{\sigma_i}{\{1, \dots, l_i\}}{P}$を用いて，和積標準形
-     \[
+     と$\map{\sigma_i}{\{1, \dots, l_i\}}{P}$を用いて，和積標準形% 「を用いて，表す」は違和感ない．和関標準形は定義していない．
+     \begin{equation}
           \phi(X, Y_1, \dots, Y_n) \leftrightarrow \bigvee_i \bigwedge_j (\sign(f_{i,j}(X, Y_1, \dots, Y_n)) = \sigma_i(j))
-     \]
+     \end{equation}
      で表すことができる．このとき，
-     \[
+     \begin{equation}
           \exists X \phi(X, Y_1, \dots, Y_n) \leftrightarrow \bigvee_i (\exists X \bigwedge_j (\sign(f_{i,j}(X, Y_1, \dots, Y_n)) = \sigma_i(j)))
-     \]
+     \end{equation}
      が成り立つ．ここで，\ref{qe_1}より，各$i=1, \dots, k$に対して，
-     \[
+     \begin{equation}
           \exists X \bigwedge_j (\sign(f_{i,j}(X, Y_1, \dots, Y_n)) = \sigma_i(j)) \leftrightarrow \theta_i(Y_1, \dots, Y_n)
-     \]
-     を満たす量化記号のない論理式$\theta_i(Y_1, \dots, Y_n)$が存在する．したがって，\ref{qe_2}は成り立つ．
+     \end{equation}
+     を満たす量化記号のない論理式$\theta_i(Y_1, \dots, Y_n)$が存在する．
+     % このしたがってはギャップがある．
+     したがって，\ref{qe_2}は成り立つ．
 
      次に，\ref{qe_2}より，理論$\RCF$が量化記号消去できることを示す．
      任意の論理式$\phi$に対し，それと同値となるような量化記号のない論理式$\theta$が存在することを示せばよい．
@@ -518,14 +593,14 @@ $\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意してお�
 \end{theorem}
 
 ここで，$a \in R$に対して，$\sign_R(a)$は
-\[
+\begin{equation}
      \sign_R(a) :=
      \begin{cases}
           1 & a > 0 \\
           0 & a = 0 \\
           -1 & a < 0
      \end{cases}
-\]
+\end{equation}
 であるとする．これを，$a$の符号と呼ぶ．
 
 さらに，実閉体$R$と，多項式$f_1, \dots, f_s \in R[X]$に対し，
@@ -536,14 +611,18 @@ $\SIGN_R(f_1, \dots, f_s)$を次のように定める．
 このとき，\cref{proposition:intermediate}より，各$f_i$の符号は，$(x_j, x_{j+1})$上一定である．
 
 この時，$s$行$2N+1$列行列$\SIGN_R(f_1, \dots, f_s) = (c_{i,j})_{i=1, \dots, s, j=1, \dots, 2N+1}$を，
-\begin{align*}
+\begin{align}
      c_{i,2k} &= \sign_R(f_i(x_k)) \quad k=1, \dots, N\\
      c_{i,2k+1} &= \sign_R(f_i((x_k, x_{k+1}))) \quad k=0, \dots, N
-\end{align*}
+\end{align}
 と定める．
 
 このとき，正整数$s, m$に対して，$P_{s,m}$を，$P$成分の$s$行$(2l+1)$列行列($0 \leq l \leq sm$)全体を表すとすると，
 $\SIGN_R(f_1, \dots, f_s) \in P_{s,m}$である．
+
+% Tarskiの証明はセミナー形式で話しましょう．
+% fが多変数だったのに，急に1変数になったりして誤解を招いてるかもしれない？
+% RealAlgebraicGeometry の1章最後にbibliographicnoteがあるのでそこに書いてある参考文献を引用するべきなのでは
 
 \begin{lemma}\label{lemma:qe_1ststep}
      与えられた$\map{\sigma}{\{1, \dots, t\}}{P}$に対して，部分集合$P(\sigma) \subset P_{s,m}$を，次を満たすように取れる．
@@ -555,9 +634,9 @@ $\SIGN_R(f_1, \dots, f_s) \in P_{s,m}$である．
 \end{lemma}
 
 \begin{proof}
-     \[
+     \begin{equation}
           P(\sigma):=\{A \in P_{s,m} \mid \text{行列$A$のある列が$(\sigma(i))_{i=1}^s$である}\}
-     \]
+     \end{equation}
      とすればよい．
 \end{proof}
 
@@ -568,9 +647,9 @@ $\SIGN_R(f_1, \dots, f_s) \in P_{s,m}$である．
 
      次数が$m$以下であるような任意の$f_1, \dots, f_s \in R[X]$で，$f_s$は定数でなく，$f_1, \dots, f_{s-1}$は恒等的に$0$でないとする．
      このとき，$g_1, \dots, g_s \in R[X]$を，それぞれ$f_s$を$f_1, \dots, f_{s-1}$, $f_s'$で割ったあまりとすれば，
-     \[
+     \begin{equation}
           \SIGN_R(f_1, \dots, f_s) = \phi(\SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s))
-     \]
+     \end{equation}
      である．
 \end{lemma}
 
@@ -601,60 +680,60 @@ $\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい．
      各区間に$f_s(X)$が根を持つことの必要十分条件は，次のように述べれる．
      \begin{itemize}
           \item $M\neq0$で，$k=1, \dots, M-1$に対して，$f_s(X)$が区間$(x_{i_k}, x_{i_{k+1}})$上に解を持つことの必要十分条件は
-          \[
+          \begin{equation}
                \sign_R(g_\theta(k)(x_{i_k}))\sign_R(g_\theta(k+1)(x_{i_{k+1}})) = -1.
-          \]
+          \end{equation}
           \item $M\neq0$で，$(-\infty, x_1)$に解を持つことの必要条件は，
-          \[
+          \begin{equation}
                \sign_R(f_s'((-\infty, x_1))) \sign_R(g_\theta(1)(x_1)) = 1.
-          \]
+          \end{equation}
           \item $M\neq0$で，$(x_M, \infty)$に解を持つことの必要条件は，
-          \[
+          \begin{equation}
                \sign_R(f_s'((x_M, \infty))) \sign_R(g_\theta(M)(x_M)) = -1.
-          \]
+          \end{equation}
           \item $M = 0$の場合は，$(\infty, \infty)$上に必ず解を持つ．
      \end{itemize}
      いずれの条件も，行列$w$の情報のみで記述されることに注意する．
 
      いま，$y_1 < \dots < y_L$を，$f_1, \dots, f_{s-1}, f_s$の$R$上の根とし，$y_0 = -\infty$, $y_0$ = 0とする．
      $\map{\rho}{\{0, \dots, L+1\}}{\{0, \dots, M+1\} \cup \{(k,k+1) \mid k=0, \dots, M\}}$を，
-     \[
+     \begin{equation}
           \rho(l) := \begin{cases} 
                k & y_l = x_{i_k},\\
                (k, k+1) & y_l \in (x_{i_k}, x_{i_{k+1}})
           \end{cases}
-     \]
+     \end{equation}
      と定める．$\rho$の定義は，行列$w$の情報だけに依存する．
 
      それでは，$\SIGN_R(f_1, \dots, f_s)$が$w$の情報のみに依存して定まる事を示す．
      
      まず，$i=1, \dots, s-1$に対しては，
-     \[
+     \begin{equation}
           \sign_R(f_i(y_l)) = \begin{cases}
                \sign_R(f_j(x_{i_k})) & \rho(l) = k,\\
                \sign_R(f_j((x_{i_k}, x_{i_{k+1}}))) & \rho(l) = (k, k+1)
           \end{cases}
-     \]
+     \end{equation}
      であり，また，
-     \[
+     \begin{equation}
           \sign_R(f_i((y_l,y_{l+1}))) = \sign_R(f_i((x_{i_k}, x_{i_{k+1}}))) \quad \text{$\rho(l)=k$または$\rho(l)=(k,k+1)$}
-     \]
+     \end{equation}
      である．さらに，$i=s$に対しては，
-     \[
+     \begin{equation}
           \sign_R(f_s(y_l)) = \begin{cases}
                \sign_R(g_{\theta(k)}(x_{i_k})) & \rho(l) = k,\\
                0 & \rho(l) = (k, k+1)
           \end{cases}
-     \]
+     \end{equation}
      であり，また，
-     \[
+     \begin{equation}
           \sign_R(f_s((y_l,y_{l+1}))) = \begin{cases}
                \sign_R(g_{\theta(k)}(x_{i_k})) & \rho(l) = k, l \neq 0, g_{\theta(k)}(x_{i_k})\neq 0\\
                \sign_R(f_s'((x_{i_k},x_{i_{k+1}}))) & \rho(l)=k, l \neq 0, g_{\theta(k)}(x_{i_k}) = 0 \\
                \sign_R(f_s'((x_{i_k}, x_{i_{k+1}}))) & \rho(l) = (k, k+1), l \neq 0\\
                -\sign_R(f_s'((-\infty, x_1))) & l=0
           \end{cases}
-     \]
+     \end{equation}
      である．
 
      以上により$\SIGN_R(f_1, \dots, f_s)$が$w$の情報飲みに依存して定まることが示せ，よって証明が完了した．
@@ -679,18 +758,18 @@ $\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい．
 
      まず，$m=0$の場合，すなわち$f_1, \dots, f_s \in \Z[Y_1, \dots, Y_n]$の場合，
      $W':=\{A = (a_i)_{i=1}^s \in W \mid \text{Aはs行1列の行列}\}$として
-     \[
+     \begin{equation}
           \theta(Y_1, \dots, Y_n) := \bigvee_{A \in W'}\bigwedge_{i=1}^s (\sign(f_i(Y_1, \dots, Y_n))=a_i) 
-     \]
+     \end{equation}
      とすれば，主張は満たされる．
 
      次に，$m \geq 1$の場合を考える．
      一般性を失わずに，$f_1, \dots, f_s$が恒等的に$0$でないとしてよい．
      また，順番を並び替えて$f_s$の$X$についての次数が$m$であるとしてよい．
      このとき，多項式列の次数$f_1, \dots, f_s$の$X$についての次数がそれぞれ$m_1, \dots, m_s$とすれば，
-     \[
+     \begin{equation}
           f_i(X,Y_1, \dots, Y_n) = h_{i,m_i}(Y_1, \dots, Y_n)X^m_i + \dots + h_{i,0}(Y_1, \dots, Y_n), \quad i=1, \dots, s
-     \]
+     \end{equation}
      とかくことができる．ただし，各$i=1, \dots, m$に対して$h_{i,m_i}(Y_1, \dots, Y_n)$は恒等的に$0$でない．
 
      $m \geq 1$の場合の証明は，\cref{lemma:qe_lowering}を用いて多項式の$X$についての「次数を下げていく」ことで，
@@ -698,9 +777,9 @@ $\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい．
 
      まず，「次数を下げていく」ことについてより詳しく述べる．
      非負整数列全体$\{(m_1, \dots, m_s) \mid s \geq 1, m_1, \dots, m_s\}$上の前順序関係
-     \[
+     \begin{equation}
           (m_1, \dots, m_s) \prec (m_1', \dots, m_t')
-     \]
+     \end{equation}
      を，ある非負整数$p$が存在し，$m_i$が$p$である$i=1, \dots, s$の数が，$m_j'$が$p$である$j=1, \dots, t$の数より少なく，
      かつ任意の$q>p$に対しては$m_i$が$q$である$i=1, \dots, s$の数と，$m_j'$が$q$である$j=1, \dots, t$の数が等しいことと定義する．
 
@@ -713,14 +792,14 @@ $\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい．
      では，「次数下げ」の仕組みについて説明する．そのうえで重要なことは，次の主張である．  
      \begin{claim*}
           $ f , g \in \Z[X, Y_1, \dots, Y_n]$とし，それぞれの$X$についての次数が$m$, $l$であるとする．ただし，$m \geq l$とし，$g$は恒等的に$0$でないとする．
-          \begin{align*}
+          \begin{align}
                f &= u_m(Y_1, \dots, Y_n)X^m + \dots + u_0(Y_1, \dots, Y_n), \quad u_m(Y_1, \dots, Y_n) \neq 0, \\
                g &= v_l(Y_1, \dots, Y_n)X^l + \dots + v_0(Y_1, \dots, Y_n), \quad v_l(Y_1, \dots, Y_n) \neq 0
-          \end{align*}
+          \end{align}
           とすると，$\Z(Y_1, \dots, Y_n)[X]$上$f$を$g$で割った余りを$r \in \Z(Y_1, \dots, Y_n)[X]$とすると，ある正整数$p>0$が存在し，
-          \[
+          \begin{equation}
                v_l(Y_1, \dots, Y_n)^p \cdot r(X,Y_1, \dots, Y_n) \in \Z[Y_1, \dots, Y_n][X]
-          \]
+          \end{equation}
           が成り立つ．また，この条件は，$p>m-l$であれば必ず満たされる．
      \end{claim*}
      この主張は，通常の割り算のアルゴリズムから従う．
@@ -730,29 +809,32 @@ $\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい．
      $y_1, \dots, y_n \in R$が，ある$i=1, \dots, s$に対して$h_{i, m_i}(y_1, \dots, y_n) = 0$となる場合，
      そのような$i$については$\tilde{f}_i := f_i - h_{i, m_i}X^{m_i}$とし，それ以外の$i$については$\tilde{f}_i := f_i$として得られる多項式列$(\tilde{f}_1, \dots, \tilde{f}_s)$
      について，
-     \begin{align*}
+     \begin{align}
           &\SIGN_R(f_1(X,y_1, \dots, y_n), \dots, f_s(X,y_1, \dots, y_n)) \in W\\
           \iff &\SIGN_R(\tilde{f}_1(X,y_1, \dots, y_n), \dots, \tilde{f}_s(X,y_1, \dots, y_n)) \in W
-     \end{align*}
+     \end{align}
      である．
 
      また，$y_1, \dots, y_n \in R$が，全ての$i=1, \dots, s$に対して$h_{i, m_i}(y_1, \dots, y_n) \neq 0$となる場合，
      $r_1, \dots, r_s \in \Z(Y_1, \dots, Y_n)[X]$を，$f_s$をそれぞれ$f_1, \dots, f_{s-1}, f'_s$で割った余りとし，$g_1, \dots, g_s \in \Z[X,Y_1, \dots, Y_n]$を，
-     \[
+     \begin{equation}
           g_i = \begin{cases}
                r_i \cdot h_{i,m_i}^{2(m_s-m_i+1)} & i=1, \dots, s-1\\
                r_s \cdot (m_s h_{i,m_s})^{2\cdot2} & i=s
           \end{cases}
-     \]
+     \end{equation}
      と定めれば，\cref{lemma:qe_lowering}より，多項式列$(f_1, \dots, f_s', g_1, \dots, g_s)$について，
-     \begin{align*}
+     \begin{align}
           &\SIGN_R(f_1(X,y_1, \dots, y_n), \dots, f_s(X,y_1, \dots, y_n)) \in W\\
           \iff &\SIGN_R(f_1(X,y_1, \dots, y_n), \dots, f_s'(X,y_1, \dots, y_n),g_1(X,y_1, \dots, y_n), \dots, g_s(X,y_1, \dots, y_n)) \in \phi^{-1}(W)
-     \end{align*}
+     \end{align}
      が成り立つ．
 
      いずれの場合も，多項式列の次数を下げることができている．よって，証明が完了した．
 \end{proof}
+
+\section{半代数的集合}
+% ここに半代数的集合について書く．
 
 \section{柱状代数分解}
 
@@ -775,20 +857,20 @@ $R$を実閉体とする．
           \item $S \in \calS_1$は，$R$上の点か，開区間かのいずれかである．
           \item $n\geq 2$の場合，任意の$i=1, \dots, k-1$と任意の$S \in \calS_i$に対し，
           有限個の連続な半代数的関数
-          \[
+          \begin{equation}
                \map{\xi_{S,1}< \dots <\xi_{S,l_S}}{S}{R}
-          \]
+          \end{equation}
           が存在し，以下を満たす．（ただし，$l_S$は0以上の自然数とする．）
           \begin{itemize}
                \item 各$j=1 \dots, l_S$に対し，$\xi_{S,j}$のグラフ
-               \[
+               \begin{equation}
                     \{(x,x_{i+1}) \mid x \in S, \xi_{S,j}(x)=x_{i+1} \} \subset R^{i+1}
-               \]
+               \end{equation}
                は，$\calS_{i+1}$の元である．
                \item $\xi_{S,0}=-\infty$, $\xi_{S,l_S+1}=\infty$とするとき，各$j=0, \dots, l_S$に対し，\label{cad_condition1}
-               \[
+               \begin{equation}
                     \{(x,x_{i+1}) \mid x \in S, \xi_{S,j}(x)<x_{i+1}<\xi_{S,j+1} \} \subset R^{i+1}
-               \]
+               \end{equation}
                は，$\calS_{i+1}$の元である．
           \end{itemize}
      \end{enumerate}
@@ -836,9 +918,9 @@ $F$に適合した$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を$R^{n-1}$の
      $S$が$F$描画可能($F$-delineable)であるとは，$k$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_k}{S}{R}$が存在し，次を満たすことと定義する．
      \begin{itemize}
           \item 任意の$ x \in S $に対し，
-          \[
+          \begin{equation}
                \{\xi_i(x)\}_{i=1}^k = \{y \in R \mid \prod_{f \in F'}f(x,y)=0\}
-          \]
+          \end{equation}
           である．ただし，$F' = \{f \in F \mid \text{$f$は$S$上恒等的に0でない}\}$とする．
           \item 各$i=1, \dots, k$および$f \in F'$に対し，多項式$f(x,X_n)$における根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
      \end{itemize}
@@ -880,9 +962,9 @@ $F$描画可能であることの必要条件は，次のように与えられ�
      $x \in S$に対して，$f_1(x,Y), f_2(x,Y)$の$R[\sqrt{-1}]$上の相異なる共通根の数を$N(x)$と定義する．
      すると，$\map{N}{S}{R}$は半代数的関数である．
      \footnote{$N$が半代数的関数であることは，$N$のグラフを以下のように書き表すことができるためである：
-     \[
+     \begin{equation}
           \{(x,z) \mid \bigvee_{n}(z = n \text{ and } \exists y_1, \dots, y_n \text{ s.t. } y_i \neq y_j( i\neq j) \text{ and } \forall y(f_1(x,y)=f_2(x,y) \leftrightarrow \bigvee_{i=1}^n (y = y_i)))\}
-     \]
+     \end{equation}
      ここで，論理和の$n$は，$0$から$\gcd(P,Q)$の$Y$に関する次数までをとる．
      この主張はすでに$\RCF$において$量化記号消去$が可能であることを用いてしまっているが，
      それは別の方法で示すことができる．(例えば新井\cite{Arai}を参照．)
@@ -971,12 +1053,12 @@ $S \subset \R^{n-1}$を弧状連結部分集合とし，$F \subset \R[x_1,\dots,
 $\mathrm{R}$を可換環とし，$A(x), B(x) \in \mathrm{R}[x]$ を，$\deg A(x) = m$, $\deg B(x) = n$ とする．ただし，$\deg 0 = 0$と解釈する．
 
 $j = 0, \dots, \min\{n, m\}$に対し，多項式$A(x)$, $B(x)$の$j$次部分終結式$S_j(A, B)$を次のように定義する．
-\begin{align*}
+\begin{align}
 A(x) = a_m x^m + \dots + a_1 x + a_0, \\
 B(x) = b_n x^n + \dots + b_1 x + b_0 
-\end{align*}
+\end{align}
 として，$j = 0, \dots, \min\{n,m\}$に対し，
-\begin{align*}
+\begin{align}
 M_j = 
 \begin{pmatrix}
 a_m & a_{m-1} & \cdots & a_1 & a_0 &    &  \\
@@ -987,18 +1069,18 @@ b_n & b_{n-1} & \cdots & b_1 & b_0 &    & \\
      &   & \ddots &  & & 
 \end{pmatrix}
 \in \mathrm{M}_{m+n-2j, m+n-j}(\mathrm{R})
-\end{align*}
+\end{align}
 とする．ここで，行列の空白部分はすべて$0$であり，また，行列の上側は$n-j$行，行列の下側は$m-j$行である．
 
 また，$j = 0, \dots, \min\{m,n\}$, $i = 0, \dots, j$に対し，
-\begin{align*}
+\begin{align}
 M_{j,i} = (\text{$M_j$の第$1$列}, \text{$M_j$の第$2$列}, \dots ,\text{$M_j$の第$m+n-2j-1$列}, \text{$M_j$の第$m+n-i-j$列})
 \in \mathrm{M}_{m+n-2j, m+n-2j}(\mathrm{R})
-\end{align*}
+\end{align}
 とする．$j = 0, \dots, \min\{n, m\}$に対し，
-\begin{align*}
+\begin{align}
 S_j(A, B) = \sum_{i=0}^j \det M_{j, i} \cdot x^i 
-\end{align*}
+\end{align}
 を多項式$A(x)$, $B(x)$の$j$次部分終結式$S_j(A, B)$という．
 
 この$j$次部分終結式の先頭項係数を，$\psc_j(A,B)$とかき，多項式$A(x)$, $B(x)$の$j$次主部分終結式係数という．
@@ -1016,9 +1098,9 @@ $S_0(A,B) = 0$, $\psc_0(A,B) = 0$とする．
 
 \begin{proposition}\label{proposition:psc}
 $\mathrm{R}$を体とし，$A(x), B(x) \in \mathrm{R}[x] \setminus \{0\}$とすると，次が成立する．
-\begin{align*}
+\begin{align}
 \deg(\gcd(A, B)) = \min \{ j  \in \{0,1, \dots, \min\{n,m\}\}\mid \psc_j(A,B) \neq 0\}
-\end{align*}
+\end{align}
 \end{proposition}
 
 \begin{proof}
@@ -1039,15 +1121,15 @@ $\PROJ(F) \subset R[X_1, \dots, X_{n-1}]$を，次のように定める．
 
 まず，$B(F) := \{ \mathrm{red}^k(f) \mid f \in F, k=1, \dots, \deg(f) \}$とする．ただし，$\mathrm{red}(f) = f - \mathrm{LT}(f; X_n)$である．
 次に，
-\begin{align*}
+\begin{align}
 	\PROJ_1(F) &:= \{\mathrm{LC}(f;X_n) \mid f \in B\},\\
 	\PROJ_2(F) &:= \{\psc_j(f, \frac{\partial f}{\partial X_n}; X_n) \mid f \in B, j =0, \dots, \deg(\frac{\partial f}{\partial X_n};X_n) \},\\
 	\PROJ_3(F) &:= \{\psc_j(f,g;X_n) \mid f,g \in B, j = 0, \dots, \min\{\deg(f;X_n), \deg(g;X_n)\}\}
-\end{align*}
+\end{align}
 とし，以上を用いて
-\begin{align*}
+\begin{align}
 	\PROJ(F) &:= \PROJ_1(F) \cup \PROJ_2(F) \cup \PROJ_3(F)
-\end{align*}
+\end{align}
 と定める．
 \end{definition}
 
@@ -1070,9 +1152,9 @@ $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
 
      $n=1$の場合，$F$の$R$上の根を$a_1 < \dots, a_k$とする．
      $a_0 = -\infty$, $a_{k+1} = \infty$とすれば，
-     \[
+     \begin{equation}
           \calS_1 = \{(a_i, a_{i+1})\}_{i=0}^k \cup \{a_i\}_{i=1}^k
-     \]
+     \end{equation}
      が$F$-適合な柱状代数分解を与える．よって，定理は成り立つ．
 
      $n\geq 2$の場合，$n-1$までで主張が成り立つとする．
@@ -1083,9 +1165,9 @@ $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
      従って，各$S \in \calS_{n-1}$に対して，有限個の半代数的連続関数$\map{\xi_{S,1}< \dots < \xi_{S,l_S}}{S}{R}$が存在し，
      \begin{itemize}
           \item 任意の$ x \in S $に対し，
-          \[
+          \begin{equation}
                \{\xi_{S,i}\}_{i=1}^{l_S} = \{y \in R \mid \prod_{f \in F'}f(x,y)=0\}
-          \]
+          \end{equation}
           である．ただし，$F' = \{f \in F \mid \text{$f$は$S$上恒等的に0でない}\}$とする．
           \item 各$i=1, \dots, l_S$および$f \in F'$に対し，多項式$f(x,X_n)$における根$\xi_{S,i}(x)$の重複度は，$x\in S$によらず一定．
      \end{itemize}
@@ -1093,14 +1175,14 @@ $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
      また，$\xi_{S,0} := -\infty$, $\xi_{S,l_S} := \infty$としておく．
 
      このとき，
-     \begin{align*}
+     \begin{align}
           C_{S,2i} &:= \{(x,y) \mid  x \in S, \xi_{S,i}(x) = y \} \quad i = 1,\dots, l_S,\\
           C_{S,2i+1} &:= \{(x,y) \mid x \in S, \xi_{S,i}(x)<y<\xi_{S,i+1}(x) \} \quad i = 0,1, \dots, l_S 
-     \end{align*}
+     \end{align}
      とし，
-     \[
+     \begin{equation}
           \calS_n := \{C_{S,i} \mid S \in \calS_{n-1}, i=1, \dots, 2l_S+1\}
-     \]
+     \end{equation}
      とすれば，$\{\calS_i\}_{i=1}^n$は，$R^n$の$F$適合な柱状代数分解を与える．
 
      よって，帰納法により示された．
@@ -1109,10 +1191,10 @@ $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
 % \begin{definition}
 % $ F \subset \mathbb{R}[x_1,\dots,x_n] $ を有限部分集合とする．$ S \subset \mathbb{R}^{n-1} $が$ F $描画可能とする．
 % このとき，$ S $上の$ F $の解を$ f_1(x)< \dots <f_k(x) $とし，$ f_0(x) := -\infty $ , $ f_{k+1}(x) := \infty $とするとき，
-% \begin{align*}
+% \begin{align}
 %   C_{2i} &:= \{(x,y) \mid  x \in S, f_i(x) = y \} \quad i = 1,\dots, k,\\
 %   C_{2i+1} &:= \{(x,y) \mid x \in S, f_{i}(x)<y<f_{i+1}(x) \} \quad i = 0,1, \dots, k 
-% \end{align*}
+% \end{align}
 
 % とすれば，$\{C_j\}_{j=1}^{2k+1}$は$ S \times \mathbb{R} $の$F$符号不変な分割を与える．
 % この$ S \times \mathbb{R} $の分割$ \{C_j\}_{j=1}^{2k+1} $を，$ S $の持ち上げといい，$ \mathfrak{L}(S) $と書く．
@@ -1126,9 +1208,9 @@ $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
 この節では，柱状代数分解による量化記号消去のアルゴリズムについて示す．
 
 冠頭標準形の論理式
-\[
+\begin{equation}
      \Qua_1 X_1 \dots \Qua_1 X_k \phi(Y_1, \dots, Y_l, X_1, \dots, X_k)
-\]
+\end{equation}
 が与えられたとき，
 $R^{k+l}$の柱状代数分解$\{\calS_i\}_{i=1}^{k+l}$を用いて量化記号消去を行うことを考える．
 
@@ -1146,9 +1228,9 @@ $\{\calS_i\}_{i=1}^l$に属する各$S \in \calS_i$の定義式を与えるよ�
 \begin{theorem}[Thomの補題]
      $F = \{f_1, \dots, f_s\} \subset R[X]$を，微分について閉じた有限部分集合とする．
      このとき， 任意の$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対し，
-     \[
+     \begin{equation}
           A_\sigma := \{x \in R \mid \text{任意の$i=1, \dots, s$に対し，} \sign(f_i(x)) = \sigma(i)\}
-     \]
+     \end{equation}
      と定義する．
      このとき，$A_\sigma$は空集合，一点からなる集合，開区間のいずれかである．
 \end{theorem}
@@ -1162,15 +1244,15 @@ $\{\calS_i\}_{i=1}^l$に属する各$S \in \calS_i$の定義式を与えるよ�
 
      任意に$\map{\sigma}{\{1, \dots, s, s+1\}}{\{-1,0,1\}}$をとる．
      $\map{\sigma_0}{\{1, \dots, s\}}{\{-1,0,1\}}$を$\sigma$の制限，すなわち
-     \[
+     \begin{equation}
           \sigma_0(i) := \sigma(i), \quad i=1, \dots, s
-     \]
+     \end{equation}
      とする．
 
      このとき，$F_0 := \{f_1, \dots, f_{s}\}$は微分について閉じているので，帰納法の仮定より
-     \[
+     \begin{equation}
           A_{\sigma_0}:=\{x \in R \mid \text{任意の$i=1, \dots, s$に対し，} \sign(f_i(x)) = \sigma_0(i)\}
-     \]
+     \end{equation}
      は，空集合，一点からなる集合，開区間のいずれかである．
 
      $A_\sigma = A_{\sigma_0} \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(s+1)\}$であるから，
@@ -1197,9 +1279,9 @@ $\{\calS_i\}_{i=1}^l$に属する各$S \in \calS_i$の定義式を与えるよ�
      $S$が$\APROJ(F)$不変ならば，$S$は$\der(F)$描画可能である．
 
      特に，$\map{\sigma}{\{1,\dots, s\}}{\{-1, 0, 1\}}$と$g_1, \dots g_s \in R[X_1, \dots, X_{n-1}]$を用いて，
-     \[
+     \begin{equation}
           S = \{(x_1, \dots, x_{n-1}) \in R^{n-1} \mid \sign(g_i(x_1, \dots, x_{n-1}))= \sigma_i\}
-     \]
+     \end{equation}
      であるならば，
      $\der(F)$による$S$の持ち上げ$\calL(S)$の定義式は，$\{g_1, \dots,g_s\} \cup \der(F)$で記述できる．
 \end{theorem}
@@ -1220,6 +1302,7 @@ $\{\calS_i\}_{i=1}^l$に属する各$S \in \calS_i$の定義式を与えるよ�
 \begin{thebibliography}{99}
      \bibitem{Arai} 新井敏康，『数学基礎論』(2016).
      \bibitem{Itai} 板井昌典，『モデル理論』(2023).
+     \bibitem{Artin} Artin, E., Schreier, O. Algebraische Konstruktion reeller Körper. Abh.Math.Semin.Univ.Hambg. 5, 85–99 (1927). https://doi.org/10.1007/BF02952512
      \bibitem{Bochnak}Jacek Bochnak, Michel Coste, Marie-Fran\c{c}oise Roy, Real Algebraic Geometry, Springer(1998).
      \bibitem{Basu} Saugata Basu, Richard Pollack, Marie-Fran\c{c}oise Roy, Algorithms in Real Algebraic Geometry(2003).
      \bibitem{Collins} George E. Collins, Quantifier elimination for real closed fields by cylindrical algebraic decomposition(1975).
