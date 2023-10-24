@@ -12,6 +12,10 @@ __pycache__/
 *.fls
 *.fdb_latexmk
 
+#bibtex
+*.bbl
+*.blg
+
 # C extensions
 *.so
 
