@@ -5,7 +5,9 @@
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{cleveref}
+\usepackage{todonotes}
 
+\numberwithin{equation}{section}
 \makeatletter
 \renewenvironment{proof}[1][\proofname]{\par
   \pushQED{\qed}%
@@ -14,7 +16,7 @@
   \item\relax
   {\bfseries
   #1\@addpunct{.}}\hspace\labelsep\ignorespaces
-}{%
+}{
   \popQED\endtrivlist\@endpefalse
 }
 \makeatother
@@ -42,15 +44,15 @@
 
 \theoremstyle{definition}
 \newtheorem{definition}{定義}[section]
-\crefname{definition}{定義}{定義}%
+\crefname{definition}{定義}{定義}
 \newtheorem{proposition}{命題}[section]
-\crefname{proposition}{命題}{命題}%
+\crefname{proposition}{命題}{命題}
 \newtheorem{lemma}{補題}[section]
-\crefname{lemma}{補題}{補題}%
+\crefname{lemma}{補題}{補題}
 \newtheorem{theorem}{定理}[section]
-\crefname{theorem}{定理}{定理}%
+\crefname{theorem}{定理}{定理}
 \newtheorem{corollary}{系}[section]
-\crefname{corollary}{系}{系}%S
+\crefname{corollary}{系}{系}
 \newtheorem*{claim*}{主張}
 \newtheorem{remark}{注意}[section]
 \newtheorem{example}{例}[section]
@@ -63,13 +65,21 @@
 \author{富永 直弥}
 \maketitle
 
-\section{基礎的な定義}
+% mathscinetからbibtex.
+% todonote
+% 実数体の公理ではない，実閉体の公理だし．例1.2は例じゃなく定義にすべきでは．
+% section6の続きをひとまず書く．
+% 【前日に1行でも編集した場合はgithubにpushする．】
+% 【平日午前9時にdiscordで定時連絡する．】
+% この本を呼んでいました，休んでました，等でもOK．
 
-\subsection{実閉体}
+\section{実閉体}
 
-% どの論文で導入されたかの引用をするべき．論文の定理番号も可能なら引用する．
-% 順序体・実体の概念がいつ頃導入されたものなのかはよくわからないです．
-まず，\cite{Artin}でArtinとSchreierにより導入された，実閉体の概念についてまとめる．
+\todo[inline]{
+     どの論文で導入されたかの引用をするべき．論文の定理番号も可能なら引用する．
+     順序体・実体の概念がいつ頃導入されたものなのかはよくわからないです．
+}
+まず，\cite{MR3069467}でArtinとSchreierにより導入された，実閉体の概念についてまとめる．
 実閉体は，実数体を拡張して定義される概念であり，実閉体上でも実数体と類似した解析的な性質が成り立つ．
 
 まず始めに，順序体と実体の定義を述べる．
@@ -87,9 +97,8 @@
 
 順序体と実体について，次の命題が成り立つ．
 
-% ここは命題であったが，定理に修正した．
-% 証明を付けるか，引用するかどちらかすべき．
-\begin{theorem}
+\todo[inline]{ここは命題であったが，定理に修正した}
+\begin{theorem}\todo[inline]{ 証明を付けるか，引用するかどちらかすべき．}
      $F$を体とする．このとき，以下は同値である．
      \begin{enumerate}
           \item $F$が実体である．
@@ -97,21 +106,22 @@
      \end{enumerate}
 \end{theorem}
 
-% $\Q(\sqrt{2})$を$\Q\left(\sqrt{2}\right)$に修正．以下同様．
+
+\todo[inline]{$\Q(\sqrt{2})$を$\Q\left(\sqrt{2}\right)$に修正．以下同様．}
 例えば，実数体$\R$や有理数体$\Q$，有理数体$\Q$に$\sqrt{2}$を添加した体$\Q\left(\sqrt{2}\right)$は，
 通常の全順序構造を入れることにより順序体となる．
 したがって，$\R, \Q, \Q\left(\sqrt{2}\right)$はいずれも実体である．
 
-% $\C$が順序体の構造を持たないことは命題として述べてもいいのでは．(まだ直してない)
+\todo[inline]{$\C$が順序体の構造を持たないことは命題として述べてもいいのでは．}
 一方で，複素数体$\C$は順序体の構造を持たない．よって，$\C$は実体ではない．
 
 有理数体$\Q$は，実体$\Q\left(\sqrt{2}\right)$を代数拡大にもつが，
 実数体$\R$は代数拡大で実体になるものは自分以外には持たない．
 そのような特徴に注目し，実閉体の概念を導入する．
 
-% 引用の書き方が分からないのですが，これでいいでしょうか？
-実閉体は\cite{Artin}により初めて定義された．
-なお，\cite[Definition1.2.1]{Bochnak}の定義を参照している．
+\todo[inline]{引用の書き方が分からないのですが，これでいいでしょうか？}
+実閉体は\cite{MR3069467}により初めて定義された．
+なお，\cite[Definition 1.2.1]{MR1659509}の定義を参照している．
 
 \begin{definition}[実閉体の定義] \label{definition:RCF}
      実体$F$が実閉体(real closed field)であるとは，$F$の代数拡大で実体になるものは$F$自身に限ることである．
@@ -121,27 +131,31 @@
 また，代数的数全体(すなわち, 有理数体$\Q$の代数的閉包)$\overline{\Q}$と実数体$\R$の共通部分$\Ralg := \overline{\Q} \cap \R$は実閉体である．
 $\Ralg$に属する元を実代数的数という．
 
-% 一階述語論理で書けない～というところを，消去しました．
+\todo[inline]{一階述語論理で書けない～というところを，消去しました．}
 この実閉体の\cref{definition:RCF}は，次の定理を用いることで，一階述語論理で実閉体の理論を定式化することができる．
 
-%以下の定理の引用を加えました．(これでよい？)
-% 1⇒2, 3は示されているようだが，ぱっと見，逆が示されていなそう．
-次の定理は，\cite{Artin}において示された．
-また，\cite[Theorem.1.2.2.]{Bochnak}を参照した．
-\begin{theorem}
+\todo[inline]{
+     以下の定理の引用を加えました．(これでよい？)
+     1⇒2, 3は示されているようだが，ぱっと見，逆が示されていなそう．
+     以下の定理は証明を書いていない．
+}
+
+次の定理は，\cite{MR3069467}において示された．
+また，\cite[Theorem.1.2.2.]{MR1659509}を参照した．
+\begin{theorem}\todo[inline]{定理の証明はされていないので引用をすべき．}
      体$F$について，以下は同値である．
      \begin{enumerate}
-          \item 体$F$は実閉体である．\label{proposition:rcf_1}
+          \item 体$F$は実閉体である．
           \item 次を満たす$F$の順序体の構造$<$がただ一つ存在する．
                \begin{itemize}
                     \item 任意の$x \in F$に対し, $x>0$ならば$x = y^2$を満たす$y \in F$が存在する．
                     \item 奇数次数の$F$係数$1$変数多項式は，$F$において少なくとも$1$つの根を持つ．
                \end{itemize}
-          \item $F\left[\sqrt{-1}\right] := F[X]/(X^2 + 1)$は代数的閉体である．\label{proposition:rcf_2}
+          \item $F\left[\sqrt{-1}\right] := F[X]/(X^2 + 1)$は代数的閉体である．
      \end{enumerate}
 \end{theorem}
 
-% 以降 → これ以下では に訂正．
+\todo[inline]{以降 → これ以下では に訂正．}
 これ以下では，実閉体$R$上の区間を，
 \begin{equation}
      [a,b]:=\{x \in R \mid a \leq x \leq b\}, \quad (a,b):=\{x \in R \mid a < x < b\}
@@ -163,7 +177,8 @@ $\Ralg$に属する元を実代数的数という．
           &(X-\beta)^2 + \gamma^2 = (X-\beta-\gamma\sqrt{-1})(X-\beta+\gamma\sqrt{-1})
      \end{align}
      の形のどちらかである($\alpha, \beta, \gamma \in R$, $\gamma \neq 0$)．
-     % 証明にギャップがあったので直した．
+
+     \todo[inline]{証明にギャップがあったので直した．}
      このとき，$(X-\beta)^2 + \gamma^2$の形の既約因子は，$\gamma \neq 0$であるから$R$上で常に$0$より大きいことに注意する．
      $f(a)f(b)<0$であることから，$f(X)$のある既約因子$g(X)$について，$g(a)g(b)<0$となる．
      実際，もしすべての$f(X)$の既約因子$g(X)$について，$g(a)g(b) \geq 0$であれば，$f(a)f(b)\geq0$となり仮定に反する．
@@ -178,7 +193,7 @@ $\Ralg$に属する元を実代数的数という．
      $f(a)=f(b)=0$であるとき，ある$x \in (a,b)$が存在し，$f'(x)=0$である．
 \end{proposition}
 \begin{proof}
-     % 以下の主張において，「十分である」ことの説明を加えた．
+     \todo[inline]{以下の主張において，「十分である」ことの説明を加えた．}
      $(a,b)$上に$f(X)$の根がない場合について示せば十分である．
      実際，もし$(a,b)$上に$f(X)$の根が存在するとき，それらの根を$a < x_1 < \dots < x_k < b$とすれば，
      $x_1$を改めて$b$とすることで$(a,b)$上に$f(X)$の根がない場合に帰着する．
@@ -199,7 +214,7 @@ $\Ralg$に属する元を実代数的数という．
      この$x \in (a,b)$に対して$f'(x)=0$である．
 \end{proof}
 
-% この系と証明を追加した．
+\todo[inline]{この系と証明を追加した．}
 \begin{corollary}\label{corollary:mean-value}
      $R$を実閉体とし，$f \in R[X]$とする．また，$a, b \in R$を$a<b$とする．
      このとき，ある$c \in (a,b)$が存在して，$f(b)-f(a) = (b-a)f'(c)$を満たす．
@@ -215,7 +230,7 @@ $\Ralg$に属する元を実代数的数という．
      この$c$に対して，$f(b)-f(a)=f'(c)(b-a)$が成り立つ．
 \end{proof}
 
-% この系の証明を追加した．
+\todo[inline]{この系の証明を追加した．}
 \begin{corollary}\label{corollary:monotone}
      $R$を実閉体とし，$f \in R[X]$とする．また，$a, b \in R$を$a<b$とする．
      このとき，任意の$x \in (a,b)$について$f'(x)>0$ならば，$f(X)$は$[a,b]$上狭義単調増加である．
@@ -231,15 +246,17 @@ $\Ralg$に属する元を実代数的数という．
      この$x \in (a,b)$に対して$f'(x) \leq 0$となり，前半の主張の証明が完了した．
 \end{proof}
 
-\subsection{一階述語論理}
+\section{一階述語論理}
 一階述語論理式(first-order logic)は，
-% 変数記号，論理記号，量化記号を英語でも何というかを書くべき．
+\todo[inline]{変数記号，論理記号，量化記号を英語でも何というかを書くべき．}
 変数記号，論理記号 ($=, \lnot, \lor, \land, \rightarrow$), 量化記号($\forall, \exists$)
 と，言語$L$で記述される．
- 
-% 言語も何と書くか書くべき，
-% 述語記号，定数記号，関数記号の集合を区別するべき．
-% このあたりはよく検討するべき．というかまあ合わせたほうが良さそう．(富永：なにかしら基礎論の本を参照して書くのはどうでしょうか)
+
+\todo[inline]{
+     言語も何と書くか書くべき，
+     述語記号，定数記号，関数記号の集合を区別するべき．
+     このあたりはよく検討するべき．教科書に合わせたほうが良さそう．
+}
 ここで，言語$L$とは，述語記号，関数記号，定数記号からなる集合である．
 ただし，各述語記号$R \in L$は，何個の変数を受け取るか定まっているものとし，
 同様に各関数記号$f \in L$は，何個の変数を受け取るか定まっているものとする．
@@ -254,7 +271,6 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
      \end{itemize}
 \end{example}
 
-% 「順に」が二つある．→修正しました．
 言語$L$が定義されると，順に項，原子論理式，論理式が定義される．
 
 \begin{definition}[項の定義]
@@ -267,8 +283,8 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
      言語$L$上の項であることを強調したいとき，$L$項($L$-term)と呼ぶ．
 \end{definition}
 
-% Rを$n$変数述語記号とする．のように書くべき，
-% $R \in L$のような書き方を避けるべき．
+\todo[inline]{$R$は$n$変数述語記号とする，のように書くべき．$R \in L$のような書き方を避けるべき．}
+
 \begin{definition}[論理式の定義]
      言語$L$に対して，原子論理式(atomic formula)を，次のいずれかの形をした記号列で定義する．
      \begin{enumerate}
@@ -325,10 +341,12 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
      言語$L$に対して，閉論理式からなる集合を$L$理論($L$-theory)，あるいは単純に理論(theory)という．
 \end{definition}
 
-% ここは信頼できる文献を参照して書いたほうがいいんじゃない．
-% 最後の主張が正しくない．
-% 引用：文献の引用をしてうつす．
-% AxiomScheme(公理図式)なので，そもそも公理じゃない．
+
+\todo[inline]{
+     ここは信頼できる文献を参照して書いたほうがいい．   
+     最後の主張は正しくない．
+     AxiomScheme(公理図式)なので，そもそも公理じゃない．
+}
 
 \cite{Arai}に従い，実閉体の理論$RCF$を定義する．
 
@@ -386,7 +404,7 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
 $L$構造$\M$が与えられたとき，
 $L$論理式$\phi$が$L$構造$\M$で成り立つかどうか，すなわち充足関係があるかどうかを定義できる．
 
-% 定義については引用した方がいいんじゃないか？ということをほのめかされた．
+\todo[inline]{定義は引用した方がいい.}
 \begin{definition}
      $L$-構造$\M = (M,\dots)$をとる．
      言語$L$に形式的な定数記号$\{c_m \mid m \in M\}$を追加した言語を$L(\M)$とする．
@@ -408,7 +426,7 @@ $L$論理式$\phi$が$L$構造$\M$で成り立つかどうか，すなわち充�
                \begin{equation}
                     \M \models (R(t_1, \dots, t_n)) \defiff (t_1^\M, \dots, t_n^\M) \in R^\M,
                \end{equation}
-               % \not\modelsは定義されていないが？
+               \todo[inline]{$\not \models$ は定義されていない．}
                \item $L(\M)$閉論理式$\phi$に対し
                \begin{equation}
                     \M \models (\lnot \phi) \defiff \M \not\models \phi,
@@ -473,8 +491,7 @@ $L$論理式$\phi$が$L$構造$\M$で成り立つかどうか，すなわち充�
 $T$を言語$L$上の理論とし，$\phi$を$L$上の論理式とする．
 全ての$T$のモデル$\M$に対して$\M \models \phi$が成り立つとき，$\phi$は$T$の帰結(consequence)であるといい，$T \models \phi$とかく．
 
-% 理論$T$が量化記号消去を「持つ」と書くべきか？
-% 検討してください．以降の表現も気を付けてください．
+\todo[inline]{理論$T$が量化記号消去を「持つ」と書くべきか？ 検討する．以降の表現も気を付ける．}
 理論$T$で量化記号消去(quantifier elimination)ができるとは，
 $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号のない論理式$\psi(x_1,\dots, x_n)$が存在し，
 \begin{equation}
@@ -486,12 +503,12 @@ $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号のな�
 
 実閉体の理論は量化記号消去ができる．すなわち，次が成り立つ．
 
-% これは論文を引用するべき．discordに挙げてくれた．
+\todo[inline]{これは論文を引用するべき．discordに挙げてくれた．}
 \begin{theorem}[Tarski]\label{theorem:Tarski}
      実閉体の理論$\RCF$は量化記号消去ができる．
 \end{theorem}
 
-% 「以降この節は」「この節の残りでは」等に直すべき．でもそれも砕けすぎている．
+\todo[inline]{「以降この節は」「この節の残りでは」等に直すべき．でもそれも砕けすぎている．}
 以降この節は\cref{theorem:Tarski}の証明を述べる．
 
 この定理の証明および後々の議論のため，言語$L_\mathrm{OR} = \{<, +, \cdot, 1, 0\}$上の原子論理式について注意をしておく．
@@ -511,15 +528,17 @@ $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号のな�
      \sign (f(x_1, \dots, x_n)) = -1 &\defiff \sum_{i=1}^k a_i x_1^{\alpha_{i,1}} \cdots x_n^{\alpha_{i,n}} < \sum_{j=1}^l b_j x_1^{\beta_{j,1}} \cdots x_n^{\beta_{j,n}}
 \end{align}
 
-% を用いて→に対して
-% ～しておくは砕けた表現．注意する，とする，というようにする．
+\todo[inline]{
+     を用いて→に対して\\
+     ～しておくは砕けた表現．注意する，とする，というようにする．
+}
 このとき，$\RCF$において，任意の原子論理式$\phi(x_1, \dots, x_n)$は，ある多項式$f \in \Z[x_1, \dots, x_n]$及び$\sigma \in \{-1, 0, 1\}$を用いて，
 $\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意しておく．
 また，$P = \{-1, 0, 1\}$としておく．
 
 それでは，\cref{theorem:Tarski}を示していく．そのために，まずは次の補題を準備する．
 
-% 補題番号をローマ数字にしてフォントをかえる，アルファベットに直すとかが適切です．「1.より」とかはだめ．
+\todo[inline]{補題番号をローマ数字にしてフォントをかえる，アルファベットに直すとかが適切です．「1.より」とかはだめ．}
 \begin{lemma}\label{lemma:qe_simplify}
      言語$L_\mathrm{OR}$上の理論$\RCF$において，次の主張が成り立てば．理論$\RCF$は量化記号消去できる．
 
@@ -545,7 +564,7 @@ $\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意してお�
           をみたす．
      \end{enumerate}
      実際，任意に与えられた量化記号のない論理式$\phi(X, Y_1, \dots, Y_n)$は，多項式$f_{i,j} \in \Z[X, Y_1, \dots, Y_n]$($i=1, \dots, k, j=1, \dots, l_i$)
-     と$\map{\sigma_i}{\{1, \dots, l_i\}}{P}$を用いて，和積標準形% 「を用いて，表す」は違和感ない．和関標準形は定義していない．
+     と$\map{\sigma_i}{\{1, \dots, l_i\}}{P}$を用いて，和積標準形\todo[inline]{ 「を用いて，表す」は違和感ない．和関標準形は定義していない．}
      \begin{equation}
           \phi(X, Y_1, \dots, Y_n) \leftrightarrow \bigvee_i \bigwedge_j (\sign(f_{i,j}(X, Y_1, \dots, Y_n)) = \sigma_i(j))
      \end{equation}
@@ -558,7 +577,7 @@ $\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意してお�
           \exists X \bigwedge_j (\sign(f_{i,j}(X, Y_1, \dots, Y_n)) = \sigma_i(j)) \leftrightarrow \theta_i(Y_1, \dots, Y_n)
      \end{equation}
      を満たす量化記号のない論理式$\theta_i(Y_1, \dots, Y_n)$が存在する．
-     % このしたがってはギャップがある．
+     \todo[inline]{このしたがってはギャップがある．}
      したがって，\ref{qe_2}は成り立つ．
 
      次に，\ref{qe_2}より，理論$\RCF$が量化記号消去できることを示す．
@@ -620,9 +639,9 @@ $\SIGN_R(f_1, \dots, f_s)$を次のように定める．
 このとき，正整数$s, m$に対して，$P_{s,m}$を，$P$成分の$s$行$(2l+1)$列行列($0 \leq l \leq sm$)全体を表すとすると，
 $\SIGN_R(f_1, \dots, f_s) \in P_{s,m}$である．
 
-% Tarskiの証明はセミナー形式で話しましょう．
-% fが多変数だったのに，急に1変数になったりして誤解を招いてるかもしれない？
-% RealAlgebraicGeometry の1章最後にbibliographicnoteがあるのでそこに書いてある参考文献を引用するべきなのでは
+\todo[inline]{fが多変数だったのに，急に1変数になったりして誤解を招いてるかもしれない？
+RealAlgebraicGeometry の1章最後にbibliographicnoteがあるのでそこに書いてある参考文献を引用するべきなのでは}
+ 
 
 \begin{lemma}\label{lemma:qe_1ststep}
      与えられた$\map{\sigma}{\{1, \dots, t\}}{P}$に対して，部分集合$P(\sigma) \subset P_{s,m}$を，次を満たすように取れる．
@@ -847,7 +866,7 @@ $R$を実閉体とする．
 \end{enumerate}
 を満たすとき，部分集合族$\calS$を$X$の分解(decomposition)と呼ぶ．
 
-まず始めに，$R^n$の柱状代数分解を定義する．この定義は，参考文献\cite{Basu}による．
+まず始めに，$R^n$の柱状代数分解を定義する．この定義は，参考文献\cite{MR2248869}による．
 
 \begin{definition} \label{definition:cad}
      $i=1, \dots, n$に対し，$\calS_i$を$R^i$の分解とする．
@@ -911,7 +930,7 @@ $R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を構成することができる
 $F$に適合した$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を$R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^n$から構成するとき，
 各$S \in \calS_{n-1}$は次に定義する性質を満たしてほしい．
 
-なお，次の定義は参考文献\cite{Collins}によって導入されたものである．
+なお，次の定義は参考文献\cite{MR0403962}によって導入されたものである．
 
 \begin{definition} 
      $F \subset R^n[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を空でない半代数的連結な半代数的集合とする．
@@ -961,13 +980,14 @@ $F$描画可能であることの必要条件は，次のように与えられ�
      このとき，$f_1, f_2$は$f_1(X,Y), f_2(X,Y)$と表すことができる．
      $x \in S$に対して，$f_1(x,Y), f_2(x,Y)$の$R[\sqrt{-1}]$上の相異なる共通根の数を$N(x)$と定義する．
      すると，$\map{N}{S}{R}$は半代数的関数である．
+     実際，$N$のグラフは，次のように書き表される．
      \footnote{$N$が半代数的関数であることは，$N$のグラフを以下のように書き表すことができるためである：
      \begin{equation}
           \{(x,z) \mid \bigvee_{n}(z = n \text{ and } \exists y_1, \dots, y_n \text{ s.t. } y_i \neq y_j( i\neq j) \text{ and } \forall y(f_1(x,y)=f_2(x,y) \leftrightarrow \bigvee_{i=1}^n (y = y_i)))\}
      \end{equation}
      ここで，論理和の$n$は，$0$から$\gcd(P,Q)$の$Y$に関する次数までをとる．
-     この主張はすでに$\RCF$において$量化記号消去$が可能であることを用いてしまっているが，
-     それは別の方法で示すことができる．(例えば新井\cite{Arai}を参照．)
+     \cref{theorem:Tarski}より，$\RCF$において量化記号消去可能であるから，
+     $N$のグラフは半代数的である．
      }
 
      次の主張を示せば，$N$は$S$上の局所定数半代数的関数であるため，$N$は定数関数となり，証明が完了する．
@@ -976,9 +996,9 @@ $F$描画可能であることの必要条件は，次のように与えられ�
           $S\cap V$上$f_1(X,Y), f_2(X,Y)$の$R[\sqrt{-1}]$上の相異なる共通根の数が一定となるようなものが存在する．
      \end{claim*}
      以降は主張を示す．
-% メモ：
-% この後は，方程式の解が係数に関して連続であることから示される．
-%（実閉体の場合も同様に示すことができる，証明は逆関数定理を経由する．）
+     \todo[inline]{
+          この後は，方程式の解が係数に関して連続であることから示される．
+          （実閉体の場合も同様に示すことができる，証明は逆関数定理を経由する．）}
 \end{proof}
 
 \begin{lemma}\label{lemma:del_2}
@@ -993,26 +1013,8 @@ $F$描画可能であることの必要条件は，次のように与えられ�
 \end{lemma}
 
 \begin{proof}
-     
+     \todo[inline]{証明が書かれていないので，証明を書く．}
 \end{proof}
-
-% ここからは実閉体上で書いているため，チェックをしておく．
-
-% \begin{lemma}\label{lemma:del_2}
-% $A \in \R[x_1, \dots, x_n]$とし，$S \subset \R^{n-1}$を弧状連結部分集合とする．
-% \begin{itemize}
-% \item $S$上$A$の重複度込みの複素数根の数は一定．
-% \item $S$上$A$の相異なる複素数根の数は一定．
-% \end{itemize}
-% このとき，$S$は$\{A\}$描画可能である．
-% \end{lemma}
-
-% \begin{proof}
-% 方針:次の二つのことを示さなければならない．\\
-% 1.  $S$上実根の数は一定．\\
-% 2.  $S$上実根は連続である．\\
-% いずれも多項式の根の係数に対する連続性から示せる．
-% \end{proof}
 
 \begin{proof}[{\bf \cref{proposition:del}の証明}]
 任意の$f \in F$は$S$上恒等的に$0$でないとしてよい．
@@ -1104,8 +1106,7 @@ $\mathrm{R}$を体とし，$A(x), B(x) \in \mathrm{R}[x] \setminus \{0\}$とす�
 \end{proposition}
 
 \begin{proof}
-後で書く．
-方針: 部分終結式がユークリッドの互除法で出てくる多項式の列の定数倍になることが分かる．
+\todo[inline]{後で書く．方針： 部分終結式がユークリッドの互除法で出てくる多項式の列の定数倍になることが分かる．}
 \end{proof}
 
 \subsection{符号不変な分割の存在}
@@ -1299,14 +1300,17 @@ $\{\calS_i\}_{i=1}^l$に属する各$S \in \calS_i$の定義式を与えるよ�
      \end{algorithmic}
 \end{algorithm}
 
-\begin{thebibliography}{99}
-     \bibitem{Arai} 新井敏康，『数学基礎論』(2016).
-     \bibitem{Itai} 板井昌典，『モデル理論』(2023).
-     \bibitem{Artin} Artin, E., Schreier, O. Algebraische Konstruktion reeller Körper. Abh.Math.Semin.Univ.Hambg. 5, 85–99 (1927). https://doi.org/10.1007/BF02952512
-     \bibitem{Bochnak}Jacek Bochnak, Michel Coste, Marie-Fran\c{c}oise Roy, Real Algebraic Geometry, Springer(1998).
-     \bibitem{Basu} Saugata Basu, Richard Pollack, Marie-Fran\c{c}oise Roy, Algorithms in Real Algebraic Geometry(2003).
-     \bibitem{Collins} George E. Collins, Quantifier elimination for real closed fields by cylindrical algebraic decomposition(1975).
-     \bibitem{Anai} 穴井宏和，横山和弘，『QEの計算アルゴリズムとその応用 数式処理による最適化』(2011).
-\end{thebibliography}
+% \begin{thebibliography}{99}
+%      \bibitem{Arai} 新井敏康，『数学基礎論』(2016).
+%      \bibitem{Itai} 板井昌典，『モデル理論』(2023).
+%      \bibitem{Anai} 穴井宏和，横山和弘，『QEの計算アルゴリズムとその応用 数式処理による最適化』(2011).
+%      \bibitem{Artin} Artin, E., Schreier, O. Algebraische Konstruktion reeller Körper. Abh.Math.Semin.Univ.Hambg. 5, 85–99 (1927). https://doi.org/10.1007/BF02952512
+%      \bibitem{Bochnak}Jacek Bochnak, Michel Coste, Marie-Fran\c{c}oise Roy, Real Algebraic Geometry, Springer(1998).
+%      \bibitem{Basu} Saugata Basu, Richard Pollack, Marie-Fran\c{c}oise Roy, Algorithms in Real Algebraic Geometry(2003).
+%      \bibitem{Collins} George E. Collins, Quantifier elimination for real closed fields by cylindrical algebraic decomposition(1975).
+% \end{thebibliography}
 
+
+\bibliographystyle{unsrt}
+\bibliography{references.bib}
 \end{document}
