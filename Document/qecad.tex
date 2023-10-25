@@ -66,10 +66,8 @@
 \maketitle
 
 % mathscinetからbibtex.
-% todonote
 % 実数体の公理ではない，実閉体の公理だし．例1.2は例じゃなく定義にすべきでは．
 % section6の続きをひとまず書く．
-% 【前日に1行でも編集した場合はgithubにpushする．】
 % 【平日午前9時にdiscordで定時連絡する．】
 % この本を呼んでいました，休んでました，等でもOK．
 
@@ -755,7 +753,7 @@ $\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい．
      \end{equation}
      である．
 
-     以上により$\SIGN_R(f_1, \dots, f_s)$が$w$の情報飲みに依存して定まることが示せ，よって証明が完了した．
+     以上により$\SIGN_R(f_1, \dots, f_s)$が$w$の情報のみに依存して定まることが示せ，よって証明が完了した．
 \end{proof}
 
 以上の準備をもとに，\cref{theorem:weak_Tarski}を示す．
@@ -854,6 +852,37 @@ $\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい．
 
 \section{半代数的集合}
 % ここに半代数的集合について書く．
+\todo[inline]{
+     定義すべきこと：\\
+     ・半代数的集合\\
+     ・半代数的関数\\
+     ・半代数的連結\\
+}
+\todo[inline]{
+     示すべきこと：\\
+     ・半代数的連結空間上の半代数的局所定数関数は，大域的に定数関数\\
+     ・実根の連続性\\
+     ・逆関数定理\\
+}
+
+以下の命題は，\cite[Theorem 5.12.]{MR2248869}を参考にした．
+
+\begin{proposition} \label{proposition:continuity-of-roots}
+     $R$を実閉体とし，$f \in R[X_1, \dots, X_n]$とする．
+     また，$S \subset R^{n-1}$を半代数的集合とし，$a \in S$とする．
+
+     $\deg (f(x,X_n))$は$x \in S$に対して一定で，さらに，
+     $f(a,X_n)$の相異なる$R\left[\sqrt{-1} \right]$上の根が$z_1, \dots, z_j$で，
+     重複度がそれぞれ$\mu_1, \dots, \mu_j$であったとする．
+
+     この時，各$D(z_j, r) \subset R\left[ \sqrt{-1} \right]$ ($i=1, \dots, j$)が
+     非交叉であるような任意の$R$の元$r > 0$に対して，
+     $a$の開近傍 $V \subset R^{n-1}$を，任意の$x \in V \cap S$に対して，
+     $f(x, X_n)$の根が各$D(z_i, r)$ ($i=1, \dots, j$)の中に（重複度込みで）ちょうど$\mu_i$個であるようにとれる．
+
+\end{proposition}
+
+
 
 \section{柱状代数分解}
 
@@ -866,7 +895,7 @@ $R$を実閉体とする．
 \end{enumerate}
 を満たすとき，部分集合族$\calS$を$X$の分解(decomposition)と呼ぶ．
 
-まず始めに，$R^n$の柱状代数分解を定義する．この定義は，参考文献\cite{MR2248869}による．
+まず始めに，$R^n$の柱状代数分解を定義する．この定義は，参考文献\cite[Definition 5.1]{MR2248869}による．
 
 \begin{definition} \label{definition:cad}
      $i=1, \dots, n$に対し，$\calS_i$を$R^i$の分解とする．
@@ -874,12 +903,12 @@ $R$を実閉体とする．
      以下の条件を満たすことをいう．
      \begin{enumerate}
           \item $S \in \calS_1$は，$R$上の点か，開区間かのいずれかである．
-          \item $n\geq 2$の場合，任意の$i=1, \dots, k-1$と任意の$S \in \calS_i$に対し，
+          \item $n\geq 2$の場合，任意の$i=1, \dots, n-1$と任意の$S \in \calS_i$に対し，
           有限個の連続な半代数的関数
           \begin{equation}
                \map{\xi_{S,1}< \dots <\xi_{S,l_S}}{S}{R}
           \end{equation}
-          が存在し，以下を満たす．（ただし，$l_S$は0以上の自然数とする．）
+          が存在し，以下を満たす．（ただし，$l_S$は非負整数とする．）
           \begin{itemize}
                \item 各$j=1 \dots, l_S$に対し，$\xi_{S,j}$のグラフ
                \begin{equation}
@@ -901,59 +930,62 @@ $R$を実閉体とする．
 $R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を構成することができる．
 このように，柱状代数分解は再帰的な構造である．
 
+以下の定義は，\cite[Definition 5.5]{MR2248869}を参照した．
 \begin{definition}
      $F \subset R[X_1, \dots, x_n]$を有限部分集合とする．
      \begin{enumerate}
           \item 部分集合$S \subset \R^n$が$F$符号不変($F$-invariant)であるとは，
           任意の$f \in F$及び任意の$x,y \in S$に対し$\sign(f(x))=\sign(f(y))$であることと定義する．
+
           \item $R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$が$F$に適合している(adapted to $F$)とは，
           任意の$C \in \calS_k$が$F$符号不変であることと定義する．
      \end{enumerate}
 \end{definition}
 
-この節の目的は，次の定理を示すことである．
-
+この節の目的は，次の定理を示すことである．以下の定理の主張は\cite[Theorem 5.6]{MR2248869}を参照した．
 \begin{theorem} \label{theorem:cad}
-     任意の有限部分集合$F \subset R[X_1, \dots, x_n]$に対して，
+     任意の有限部分集合$F \subset R[X_1, \dots, X_n]$に対して，
      $F$に適合した$R^n$の柱状代数分解が存在する．
 \end{theorem}
 
-この定理は，柱状代数分解を再帰的に構成することで証明される．
-まず初めに$R^1$の柱状代数分解$\{\calS_1\}$を与え，
-それを基に順に$R^k$の柱状代数分解$\{\calS_i\}_{i=1}^k$を構成していく．（ただし$k=2, \dots, n$.）
-
-問題になるのは，$F$に適合した$R^n$の柱状代数分解を構成することである．
-以下の節では，各$k=1, \dots, n-1$で$R^k$の柱状代数分解$\{\calS_i\}_{i=1}^k$を構成するにあたり
-どのような条件を満たす必要があるかを述べていく．
+この定理は，柱状代数分解を次元について帰納的に構成することで証明される．
+まず初めに$R^1$の柱状代数分解を与え，
+それを基に順に$R^2, R^3, \dots, R^n$の柱状代数分解を構成していく．
 
 \subsection{描画可能}
-$F$に適合した$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を$R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^n$から構成するとき，
+$F$に適合した$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を$R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$から構成するとき，
 各$S \in \calS_{n-1}$は次に定義する性質を満たしてほしい．
 
-なお，次の定義は参考文献\cite{MR0403962}によって導入されたものである．
+なお，次の定義はCollins\cite{MR0403962}によって導入されたものである．
+\footnote{
+     Collins\cite{MR0403962}による描画可能性の定義は，$R=\R$, $F$が$1$元集合になる場合のみの定義であったが，
+     ここでは一般の有限集合の場合に拡張している．
+}
 
 \begin{definition} 
-     $F \subset R^n[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を空でない半代数的連結な半代数的集合とする．
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結な半代数的集合とする．
      $S$が$F$描画可能($F$-delineable)であるとは，$k$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_k}{S}{R}$が存在し，次を満たすことと定義する．
      \begin{itemize}
           \item 任意の$ x \in S $に対し，
           \begin{equation}
                \{\xi_i(x)\}_{i=1}^k = \{y \in R \mid \prod_{f \in F'}f(x,y)=0\}
           \end{equation}
-          である．ただし，$F' = \{f \in F \mid \text{$f$は$S$上恒等的に0でない}\}$とする．
+          である．ただし，$F' = \{f \in F \mid \text{$f$は$S$上恒等的に$0$でない}\}$とする．
           \item 各$i=1, \dots, k$および$f \in F'$に対し，多項式$f(x,X_n)$における根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
      \end{itemize}
 \end{definition}
 
-$R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^n$で，
+$R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$で，
 各$S \in \calS_{n-1}$が$F$描画可能であるとき，定義より得られる連続な半代数関数$\map{\xi_1<\dots<\xi_k}{S}{R}$を
 各$S$に対して取ることにより，$F$適合な$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を得ることができる．
 
-$F$描画可能であることの必要条件は，次のように与えられる．
+次の命題は，$F$描画可能であることの必要条件を述べている．
+なお，次の命題は，\cite[Proposition 5.14.]{MR2248869}を参照した．
 
+\todo[inline]{以下の命題は条件2.が「相異なる実根」と，少し違った形で述べられている．誤植だと思う．}
 \begin{proposition}\label{proposition:del}
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset \R^{n-1}$を半代数的連結な半代数的集合とする．
-     さらに，以下を満たすとする．
+     さらに，以下の条件を満たすとする．
      \begin{enumerate}
           \item 任意の$f \in F$に対し，$S$上$f$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定である．
           \item 任意の$f \in F$に対し，$S$上$f$の$R[\sqrt{-1}]$上の相異なる根の数は一定である．
@@ -962,10 +994,11 @@ $F$描画可能であることの必要条件は，次のように与えられ�
      このとき，$S$は$F$描画可能である．
 \end{proposition}
 
+
 \cref{proposition:del}を示すために，次の二つの補題を用意する．
 
 \begin{lemma}\label{lemma:del_1}
-     $S \subset R^{n-1}$を空でない半代数的連結な半代数的集合部分集合とし，
+     $S \subset R^{n-1}$を半代数的連結な半代数的集合部分集合とし，
      $f_1, f_2 \in R[x_1, \dots, x_n]$を$S$上恒等的に$0$でない多項式とする．
      $f_1, f_2$が次を満たすとする．
      \begin{enumerate}
@@ -980,7 +1013,6 @@ $F$描画可能であることの必要条件は，次のように与えられ�
      このとき，$f_1, f_2$は$f_1(X,Y), f_2(X,Y)$と表すことができる．
      $x \in S$に対して，$f_1(x,Y), f_2(x,Y)$の$R[\sqrt{-1}]$上の相異なる共通根の数を$N(x)$と定義する．
      すると，$\map{N}{S}{R}$は半代数的関数である．
-     実際，$N$のグラフは，次のように書き表される．
      \footnote{$N$が半代数的関数であることは，$N$のグラフを以下のように書き表すことができるためである：
      \begin{equation}
           \{(x,z) \mid \bigvee_{n}(z = n \text{ and } \exists y_1, \dots, y_n \text{ s.t. } y_i \neq y_j( i\neq j) \text{ and } \forall y(f_1(x,y)=f_2(x,y) \leftrightarrow \bigvee_{i=1}^n (y = y_i)))\}
@@ -1003,26 +1035,55 @@ $F$描画可能であることの必要条件は，次のように与えられ�
 
 \begin{lemma}\label{lemma:del_2}
      $S \subset R^{n-1}$を半代数的連結な半代数的集合とし，     
-     $A \in R[x_1, \dots, x_n]$を$S$上恒等的に$0$でない多項式とする．
+     $f \in R[x_1, \dots, x_n]$を$S$上恒等的に$0$でない多項式とする．
      さらに，次を満たすとする．
      \begin{itemize}
-          \item $S$上$A$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定．
-          \item $S$上$A$の$R[\sqrt{-1}]$上の相異なる根の数は一定．
+          \item $S$上$f$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定．
+          \item $S$上$f$の$R[\sqrt{-1}]$上の相異なる根の数は一定．
      \end{itemize}
-     このとき，$S$は$\{A\}$描画可能である．
+     このとき，$S$は$\{f\}$描画可能である．
 \end{lemma}
 
 \begin{proof}
-     \todo[inline]{証明が書かれていないので，証明を書く．}
+     まず，相異なる$R$上の根の個数が，$S$の上で一定であることを示す．
+
+     $\map{N}{S}{R}$を，各$a \in F$に対し，$N(a)$を$f(a,X_n)$の相異なる$R$上の根の数で定める，
+     すると，$N$は半代数的関数である．\footnote{これも同じように1階述語論理式出かけることから従う．}
+     
+     さらに，$N$が局所定数関数であることを示す．
+     $a \in S$を任意にとり，$f(a,X_n)$の$R$上の根を$z_1, \dots, z_s$, それ以外の根を$z_{s+1}, \dots, z_t$とする．
+     $R$の元$r > 0$を，$\{D(z_i,r)\}_{i=1}^t$が非交叉になるようにとると，\cref{proposition:continuity-of-roots}より，
+     ある$a$の開近傍$V$が存在し，各$x \in V \cap S$に対して$f (x, X_n)$ の根が各 $D(z_i, r)$ ($i = 1, \dots , t$) の中に（重複
+     度込みで）ちょうど $\mu_i$ 個であるようにとれる．
+     ここで，仮定より$S$の相異なる根の数は一定であるから，$\{D(z_i, r)\}_{i=1}^t$は非交叉であること合わせて，
+     各$D(z_i, r)$に含まれる全ての$f(x, X_n)$の根は一致しなければならない．
+
+     さらに，各$x \in V \cap S$に対して，$f(x,X_n)$は$R$係数の$1$変数多項式であるから，
+     $D(z_i, r)$ ($i=1, \dots, s$)に含まれるただ一つの根は$R$に値を取らなければならない．
+     なぜなら，もしその根が$\alpha + \beta \sqrt{-1}$である場合，その共役$\alpha - \beta \sqrt{-1}$も根となり，
+     $D(z_i, r)$に含まれる根がすべて一致することから$\beta = 0$となるためである．
+
+     これで，各$x \in V \cap S$に対して，$f(x, X_n)$の$R$上の相異なる根の数が一定であることが示せた．
+     すなわち，$N$は局所定数関数である事が示せた．
+
+     よって，$S$が半代数的連結であることと合わせて，$N$は定数関数である，すなわち，相異なる$R$上の根の個数は$S$上一定である．
+
+     ここで，各$x \in S$に対し，$\xi_1(x) < \dots < \xi_k(x)$を，相異なる$f(x, X_n)$の$R$上の根として定める．
+     このとき，先ほどの議論と同様にして，
+     各$\xi_i$が連続で，多項式$f(x,X_n)$の各根$\xi_i(x)$の重複度は$x \in S$によらず一定であることが示せる．
+
+     さらに，各$\map{\xi_i}{S}{R}$は，各グラフが半代数的集合となることからいずれも半代数的関数である．
+
+     よって，$S$は$\{f\}$描画可能であることが示された．
 \end{proof}
 
 \begin{proof}[{\bf \cref{proposition:del}の証明}]
 任意の$f \in F$は$S$上恒等的に$0$でないとしてよい．
 
 \cref{lemma:del_2}より，各$f \in F$に対して，$S$は$\{f\}$描画可能である．
-よって，$S$上の連続関数$\alpha_{1,f}(a) < \dots \alpha_{n_f, f}(a)$を，各$a \in S$で$f(a)(x) \in \R[x]$の解であるようにとれる．
+よって，$S$上の連続な半代数的関数$\alpha_{1,f}(a) < \dots \alpha_{n_f, f}(a)$を，各$a \in S$で$f(a)(x) \in \R[x]$の解であるようにとれる．
 
-次の主張が成り立てばよい．
+このとき，次の主張が成り立てば証明が完了する．
 
 \begin{claim*}
 $f, g \in F$が，$f \neq g$であるとする．
@@ -1163,7 +1224,7 @@ $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
 
      ここで，各$S \in \calS_{n-1}$は$\PROJ(F)$不変であるから，\cref{corollary:inv-deline}より，$S$は$F$描画可能である．
 
-     従って，各$S \in \calS_{n-1}$に対して，有限個の半代数的連続関数$\map{\xi_{S,1}< \dots < \xi_{S,l_S}}{S}{R}$が存在し，
+     従って，各$S \in \calS_{n-1}$に対して，有限個の連続な半代数的関数$\map{\xi_{S,1}< \dots < \xi_{S,l_S}}{S}{R}$が存在し，
      \begin{itemize}
           \item 任意の$ x \in S $に対し，
           \begin{equation}
