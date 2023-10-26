@@ -35,27 +35,32 @@
 \newcommand{\RCF}{\mathrm{RCF}}
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\psc}{\mathrm{psc}}
+\newcommand{\PSC}{\mathrm{PSC}}
+\newcommand{\RED}{\mathrm{RED}}
+\newcommand{\LT}{\mathrm{LT}}
+\newcommand{\LC}{\mathrm{LC}}
+\newcommand{\red}{\mathrm{red}}
 \newcommand{\PROJ}{\mathrm{PROJ}}
 \newcommand{\APROJ}{\mathrm{APROJ}}
 \newcommand{\der}{\mathrm{der}}
 \newcommand{\sign}{\mathrm{sign}}
 \newcommand{\SIGN}{\mathrm{SIGN}}
-\newcommand{\map}[3]{{#1}:{#2}\rightarrow{#3}}
+\newcommand{\map}[3]{{#1}\colon{#2}\rightarrow{#3}}
 
 \theoremstyle{definition}
 \newtheorem{definition}{定義}[section]
 \crefname{definition}{定義}{定義}
-\newtheorem{proposition}{命題}[section]
+\newtheorem{proposition}[definition]{命題}
 \crefname{proposition}{命題}{命題}
-\newtheorem{lemma}{補題}[section]
+\newtheorem{lemma}[definition]{補題}
 \crefname{lemma}{補題}{補題}
-\newtheorem{theorem}{定理}[section]
+\newtheorem{theorem}[definition]{定理}
 \crefname{theorem}{定理}{定理}
-\newtheorem{corollary}{系}[section]
+\newtheorem{corollary}[definition]{系}
 \crefname{corollary}{系}{系}
 \newtheorem*{claim*}{主張}
-\newtheorem{remark}{注意}[section]
-\newtheorem{example}{例}[section]
+\newtheorem{remark}[definition]{注意}
+\newtheorem{example}[definition]{例}
 
 \renewcommand{\proofname}{\textbf{証明}}
 
@@ -346,7 +351,7 @@ $n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n
      AxiomScheme(公理図式)なので，そもそも公理じゃない．
 }
 
-\cite{Arai}に従い，実閉体の理論$RCF$を定義する．
+\cite{Arai}に従い，実閉体の理論$\RCF$を定義する．
 
 \begin{example}[実閉体の理論]
      順序環の言語$L_\mathrm{OR}=\{<, +, \cdot, 1, 0\}$上の実閉体の理論$\RCF$を，次のように定義する．
@@ -943,6 +948,7 @@ $R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を構成することができる
 \end{definition}
 
 この節の目的は，次の定理を示すことである．以下の定理の主張は\cite[Theorem 5.6]{MR2248869}を参照した．
+\todo[inline]{では，初登場の論文はなんでしょうか？}
 \begin{theorem} \label{theorem:cad}
      任意の有限部分集合$F \subset R[X_1, \dots, X_n]$に対して，
      $F$に適合した$R^n$の柱状代数分解が存在する．
@@ -1167,26 +1173,40 @@ $\mathrm{R}$を体とし，$A(x), B(x) \in \mathrm{R}[x] \setminus \{0\}$とす�
 \end{proof}
 
 \subsection{符号不変な分割の存在}
-ここでは\cref{theorem:cad}を証明する．
+この節では，\cref{theorem:cad}を証明する．
 そのために，与えられた有限部分集合$F \subset R[X_1, \dots, X_n]$に対して，
 帰納的な議論で$R^n$の$F$適合な柱状代数分解の存在を示す．
 
 まず，帰納的な議論のために，次のような記号を定義する．
+以下の定義は，\cite[Section 3]{MR0764184}で定義されたものと同一であるが，本質的には\cite[Theorem 4]{MR0403962}で定義されたものである．
+
+まず，$f \in R[X_1, \dots, X_n]$に対し，$\red(f):=f - \LT(f; X_n)$と定義する．
+ただし，$f=0$の場合，$\red(f)=0$とする．さらに，
+\begin{align}
+     \red^0(f)&:=f\\
+     \red^{n+1}(f)&:=\red(\red^n(f))
+\end{align}
+により，非負整数$n$に対して帰納的に$\red^n(f)$を定義する．また，
+\begin{equation}
+     \RED(f) := \{ \mathrm{red}^k(f) \mid f \in F, k=0, \dots, \deg(f; X_n) \} \setminus \{0\}
+\end{equation}
+とする．$f=0$の場合，$\RED(f) = \emptyset$となることに注意しておく．
+
+次に，$f, g \in R[X_1, \dots, X_n] \setminus \{0\}$に対して，
+\begin{equation}
+     \PSC(f,g) := \{\psc_j(f,g) \mid j = 0, \dots, \min\{\deg(f;X_n), \deg(g;X_n)\}\} \setminus \{0\}
+\end{equation}
+と定義する．また，$f, g$のいずれかが$0$である場合には，$\PSC(f,g):=\emptyset$と定義する．
 
 \begin{definition}
 $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．ただし，$n \geq 2$とする．
-$\PROJ(F) \subset R[X_1, \dots, X_{n-1}]$を，次のように定める．
-
-まず，$B(F) := \{ \mathrm{red}^k(f) \mid f \in F, k=1, \dots, \deg(f) \}$とする．ただし，$\mathrm{red}(f) = f - \mathrm{LT}(f; X_n)$である．
-次に，
 \begin{align}
-	\PROJ_1(F) &:= \{\mathrm{LC}(f;X_n) \mid f \in B\},\\
-	\PROJ_2(F) &:= \{\psc_j(f, \frac{\partial f}{\partial X_n}; X_n) \mid f \in B, j =0, \dots, \deg(\frac{\partial f}{\partial X_n};X_n) \},\\
-	\PROJ_3(F) &:= \{\psc_j(f,g;X_n) \mid f,g \in B, j = 0, \dots, \min\{\deg(f;X_n), \deg(g;X_n)\}\}
+     \PROJ_1(F) &:= \bigcup_{f \in F} \bigcup_{A \in \RED(f)} \left(\{\LC(A;X_n)\} \cup \PSC\left(A, \frac{\partial A}{\partial X_n}\right)\right)\\
+     \PROJ_2(F) &:= \bigcup_{f \neq g \in F} \bigcup_{A \in \RED(f), B \in \RED(g)} \PSC(A,B)
 \end{align}
 とし，以上を用いて
 \begin{align}
-	\PROJ(F) &:= \PROJ_1(F) \cup \PROJ_2(F) \cup \PROJ_3(F)
+	\PROJ(F) &:= \PROJ_1(F) \cup \PROJ_2(F)
 \end{align}
 と定める．
 \end{definition}
@@ -1194,7 +1214,7 @@ $\PROJ(F) \subset R[X_1, \dots, X_{n-1}]$を，次のように定める．
 この記号のもとで，次の系が成り立つ．
 
 \begin{corollary}\label{corollary:inv-deline}
-$F \subset \R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset \R^{n-1}$を半代数連結な半代数的集合とする．
+$F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数連結な半代数的集合とする．
 
 $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
 \end{corollary}
