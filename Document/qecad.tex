@@ -987,75 +987,46 @@ $R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$で，
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset \R^{n-1}$を半代数的連結な半代数的集合とする．
      さらに，以下の条件を満たすとする．
      \begin{enumerate}
-          \item 任意の$f \in F$に対し，$S$上$f$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定である．
-          \item 任意の$f \in F$に対し，$S$上$f$の$R[\sqrt{-1}]$上の相異なる根の数は一定である．
-          \item 任意の$f, g \in F$に対し，$S$上$f$, $g$に共通する$R[\sqrt{-1}]$上の根の数は重複度込みで一定である．
+          \item \label{proposition:del-1}
+          任意の$f \in F$に対し，$S$上$f$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定である．
+          \item \label{proposition:del-2}
+          任意の$f \in F$に対し，$S$上$f$の$R[\sqrt{-1}]$上の相異なる根の数は一定である．
+          \item \label{proposition:del-3}
+          任意の$f, g \in F$に対し，$S$上$f$, $g$に共通する$R[\sqrt{-1}]$上の根の数は重複度込みで一定である．
      \end{enumerate}
      このとき，$S$は$F$描画可能である．
 \end{proposition}
 
 
-\cref{proposition:del}を示すために，次の二つの補題を用意する．
+\cref{proposition:del}を示すために，補題を用意する．
 
-\begin{lemma}\label{lemma:del_1}
-     $S \subset R^{n-1}$を半代数的連結な半代数的集合部分集合とし，
-     $f_1, f_2 \in R[x_1, \dots, x_n]$を$S$上恒等的に$0$でない多項式とする．
-     $f_1, f_2$が次を満たすとする．
-     \begin{enumerate}
-          \item 各$i=1, 2$に対し，$S$上$f_i$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定．
-          \item 各$i=1, 2$に対し，$S$上$f_i$の$R[\sqrt{-1}]$上の相異なる根の数は一定．
-          \item $S$上$f_1, f_2$の$R[\sqrt{-1}]$上の共通根の数は重複度込みで一定．
-     \end{enumerate}
-     このとき，$S$上$f_1, f_2$の相異なる$R[\sqrt{-1}]$上の共通根の数は一定である．
-\end{lemma}
-\begin{proof}
-     簡単のため，$Y:=X_n$, $X:=(X_1, \dots, X_{n-1})$と表す．
-     このとき，$f_1, f_2$は$f_1(X,Y), f_2(X,Y)$と表すことができる．
-     $x \in S$に対して，$f_1(x,Y), f_2(x,Y)$の$R[\sqrt{-1}]$上の相異なる共通根の数を$N(x)$と定義する．
-     すると，$\map{N}{S}{R}$は半代数的関数である．
-     \footnote{$N$が半代数的関数であることは，$N$のグラフを以下のように書き表すことができるためである：
-     \begin{equation}
-          \{(x,z) \mid \bigvee_{n}(z = n \text{ and } \exists y_1, \dots, y_n \text{ s.t. } y_i \neq y_j( i\neq j) \text{ and } \forall y(f_1(x,y)=f_2(x,y) \leftrightarrow \bigvee_{i=1}^n (y = y_i)))\}
-     \end{equation}
-     ここで，論理和の$n$は，$0$から$\gcd(P,Q)$の$Y$に関する次数までをとる．
-     \cref{theorem:Tarski}より，$\RCF$において量化記号消去可能であるから，
-     $N$のグラフは半代数的である．
-     }
-
-     次の主張を示せば，$N$は$S$上の局所定数半代数的関数であるため，$N$は定数関数となり，証明が完了する．
-     \begin{claim*}
-          任意の$x \in S$に対し，$x$の開近傍$V$で，
-          $S\cap V$上$f_1(X,Y), f_2(X,Y)$の$R[\sqrt{-1}]$上の相異なる共通根の数が一定となるようなものが存在する．
-     \end{claim*}
-     以降は主張を示す．
-     \todo[inline]{
-          この後は，方程式の解が係数に関して連続であることから示される．
-          （実閉体の場合も同様に示すことができる，証明は逆関数定理を経由する．）}
-\end{proof}
-
-\begin{lemma}\label{lemma:del_2}
+\begin{lemma}\label{lemma:del}
      $S \subset R^{n-1}$を半代数的連結な半代数的集合とし，     
      $f \in R[x_1, \dots, x_n]$を$S$上恒等的に$0$でない多項式とする．
      さらに，次を満たすとする．
-     \begin{itemize}
-          \item $S$上$f$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定．
-          \item $S$上$f$の$R[\sqrt{-1}]$上の相異なる根の数は一定．
-     \end{itemize}
+     \begin{enumerate}
+          \item \label{lemma:del-1}
+          $S$上$f$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定．
+          \item \label{lemma:del-2}
+          $S$上$f$の$R[\sqrt{-1}]$上の相異なる根の数は一定．
+     \end{enumerate}
      このとき，$S$は$\{f\}$描画可能である．
 \end{lemma}
 
 \begin{proof}
      まず，相異なる$R$上の根の個数が，$S$の上で一定であることを示す．
 
-     $\map{N}{S}{R}$を，各$a \in F$に対し，$N(a)$を$f(a,X_n)$の相異なる$R$上の根の数で定める，
-     すると，$N$は半代数的関数である．\footnote{これも同じように1階述語論理式出かけることから従う．}
+     $\map{N}{S}{R}$を，各$x \in S$に対し，$N(x)$を$f(x,X_n)$の相異なる$R$上の根の数で定める，
+     すると，$N$は半代数的関数である．\footnote{$N$のグラフが1階述語論理式出かけることから従う．}
      
      さらに，$N$が局所定数関数であることを示す．
      $a \in S$を任意にとり，$f(a,X_n)$の$R$上の根を$z_1, \dots, z_s$, それ以外の根を$z_{s+1}, \dots, z_t$とする．
-     $R$の元$r > 0$を，$\{D(z_i,r)\}_{i=1}^t$が非交叉になるようにとると，\cref{proposition:continuity-of-roots}より，
+
+     $R$の元$r > 0$を，$\{D(z_i,r)\}_{i=1}^t$が非交叉になるようにとる．
+     仮定の条件\ref{lemma:del-1}と\cref{proposition:continuity-of-roots}より，
      ある$a$の開近傍$V$が存在し，各$x \in V \cap S$に対して$f (x, X_n)$ の根が各 $D(z_i, r)$ ($i = 1, \dots , t$) の中に（重複
      度込みで）ちょうど $\mu_i$ 個であるようにとれる．
-     ここで，仮定より$S$の相異なる根の数は一定であるから，$\{D(z_i, r)\}_{i=1}^t$は非交叉であること合わせて，
+     ここで，仮定の条件\ref{lemma:del-2}より，$\{D(z_i, r)\}_{i=1}^t$は非交叉であること合わせて，
      各$D(z_i, r)$に含まれる全ての$f(x, X_n)$の根は一致しなければならない．
 
      さらに，各$x \in V \cap S$に対して，$f(x,X_n)$は$R$係数の$1$変数多項式であるから，
@@ -1066,56 +1037,81 @@ $R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$で，
      これで，各$x \in V \cap S$に対して，$f(x, X_n)$の$R$上の相異なる根の数が一定であることが示せた．
      すなわち，$N$は局所定数関数である事が示せた．
 
-     よって，$S$が半代数的連結であることと合わせて，$N$は定数関数である，すなわち，相異なる$R$上の根の個数は$S$上一定である．
+     よって，$S$が半代数的連結であることと$N$が局所定数な半代数的関数であることから，$N$は定数関数である．
+     したがって，$R$上の相異なる根の個数は$S$上一定である．
 
      ここで，各$x \in S$に対し，$\xi_1(x) < \dots < \xi_k(x)$を，相異なる$f(x, X_n)$の$R$上の根として定める．
      このとき，先ほどの議論と同様にして，
      各$\xi_i$が連続で，多項式$f(x,X_n)$の各根$\xi_i(x)$の重複度は$x \in S$によらず一定であることが示せる．
 
-     さらに，各$\map{\xi_i}{S}{R}$は，各グラフが半代数的集合となることからいずれも半代数的関数である．
+     さらに，各$\map{\xi_i}{S}{R}$は，各グラフが半代数的集合となることから，いずれも半代数的関数である．
 
      よって，$S$は$\{f\}$描画可能であることが示された．
 \end{proof}
 
 \begin{proof}[{\bf \cref{proposition:del}の証明}]
-任意の$f \in F$は$S$上恒等的に$0$でないとしてよい．
+     各$f \in F$は$S$上恒等的に$0$でないとしてよい．
+     実際，$F' := \{f \in F \mid \text{$f$は$S$上恒等的に$0$でない}\}$とすると，$S$が$F$描画可能であることと$F'$描画可能であることは同値であるから，
+     $F'$を$F$として証明すればよい．
+     よって以下では，各$f \in F$は$S$上恒等的に$0$でないとして示す．
 
-\cref{lemma:del_2}より，各$f \in F$に対して，$S$は$\{f\}$描画可能である．
-よって，$S$上の連続な半代数的関数$\alpha_{1,f}(a) < \dots \alpha_{n_f, f}(a)$を，各$a \in S$で$f(a)(x) \in \R[x]$の解であるようにとれる．
+     \cref{lemma:del}より，各$f \in F$に対して，$S$は$\{f\}$描画可能である．
+     よって，$S$上の連続な半代数的関数$\xi_{1,f}(a) < \dots < \xi_{n_f, f}(a)$を，各$a \in S$で$f(a)(x) \in R[x]$の解であるようにとれる．
 
-このとき，次の主張が成り立てば証明が完了する．
+     このとき，次の主張が成り立てば証明が完了する．
 
-\begin{claim*}
-$f, g \in F$が，$f \neq g$であるとする．
-ある$a \in S$において$\alpha_{k,f}(a) = \alpha_{l,g}(a)$であるならば，任意の$a \in S$に対して$\alpha_{k,f}(a) = \alpha_{l,g}(a)$である．
-\end{claim*}
+     \begin{claim*}
+          $f, g \in F$が，$f \neq g$であるとする．
+          ある$a \in S$において$\xi_{k,f}(a) = \xi_{l,g}(a)$であるならば，任意の$a \in S$に対して$\xi_{k,f}(a) = \xi_{l,g}(a)$である．
+     \end{claim*}
 
-この主張は，$S$が半代数的連結であることと，\cref{lemma:del_1}から従う．よって，命題が示された．
+     以下ではこの主張を示す．
+     $\xi_{k,f}(a) = \xi_{l, g}(a)$であるような$a \in S$をとり，$a$の開近傍$V$で，
+     任意の$x \in V \cap S$に対して$\xi_{k,f}(x) = \xi_{l,g}(x)$となるようなものが存在することを示せばよい．
+
+     まず，$f_1(a, X_n), f_2(a, X_n)$の相異なる$R\left[\sqrt{-1}\right]$の共通根を，$z_1, \dots, z_j$とする．
+     ただし，$z_1 = \xi_{k,f}(a)=\xi_{l,g}(a)$とする．
+     さらに，\cref{proposition:continuity-of-roots}および仮定の条件\ref{proposition:del-1}, \ref{proposition:del-2}より，
+     十分小さい$R$の元$r>0$と$a$の開近傍$V$を，
+     任意の$x \in V \cap S$に対し，各$D(z_i, r)$に含まれる$f(x, X_n)$, $g(x, X_n)$それぞれの根はちょうど1つであり，
+     根の重複度も$x$によらずに一定であるようにできる．
+
+     ここで，$\xi_{k,f}, \xi_{l, g}$の連続性から，さらに$V$を小さくとれば，任意の$x \in V \cap S$に対し，
+     $f(x, X_n)$の$D(z_1, r)$に含まれる唯一の根は$\xi_{k,f}(x)$であり，
+     $g(x, X_n)$の$D(z_1, r)$に含まれる唯一の根は$\xi_{k,f}(x)$であるように取れる．
+
+     さらに，仮定の条件\ref{proposition:del-3}から，各$D(z_i, r)$に含まれる$f(x, X_n)$, $g(x, X_n)$の唯一の根は一致しなければならない．
+     したがって，任意の$x \in V \cap S$に対して$\xi_{k, f}(x) = \xi_{l, g}(x)$となることが示された．
+
+     よって主張が示され，命題の証明が完了した．
 \end{proof}
 
 \begin{corollary}\label{corollary:del}
-$S \subset \R^{n-1}$を弧状連結部分集合とし，$F \subset \R[x_1,\dots, x_n]$を有限部分集合とする．
-次が成り立つとき，$S$は$F$描画可能である．
-\begin{itemize}
-\item 任意の$f \in F$に対し，$\deg(f(a))$が一定（$a \in S$）．
-\item 任意の$f \in F$に対し，$\deg(\gcd(f(a), \frac{\partial f}{\partial x_n}(a)))$が一定（$a \in S$）．
-\item 任意の$f, g \in F$に対し，$\deg(\gcd(f(a), g(a)))$が一定（$a \in S$）．
-\end{itemize}
+     $S \subset R^{n-1}$を弧状連結部分集合とし，$F \subset R[x_1,\dots, x_n]$を有限部分集合とする．
+     次が成り立つとき，$S$は$F$描画可能である．
+     \begin{enumerate}
+          \item \label{corollary:del-1}
+          任意の$f \in F$に対し，$\deg(f(a))$が一定（$a \in S$）．
+          \item \label{corollary:del-2}
+          任意の$f \in F$に対し，$\deg(\gcd(f(a), \frac{\partial f}{\partial x_n}(a)))$が一定（$a \in S$）．
+          \item \label{corollary:del-3}
+          任意の$f, g \in F$に対し，$\deg(\gcd(f(a), g(a)))$が一定（$a \in S$）．
+     \end{enumerate}
 \end{corollary}
 
-よって，$F$符号不変な$\R^n$の分割を与えるには，\cref{corollary:del}の条件を満たすような$\R^{n-1}$の分割を構成すればよい．
-一つ目の条件を満たすような$\R^{n-1}$の分割を与えるには，各$f \in F$について，$x_n$係数が符号不変になるような分割を構成すればよい．
-しかし，二つ目と三つ目の条件を満たすような$\R^{n-1}$の分割を与えるのは少し難しい．
-なぜなら，多項式$f, g \in \R[x_1, \dots, x_n]$について，$a \in \R^{n-1}$を固定したとき，$\gcd(f,g)(a)$と$\gcd(f(a),g(a))$は必ずしも等しくないからである．
+よって，$F$符号不変な$R^n$の分割を与えるには，\cref{corollary:del}の条件を満たすような$R^{n-1}$の分割を構成すればよい．
+条件\ref{corollary:del-1}を満たすような$R^{n-1}$の分割を与えるには，各$f \in F$について，$X_n$係数が符号不変になるような分割を構成すればよい．
+一方，条件\ref{corollary:del-2}, \ref{corollary:del-3}を満たすような$R^{n-1}$の分割を与えるのは，少し難しい．
+条件\ref{corollary:del-2}, \ref{corollary:del-3}も満たすような$R^{n-1}$の分割を与えることができるよう，次の節で準備をする．
 
-よって，二つ目と三つ目の条件も満たすような$\R^{n-1}$の分割を与えることができるように次の節で準備をする．
+\subsection{主部分終結式係数}
 
-\subsection{主部分終結式係数(Principal Subresultant Coefficient)}
+\todo[inline]{この節を書くのは後回しにする．理由は，適切な参考文献を見つけていないこと，証明を書くのが大変そうなのでやりたくないから．}
 
 \begin{definition}
 $\mathrm{R}$を可換環とし，$A(x), B(x) \in \mathrm{R}[x]$ を，$\deg A(x) = m$, $\deg B(x) = n$ とする．ただし，$\deg 0 = 0$と解釈する．
 
-$j = 0, \dots, \min\{n, m\}$に対し，多項式$A(x)$, $B(x)$の$j$次部分終結式$S_j(A, B)$を次のように定義する．
+$j = 0, \dots, \min\{n, m\}$に対し，多項式$A(x)$, $B(x)$の$j$次部分終結式($j$-th subresultant) $S_j(A, B)$を次のように定義する．
 \begin{align}
 A(x) = a_m x^m + \dots + a_1 x + a_0, \\
 B(x) = b_n x^n + \dots + b_1 x + b_0 
@@ -1146,7 +1142,7 @@ S_j(A, B) = \sum_{i=0}^j \det M_{j, i} \cdot x^i
 \end{align}
 を多項式$A(x)$, $B(x)$の$j$次部分終結式$S_j(A, B)$という．
 
-この$j$次部分終結式の先頭項係数を，$\psc_j(A,B)$とかき，多項式$A(x)$, $B(x)$の$j$次主部分終結式係数という．
+この$j$次部分終結式の先頭項係数を，$\psc_j(A,B)$とかき，多項式$A(x)$, $B(x)$の$j$次主部分終結式係数($j$-th principal subresultant coefficient)という．
 \end{definition}
 
 
