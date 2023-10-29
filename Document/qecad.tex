@@ -36,6 +36,8 @@
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\psc}{\mathrm{psc}}
 \newcommand{\PSC}{\mathrm{PSC}}
+\newcommand{\Elim}{\mathrm{Elim}}
+\newcommand{\Tru}{\mathrm{Tru}}
 \newcommand{\RED}{\mathrm{RED}}
 \newcommand{\LT}{\mathrm{LT}}
 \newcommand{\LC}{\mathrm{LC}}
@@ -1174,41 +1176,35 @@ $\mathrm{R}$を体とし，$A(x), B(x) \in \mathrm{R}[x] \setminus \{0\}$とす�
 
 \subsection{符号不変な分割の存在}
 この節では，\cref{theorem:cad}を証明する．
-そのために，与えられた有限部分集合$F \subset R[X_1, \dots, X_n]$に対して，
-帰納的な議論で$R^n$の$F$適合な柱状代数分解の存在を示す．
 
-まず，帰納的な議論のために，次のような記号を定義する．
-以下の定義は，\cite[Section 3]{MR0764184}で定義されたものと同一であるが，本質的には\cite[Theorem 4]{MR0403962}で定義されたものである．
+まず，次のような記号を定義する．
+以下の定義は，\cite[Section 3]{MR0764184}, \cite[Notation 5.15.]{MR2248869}
+を参考にしているが，元々は\cite[Theorem 4]{MR0403962}で定義されたものである．
 
-まず，$f \in R[X_1, \dots, X_n]$に対し，$\red(f):=f - \LT(f; X_n)$と定義する．
-ただし，$f=0$の場合，$\red(f)=0$とする．さらに，
-\begin{align}
-     \red^0(f)&:=f\\
-     \red^{n+1}(f)&:=\red(\red^n(f))
-\end{align}
-により，非負整数$n$に対して帰納的に$\red^n(f)$を定義する．また，
+まず，$f \in R[X_1, \dots, X_n]$に対し，$\Tru(f;X_n)$を，
 \begin{equation}
-     \RED(f) := \{ \mathrm{red}^k(f) \mid f \in F, k=0, \dots, \deg(f; X_n) \} \setminus \{0\}
+     \Tru(f;X_n):= \begin{cases}
+          \{f\} &  \text{if $\LC(f; X_n) \in R$ or $f \in R[X_1, \dots, X_{n-1}]$} \\
+          \{f\} \cup \Tru(f-\LT(f;X_n);X_n) & \text{otherwise}
+     \end{cases}
 \end{equation}
-とする．$f=0$の場合，$\RED(f) = \emptyset$となることに注意しておく．
+により定義する．
 
-次に，$f, g \in R[X_1, \dots, X_n] \setminus \{0\}$に対して，
+また，有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\Tru(F;X_n)$を，
 \begin{equation}
-     \PSC(f,g) := \{\psc_j(f,g) \mid j = 0, \dots, \min\{\deg(f;X_n), \deg(g;X_n)\}\} \setminus \{0\}
+     \Tru(F;X_n) := \bigcup_{f \in F} \Tru(f;X_n)
 \end{equation}
-と定義する．また，$f, g$のいずれかが$0$である場合には，$\PSC(f,g):=\emptyset$と定義する．
+により定義する．
 
 \begin{definition}
 $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．ただし，$n \geq 2$とする．
-\begin{align}
-     \PROJ_1(F) &:= \bigcup_{f \in F} \bigcup_{A \in \RED(f)} \left(\{\LC(A;X_n)\} \cup \PSC\left(A, \frac{\partial A}{\partial X_n}\right)\right)\\
-     \PROJ_2(F) &:= \bigcup_{f \neq g \in F} \bigcup_{A \in \RED(f), B \in \RED(g)} \PSC(A,B)
+$\Elim_{X_n}(F) \subset R[X_1, \dots, X_{n-1}]$を，以下の集合の合併として定義する．
+\begin{align} 
+     &\{\LC(A;X_n) \mid A \in \Tru(F;X_n) \},\\
+     &\left\{ \psc_j\left(A,\frac{\partial A}{\partial X_n};X_n\right) \middle| A \in \Tru(F;X_n), j= 0, \dots, \deg(A;X_n)-1\right\},\\
+     &\{\psc_j(A,B;X_n) \mid A \neq B \in \Tru(F; X_n), j = 0, \dots, \min\{\deg(A;X_n), \deg(B;X_n)\}\}
+     % \PSC(f,g;X_n) := \{\psc_j(f,g;X_n) \mid j = 0, \dots, \min\{\deg(f;X_n), \deg(g;X_n)\}\} \setminus \{0\}   
 \end{align}
-とし，以上を用いて
-\begin{align}
-	\PROJ(F) &:= \PROJ_1(F) \cup \PROJ_2(F)
-\end{align}
-と定める．
 \end{definition}
 
 この記号のもとで，次の系が成り立つ．
