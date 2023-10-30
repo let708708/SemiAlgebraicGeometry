@@ -43,7 +43,8 @@
 \newcommand{\LC}{\mathrm{LC}}
 \newcommand{\red}{\mathrm{red}}
 \newcommand{\PROJ}{\mathrm{PROJ}}
-\newcommand{\APROJ}{\mathrm{APROJ}}
+\newcommand{\APROJ}{\mathrm{APROJ}}     
+\newcommand{\Reali}{\mathrm{Reali}}
 \newcommand{\der}{\mathrm{der}}
 \newcommand{\sign}{\mathrm{sign}}
 \newcommand{\SIGN}{\mathrm{SIGN}}
@@ -71,12 +72,6 @@
 \title{実閉体上の柱状代数分解による量化記号消去}
 \author{富永 直弥}
 \maketitle
-
-% mathscinetからbibtex.
-% 実数体の公理ではない，実閉体の公理だし．例1.2は例じゃなく定義にすべきでは．
-% section6の続きをひとまず書く．
-% 【平日午前9時にdiscordで定時連絡する．】
-% この本を呼んでいました，休んでました，等でもOK．
 
 \section{実閉体}
 
@@ -889,8 +884,6 @@ $\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい．
 
 \end{proposition}
 
-
-
 \section{柱状代数分解}
 
 $R$を実閉体とする．
@@ -945,7 +938,7 @@ $R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を構成することができる
           任意の$f \in F$及び任意の$x,y \in S$に対し$\sign(f(x))=\sign(f(y))$であることと定義する．
 
           \item $R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$が$F$に適合している(adapted to $F$)とは，
-          任意の$C \in \calS_k$が$F$符号不変であることと定義する．
+          任意の$C \in \calS_n$が$F$符号不変であることと定義する．
      \end{enumerate}
 \end{definition}
 
@@ -992,7 +985,7 @@ $R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$で，
 
 \todo[inline]{以下の命題は条件2.が「相異なる実根」と，少し違った形で述べられている．誤植だと思う．}
 \begin{proposition}\label{proposition:del}
-     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset \R^{n-1}$を半代数的連結な半代数的集合とする．
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結な半代数的集合とする．
      さらに，以下の条件を満たすとする．
      \begin{enumerate}
           \item \label{proposition:del-1}
@@ -1174,7 +1167,7 @@ $\mathrm{R}$を体とし，$A(x), B(x) \in \mathrm{R}[x] \setminus \{0\}$とす�
 \todo[inline]{後で書く．方針： 部分終結式がユークリッドの互除法で出てくる多項式の列の定数倍になることが分かる．}
 \end{proof}
 
-\subsection{符号不変な分割の存在}
+\subsection{符号不変な柱状代数分割の存在}
 この節では，\cref{theorem:cad}を証明する．
 
 まず，次のような記号を定義する．
@@ -1207,15 +1200,16 @@ $\Elim_{X_n}(F) \subset R[X_1, \dots, X_{n-1}]$を，以下の集合の合併と
 \end{align}
 \end{definition}
 
-この記号のもとで，次の系が成り立つ．
+この記号のもとで，次の系が成り立つ．なお，\cite[Theorem 5.16.]{MR2248869}を参考にした．
 
 \begin{corollary}\label{corollary:inv-deline}
 $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数連結な半代数的集合とする．
 
-$S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
+$S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 \end{corollary}
 
 \begin{proof}
+\todo[inline]{詳細に証明を書く．}
 \cref{proposition:del}及び\cref{proposition:psc}から従う．
 \end{proof}
 
@@ -1224,7 +1218,7 @@ $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
 \begin{proof}[\cref{theorem:cad}の証明]
      $n$についての帰納法によって示す．
 
-     $n=1$の場合，$F$の$R$上の根を$a_1 < \dots, a_k$とする．
+     $n=1$の場合，$F$の$R$上の根を$a_1 < \dots < a_k$とする．
      $a_0 = -\infty$, $a_{k+1} = \infty$とすれば，
      \begin{equation}
           \calS_1 = \{(a_i, a_{i+1})\}_{i=0}^k \cup \{a_i\}_{i=1}^k
@@ -1232,9 +1226,9 @@ $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
      が$F$-適合な柱状代数分解を与える．よって，定理は成り立つ．
 
      $n\geq 2$の場合，$n-1$までで主張が成り立つとする．
-     このとき，帰納法の仮定により$\PROJ(F)$適合な$R^{n-1}$の柱状代数分解を$\{\calS_i\}_{i=1}^{n-1}$がとれる．
+     このとき，帰納法の仮定により$\Elim_{X_n}(F)$適合な$R^{n-1}$の柱状代数分解を$\{\calS_i\}_{i=1}^{n-1}$がとれる．
 
-     ここで，各$S \in \calS_{n-1}$は$\PROJ(F)$不変であるから，\cref{corollary:inv-deline}より，$S$は$F$描画可能である．
+     ここで，各$S \in \calS_{n-1}$は$\Elim_{X_n}(F)$符号不変であるから，\cref{corollary:inv-deline}より，$S$は$F$描画可能である．
 
      従って，各$S \in \calS_{n-1}$に対して，有限個の連続な半代数的関数$\map{\xi_{S,1}< \dots < \xi_{S,l_S}}{S}{R}$が存在し，
      \begin{itemize}
@@ -1277,37 +1271,57 @@ $S$が$\PROJ(F)$符号不変ならば，$S$は$F$描画可能である．
 % \end{definition}
 
 \section{柱状代数分解による量化記号消去}
+
 有限部分集合$F \subset R[x_1, \dots, x_n]$が与えられたとき，
-前節では$\R^n$の$F$適合な柱状代数分解$\mathfrak{D}$が存在することを示した．
+前節では$R^n$の$F$適合な柱状代数分解が存在することを示した．
 この節では，柱状代数分解による量化記号消去のアルゴリズムについて示す．
 
-冠頭標準形の論理式
-\begin{equation}
-     \Qua_1 X_1 \dots \Qua_1 X_k \phi(Y_1, \dots, Y_l, X_1, \dots, X_k)
-\end{equation}
-が与えられたとき，
-$R^{k+l}$の柱状代数分解$\{\calS_i\}_{i=1}^{k+l}$を用いて量化記号消去を行うことを考える．
+% 冠頭標準形の論理式
+% \begin{equation}
+%      \Qua_1 X_1 \dots \Qua_1 X_k \phi(Y_1, \dots, Y_l, X_1, \dots, X_k)
+% \end{equation}
+% が与えられたとき，
+% $R^{k+l}$の柱状代数分解$\{\calS_i\}_{i=1}^{k+l}$を用いて量化記号消去を行うことを考える．
 
-そのためには，$\calS_l$に属する各$S \in \calS_l$の定義式が与えられている必要がある．
-しかし，前節で示した柱状代数分解の構成では，各$S \in \calS_l$の定義式は与えられない．
+% そのためには，$\calS_l$に属する各$S \in \calS_l$の定義式が与えられている必要がある．
+% しかし，前節で示した柱状代数分解の構成では，各$S \in \calS_l$の定義式は与えられない．
 
-そのため，柱状代数分解のアルゴリズムを改良し，
-$\{\calS_i\}_{i=1}^l$に属する各$S \in \calS_i$の定義式を与えるようにする必要がある．
-そのために，まずは増補射影について定義する．
+% そのため，柱状代数分解のアルゴリズムを改良し，
+% $\{\calS_i\}_{i=1}^l$に属する各$S \in \calS_i$の定義式を与えるようにする必要がある．
+% そのために，まずは増補射影について定義する．
 
-\subsection{増補射影}
-     多項式の有限部分集合$F \subset R[X]$が，微分について閉じている(closed under differentiation)
-     とは，任意の$f \in F$に対して，$f' \in F$または$f'=0$となることと定義する．
+\subsection{量化記号消去と柱状代数分解の関係(仮)}
+\todo[inline]{量化記号消去と柱状代数分解がどのように関連するかについて言及する．}
 
-\begin{theorem}[Thomの補題]
-     $F = \{f_1, \dots, f_s\} \subset R[X]$を，微分について閉じた有限部分集合とする．
+\begin{definition}
+     $\{\calS_i\}_{i=1}^n$を，$R^n$の柱状代数分解とする．
+     $\{\calS_i\}_{i=1}^n$の標本点の柱状集合(cylindrical set of sample points)とは，
+     次を満たすような有限集合の列$\{\mathcal{A}_i\}_{i=1}^n$のことである．
+     \begin{itemize}
+     \item $\mathcal{A}_i$は，$R^i$上の有限集合であり，全ての$S \in \calS_i$と共有点を持つ．
+     \end{itemize}
+\end{definition}
+
+
+\subsection{柱状代数分解の改良}
+多項式の有限部分集合$F \subset R[X]$が，
+微分について閉じている(closed under differentiation)
+とは，$0 \not \in F$であり，かつ任意の$f \in F$に対して，$f' \in F$または$f'=0$となることと定義する．
+
+\todo[inline]{符号条件$\sigma$の記号，及び$\Reali(\sigma)$についてはあらかじめ言及しといたほうが良い気がする．}
+
+
+以下の命題の主張は，\cite[Lemma 5.33.]{MR2248869}を参照した．
+
+\begin{proposition}\label{proposition:Thom}
+     有限部分集合$F = \{f_1, \dots, f_s\} \subset R[X]$が，微分について閉じているとする．
      このとき， 任意の$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対し，
      \begin{equation}
-          A_\sigma := \{x \in R \mid \text{任意の$i=1, \dots, s$に対し，} \sign(f_i(x)) = \sigma(i)\}
+          \Reali(\sigma) := \{x \in R \mid \text{任意の$i=1, \dots, s$に対し，} \sign(f_i(x)) = \sigma(i)\}
      \end{equation}
      と定義する．
-     このとき，$A_\sigma$は空集合，一点からなる集合，開区間のいずれかである．
-\end{theorem}
+     このとき，$\Reali(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
+\end{proposition}
 
 \begin{proof}
      $s$に関する帰納法で示す．
@@ -1325,40 +1339,83 @@ $\{\calS_i\}_{i=1}^l$に属する各$S \in \calS_i$の定義式を与えるよ�
 
      このとき，$F_0 := \{f_1, \dots, f_{s}\}$は微分について閉じているので，帰納法の仮定より
      \begin{equation}
-          A_{\sigma_0}:=\{x \in R \mid \text{任意の$i=1, \dots, s$に対し，} \sign(f_i(x)) = \sigma_0(i)\}
+          \Reali({\sigma_0}):=\{x \in R \mid \text{任意の$i=1, \dots, s$に対し，} \sign(f_i(x)) = \sigma_0(i)\}
      \end{equation}
      は，空集合，一点からなる集合，開区間のいずれかである．
 
-     $A_\sigma = A_{\sigma_0} \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(s+1)\}$であるから，
-     $A_{\sigma_0}$が空集合，あるいは一点からなる集合の場合には，$A_\sigma$は空集合か一点からなる集合になるので主張は成り立つ．
-     したがって，$A_{\sigma_0}$が開区間である場合を考える．
-     $f_{s+1}$の微分$f_{s+1}'$は，$f_1, \dots, f_s$のいずれかであるから，$A_{\sigma_0}$上符号は一定である．
-     $f_{s+1}'$の符号が$A_{\sigma_0}$上常に$0$である場合，$f_{s+1}$は$A_{\sigma_0}$上定数であるから，主張は成り立つ．
-     $f_{s+1}'$の符号が$A_{\sigma_0}$上常に$-1$(あるいは$1$)の場合を考える．
-     このとき$f$は$A_{\sigma_0}$上狭義単調増加(あるいは狭義単調減少)であるから，$A_{\sigma}$は空集合，一点からなる集合，開区間のいずれかである．
+     $\Reali(\sigma) = \Reali({\sigma_0}) \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(s+1)\}$であるから，
+     $\Reali({\sigma_0})$が空集合，あるいは一点からなる集合の場合には，$\Reali(\sigma)$は空集合か一点からなる集合になるので主張は成り立つ．
+
+     したがって，$\Reali({\sigma_0})$が開区間である場合を考える．
+     $f_{s+1}$の微分$f_{s+1}'$は，$f_1, \dots, f_s$のいずれかであるから，$\Reali({\sigma_0})$上符号は一定である．
+
+     $f_{s+1}'$の符号が$\Reali({\sigma_0})$上常に$0$である場合，$f_{s+1}$は$\Reali({\sigma_0})$上定数であるから，主張は成り立つ．
+
+     $f_{s+1}'$の符号が$\Reali({\sigma_0})$上常に$-1$(あるいは$1$)の場合を考える．
+     このとき\cref{corollary:monotone}より，$f$は$\Reali({\sigma_0})$上狭義単調増加(あるいは狭義単調減少)であるから，$\Reali(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
 
      以上より，主張は示された．
 \end{proof}
 
-\begin{definition}[増補射影]
-     \todo[inline]{後で書く．}
-
-\end{definition}
-
-増補射影を用いることで，帰納的に定義式が分かっているような分割を得ることができる．
-
+次の定理は，\cite[Theorem 5.34.]{MR2248869}を参考にした．
 \begin{theorem}
-     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$n \geq 2$とする．
-     $S \subset R^{n-1}$を，半代数的連結な半代数的部分集合とする．
-     $S$が$\APROJ(F)$不変ならば，$S$は$\der(F)$描画可能である．
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，
+     $\{F_i\}_{i=1}^n$が以下を満たすとする．
+     \begin{itemize}
+          \item $F \subset F_n$である．\\
+          \item 各$i=1,\dots, n$に対して，$F_i \subset R[X_1, \dots, X_i]$であり，$F_i$は$X_i$での微分について閉じている．\\
+          \item 各$i=1, \dots, n-1$に対して，$\Elim_{X_{i+1}}(F_{i+1}) \subset F_i$を満たす．
+     \end{itemize}
 
-     特に，$\map{\sigma}{\{1,\dots, s\}}{\{-1, 0, 1\}}$と$g_1, \dots g_s \in R[X_1, \dots, X_{n-1}]$を用いて，
+     このとき，$F_{\leq i}:=\cup_{j \leq i} F_j$として，各$i=1, \dots, n$に対し
      \begin{equation}
-          S = \{(x_1, \dots, x_{n-1}) \in R^{n-1} \mid \sign(g_i(x_1, \dots, x_{n-1}))= \sigma_i\}
-     \end{equation}
-     であるならば，
-     $\der(F)$による$S$の持ち上げ$\calL(S)$の定義式は，$\{g_1, \dots,g_s\} \cup \der(F)$で記述できる．
+          \calS_i := \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq i}}{\{-1,0,1\}}\}
+     \end{equation}          
+     と定義すると，$\{\calS_i\}_{i=1}^n$は$F$適合な柱状代数分解である．
 \end{theorem}
+
+\begin{proof}
+     $n$に関する帰納法で示す．
+
+     $n=1$の場合，\cref{proposition:Thom}により主張が従う．
+
+     次に，$n>1$の場合について示す．$n-1$で主張が成り立っていると仮定すると，帰納法の仮定より
+     $\{\calS_{i}\}_{i=1}^{n-1}$は$F_{n-1}$適合な柱状代数分解である．
+
+     $\Elim_{X_n}(F_n) \subset F_{n-1}$であるから，各$S \in \calS_{n-1}$はいずれも$\Elim_{X_n}(F_n)$符号不変である．
+     よって，\cref{corollary:inv-deline}より，各$S \in \calS_{n-1}$は$F_n$描画可能である．
+
+     従って，定義より$l_S$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_{l_S}}{S}{R}$を，次を満たすように取れる．
+     \begin{itemize}
+          \item 任意の$ x \in S $に対し，
+          \begin{equation}
+               \{\xi_i(x)\}_{i=1}^{l_S} = \{y \in R \mid \prod_{f \in F_n'}f(x,y)=0\}
+          \end{equation}
+          である．ただし，$F_n' = \{f \in F_n \mid \text{$f$は$S$上恒等的に$0$でない}\}$とする．
+          \item 各$i=1, \dots, l_S$および$f \in F_n'$に対し，多項式$f(x,X_n)$における根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
+     \end{itemize}
+     また，$\xi_{S,0} := -\infty$, $\xi_{S,l_S} := \infty$としておく．
+
+     このとき，$S \in \calS_{n-1}$に対し，
+     \begin{align}
+          C_{S,2i} &:= \{(x,y) \mid  x \in S, \xi_{S,i}(x) = y \} \quad i = 1,\dots, l_S,\\
+          C_{S,2i+1} &:= \{(x,y) \mid x \in S, \xi_{S,i}(x)<y<\xi_{S,i+1}(x) \} \quad i = 0,1, \dots, l_S 
+     \end{align}
+     とし，
+     \begin{equation}
+          \calS_n := \{C_{S,i} \mid S \in \calS_{n-1}, i=1, \dots, 2l_S+1 \}
+     \end{equation}
+     と定義すれば，$\{\calS_i\}_{i=1}^n$は$F_n$適合な柱状代数分解を与える．
+
+     そこで，この定義が，定理の主張で与えられている定義に等しい事を示す．
+     すなわち，各$S \in \calS_{n-1}$及び各$i=1, \dots, 2l_s+1$に対し，
+     \begin{equation}
+          C_{S,i} \in \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq n}}{\{-1,0,1\}}\}
+     \end{equation}
+     となることを示す．
+
+     \todo[inline]{続きを書く．}
+\end{proof}
 
 \subsection{柱状代数分解による量化記号消去のアルゴリズム}
 
