@@ -76,6 +76,8 @@
 \author{富永 直弥}
 \maketitle
 
+% \tableofcontents
+
 \section{実閉体}
 
 \todo[inline]{
@@ -1090,13 +1092,13 @@ $R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$で，
 \end{proof}
 
 \begin{corollary}\label{corollary:del}
-     $S \subset R^{n-1}$を弧状連結部分集合とし，$F \subset R[x_1,\dots, x_n]$を有限部分集合とする．
+     $S \subset R^{n-1}$を弧状連結部分集合とし，$F \subset R[X_1,\dots, X_n]$を有限部分集合とする．
      次が成り立つとき，$S$は$F$描画可能である．
      \begin{enumerate}
           \item \label{corollary:del-1}
           任意の$f \in F$に対し，$\deg(f(a))$が一定（$a \in S$）．
           \item \label{corollary:del-2}
-          任意の$f \in F$に対し，$\deg(\gcd(f(a), \frac{\partial f}{\partial x_n}(a)))$が一定（$a \in S$）．
+          任意の$f \in F$に対し，$\deg(\gcd(f(a), \frac{\partial f}{\partial X_n}(a)))$が一定（$a \in S$）．
           \item \label{corollary:del-3}
           任意の$f, g \in F$に対し，$\deg(\gcd(f(a), g(a)))$が一定（$a \in S$）．
      \end{enumerate}
@@ -1306,47 +1308,45 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 
 
 \subsection{柱状代数分解の改良}
+多項式の有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\map{\sigma}{F}{\{-1,0,1\}}$を，$F$の符号条件(sign condition)という．
+さらに，$F$の符号条件$\sigma$が与えられたとき，
+\begin{equation}
+     \Reali(\sigma):= \{x \in R^k \mid \bigwedge_{f \in F} \sign(f(x)) = \sigma(f)\}
+\end{equation}
+により定義される$\Reali(\sigma)$を，符号条件$\sigma$の実現(realization)という．
+
 \todo[inline]{以下の定義も微妙．$0 \in F$にした方がよいのではないか．}
-多項式の有限部分集合$F \subset R[X]$が，
+また，多項式の有限部分集合$F \subset R[X]$が，
 微分について閉じている(closed under differentiation)
 とは，$0 \not \in F$であり，かつ任意の$f \in F$に対して，$f' \in F$または$f'=0$となることと定義する．
-
-\todo[inline]{符号条件$\sigma$の記号，及び$\Reali(\sigma)$についてはあらかじめ言及しといたほうが良い気がする．}
 
 
 以下の命題の主張は，\cite[Lemma 5.33.]{MR2248869}を参照した．
 
 \begin{proposition}\label{proposition:Thom}
-     有限部分集合$F = \{f_1, \dots, f_s\} \subset R[X]$が，微分について閉じているとする．
-     このとき， 任意の$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対し，
-     \begin{equation}
-          \Reali(\sigma) := \{x \in R \mid \text{任意の$i=1, \dots, s$に対し，} \sign(f_i(x)) = \sigma(i)\}
-     \end{equation}
-     と定義する．
-     このとき，$\Reali(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
+     有限部分集合$F \subset R[X]$が，微分について閉じているとする．
+     このとき， 任意の$F$の符号条件$\map{\sigma}{F}{\{-1,0,1\}}$に対し，
+     $\Reali(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
 \end{proposition}
 
 \begin{proof}
-     $s$に関する帰納法で示す．
+     $F = \{f_1, \dots, f_s\}$として，$s$に関する帰納法で示す．
      $s = 0$のときは明らかである．
      
      次に，$s$において主張が成り立つとする．
-     $F = \{f_1, \dots, f_{s+1}\}$とする．ここで，順番を並び替えて$f_{s+1}$の次数が最大であるとする．
+     $F = \{f_1, \dots, f_{s+1}\}$について，順番を並び替えて$f_{s+1}$の次数が最大であるとする．
 
-     任意に$\map{\sigma}{\{1, \dots, s, s+1\}}{\{-1,0,1\}}$をとる．
-     $\map{\sigma_0}{\{1, \dots, s\}}{\{-1,0,1\}}$を$\sigma$の制限，すなわち
+     任意に$\map{\sigma}{F}{\{-1,0,1\}}$をとる．
+     $\map{\sigma_0}{F \setminus \{f_{s+1}\}}{\{-1,0,1\}}$を$\sigma$の制限，すなわち
      \begin{equation}
-          \sigma_0(i) := \sigma(i), \quad i=1, \dots, s
+          \sigma_0(f_i) := \sigma(f_i), \quad i=1, \dots, s
      \end{equation}
      とする．
 
-     このとき，$F_0 := \{f_1, \dots, f_{s}\}$は微分について閉じているので，帰納法の仮定より
-     \begin{equation}
-          \Reali({\sigma_0}):=\{x \in R \mid \text{任意の$i=1, \dots, s$に対し，} \sign(f_i(x)) = \sigma_0(i)\}
-     \end{equation}
-     は，空集合，一点からなる集合，開区間のいずれかである．
+     このとき，$F_0 := \{f_1, \dots, f_{s}\}$は微分について閉じているので，帰納法の仮定より，
+     $\Reali(\sigma_0)$は，空集合，一点からなる集合，開区間のいずれかである．
 
-     $\Reali(\sigma) = \Reali({\sigma_0}) \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(s+1)\}$であるから，
+     $\Reali(\sigma) = \Reali({\sigma_0}) \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(f_{s+1})\}$であるから，
      $\Reali({\sigma_0})$が空集合，あるいは一点からなる集合の場合には，$\Reali(\sigma)$は空集合か一点からなる集合になるので主張は成り立つ．
 
      したがって，$\Reali({\sigma_0})$が開区間である場合を考える．
