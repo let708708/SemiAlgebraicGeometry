@@ -2,8 +2,8 @@
 
 \usepackage{amsmath,amssymb}
 \usepackage{amsthm}
-\usepackage{algorithmic}
 \usepackage{algorithm}
+\usepackage{algorithmic}
 \usepackage{cleveref}
 \usepackage{todonotes}
 
@@ -49,6 +49,9 @@
 \newcommand{\sign}{\mathrm{sign}}
 \newcommand{\SIGN}{\mathrm{SIGN}}
 \newcommand{\map}[3]{{#1}\colon{#2}\rightarrow{#3}}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
 
 \theoremstyle{definition}
 \newtheorem{definition}{定義}[section]
@@ -107,7 +110,6 @@
 \end{theorem}
 
 
-\todo[inline]{$\Q(\sqrt{2})$を$\Q\left(\sqrt{2}\right)$に修正．以下同様．}
 例えば，実数体$\R$や有理数体$\Q$，有理数体$\Q$に$\sqrt{2}$を添加した体$\Q\left(\sqrt{2}\right)$は，
 通常の全順序構造を入れることにより順序体となる．
 したがって，$\R, \Q, \Q\left(\sqrt{2}\right)$はいずれも実体である．
@@ -1304,6 +1306,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 
 
 \subsection{柱状代数分解の改良}
+\todo[inline]{以下の定義も微妙．$0 \in F$にした方がよいのではないか．}
 多項式の有限部分集合$F \subset R[X]$が，
 微分について閉じている(closed under differentiation)
 とは，$0 \not \in F$であり，かつ任意の$f \in F$に対して，$f' \in F$または$f'=0$となることと定義する．
@@ -1422,11 +1425,30 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 柱状代数分解による量化記号消去のアルゴリズムは，次のように述べられる．
 
 \begin{algorithm}
-     \caption{QE}
+     \caption{Improved Cylindrical Decomposition}
      \begin{algorithmic}[1]
-     \REQUIRE 
-     \ENSURE 
-     \STATE pass
+          \REQUIRE 
+               有限部分集合
+               $F \subset R[X_1, \dots, X_n]$
+               および，順序付けられた変数のリスト$X_1, \dots, X_n$
+          \ENSURE
+               $\overline{C_i}(F) \subset R[X_1, \dots, X_i]$をみたす有限集合の列$\left\{\overline{C_i}(F)\right\}_{i=1}^n$
+          \STATE pass.
+     \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+     \caption{Cylindrical Quantifier Elimination}
+     \begin{algorithmic}[1]
+          \REQUIRE 
+               有限部分集合
+               $F \subset R[Y_1, \dots, Y_m][X_1, \dots, X_n]$,
+               および$F$論理式
+               \[\Phi(Y) = (\Qua_1 X_1)(\Qua_2 X_2)\dots(\Qua_n X_n) \Psi(Y,X),\]
+               ただし，各$\Psi(Y,X)$は量化記号のない$F$論理式とする．
+          \ENSURE 
+               $\Phi(Y)$に同値な量化記号のない論理式$\Theta(Y)$.
+          \STATE pass.
      \end{algorithmic}
 \end{algorithm}
 
