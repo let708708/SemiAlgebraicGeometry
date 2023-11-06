@@ -51,7 +51,8 @@
 \newcommand{\CSIGN}{\mathrm{CSIGN}}
 \newcommand{\map}[3]{{#1}\colon{#2}\rightarrow{#3}}
 \newcommand{\norm}[1]{\| {#1} \|}
-
+\newcommand{\true}{\text{true}}
+\newcommand{\false}{\text{false}}
 
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
@@ -1362,7 +1363,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 まず，記号について定義する．
 以下の定義は，\cite[Notation 11.7.]{MR2248869}を参考にした．
 \begin{definition}
-     $F \subset R[X_1, \dots, X_n]$とする．
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．
      $\map{\sign(F)}{R^n}{\{-1, 0, 1\}^F}$を，
      $\sign(F)(x)(f):= \sign(f(x)), f \in F$により定義する．
 
@@ -1379,6 +1380,104 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      また，$\CSIGN(F):= \CSIGN_0(F)(0)$とする．
 \end{definition}
 
+上記の記号の元で，以下が成り立つ．
+\begin{proposition}
+     $F \subset R[X_1, \dots, X_n]$とし，$\{\calS_i\}_{i=1}^n$を$R^n$の$F$適合な柱状代数分解とする．
+     このとき，任意の$i=1, \dots, n$, $S \in \calS_i$に対し，$\CSIGN_i(y)$は$y \in S$に対して一定である．
+\end{proposition}
+
+\todo[inline]{
+     以下の定義は厳密な定義ではない．
+     量化記号のない$F$論理式は，$F$に属する多項式の等号不等号，
+     および論理記号$\lor, \lnot, \land(, \rightarrow)$のみで記述された論理式の事である．}
+
+また，次のような記号を定義する．以下の定義は，\cite[Notation 11.12.]{MR2248869}を参照した．
+\begin{definition}
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$\map{\sigma}{F}{\{-1, 0, 1\}}$とする．
+     量化記号のない$F$論理式$\phi(X)$に対して，$\phi^\star(\sigma) \in \{\true, \false\}$を以下のように帰納的に定義する．
+     \begin{enumerate}
+          \item $\phi(X)$が$(f(X)=0)$, $f \in F$, であるとき，
+          \begin{equation}
+               \phi^\star(\sigma):= \begin{cases}
+                    \true  & \text{if $\sigma(f)=0$}\\
+                    \false & \text{otherwise}
+               \end{cases}
+          \end{equation}
+          と定義する．
+          \item $\phi(X)$が$(f(X)>0)$, $f \in F$, であるとき，
+          \begin{equation}
+               \phi^\star(\sigma):= \begin{cases}
+                    \true  & \text{if $\sigma(f)=1$}\\
+                    \false & \text{otherwise}
+               \end{cases}
+          \end{equation}
+          と定義する．
+          \item $\phi(X)$が$(f(X)<0)$, $f \in F$, であるとき，
+          \begin{equation}
+               \phi^\star(\sigma):= \begin{cases}
+                    \true  & \text{if $\sigma(f)=-1$}\\
+                    \false & \text{otherwise}
+               \end{cases}
+          \end{equation}
+          と定義する．
+          \item $\phi(X):=(\phi_1(X) \land \phi_2(X))$であるとき，
+          \begin{equation}
+               \phi^\star(\sigma):= \begin{cases}
+                    \true  & \text{if $\phi_1^\star(\sigma)=\true$ and $\phi_2^\star(\sigma)=\true$}\\
+                    \false & \text{otherwise}
+               \end{cases}
+          \end{equation}
+          と定義する．
+          \item $\phi(X):=(\phi_1(X) \lor \phi_2(X))$であるとき，
+          \begin{equation}
+               \phi^\star(\sigma):= \begin{cases}
+                    \true  & \text{if $\phi_1^\star(\sigma)=\true$ or $\phi_2^\star(\sigma)=\true$}\\
+                    \false & \text{otherwise}
+               \end{cases}
+          \end{equation}
+          \item $\phi(X):=(\lnot \phi_1(X))$であるとき，
+          \begin{equation}
+               \phi^\star(\sigma):= \begin{cases}
+                    \true  & \text{if $\phi_1^\star(\sigma)=\false$}\\
+                    \false & \text{otherwise}
+               \end{cases}
+          \end{equation}
+     \end{enumerate}
+\end{definition}
+
+上記の記号の元で以下が成り立つ．以下の命題は，\cite[Proposition 11.14.]{MR2248869}を参考にした．
+\todo[inline]{以下の命題は，\cite[Proposition 11.14.]{MR2248869}を参考にしているが，全く同一ではなく，QEの問題の場合のために言い換えている．}
+\begin{proposition}
+     $F \subset R[Y_1, \dots, Y_m, X_1, \dots, X_n]$を有限部分集合とし，
+     \begin{equation}
+          \Phi(Y):= \Qua_1 X_1 \dots \Qua_n X_n \phi(Y,X)
+     \end{equation}
+     とする．ただし，$\phi(Y,X)$は量化記号のない$F$論理式であり，$\Qua_i \in \{\forall, \exists\}$とする．
+
+     このとき，任意の$y \in R^m$に対し，$\Phi(y)$が成り立つことと，
+     \begin{equation}
+          \Qua_1 \sigma_1 \in \CSIGN_m(F)(y) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_n \sigma_n \in \sigma_{n-1} \phi^\star(\sigma_n) = \true
+     \end{equation}
+     が同値である．
+\end{proposition}
+
+量化記号消去と柱状代数分解の関係は以下の系のように述べられる．
+\begin{corollary}
+     $F \subset R[Y_1, \dots, Y_m, X_1, \dots, X_n]$を有限部分集合とし，
+     \begin{equation}
+          \Phi(Y):= \Qua_1 X_1 \dots \Qua_n X_n \phi(Y,X)
+     \end{equation}
+     とする．ただし，$\phi(Y,X)$は量化記号のない$F$論理式であり，$\Qua_i \in \{\forall, \exists\}$とする．
+     また，$\{calS_i\}_{i=1}^{n+m}$を$R^{n+m}$の$F$適合な柱状代数分解とする．
+
+     このとき，
+     \begin{equation}
+          \Qua_1 \sigma_1 \in \CSIGN_m(F)(S) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_n \sigma_n \in \sigma_{n-1} \phi^\star(\sigma_n) = \true
+     \end{equation}
+     が成り立つような$S \in \calS_m$の合併は，$\{y \in R^m \mid \Phi(y)\}$に一致する．
+\end{corollary}
+
+\todo[inline]{残りはsample pointsを導入し，$\CSIGN_i(F)$を計算する方法について述べる．}
 
 \subsection{柱状代数分解の改良}
 多項式の有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\map{\sigma}{F}{\{-1,0,1\}}$を，$F$の符号条件(sign condition)という．
@@ -1445,7 +1544,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 
      このとき，$F_{\leq i}:=\cup_{j \leq i} F_j$として，各$i=1, \dots, n$に対し
      \begin{equation}
-          \calS_i := \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq i}}{\{-1,0,1\}}\}
+          \calS_i := \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq i}}{\{-1,0,1\}}\} \setminus \{\emptyset\}
      \end{equation}          
      と定義すると，$\{\calS_i\}_{i=1}^n$は$F$適合な柱状代数分解である．
 \end{theorem}
@@ -1520,7 +1619,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
                \FOR{$x \in A_{i-1}$}
                     \STATE $L \leftarrow \{P_i(x, X_i) \mid P_i \in \overline{C}_i(F)\}$
                     \STATE $L$の各多項式の根と，それらで分離される開区間上の点から点のリスト$\widetilde{A}_i$をとる．
-                    \STATE $A_i \leftarrow A_i + \{(x, y)\mid y \in \widetilde{A}_i\}$
+                    \STATE $A_i \leftarrow A_i \cup \{(x, y)\mid y \in \widetilde{A}_i\}$
                \ENDFOR
           \ENDFOR
           \RETURN $\{\overline{C}_i(F)\}$, $\{A_i\}$, そして実際に各標本点で成り立っている$\overline{C}_{\leq i}(F)$の符号条件
@@ -1534,16 +1633,21 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
                有限部分集合
                $F \subset R[Y_1, \dots, Y_m][X_1, \dots, X_n]$,
                および$F$論理式
-               \[\Phi(Y) = (\Qua_1 X_1)(\Qua_2 X_2)\dots(\Qua_n X_n) \Psi(Y,X),\]
+               \[\Phi(Y) = (\Qua_1 X_1)(\Qua_2 X_2)\dots(\Qua_n X_n) \phi(Y,X),\]
                ただし，各$\Psi(Y,X)$は量化記号のない$F$論理式とする．
           \ENSURE 
                $\Phi(Y)$に同値な量化記号のない論理式$\Theta(Y)$.
-          \STATE $Y_1, \dots, Y_l, X_1, \dots, X_k$と$F$に対して，Improved Cylindrical Decompositionを適応する．
-          \FOR{$\sigma \in \overline{C}_{\leq l}(F)$}
+          \STATE $Y_1, \dots, Y_m, X_1, \dots, X_n$と$F$に対して，Improved Cylindrical Decompositionを適応する．
+          \FOR{$\sigma \in \overline{C}_{\leq m}(F)$}
+               \STATE $\calL \leftarrow \{\}$
                \IF{$\Reali(\sigma) \neq \emptyset$}
-                    \STATE $\CSIGN_l(F)(\sigma)$を，
+                    \STATE $\CSIGN_l(F)(\sigma) \leftarrow \CSIGN_l(F)(\Reali(\sigma))$ 
+                    \IF{$ \Qua_1 \mu_1 \in \CSIGN_m(F)(\sigma) \dots \Qua_n \mu_n \in \mu_{n-1} \phi^\star(\mu_n) = \true$}
+                         \STATE $\calL \leftarrow \calL \cup \{\sigma\}$
+                    \ENDIF
                \ENDIF
           \ENDFOR
+          \RETURN $\bigvee_{\sigma \in \calL} \bigwedge_{f \in \overline{C}_{\leq m}(F)}f(Y)=\sigma(f)$
      \end{algorithmic}
 \end{algorithm}
 
