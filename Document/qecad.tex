@@ -108,7 +108,6 @@
 
 順序体と実体について，次の命題が成り立つ．
 
-\todo[inline]{ここは命題であったが，定理に修正した}
 \begin{theorem}\todo[inline]{ 証明を付けるか，引用するかどちらかすべき．}
      $F$を体とする．このとき，以下は同値である．
      \begin{enumerate}
@@ -129,7 +128,6 @@
 実数体$\R$は代数拡大で実体になるものは自分以外には持たない．
 そのような特徴に注目し，実閉体の概念を導入する．
 
-\todo[inline]{引用の書き方が分からないのですが，これでいいでしょうか？}
 実閉体は\cite{MR3069467}により初めて定義された．
 なお，\cite[Definition 1.2.1]{MR1659509}の定義を参照している．
 
@@ -141,14 +139,8 @@
 また，代数的数全体(すなわち, 有理数体$\Q$の代数的閉包)$\overline{\Q}$と実数体$\R$の共通部分$\Ralg := \overline{\Q} \cap \R$は実閉体である．
 $\Ralg$に属する元を実代数的数という．
 
-\todo[inline]{一階述語論理で書けない～というところを，消去しました．}
 この実閉体の\cref{definition:RCF}は，次の定理を用いることで，一階述語論理で実閉体の理論を定式化することができる．
 
-\todo[inline]{
-     以下の定理の引用を加えました．(これでよい？)
-     1⇒2, 3は示されているようだが，ぱっと見，逆が示されていなそう．
-     以下の定理は証明を書いていない．
-}
 
 次の定理は，\cite{MR3069467}において示された．
 また，\cite[Theorem.1.2.2.]{MR1659509}を参照した．
@@ -165,7 +157,6 @@ $\Ralg$に属する元を実代数的数という．
      \end{enumerate}
 \end{theorem}
 
-\todo[inline]{以降 → これ以下では に訂正．}
 これ以下では，実閉体$R$上の区間を，
 \begin{equation}
      [a,b]:=\{x \in R \mid a \leq x \leq b\}, \quad (a,b):=\{x \in R \mid a < x < b\}
@@ -188,7 +179,6 @@ $\Ralg$に属する元を実代数的数という．
      \end{align}
      の形のどちらかである($\alpha, \beta, \gamma \in R$, $\gamma \neq 0$)．
 
-     \todo[inline]{証明にギャップがあったので直した．}
      このとき，$(X-\beta)^2 + \gamma^2$の形の既約因子は，$\gamma \neq 0$であるから$R$上で常に$0$より大きいことに注意する．
      $f(a)f(b)<0$であることから，$f(X)$のある既約因子$g(X)$について，$g(a)g(b)<0$となる．
      実際，もしすべての$f(X)$の既約因子$g(X)$について，$g(a)g(b) \geq 0$であれば，$f(a)f(b)\geq0$となり仮定に反する．
@@ -203,7 +193,6 @@ $\Ralg$に属する元を実代数的数という．
      $f(a)=f(b)=0$であるとき，ある$x \in (a,b)$が存在し，$f'(x)=0$である．
 \end{proposition}
 \begin{proof}
-     \todo[inline]{以下の主張において，「十分である」ことの説明を加えた．}
      $(a,b)$上に$f(X)$の根がない場合について示せば十分である．
      実際，もし$(a,b)$上に$f(X)$の根が存在するとき，それらの根を$a < x_1 < \dots < x_k < b$とすれば，
      $x_1$を改めて$b$とすることで$(a,b)$上に$f(X)$の根がない場合に帰着する．
@@ -224,7 +213,6 @@ $\Ralg$に属する元を実代数的数という．
      この$x \in (a,b)$に対して$f'(x)=0$である．
 \end{proof}
 
-\todo[inline]{この系と証明を追加した．}
 \begin{corollary}\label{corollary:mean-value}
      $R$を実閉体とし，$f \in R[X]$とする．また，$a, b \in R$を$a<b$とする．
      このとき，ある$c \in (a,b)$が存在して，$f(b)-f(a) = (b-a)f'(c)$を満たす．
@@ -240,7 +228,6 @@ $\Ralg$に属する元を実代数的数という．
      この$c$に対して，$f(b)-f(a)=f'(c)(b-a)$が成り立つ．
 \end{proof}
 
-\todo[inline]{この系の証明を追加した．}
 \begin{corollary}\label{corollary:monotone}
      $R$を実閉体とし，$f \in R[X]$とする．また，$a, b \in R$を$a<b$とする．
      このとき，任意の$x \in (a,b)$について$f'(x)>0$ならば，$f(X)$は$[a,b]$上狭義単調増加である．
@@ -914,7 +901,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 
 \todo[inline]{
      示すべきこと：\\
-     ・実根の連続性(D(z,r)のコンベンションも説明する)\\
+     ・実根の連続性(D(z,r)のノーテーションも説明する)\\
      ・逆関数定理：大変そう\\
 }
 
@@ -1051,6 +1038,8 @@ $R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$で，
 なお，次の命題は，\cite[Proposition 5.14.]{MR2248869}を参照した．
 
 \todo[inline]{以下の命題は条件2.が「相異なる実根」と，少し違った形で述べられている．誤植だと思う．}
+
+\todo[inline]{以下の命題の証明が，教科書と全く同一ではない．}
 \begin{proposition}\label{proposition:del}
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結な半代数的集合とする．
      さらに，以下の条件を満たすとする．
@@ -1613,18 +1602,25 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      \end{align}
      とし，
      \begin{equation}
-          \calS_n := \{C_{S,i} \mid S \in \calS_{n-1}, i=1, \dots, 2l_S+1 \}
+          \widetilde{\calS}_n := \{C_{S,i} \mid S \in \calS_{n-1}, i=1, \dots, 2l_S+1 \}
      \end{equation}
-     と定義すれば，$\{\calS_i\}_{i=1}^n$は$F_n$適合な柱状代数分解を与える．
+     と定義すれば，$\{\calS_i\}_{i=1}^{n-1} \cup \{\widetilde{\calS}_n\}$は$F_n$適合な柱状代数分解を与える．
 
-     そこで，この定義が，定理の主張で与えられている定義に等しい事を示す．
-     すなわち，各$S \in \calS_{n-1}$及び各$i=1, \dots, 2l_s+1$に対し，
+     そこで，$\widetilde{\calS}_n = \calS_n$となることを示す．
+     そのために，$S:=\Reali(\widetilde{\sigma}) \neq \emptyset$である$\map{\widetilde{\sigma}}{F_{\leq n-1}}{\{-1,0,1\}}$を任意にとり，
      \begin{equation}
-          C_{S,i} \in \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq n}}{\{-1,0,1\}}\}
+          \{C_{S,i} \mid i=1, \dots, 2l_S + 1\} = \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq n}}{\{-1,0,1\}}, \sigma|_{F_{\leq n-1}} = \widetilde{\sigma}\} \setminus \{\emptyset\}
      \end{equation}
-     となることを示す．
+     となることを示す．両辺の集合族は，$S \times R$の非交叉な被覆であることに注意する．
 
-     \todo[inline]{続きを書く．}
+     任意の$i=1, \dots, 2l_S+1$に対し，$C_{S,i}$は$F_{\leq n}$符号不変であるから，
+     $\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす$\map{\sigma}{F_{\leq n}}{\{-1,0,1\}}$がただ一つ存在して，
+     $C_{S,i} \subset \Reali(\sigma)$である．
+     また，\cref{proposition:Thom}より，$\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす任意の$\sigma$および
+     $i,j \in \{1, \dots, 2l_S + 1\}$に対して，
+     $C_{S,i} \subset \Reali(\sigma)$, $C_{S,j} \subset \Reali(\sigma)$ならば，$i=j$である．
+
+     以上で命題が示された．
 \end{proof}
 
 \subsection{柱状代数分解による量化記号消去のアルゴリズム}
@@ -1674,7 +1670,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
           \FOR{$\sigma \in \overline{C}_{\leq m}(F)$}
                \STATE $\calL \leftarrow \{\}$
                \IF{$\Reali(\sigma) \neq \emptyset$}
-                    \STATE $\CSIGN_l(F)(\sigma) \leftarrow \CSIGN_l(F)(\Reali(\sigma))$ 
+                    \STATE $\CSIGN_m(F)(\sigma) \leftarrow \CSIGN_m(F)(\Reali(\sigma))$ 
                     \IF{$ \Qua_1 \mu_1 \in \CSIGN_m(F)(\sigma) \dots \Qua_n \mu_n \in \mu_{n-1} \phi^\star(\mu_n) = \true$}
                          \STATE $\calL \leftarrow \calL \cup \{\sigma\}$
                     \ENDIF
