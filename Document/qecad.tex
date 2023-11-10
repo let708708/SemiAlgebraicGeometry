@@ -87,42 +87,57 @@
 \section{実閉体}
 
 \todo[inline]{
-     どの論文で導入されたかの引用をするべき．論文の定理番号も可能なら引用する．
-     順序体・実体の概念がいつ頃導入されたものなのかはよくわからないです．
+     実体，順序体の定義，およびその同値性は，初出の論文が分からない．
 }
 まず，\cite{MR3069467}でArtinとSchreierにより導入された，実閉体の概念についてまとめる．
 実閉体は，実数体を拡張して定義される概念であり，実閉体上でも実数体と類似した解析的な性質が成り立つ．
 
-まず始めに，順序体と実体の定義を述べる．
+まず始めに，順序体の定義を述べる．以下の定義は，\cite[Definition 1.1.1.]{MR1659509}に従った．
 
-\begin{definition}[順序体と実体の定義]
+\begin{definition}[順序体の定義]
      体$F$と$F$上の全順序構造$<$の組$(F,<)$が次の性質を満たすとき，$(F,<)$を順序体(ordered field)という．
      \begin{enumerate}
           \item 任意の$x,y,z\in F$に対し，$x \leq y$ならば$x + z \leq y + z$である．
           \item 任意の$x,y \in F$に対し，$x \geq 0$, $y \geq 0$ならば$x \cdot y \geq 0$である．
      \end{enumerate}
-
-     また，体$F$が，任意の有限個の$F$の元$x_1, \dots, x_k \in F$について，
-     $-1 \neq \sum_{i=1}^k x_i^2$を満たすとき，実体(real field)であるという．
 \end{definition}
 
-順序体と実体について，次の命題が成り立つ．
+\cite[Theorem 1.1.8.]{MR1659509}によると，以下の定理が成り立つ．
 
-\begin{theorem}\todo[inline]{ 証明を付けるか，引用するかどちらかすべき．}
+\begin{theorem}\label{theorem:real-field}
      $F$を体とする．このとき，以下は同値である．
      \begin{enumerate}
-          \item $F$が実体である．
-          \item $F$が順序体となるような全順序構造$<$を持つ．
+          \item \label{theorem:real-field-1}
+          $F$が順序体となるような全順序構造$<$を持つ．
+          \item \label{theorem:real-field-2}
+          各$x_1, \dots, x_n \in F$について，
+          \begin{equation}
+               x_1^2 + \dots + x_n^2 \neq -1.
+          \end{equation}
+          \item \label{theorem:real-field-3}
+          各$x_1, \dots, x_n \in F$について，
+          \begin{equation}
+               \sum_{i=1}^n x_i^2 = 0 \Rightarrow x_1 = \dots = x_n = 0.
+          \end{equation}
      \end{enumerate}
 \end{theorem}
+
+\cref{theorem:real-field}の証明は，\cite[Theorem 1.1.8.]{MR1659509}を参照してほしい．
+
+さらに，\cite[Definition 1.1.9.]{MR1659509}に従い，実体を定義する．
+
+\begin{definition}[実体の定義]
+     体$F$が，\cref{theorem:real-field}の
+     \ref{theorem:real-field-1}，\ref{theorem:real-field-2}，\ref{theorem:real-field-3}いずれかの条件を満たすとき，
+     体$F$を実体(real field)という．
+\end{definition}
 
 
 例えば，実数体$\R$や有理数体$\Q$，有理数体$\Q$に$\sqrt{2}$を添加した体$\Q\left(\sqrt{2}\right)$は，
 通常の全順序構造を入れることにより順序体となる．
 したがって，$\R, \Q, \Q\left(\sqrt{2}\right)$はいずれも実体である．
 
-\todo[inline]{$\C$が順序体の構造を持たないことは命題として述べてもいいのでは．}
-一方で，複素数体$\C$は順序体の構造を持たない．よって，$\C$は実体ではない．
+また，複素数体$\C$は$\sqrt{-1}^2 = -1$をみたす．したがって，$\C$は実体ではない．
 
 有理数体$\Q$は，実体$\Q\left(\sqrt{2}\right)$を代数拡大にもつが，
 実数体$\R$は代数拡大で実体になるものは自分以外には持たない．
@@ -139,12 +154,9 @@
 また，代数的数全体(すなわち, 有理数体$\Q$の代数的閉包)$\overline{\Q}$と実数体$\R$の共通部分$\Ralg := \overline{\Q} \cap \R$は実閉体である．
 $\Ralg$に属する元を実代数的数という．
 
-この実閉体の\cref{definition:RCF}は，次の定理を用いることで，一階述語論理で実閉体の理論を定式化することができる．
-
-
 次の定理は，\cite{MR3069467}において示された．
-また，\cite[Theorem.1.2.2.]{MR1659509}を参照した．
-\begin{theorem}\todo[inline]{定理の証明はされていないので引用をすべき．}
+また，\cite[Theorem 1.2.2.]{MR1659509}を参照した．
+\begin{theorem} \label{theorem:real-closed-field}
      体$F$について，以下は同値である．
      \begin{enumerate}
           \item 体$F$は実閉体である．
@@ -157,13 +169,16 @@ $\Ralg$に属する元を実代数的数という．
      \end{enumerate}
 \end{theorem}
 
+\cref{theorem:real-closed-field}の証明は，\cite[Theorem 1.2.2.]{MR1659509}を参照してほしい．
+
+
 これ以下では，実閉体$R$上の区間を，
 \begin{equation}
      [a,b]:=\{x \in R \mid a \leq x \leq b\}, \quad (a,b):=\{x \in R \mid a < x < b\}
 \end{equation}
 のようにかくことにする．
 
-実閉体$R$を係数とする一変数多項式について，実数$\R$上の連続関数，可微分関数と同様の性質が成り立つ．
+実閉体$R$を係数とする$1$変数多項式について，実数$\R$上の連続関数，可微分関数と同様の性質が成り立つ．
 
 \begin{proposition}\label{proposition:intermediate}
      $R$を実閉体とし，$f \in R[X]$とする．
@@ -179,7 +194,7 @@ $\Ralg$に属する元を実代数的数という．
      \end{align}
      の形のどちらかである($\alpha, \beta, \gamma \in R$, $\gamma \neq 0$)．
 
-     このとき，$(X-\beta)^2 + \gamma^2$の形の既約因子は，$\gamma \neq 0$であるから$R$上で常に$0$より大きいことに注意する．
+     このとき，$(X-\beta)^2 + \gamma^2$の形の既約因子は，$\gamma \neq 0$としているから，$R$上で常に$0$より大きいことに注意する．
      $f(a)f(b)<0$であることから，$f(X)$のある既約因子$g(X)$について，$g(a)g(b)<0$となる．
      実際，もしすべての$f(X)$の既約因子$g(X)$について，$g(a)g(b) \geq 0$であれば，$f(a)f(b)\geq0$となり仮定に反する．
      ここで，先に述べた注意から，$g(a)g(b)<0$となるような$f(X)$の既約因子$g(X)$は，$g(X) = X - \alpha$とかける．
@@ -201,7 +216,7 @@ $\Ralg$に属する元を実代数的数という．
      \begin{equation}
      f(X) = (X-a)^m(X-b)^ng(X), \, g(a)\neq0,\, g(b)\neq0
      \end{equation}
-     とする．このとき，$(a,b)$上$f(X)$の根がないことから，\cref{proposition:intermediate}より，$g(a)g(b)>0$である．
+     とする．このとき，$(a,b)$上$g(X)$の根がないことから，\cref{proposition:intermediate}より，$g(a)g(b)>0$である．
      
      $g_1(X) := m(X-b)g(X)+n(X-a)g(X)+(X-a)(X-b)g'(X)$とおくと．
      \begin{equation}
@@ -229,18 +244,22 @@ $\Ralg$に属する元を実代数的数という．
 \end{proof}
 
 \begin{corollary}\label{corollary:monotone}
-     $R$を実閉体とし，$f \in R[X]$とする．また，$a, b \in R$を$a<b$とする．
-     このとき，任意の$x \in (a,b)$について$f'(x)>0$ならば，$f(X)$は$[a,b]$上狭義単調増加である．
-     また，任意の$x \in (a,b)$について$f'(x)<0$ならば，$f(X)$は$[a,b]$上狭義単調減少である．
+     $R$を実閉体とし，$f \in R[X]$とする．また，$a, b \in R$を$a<b$とする．このとき，以下が成り立つ．
+     \begin{enumerate}
+          \item \label{corollary:monotone-1}
+          任意の$x \in (a,b)$について$f'(x)>0$ならば，$f(X)$は$[a,b]$上狭義単調増加である．
+          \item \label{corollary:monotone-2}
+          任意の$x \in (a,b)$について$f'(x)<0$ならば，$f(X)$は$[a,b]$上狭義単調減少である．
+     \end{enumerate}
 \end{corollary}
 \begin{proof}
-     後半も同様に示せるので，前半の主張を示す．
+     \ref{corollary:monotone-2}は\ref{corollary:monotone-1}と同様に示せるので，\ref{corollary:monotone-1}のみ示す．
      $f(X)$が$[a,b]$上狭義単調増加でないとすると，ある$x \in (a,b)$について$f'(x) \leq 0$となることを示す．
      $f(X)$が$[a,b]$上狭義単調増加でないとすると，
      $a \leq x_0 < x_1 \leq b$である$x_0, x_1 \in R$が存在して，$f(x_0) \geq f(x_1)$を満たす．
      このとき，\cref{corollary:mean-value}より，$x_0 < x < x_1$である$x \in (a,b)$が存在し，
      $f(x_1) - f(x_0) = f'(x)(x_1 - x_0)$を満たす．
-     この$x \in (a,b)$に対して$f'(x) \leq 0$となり，前半の主張の証明が完了した．
+     この$x \in (a,b)$に対して$f'(x) \leq 0$となり，\ref{corollary:monotone-1}の証明が完了した．
 \end{proof}
 
 \section{一階述語論理}
