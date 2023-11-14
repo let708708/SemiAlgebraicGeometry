@@ -871,18 +871,16 @@ $\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい．
 
 \section{半代数的集合}
 以下の定義は，\cite[Definition 2.1.4.]{MR1659509}を参考にした．
+
+\todo[inline]{半代数的集合の定義が導入された論文については不明．}
 \begin{definition}
      $R$を実閉体とする．集合$S \subset R^n$が，
      有限個の$f_{i,j} \in R[X_1, \dots, X_n]$および$\sigma_{i,j} \in \{-1, 0 ,1\}$, $i=1, \dots, s, j = 1, \dots, r_i$, をもちいて，
      \begin{equation}
-          S = \bigcup_{i=1}^s \bigcap_{j=1}^{r_i} \{x \in R^n \mid \sign(f_{i,j}) = \sigma_{i,j}\}
+          S = \bigcup_{i=1}^s \bigcap_{j=1}^{r_i} \{x \in R^n \mid \sign_R(f_{i,j}) = \sigma_{i,j}\}
      \end{equation}
      と書けるとき，$S$を$R^n$の半代数的集合という．
 \end{definition}
-
-半代数的集合は，
-
-\todo[inline]{Tarskiの定理による系は書いておきたい．}
 
 $x \in R^n$, $r \in R$, $r>0$に対して，
 \begin{align}
@@ -894,13 +892,20 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 このとき，$\{B_n(x,r)\}$を開基として$R^n$に位相を定義できる．
 以降では，$R^n$にはこの位相が入っているものとする．
 
+以下の定理が成り立つ．この定理は，\cite[Theorem 2.2.1]{MR1659509}を参考にした．
+\todo[inline]{この定理(Tarski-Seidenberg Principle)の元論文が何か分からない．}
+\begin{theorem}\label{theorem:Tarski-Seidenberg}
+     $S \subset R^{n+1}$を半代数的部分集合とする．$\map{\pi_{n+1}}{R^{n+1}}{R^n}$を，
+     $\pi_{n+1}(x_1, \dots, x_n, x_{n+1}) = (x_1, \dots, x_n)$により定める．このとき，
+     $\pi_{n+1}(S)$は$R^n$の半代数的部分集合である．
+\end{theorem}
+
+
 以下の定義は，\cite[Definition 2.2.5.]{MR1659509}を参考にした．
 \begin{definition}
      $S \subset R^m$, $T \subset R^n$を，半代数的集合とする．
      写像$\map{f}{S}{T}$が半代数的であるとは，$f$のグラフが$R^{m+n}$の半代数的集合であることと定義する．
 \end{definition}
-
-\todo[inline]{半代数的集合の像や逆像は半代数的集合である．以下の命題は，Tarski-Seidenbergの定理を経由しているはず．}
 
 \begin{proposition}
      $\map{f}{A}{B}$を，半代数的写像であるとする．
@@ -908,7 +913,16 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      また，$T \subset B$が半代数的集合であるならば，$f^{-1}(T)$も半代数的集合である．
 \end{proposition}
 
-\todo[inline]{開集合の合併でかけてかつ非交叉ならば，片方が全体集合になっている．}
+\begin{proof}
+     $A \subset R^m$, $B \subset R^n$とし，
+     \begin{equation}
+          \mathrm{Graph}(f) := \{(x,y) \in R^m \times R^n \mid x \in A, f(x) = y\}
+     \end{equation}
+     とする．
+     $f(S)$は，$(S \times B) \cap \mathrm{Graph}(f)$の射影による像であり，
+     $f^{-1}(T)$は，$(A \times T) \cap \mathrm{Graph}(f)$の射影による像であることから，
+     \cref{theorem:Tarski-Seidenberg}より示される．
+\end{proof}
 
 以下の定義は，\cite[Definition 2.4.2.]{MR1659509}を参考にした．
 \begin{definition}
@@ -918,11 +932,21 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      $S$を半代数的連結であると定義する．
 \end{definition}
 
-\todo[inline]{
-     示すべきこと：\\
-     ・実根の連続性(D(z,r)のノーテーションも説明する)\\
-     ・逆関数定理：大変そう\\
-}
+この定義より，次の命題が成り立つ．
+
+\begin{proposition}
+     $S \subset R^n$を，半代数的連結な半代数的部分集合とする．
+     任意の半代数的開部分集合$U_1, U_2 \subset S$について，
+     $U_1 \cup U_2 = S$, $U_1 \cap U_2 = \emptyset$ならば，$U_1 = S$または$U_2 = S$である．
+\end{proposition}
+
+\begin{proof}
+     所与の$U_1, U_2$に対して，各$i=1, 2$に対し$F_i:= S \setminus U_i$とする．
+     このとき，各$F_i$は半代数的閉部分集合であり，$F_1 \cup F_2 = S$, $F_1 \cap F_2 = \emptyset$をみたす．
+     ここで，半代数的連結の定義より$F_1 = S$または$F_2 = S$である．よって，$U_1 = \emptyset$または$U_2 = \emptyset$である．
+     したがって，$U_1 \cup U_2 = S$より，$U_1 = S$または$U_2 = S$となり，命題が示された．
+\end{proof}
+
 
 以下の命題は，\cite[Proposition 3.9.]{MR2248869}を参考にした．
 \begin{proposition}
@@ -940,6 +964,12 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      $U_1 = S$となる．したがって，$S = f^{-1}(\{d\})$すなわち$f$は定数関数である．
 \end{proof}
 
+ここで，$z \in R\left[ \sqrt{-1} \right]$及び$r \in R$, $r>0$, に対し，
+\begin{equation}
+     D(z, r):= \{w \in R\left[\sqrt{-1}\right] \mid \norm{z - w} < r\}
+\end{equation}
+とする．ただし，$a,b \in R$に対し$\norm{a + b\sqrt{-1}} := \sqrt{a^2 + b^2}$とする．
+
 以下の命題は，\cite[Theorem 5.12.]{MR2248869}を参考にした．
 
 \begin{proposition} \label{proposition:continuity-of-roots}
@@ -956,6 +986,11 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      $f(x, X_n)$の根が各$D(z_i, r)$ ($i=1, \dots, j$)の中に（重複度込みで）ちょうど$\mu_i$個であるようにとれる．
 
 \end{proposition}
+
+\begin{proof}
+    証明は，\cite[Theorem 5.12.]{MR2248869}参照してほしい．
+\end{proof}
+
 
 \section{柱状代数分解}
 
