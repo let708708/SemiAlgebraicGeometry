@@ -969,9 +969,9 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 \end{equation}
 とする．ただし，$a,b \in R$に対し$\norm{a + b\sqrt{-1}} := \sqrt{a^2 + b^2}$とする．
 
-以下の命題は，\cite[Theorem 5.12.]{MR2248869}を参考にした．
+以下の定理は，\cite[Theorem 5.12.]{MR2248869}を参考にした．
 
-\begin{proposition} \label{proposition:continuity-of-roots}
+\begin{theorem} \label{theorem:continuity-of-roots}
      $R$を実閉体とし，$f \in R[X_1, \dots, X_n]$とする．
      また，$S \subset R^{n-1}$を半代数的集合とし，$a \in S$とする．
 
@@ -984,7 +984,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      $a$の開近傍 $V \subset R^{n-1}$を，任意の$x \in V \cap S$に対して，
      $f(x, X_n)$の根が各$D(z_i, r)$ ($i=1, \dots, j$)の中に（重複度込みで）ちょうど$\mu_i$個であるようにとれる．
 
-\end{proposition}
+\end{theorem}
 
 \begin{proof}
     証明は，\cite[Theorem 5.12.]{MR2248869}参照してほしい．
@@ -1135,7 +1135,7 @@ $R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$で，
      $a \in S$を任意にとり，$f(a,X_n)$の$R$上の根を$z_1, \dots, z_s$, それ以外の根を$z_{s+1}, \dots, z_t$とする．
 
      $R$の元$r > 0$を，$\{D(z_i,r)\}_{i=1}^t$が非交叉になるようにとる．
-     仮定の条件\ref{lemma:del-1}と\cref{proposition:continuity-of-roots}より，
+     仮定の条件\ref{lemma:del-1}と\cref{theorem:continuity-of-roots}より，
      ある$a$の開近傍$V$が存在し，各$x \in V \cap S$に対して$f (x, X_n)$ の根が各 $D(z_i, r)$ ($i = 1, \dots , t$) の中に（重複
      度込みで）ちょうど $\mu_i$ 個であるようにとれる．
      ここで，仮定の条件\ref{lemma:del-2}より，$\{D(z_i, r)\}_{i=1}^t$は非交叉であること合わせて，
@@ -1183,7 +1183,7 @@ $R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$で，
 
      まず，$f_1(a, X_n), f_2(a, X_n)$の相異なる$R\left[\sqrt{-1}\right]$の共通根を，$z_1, \dots, z_j$とする．
      ただし，$z_1 = \xi_{k,f}(a)=\xi_{l,g}(a)$とする．
-     さらに，\cref{proposition:continuity-of-roots}および仮定の条件\ref{proposition:del-1}, \ref{proposition:del-2}より，
+     さらに，\cref{theorem:continuity-of-roots}および仮定の条件\ref{proposition:del-1}, \ref{proposition:del-2}より，
      十分小さい$R$の元$r>0$と$a$の開近傍$V$を，
      任意の$x \in V \cap S$に対し，各$D(z_i, r)$に含まれる$f(x, X_n)$, $g(x, X_n)$それぞれの根はちょうど1つであり，
      根の重複度も$x$によらずに一定であるようにできる．
