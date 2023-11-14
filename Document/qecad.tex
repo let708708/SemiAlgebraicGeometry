@@ -895,11 +895,10 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 以下の定理が成り立つ．この定理は，\cite[Theorem 2.2.1]{MR1659509}を参考にした．
 \todo[inline]{この定理(Tarski-Seidenberg Principle)の元論文が何か分からない．}
 \begin{theorem}\label{theorem:Tarski-Seidenberg}
-     $S \subset R^{n+1}$を半代数的部分集合とする．$\map{\pi_{n+1}}{R^{n+1}}{R^n}$を，
-     $\pi_{n+1}(x_1, \dots, x_n, x_{n+1}) = (x_1, \dots, x_n)$により定める．このとき，
-     $\pi_{n+1}(S)$は$R^n$の半代数的部分集合である．
+     $S \subset R^{n+1}$を半代数的部分集合とする．$\map{\pi_{n}}{R^{n+1}}{R^n}$を，
+     $\pi_{n}(x_1, \dots, x_n, x_{n+1}) = (x_1, \dots, x_n)$により定める．このとき，
+     $\pi_{n}(S)$は$R^n$の半代数的部分集合である．
 \end{theorem}
-
 
 以下の定義は，\cite[Definition 2.2.5.]{MR1659509}を参考にした．
 \begin{definition}
@@ -1003,7 +1002,8 @@ $R$を実閉体とする．
 \end{enumerate}
 を満たすとき，部分集合族$\calS$を$X$の分解(decomposition)と呼ぶ．
 
-まず始めに，$R^n$の柱状代数分解を定義する．この定義は，参考文献\cite[Definition 5.1]{MR2248869}による．
+まず始めに，$R^n$の柱状代数分解を定義する．この定義は，\cite{MR0764184}\cite[Definition 5.1]{MR2248869}を参考にしているが，
+基本的な概念が現れたのは$\cite{MR0403962}$である．
 
 \begin{definition} \label{definition:cad}
      $i=1, \dots, n$に対し，$\calS_i$を$R^i$の分解とする．
@@ -1036,6 +1036,7 @@ $R$を実閉体とする．
 逆に，$R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$が与えられているとき，各$S \in \calS_{n-1}$に対して
 \cref{definition:cad}の条件\ref{cad_condition1}を満たすような有限個の連続半代数関数$\xi_{S,1}<\dots<\xi_{S,l_S}$が与えられれば，
 $R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を構成することができる．
+
 このように，柱状代数分解は再帰的な構造である．
 
 以下の定義は，\cite[Definition 5.5]{MR2248869}を参照した．
@@ -1050,8 +1051,8 @@ $R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を構成することができる
      \end{enumerate}
 \end{definition}
 
-この節の目的は，次の定理を示すことである．以下の定理の主張は\cite[Theorem 5.6]{MR2248869}を参照した．
-\todo[inline]{では，初登場の論文はなんでしょうか？}
+この節の目的は，次の定理を示すことである．以下の定理は\cite[Theorem 5.6]{MR2248869}を参照した．
+基本的なが概念が現れたのは，\cite{MR0403962}である．
 \begin{theorem} \label{theorem:cad}
      任意の有限部分集合$F \subset R[X_1, \dots, X_n]$に対して，
      $F$に適合した$R^n$の柱状代数分解が存在する．
@@ -1197,22 +1198,24 @@ $R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$で，
      よって主張が示され，命題の証明が完了した．
 \end{proof}
 
+\cref{proposition:del}から次の系が成り立つ．
+
 \begin{corollary}\label{corollary:del}
      $S \subset R^{n-1}$を弧状連結部分集合とし，$F \subset R[X_1,\dots, X_n]$を有限部分集合とする．
      次が成り立つとき，$S$は$F$描画可能である．
      \begin{enumerate}
           \item \label{corollary:del-1}
-          任意の$f \in F$に対し，$\deg(f(a))$が一定（$a \in S$）．
+          任意の$f \in F$に対し，$\deg(f(a,X_n))$が一定（$a \in S$）．
           \item \label{corollary:del-2}
-          任意の$f \in F$に対し，$\deg(\gcd(f(a), \frac{\partial f}{\partial X_n}(a)))$が一定（$a \in S$）．
+          任意の$f \in F$に対し，$\deg(\gcd(f(a,X_n), \frac{\partial f}{\partial X_n}(a,X_n)))$が一定（$a \in S$）．
           \item \label{corollary:del-3}
-          任意の$f, g \in F$に対し，$\deg(\gcd(f(a), g(a)))$が一定（$a \in S$）．
+          任意の$f, g \in F$に対し，$\deg(\gcd(f(a,X_n), g(a,X_n)))$が一定（$a \in S$）．
      \end{enumerate}
 \end{corollary}
 
 よって，$F$符号不変な$R^n$の分割を与えるには，\cref{corollary:del}の条件を満たすような$R^{n-1}$の分割を構成すればよい．
 条件\ref{corollary:del-1}を満たすような$R^{n-1}$の分割を与えるには，各$f \in F$について，$X_n$係数が符号不変になるような分割を構成すればよい．
-一方，条件\ref{corollary:del-2}, \ref{corollary:del-3}を満たすような$R^{n-1}$の分割を与えるのは，少し難しい．
+一方，条件\ref{corollary:del-2}, \ref{corollary:del-3}を満たすような$R^{n-1}$の分割を与えるのは，条件\ref{corollary:del-1}に比べて少し難しい．
 条件\ref{corollary:del-2}, \ref{corollary:del-3}も満たすような$R^{n-1}$の分割を与えることができるよう，次の節で準備をする．
 
 \subsection{主部分終結式係数}
@@ -1281,10 +1284,8 @@ $\mathrm{R}$を体とし，$A(x), B(x) \in \mathrm{R}[x] \setminus \{0\}$とす�
 この節では，\cref{theorem:cad}を証明する．
 
 まず，次のような記号を定義する．
-以下の定義は，\cite[Section 3]{MR0764184}, \cite[Notation 5.15.]{MR2248869}
-を参考にしているが，元々は\cite[Theorem 4]{MR0403962}で定義されたものである．
 
-まず，$f \in R[X_1, \dots, X_n]$に対し，$\Tru(f;X_n)$を，
+$f \in R[X_1, \dots, X_n]$に対し，$\Tru(f;X_n)$を，
 \begin{equation}
      \Tru(f;X_n):= \begin{cases}
           \{f\} &  \text{if $\LC(f; X_n) \in R$ or $f \in R[X_1, \dots, X_{n-1}]$} \\
@@ -1298,6 +1299,10 @@ $\mathrm{R}$を体とし，$A(x), B(x) \in \mathrm{R}[x] \setminus \{0\}$とす�
      \Tru(F;X_n) := \bigcup_{f \in F} \Tru(f;X_n)
 \end{equation}
 により定義する．
+
+以下の定義は，\cite[Section 3]{MR0764184}, \cite[Notation 5.15.]{MR2248869}
+を参考にしているが，元々は\cite[Theorem 4]{MR0403962}で定義されたものである．
+
 
 \begin{definition}
 $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．ただし，$n \geq 2$とする．
@@ -1386,30 +1391,16 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 前節では$R^n$の$F$適合な柱状代数分解が存在することを示した．
 この節では，柱状代数分解による量化記号消去のアルゴリズムについて示す．
 
-% 冠頭標準形の論理式
-% \begin{equation}
-%      \Qua_1 X_1 \dots \Qua_1 X_k \phi(Y_1, \dots, Y_l, X_1, \dots, X_k)
-% \end{equation}
-% が与えられたとき，
-% $R^{k+l}$の柱状代数分解$\{\calS_i\}_{i=1}^{k+l}$を用いて量化記号消去を行うことを考える．
-
-% そのためには，$\calS_l$に属する各$S \in \calS_l$の定義式が与えられている必要がある．
-% しかし，前節で示した柱状代数分解の構成では，各$S \in \calS_l$の定義式は与えられない．
-
-% そのため，柱状代数分解のアルゴリズムを改良し，
-% $\{\calS_i\}_{i=1}^l$に属する各$S \in \calS_i$の定義式を与えるようにする必要がある．
-% そのために，まずは増補射影について定義する．
-
-\subsection{量化記号消去と柱状代数分解の関係(仮)}
+\subsection{量化記号消去と柱状代数分解の関係}
 まず，記号について定義する．
 以下の定義は，\cite[Notation 11.7.]{MR2248869}を参考にした．
 \begin{definition}
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．
-     $\map{\sign(F)}{R^n}{\{-1, 0, 1\}^F}$を，
+
+     まず，$\map{\sign(F)}{R^n}{\{-1, 0, 1\}^F}$を，
      $\sign(F)(x)(f):= \sign(f(x)), f \in F$により定義する．
 
-     $x \in R^n$とし，$F \subset R[X_1, \dots, X_n]$とする．
-     このとき，各$y \in R^i$に対し，$\CSIGN_i(F)(y)$を以下のように定義する．
+     次に，各$y \in R^i$に対し，$\CSIGN_i(F)(y)$を以下のように定義する．
      \begin{itemize}
           \item $i=n$のとき，$x \in R^i$に対し，$\CSIGN_n(F)(x):= \sign(F)(x) $とする．
           \item $0 \leq i<n$のとき，$y \in R^i$に対し，
@@ -1426,8 +1417,12 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      このとき，任意の$i=1, \dots, n$, $S \in \calS_i$に対し，$\CSIGN_i(y)$は$y \in S$に対して一定である．
 \end{proposition}
 
+\begin{proof}
+     証明を書く．
+\end{proof}
+
 \todo[inline]{
-     以下の定義は厳密な定義ではない．
+     以下の定義は厳密な定義ではない．まず，$F$論理式が定義されていない．
      量化記号のない$F$論理式は，$F$に属する多項式の等号不等号，
      および論理記号$\lor, \lnot, \land(, \rightarrow)$のみで記述された論理式の事である．}
 
@@ -1496,10 +1491,14 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 
      このとき，任意の$y \in R^m$に対し，$\Phi(y)$が成り立つことと，
      \begin{equation}
-          \Qua_1 \sigma_1 \in \CSIGN_m(F)(y) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_n \sigma_n \in \sigma_{n-1} \phi^\star(\sigma_n) = \true
+          \Qua_1 \sigma_1 \in \CSIGN_m(F)(y) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_n \sigma_n \in \sigma_{n-1} (\phi^\star(\sigma_n) = \true)
      \end{equation}
      が同値である．
 \end{proposition}
+
+\begin{proof}
+     後で書く．
+\end{proof}
 
 量化記号消去と柱状代数分解の関係は以下の系のように述べられる．
 \begin{corollary}
@@ -1508,16 +1507,19 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
           \Phi(Y):= \Qua_1 X_1 \dots \Qua_n X_n \phi(Y,X)
      \end{equation}
      とする．ただし，$\phi(Y,X)$は量化記号のない$F$論理式であり，$\Qua_i \in \{\forall, \exists\}$とする．
-     また，$\{calS_i\}_{i=1}^{n+m}$を$R^{n+m}$の$F$適合な柱状代数分解とする．
+     また，$\{\calS_i\}_{i=1}^{n+m}$を$R^{n+m}$の$F$適合な柱状代数分解とする．
 
      このとき，
      \begin{equation}
-          \Qua_1 \sigma_1 \in \CSIGN_m(F)(S) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_n \sigma_n \in \sigma_{n-1} \phi^\star(\sigma_n) = \true
+          \Qua_1 \sigma_1 \in \CSIGN_m(F)(S) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_n \sigma_n \in \sigma_{n-1}(\phi^\star(\sigma_n) = \true)
      \end{equation}
      が成り立つような$S \in \calS_m$の合併は，$\{y \in R^m \mid \Phi(y)\}$に一致する．
 \end{corollary}
 
-\todo[inline]{残りはsample pointsを導入し，$\CSIGN_i(F)$を計算する方法について述べる．}
+\begin{proof}
+     後で書く．
+\end{proof}
+
 
 有限部分集合$F \subset R[X_1, \dots, X_n]$に対して，$\CSIGN_i(F)$を計算する方法について説明する．
 
@@ -1527,7 +1529,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      ただし，$\map{\pi_i}{R^{i+1}}{R^i}$は，$\pi_i(x_1, \dots, x_i, x_{i+1}) = (x_1, \dots, x_i)$により定まる射影とする．
      
      このとき，$\mathcal{A}$が柱状代数分解$\{\calS_i\}_{i=1}^n$の標本点の柱状集合(cylindrical set of sample points)であるとは，
-     各$i=1, \dots, n$と$S\in \calS_i$に対し，$\mathcal{A_i}\cap S \neq \emptyset$を満たすことと定義する．
+     各$i=1, \dots, n$と$S\in \calS_i$に対し，$\mathcal{A}_i\cap S \neq \emptyset$を満たすことと定義する．
 \end{definition}
 
 \begin{definition}
@@ -1556,6 +1558,11 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      \end{equation}
      が成り立つ．
 \end{proposition}
+
+\begin{proof}
+     後で書く．
+\end{proof}
+
 
 \subsection{柱状代数分解の改良}
 多項式の有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\map{\sigma}{F}{\{-1,0,1\}}$を，$F$の符号条件(sign condition)という．
