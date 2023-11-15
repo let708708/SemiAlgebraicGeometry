@@ -1,6 +1,6 @@
 \documentclass[uplatex, dvipdfmx]{jsarticle}
 
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath,amssymb,mathtools}
 \usepackage{amsthm}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -94,42 +94,43 @@
 
 まず始めに，順序体の定義を述べる．以下の定義は，\cite[Definition 1.1.1.]{MR1659509}に従った．
 
-\begin{definition}[順序体の定義]
-     体$F$と$F$上の全順序構造$<$の組$(F,<)$が次の性質を満たすとき，$(F,<)$を順序体(ordered field)という．
+\begin{definition}[順序体]
+     体$F$と$F$上の全順序$<$の組$(F,<)$が次の性質を満たすとき，$(F,<)$を順序体(ordered field)という．
      \begin{enumerate}
           \item 任意の$x,y,z\in F$に対し，$x \leq y$ならば$x + z \leq y + z$である．
           \item 任意の$x,y \in F$に対し，$x \geq 0$, $y \geq 0$ならば$x \cdot y \geq 0$である．
      \end{enumerate}
 \end{definition}
 
-\cite[Theorem 1.1.8.]{MR1659509}によると，以下の定理が成り立つ．
+以下の定理が成り立つ．
 
-\begin{theorem}\label{theorem:real-field}
+\begin{theorem}[{\cite[Theorem 1.1.8.]{MR1659509}}]\label{theorem:real-field}
      $F$を体とする．このとき，以下は同値である．
      \begin{enumerate}
           \item \label{theorem:real-field-1}
-          $F$が順序体となるような全順序構造$<$を持つ．
+          $F$が順序体となるような全順序$<$を持つ．
           \item \label{theorem:real-field-2}
-          各$x_1, \dots, x_n \in F$について，
+          任意の$x_1, \dots, x_n \in F$に対して
           \begin{equation}
                x_1^2 + \dots + x_n^2 \neq -1.
           \end{equation}
           \item \label{theorem:real-field-3}
-          各$x_1, \dots, x_n \in F$について，
+          任意の$x_1, \dots, x_n \in F$に対して
           \begin{equation}
                \sum_{i=1}^n x_i^2 = 0 \Rightarrow x_1 = \dots = x_n = 0.
           \end{equation}
      \end{enumerate}
 \end{theorem}
 
-\cref{theorem:real-field}の証明は，\cite[Theorem 1.1.8.]{MR1659509}を参照してほしい．
-
 さらに，\cite[Definition 1.1.9.]{MR1659509}に従い，実体を定義する．
 
-\begin{definition}[実体の定義]
-     体$F$が，\cref{theorem:real-field}の
-     \ref{theorem:real-field-1}，\ref{theorem:real-field-2}，\ref{theorem:real-field-3}いずれかの条件を満たすとき，
-     体$F$を実体(real field)という．
+\begin{definition}[実体]
+     体$F$が\cref{theorem:real-field}の
+     \ref{theorem:real-field-1},
+     \ref{theorem:real-field-2},
+     \ref{theorem:real-field-3}
+     のいずれか（従って、全て）の条件を満たすとき，
+     $F$を実体(real field)という．
 \end{definition}
 
 
@@ -137,26 +138,22 @@
 通常の全順序構造を入れることにより順序体となる．
 したがって，$\R, \Q, \Q\left(\sqrt{2}\right)$はいずれも実体である．
 
-また，複素数体$\C$は$\sqrt{-1}^2 = -1$をみたす．したがって，$\C$は実体ではない．
+また，複素数体$\C$は$\sqrt{-1}^2 = -1$をみたす元$\sqrt{-1}$を持つ．
+したがって，$\C$は実体ではない．
 
-有理数体$\Q$は，実体$\Q\left(\sqrt{2}\right)$を代数拡大にもつが，
-実数体$\R$は代数拡大で実体になるものは自分以外には持たない．
-そのような特徴に注目し，実閉体の概念を導入する．
+有理数体$\Q$は，実体$\Q\left(\sqrt{2}\right)$を代数拡大に持つが，
+実数体$\R$は代数拡大で実体になるものは自分自身のみである．
+そのような性質に注目し，実閉体の概念を導入する．
 
-実閉体は\cite{MR3069467}により初めて定義された．
-なお，\cite[Definition 1.2.1]{MR1659509}の定義を参照している．
-
-\begin{definition}[実閉体の定義] \label{definition:RCF}
+\begin{definition}[\cite{MR3069467}] \label{definition:RCF} \todo{場所を原論文で特定}
      実体$F$が実閉体(real closed field)であるとは，$F$の代数拡大で実体になるものは$F$自身に限ることである．
 \end{definition}
 
 先ほど述べたように，有理数体$\Q$は実閉体ではないが，実数体$\R$は実閉体である．
-また，代数的数全体(すなわち, 有理数体$\Q$の代数的閉包)$\overline{\Q}$と実数体$\R$の共通部分$\Ralg := \overline{\Q} \cap \R$は実閉体である．
-$\Ralg$に属する元を実代数的数という．
+また，代数的数全体(すなわち, 有理数体$\Q$の代数的閉包) $\overline{\Q}$と実数体$\R$の共通部分$\Ralg \coloneqq \overline{\Q} \cap \R$は実閉体である．
+$\Ralg$の元を実代数的数という．
 
-次の定理は，\cite{MR3069467}において示された．
-また，\cite[Theorem 1.2.2.]{MR1659509}を参照した．
-\begin{theorem} \label{theorem:real-closed-field}
+\begin{theorem}[\cite{MR3069467}] \label{theorem:real-closed-field} \todo{場所を原論文で特定}
      体$F$について，以下は同値である．
      \begin{enumerate}
           \item 体$F$は実閉体である．
@@ -169,21 +166,23 @@ $\Ralg$に属する元を実代数的数という．
      \end{enumerate}
 \end{theorem}
 
-\cref{theorem:real-closed-field}の証明は，\cite[Theorem 1.2.2.]{MR1659509}を参照してほしい．
+\cref{theorem:real-closed-field}の証明は，
+\cite[Theorem 1.2.2.]{MR1659509}を見よ．
 
-
-これ以下では，実閉体$R$上の区間を，
+以下では，実閉体$R$上の区間を，
 \begin{equation}
      [a,b]:=\{x \in R \mid a \leq x \leq b\}, \quad (a,b):=\{x \in R \mid a < x < b\}
 \end{equation}
 のようにかくことにする．
 
-実閉体$R$を係数とする$1$変数多項式について，実数$\R$上の連続関数，可微分関数と同様の性質が成り立つ．
+実閉体$R$を係数とする$1$変数多項式に対して，
+実数体$\R$上の連続関数や可微分関数と同様の性質が成り立つ．
 
 \begin{proposition}\label{proposition:intermediate}
      $R$を実閉体とし，$f \in R[X]$とする．
-     また，$a<b$を満たす$a,b \in R$をとる．
-     $f(a)f(b)<0$であれば，ある$x \in (a,b)$が存在し，$f(x)=0$を満たす．
+     任意の$a,b \in R$に対し，
+     $a < b$かつ
+     $f(a)f(b)<0$であれば，ある$x \in (a,b)$が存在して，$f(x)=0$を満たす．
 \end{proposition}
 \begin{proof}
      $R[\sqrt{-1}]$が代数的閉体であるから，
@@ -204,39 +203,48 @@ $\Ralg$に属する元を実代数的数という．
 
 \begin{proposition}\label{proposition:Rolle}
      $R$を実閉体とし，$f \in R[X]$とする．
-     また，$a, b \in R$を$a<b$とする．
-     $f(a)=f(b)=0$であるとき，ある$x \in (a,b)$が存在し，$f'(x)=0$である．
+     任意の$a, b \in R$に対し，$a<b$かつ
+     $f(a)=f(b)=0$であれば，ある$x \in (a,b)$が存在して，$f'(x)=0$である．
 \end{proposition}
 \begin{proof}
      $(a,b)$上に$f(X)$の根がない場合について示せば十分である．
      実際，もし$(a,b)$上に$f(X)$の根が存在するとき，それらの根を$a < x_1 < \dots < x_k < b$とすれば，
      $x_1$を改めて$b$とすることで$(a,b)$上に$f(X)$の根がない場合に帰着する．
 
-     よって以下では，$(a,b)$上に$f(X)$の根がないとする．
+     $(a,b)$上に$f(X)$の根がないと仮定し，
      \begin{equation}
      f(X) = (X-a)^m(X-b)^ng(X), \, g(a)\neq0,\, g(b)\neq0
      \end{equation}
-     とする．このとき，$(a,b)$上$g(X)$の根がないことから，\cref{proposition:intermediate}より，$g(a)g(b)>0$である．
-     
-     $g_1(X) := m(X-b)g(X)+n(X-a)g(X)+(X-a)(X-b)g'(X)$とおくと．
+     とおく．このとき，$(a,b)$上$g(X)$の根がないことから，\cref{proposition:intermediate}より，$g(a)g(b)>0$である．
+     \begin{equation}
+     g_1(X) \coloneqq m(X-b)g(X)+n(X-a)g(X)+(X-a)(X-b)g'(X)
+     \end{equation}
+     とおくと，
      \begin{equation}
           f'(X) = (X-a)^{m-1}(X-b)^{n-1}g_1(X)
      \end{equation}
      である．
-     このとき，$g_1(a) = m(a-b)g(a)$, $g_1(b)=n(b-a)g(b)$であるから，$g_1(a)g_1(b)<0$である．
+     このとき，
+     \begin{align}
+     g_1(a) &= m(a-b)g(a), \\
+     g_1(b) &= n(b-a)g(b)
+     \end{align}
+     であるから，$g_1(a)g_1(b)<0$である．
      よって，\cref{proposition:intermediate}より，ある$x \in (a, b)$が存在し$g_1(x)=0$である．
      この$x \in (a,b)$に対して$f'(x)=0$である．
 \end{proof}
 
 \begin{corollary}\label{corollary:mean-value}
-     $R$を実閉体とし，$f \in R[X]$とする．また，$a, b \in R$を$a<b$とする．
-     このとき，ある$c \in (a,b)$が存在して，$f(b)-f(a) = (b-a)f'(c)$を満たす．
+     $R$を実閉体とし，$f \in R[X]$とする．
+     任意の$a, b \in R$に対して，
+     $a<b$であれば，
+     ある$c \in (a,b)$が存在して，$f(b)-f(a) = (b-a)f'(c)$を満たす．
 \end{corollary}
 
 \begin{proof}
      $F(X) \in R[X]$を，
      \begin{equation}
-          F(X) := f(X) - \left\{\frac{f(b)-f(a)}{b-a}(X-a) + f(a)\right\}
+          F(X) \coloneqq f(X) - \left\{\frac{f(b)-f(a)}{b-a}(X-a) + f(a)\right\}
      \end{equation}
      と定義すると，$F(a)=F(b)=0$であるから，\cref{proposition:Rolle}より，
      ある$c \in (a,b)$が存在して，$F'(c)=0$を満たす．
@@ -244,22 +252,22 @@ $\Ralg$に属する元を実代数的数という．
 \end{proof}
 
 \begin{corollary}\label{corollary:monotone}
-     $R$を実閉体とし，$f \in R[X]$とする．また，$a, b \in R$を$a<b$とする．このとき，以下が成り立つ．
+     $R$を実閉体とし，$f \in R[X]$とする．任意の$a, b \in R$に対して、$a<b$であれば以下が成り立つ．
      \begin{enumerate}
           \item \label{corollary:monotone-1}
-          任意の$x \in (a,b)$について$f'(x)>0$ならば，$f(X)$は$[a,b]$上狭義単調増加である．
+          任意の$x \in (a,b)$に対して$f'(x)>0$ならば，$f(X)$は$[a,b]$上狭義単調増加である．
           \item \label{corollary:monotone-2}
-          任意の$x \in (a,b)$について$f'(x)<0$ならば，$f(X)$は$[a,b]$上狭義単調減少である．
+          任意の$x \in (a,b)$に対して$f'(x)<0$ならば，$f(X)$は$[a,b]$上狭義単調減少である．
      \end{enumerate}
 \end{corollary}
 \begin{proof}
      \ref{corollary:monotone-2}は\ref{corollary:monotone-1}と同様に示せるので，\ref{corollary:monotone-1}のみ示す．
-     $f(X)$が$[a,b]$上狭義単調増加でないとすると，ある$x \in (a,b)$について$f'(x) \leq 0$となることを示す．
+     $f(X)$が$[a,b]$上狭義単調増加でないとすると，ある$x \in (a,b)$に対して$f'(x) \leq 0$となることを示す．
      $f(X)$が$[a,b]$上狭義単調増加でないとすると，
      $a \leq x_0 < x_1 \leq b$である$x_0, x_1 \in R$が存在して，$f(x_0) \geq f(x_1)$を満たす．
-     このとき，\cref{corollary:mean-value}より，$x_0 < x < x_1$である$x \in (a,b)$が存在し，
-     $f(x_1) - f(x_0) = f'(x)(x_1 - x_0)$を満たす．
-     この$x \in (a,b)$に対して$f'(x) \leq 0$となり，\ref{corollary:monotone-1}の証明が完了した．
+     このとき，\cref{corollary:mean-value}より，$x_0 < x < x_1$である$x \in (a,b)$が存在して，
+     $f(x_1) - f(x_0) = f'(x)(x_1 - x_0)$を満たすが、
+     この$x \in (a,b)$に対して$f'(x) \leq 0$となる．
 \end{proof}
 
 \section{一階述語論理}
