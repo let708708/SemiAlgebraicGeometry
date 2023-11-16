@@ -86,13 +86,11 @@
 
 \section{実閉体}
 
-\todo[inline]{
-     実体，順序体の定義，およびその同値性は，初出の論文が分からない．
-}
 まず，\cite{MR3069467}でArtinとSchreierにより導入された，実閉体の概念についてまとめる．
 実閉体は，実数体を拡張して定義される概念であり，実閉体上でも実数体と類似した解析的な性質が成り立つ．
 
-まず始めに，順序体の定義を述べる．以下の定義は，\cite[Definition 1.1.1.]{MR1659509}に従った．
+まず始めに，順序体の定義を述べる．
+以下の定義は\cite[Definition 1.1.1.]{MR1659509}に従った．
 
 \begin{definition}[順序体]
      体$F$と$F$上の全順序$<$の組$(F,<)$が次の性質を満たすとき，$(F,<)$を順序体(ordered field)という．
@@ -104,7 +102,7 @@
 
 以下の定理が成り立つ．
 
-\begin{theorem}[{\cite[Theorem 1.1.8.]{MR1659509}}]\label{theorem:real-field}
+\begin{theorem}[{cf.~\cite[Theorem 1.1.8.]{MR1659509}}]\label{theorem:real-field}
      $F$を体とする．このとき，以下は同値である．
      \begin{enumerate}
           \item \label{theorem:real-field-1}
@@ -145,15 +143,16 @@
 実数体$\R$は代数拡大で実体になるものは自分自身のみである．
 そのような性質に注目し，実閉体の概念を導入する．
 
-\begin{definition}[{\cite[section 1.]{MR3069467}}] \label{definition:RCF}
-     実体$F$が実閉体(real closed field)であるとは，$F$の代数拡大で実体になるものは$F$自身に限ることである．
+\begin{definition}[{\cite[Section I]{MR3069467}}] \label{definition:RCF}
+     実体$F$が実閉体(real closed field)であるとは，
+     $F$の代数拡大で実体になるものは$F$自身に限ることを指す．
 \end{definition}
 
 先ほど述べたように，有理数体$\Q$は実閉体ではないが，実数体$\R$は実閉体である．
 また，代数的数全体(すなわち, 有理数体$\Q$の代数的閉包) $\overline{\Q}$と実数体$\R$の共通部分$\Ralg \coloneqq \overline{\Q} \cap \R$は実閉体である．
 $\Ralg$の元を実代数的数という．
 
-\begin{theorem}[{\cite[Staz 1.-3.]{MR3069467}}] \label{theorem:real-closed-field}
+\begin{theorem}[{\cite[S\"{a}tze 1--3]{MR3069467}}] \label{theorem:real-closed-field}
      体$F$について，以下は同値である．
      \begin{enumerate}
           \item 体$F$は実閉体である．
