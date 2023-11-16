@@ -311,9 +311,7 @@ $f^\mathcal{M}$, $R^\mathcal{M}$, $c^\mathcal{M}$を，
 $\mathcal{L}$構造の性質を表す論理式を定義する．
 
 論理式は，言語$\mathcal{L}$の記号と，
-変数記号
-\footnote{変数記号は，$a, b, \dots, x, y, z, x_1, x_2, \dots$などの記号も含むとする．}
-(variable symbol)$v_1, v_2, \dots$, 
+変数記号(variable symbol)$v_1, v_2, \dots$, 
 等号(equality symbol) $=$,
 論理記号(logic symbol) $\lor, \land, \lnot, \exists, \forall$
 および括弧$(, )$からなる文字列である．
@@ -355,53 +353,114 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
      次に，$\mathcal{L}$論理式($\mathcal{L}$-formula)の集合を，以下を満たす最小の集合$\mathcal{W}$で定義する．
      \begin{enumerate}
           \item $\mathcal{W}$は，全ての$\mathcal{L}原子論理式$を含む．
-          \item $\phi \in \mathcal{W}$ならば，$(\lnot \phi) \in \mathcal{W}$である．
+          \item $\phi \in \mathcal{W}$ならば，$\lnot \phi \in \mathcal{W}$である．
           \item $\phi, \psi \in \mathcal{W}$ならば，$(\phi \lor \psi), (\phi \land \psi) \in \mathcal{W}$である．
-          \item $\phi \in \mathcal{W}$ならば，任意の変数記号$v_i$に対し$(\forall v_i \phi), (\exists v_i \phi) \in \mathcal{W}$である．
+          \item $\phi \in \mathcal{W}$ならば，任意の変数記号$v_i$に対し$\forall v_i \phi, \exists v_i \phi \in \mathcal{W}$である．
      \end{enumerate}
 \end{definition}
 
-\todo[inline]{ここまで書いた．}
+\todo[inline]{自由変数の定義のみ，正しい定義ではなかった．そのため，現在微修正しかしていない．}
 
-論理式$\phi := \forall x (x^2 + y > 0)$について観察する．ここで，$x,y$はいずれも変数記号である．
+ここで，論理式$\phi := \forall x (x^2 + y > 0)$について観察する．ここで，$x,y$はいずれも変数記号である．
 
 これは，「全ての$x$に対して$x^2 + y > 0$が成り立つ」というように読むことができるが，$y$の値は自由に設定することができ，$y$の値が定まらない限りは真であるか偽であるかははっきりしない．
-この$y$のように，自由な状態にある変数記号を論理式$\phi$の自由変数といい，一方$x$のように自由な状態にない変数記号を論理式$\phi$の束縛変数という．
+この$y$のように，自由な状態にある変数記号を論理式$\phi$の自由変数という．
 
 厳密には，次のように定義する．
 
 \begin{definition}[自由変数の定義]
-     言語$L$を一つとる．
-     項$t$に登場する全ての変数記号を$\Var(t)$で表す．
+     $\mathcal{L}$を言語とする．
+     $\mathcal{L}$項$t$に登場する全ての変数記号を$\Var(t)$で表す．
 
-     論理式$\phi$の自由変数(free variable)全体$\Var(\phi)$を，次のように論理記号及び量化記号の数に関して帰納的に定義する．
+     $\mathcal{L}$論理式$\phi$の自由変数(free variable)全体$\Var(\phi)$を，次のように帰納的に定義する．
      \begin{enumerate}
           \item $t_1, t_2$を項とするとき，$\Var((t_1=t_2)):=\Var(t_1)\cup\Var(t_2)$と定義する．
           \item $R \in L$を$n$変数述語記号，$t_1, \dots, t_n$を項とするとき，$\Var(R(t_1, \dots, t_n)):= \bigcup_{i=1}^n \Var(t_i)$と定義する．
-          \item 論理式$\phi$に対して$\Var(\phi)$が定義されているとき，$\Var((\lnot \phi)):=\Var(\phi)$と定義する．
+          \item 論理式$\phi$に対して$\Var(\phi)$が定義されているとき，$\Var(\lnot \phi):=\Var(\phi)$と定義する．
           \item 論理式$\phi, \psi$に対して$\Var(\phi), \Var(\psi)$が定義されているとき，
           $\Var((\phi \lor \psi)):=\Var(\phi)\cup\Var(\psi)$,
           $\Var((\phi \land \psi)):=\Var(\phi)\cup\Var(\psi)$,
-          $\Var((\phi \rightarrow \psi)):=\Var(\phi)\cup\Var(\psi)$
           と定義する．
           \item 論理式$\phi$に対して，$\Var(\phi)$が定義されているとき，変数記号$x$に対して
-          $\Var((\forall x\phi)):=\Var(\phi) \setminus \{x\}$,
-          $\Var((\exists x\phi)):=\Var(\phi) \setminus \{x\}$
+          $\Var(\forall x\phi):=\Var(\phi) \setminus \{x\}$,
+          $\Var(\exists x\phi):=\Var(\phi) \setminus \{x\}$
           と定義する．
      \end{enumerate}
 
-     論理式$\phi$に登場する自由変数が高々$x_1, \dots, x_n$である事を明示したいとき，$\phi(x_1, \dots, x_n)$と書く．ただし，登場しない自由変数があっても良い．
+     $\mathcal{L}$論理式$\phi$に登場する自由変数が高々$x_1, \dots, x_n$である事を明示したいとき，$\phi(x_1, \dots, x_n)$と書く．ただし，登場しない自由変数があっても良い．
 
-     項$t$が自由変数を持たないとき，すなわち$\Var(t)=\emptyset$であるとき，$t$を閉項(closed term)という．
-     また，論理式$\phi$が自由変数を持たないとき，すなわち$\Var(\phi)=\emptyset$であるとき，$\phi$を閉論理式(closed formula)という．
+     $\mathcal{L}$項$t$が自由変数を持たないとき，すなわち$\Var(t)=\emptyset$であるとき，$t$を閉項(closed term)という．
+     また，$\mathcal{L}$論理式$\phi$が自由変数を持たないとき，すなわち$\Var(\phi)=\emptyset$であるとき，
+     $\phi$を$\mathcal{L}$閉論理式(closed $\mathcal{L}$-formula)，あるいは$\mathcal{L}$文($\mathcal{L}$-sentense)という．
 \end{definition}
 
-\begin{definition}[理論]
-     言語$L$に対して，閉論理式からなる集合を$L$理論($L$-theory)，あるいは単純に理論(theory)という．
+\todo[inline]{ここから改めて書き始める．}
+
+\begin{definition}
+     $\mathcal{M}$を$\mathcal{L}$構造とする．
+     $\mathcal{L}$論理式$\phi$が$\bar{v} = (v_{i_1}, \dots, v_{i_m})$を自由変数に持つとし，$\bar{a} = (a_{i_1}, \dots, a_{i_m}) \in M^m$とする．
+     このとき，帰納的に$\mathcal{M} \models \phi(\bar{a})$を定義する．
+     \begin{enumerate}
+          \item 
+               $\phi$が$(t_1=t_2)$である場合，
+               $\mathcal{M} \models \phi(\bar{a})$を$t_1^\mathcal{M}(\bar{a}) = t_2^\mathcal{M}(\bar{a})$により定義する．
+          \item 
+               $\phi$が$(R(t_1, \dots, t_{n_R}))$である場合，
+               $\mathcal{M} \models \phi(\bar{a})$を$(t_1^\mathcal{M}(\bar{a}), \dots, t_{n_R}^\mathcal{M}(\bar{a}))\in R^\mathcal{M}$により定義する．
+          \item
+               $\phi$が$\lnot \psi$である場合，
+               $\mathcal{M} \models \phi(\bar{a})$を，$\mathcal{M} \models \psi(\bar{a})$でないことにより定義する．
+          \item
+               $\phi$が$(\psi \lor \theta)$である場合，
+               $\mathcal{M} \models \phi(\bar{a})$を，
+               $\mathcal{M} \models \psi(\bar{a})$または
+               $\mathcal{M} \models \theta(\bar{a})$であることにより定義する．
+          \item
+               $\phi$が$(\psi \land \theta)$である場合，
+               $\mathcal{M} \models \phi(\bar{a})$を，
+               $\mathcal{M} \models \psi(\bar{a})$かつ
+               $\mathcal{M} \models \theta(\bar{a})$であることにより定義する．
+          \item
+               $\phi$が$\exists v_j\psi(\bar{v}, v_j)$である場合，
+               $\mathcal{M} \models \phi(\bar{a})$を，
+               ある$b \in \mathcal{M}$が存在して
+               $\mathcal{M} \models \psi(\bar{a},b)$であることにより定義する．
+          \item
+          $\phi$が$\forall v_j\psi(\bar{v}, v_j)$である場合，
+          $\mathcal{M} \models \phi(\bar{a})$を，
+          全ての$b \in \mathcal{M}$に対して
+          $\mathcal{M} \models \psi(\bar{a},b)$であることにより定義する．
+     \end{enumerate}
+     $\mathcal{M} \models \phi(\bar{a})$であるとき，$\mathcal{L}$構造は$\phi(\bar{a})$を満たすという．
+\end{definition}
+
+\begin{remark}
+     以下の点に注意しておく．
+
+     \begin{itemize}
+          \item
+               $\phi \rightarrow \psi$を，$\lnot \phi \lor \psi$の省略とする．また，
+               $\phi \leftrightarrow \psi$を，$(\phi \rightarrow \psi)\land(\psi \rightarrow \phi)$の省略とする．
+          \item
+               有限個の論理式$\phi_1, \dots, \phi_n$に対して，$\bigvee_{i=1}^n \phi_i$を$\phi_1 \lor \dots \lor \phi_n$の省略とする．
+               また，$\bigwedge_{i=1}^n \phi_i$を$\phi_1 \land \dots \land \phi_n$の省略とする．
+          \item     
+               変数記号は，$v_1, v_2, \dots, $に加え，$w, x, y, z, \dots$なども用いることにする．
+          \end{itemize}
+\end{remark}
+
+\begin{definition}
+     $\mathcal{L}$を言語とする．
+     $\mathcal{L}$文からなる集合$T$を，$\mathcal{L}$理論($\mathcal{L}$-theory)という．
+     さらに，$\mathcal{L}$構造$\mathcal{M}$が，任意の$\phi \in T$に対し
+     $\mathcal{M} \models \phi$を満たすとき，$\mathcal{L}$構造$\mathcal{M}$を$\mathcal{L}$理論$T$のモデル(model)と言い，
+     $\mathcal{M} \models T$とかく．
 \end{definition}
 
 
 \todo[inline]{
+     ここまで文献を見て書いた．
+
      ここは信頼できる文献を参照して書いたほうがいい．   
      最後の主張は正しくない．
      AxiomScheme(公理図式)なので，そもそも公理じゃない．
@@ -446,69 +505,6 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
      ただし，項$t_1, t_2$に対し，$t_1 \leq t_2$は$(t_1 < t_2)\lor(t_1 = t_2)$の省略記号とする．
      また，項$t$と$n=1,2,\dots$に対し，$t^n$は，$t^n:=t \cdot t^{n-1}$, $t^1:=t$により帰納的に定義された省略記号とする．
 \end{example}
-
-理論$\RCF$の閉論理式をすべて満たすような「数学的構造」を，実閉体とよびたい．
-このような定義を正当化させるには，この「数学的構造」が，言語$L_\mathrm{OR}$で書かれた閉論理式を，真か偽か判定できることが必要である．
-そのために，言語を解釈することのできる「数学的構造」を定義する．
-
-\begin{definition}[構造の定義]
-     言語$L$において，$L$構造($L$-structure)とは，空でない集合$M$と，次のようなデータの組$\M=(M,\dots)$である．
-     \begin{itemize}
-          \item 各$n$変数述語記号$R \in L$に対応する部分集合$R^\M \subset M^n$.
-          \item 各$n$変数関数記号$f \in L$に対応する写像$\map{f^\M}{M^n}{M}$.
-          \item 各定数記号$c \in L$に対応する元$c^\M \in M$.
-     \end{itemize}
-\end{definition}
-
-$L$構造$\M$が与えられたとき，
-$L$論理式$\phi$が$L$構造$\M$で成り立つかどうか，すなわち充足関係があるかどうかを定義できる．
-
-\todo[inline]{定義は引用した方がいい.}
-\begin{definition}
-     $L$-構造$\M = (M,\dots)$をとる．
-     言語$L$に形式的な定数記号$\{c_m \mid m \in M\}$を追加した言語を$L(\M)$とする．
-     ここで，各$m \in M$に対し, $c_m^{\M}:=m$とすることで，
-     $\M$は$L(\M)$構造に拡張できる．
-     \begin{itemize}
-          \item $L(\M)$閉項$t$の解釈$t^\M$を帰納的に定義する．
-          \begin{enumerate}
-               \item $f$を$n$変数関数記号とし, 閉項$t_1$, \dots $t_n$のそれぞれの解釈$t_1^\M,\dots,t_n^\M$が定まっているとする．
-               このとき，$(f(t_1,\dots,t_n))^\M:=f^\M(t_1^\M,\dots,t_m^\M)$と定める．
-          \end{enumerate}
-          \item $L(\M)$閉論理式$\phi$に対し, 充足関係(satisfaction relation)があること（$\M \models \phi$とかく）を帰納的に定義する．
-          \begin{enumerate}
-               \item $t_1,t_2$を$L(\M)$上の閉項とするとき, 
-               \begin{equation}
-                    \M \models (t_1 = t_2) \defiff t_1^\M = t_2^\M,
-               \end{equation}
-               \item $t_1,\dots t_n$を$L(\M)$閉項，$R$を$n$変数述語記号とするとき，
-               \begin{equation}
-                    \M \models (R(t_1, \dots, t_n)) \defiff (t_1^\M, \dots, t_n^\M) \in R^\M,
-               \end{equation}
-               \todo[inline]{$\not \models$ は定義されていない．}
-               \item $L(\M)$閉論理式$\phi$に対し
-               \begin{equation}
-                    \M \models (\lnot \phi) \defiff \M \not\models \phi,
-               \end{equation}
-               \item $L(\M)$閉論理式$\phi, \psi$に対し
-               \begin{align}
-                    &\M \models (\phi \lor \psi) \defiff \M \models \phi \text{または} \M \models \psi,\\
-                    &\M \models (\phi \land \psi) \defiff \M \models \phi \text{かつ} \M \models \psi,\\
-                    &\M \models (\phi \rightarrow \psi) \defiff \M \not\models \phi \text{または} \M \models \psi,
-               \end{align}
-               \item 変数記号が高々$x$のみである$L(\M)$論理式$\phi(x)$に対し
-               \begin{align}
-                    &\M \models (\forall x \phi(x)) \defiff \text{任意の$m \in M$に対し}\M \models \phi(c_m),\\
-                    &\M \models (\exists x \phi(x)) \defiff \text{ある$m \in M$に対し}\M \models\phi(c_m).
-               \end{align}
-          \end{enumerate}
-     \end{itemize}
-\end{definition}
-
-\begin{definition}
-     $L$を言語とし，$T$を$L$理論とする．
-     $L$構造$\M$が任意の$\phi \in T$に対して$\M\models \phi$であるとき，$L$構造$\M$を$T$のモデル(model)といい，$\M \models T$とかく．
-\end{definition}
 
 順序環の言語$L_{\mathrm{OR}}$において，$L_\mathrm{OR}$構造$\R=(\R,<,+,\cdot,1,0)$や$\Ralg=(\Ralg,<,+,\cdot,1,0)$は，
 \begin{equation}
