@@ -270,62 +270,98 @@ $\Ralg$の元を実代数的数という．
 \end{proof}
 
 \section{一階述語論理}
-一階述語論理式(first-order logic)は，
-\todo[inline]{変数記号，論理記号，量化記号を英語でも何というかを書くべき．}
-変数記号，論理記号 ($=, \lnot, \lor, \land, \rightarrow$), 量化記号($\forall, \exists$)
-と，言語$L$で記述される．
 
-\todo[inline]{
-     言語も何と書くか書くべき，
-     述語記号，定数記号，関数記号の集合を区別するべき．
-     このあたりはよく検討するべき．教科書に合わせたほうが良さそう．
-}
-ここで，言語$L$とは，述語記号，関数記号，定数記号からなる集合である．
-ただし，各述語記号$R \in L$は，何個の変数を受け取るか定まっているものとし，
-同様に各関数記号$f \in L$は，何個の変数を受け取るか定まっているものとする．
-$n$個の変数を受け取る述語記号を$n$変数述語記号といい，$n$個の変数を受け取る関数記号を$n$変数関数記号という．
+\todo[inline]{David Marker Model Theory: An Introductionに従って，この節を書く．}
+
+\begin{definition}
+     以下のデータの組$\mathcal{L}$を言語(Language)という．
+     \begin{enumerate}
+          \item 関数記号(function symbol)の集合$\mathcal{F}$と，各$f \in \mathcal{F}$に対し正整数$n_f$を対応させる写像．
+          \item 述語記号(relation symbol)の集合$\mathcal{R}$と，各$R \in \mathcal{R}$に対し正整数$n_R$を対応させる写像．
+          \item 定数記号(constant symbol)の集合$\mathcal{C}$．
+     \end{enumerate}
+\end{definition}
+
+ここで，$n_f$や$n_R$は，関数記号$f$と関係記号$R$がそれぞれ$n_f$変数，$n_R$変数を取ることを意味する．
 
 \begin{example}[順序環の言語]
-     次の記号からなる言語$L_\mathrm{OR}$を，順序環の言語という．
+     次の記号からなる言語$\mathcal{L}_\mathrm{OR}$を，順序環の言語(the language of order rings)という．
      \begin{itemize}
-          \item 2変数述語記号 $<$,
           \item 2変数関数記号 $+$, $\cdot$,
+          \item 2変数述語記号 $<$,
           \item 定数記号 $1$, $0$.
      \end{itemize}
 \end{example}
 
-言語$L$が定義されると，順に項，原子論理式，論理式が定義される．
+次に，言語$\mathcal{L}$が与えられたときの構造について定義する．
 
-\begin{definition}[項の定義]
-     言語$L$に対して，項(term)が帰納的に定義される．
+\begin{definition}
+     以下のデータの組$\mathcal{M}$を$\mathcal{L}$構造($\mathcal{L}$-structure)という．
      \begin{enumerate}
-          \item 変数記号，定数記号は項である．
-          \item $t_1, \dots, t_n$がいずれも項とする．任意の$n$変数関数記号$f \in L$に対し，$f(t_1, \dots, t_n)$は項である．
-          \item 以上の規則により定まる記号列のみが項である．
+          \item 空でない集合$M$. 
+          \item 各$f \in \mathcal{F}$に対し，関数$\map{f^\mathcal{M}}{M^{n_f}}{M}$を対応させる写像．
+          \item 各$R \in \mathcal{R}$に対し，集合$R^\mathcal{M} \subset M^{n_R}$を対応させる写像．
+          \item 各$c \in \mathcal{C}$に対し，$c^\mathcal{M} \in M$を対応させる写像．
      \end{enumerate}
-     言語$L$上の項であることを強調したいとき，$L$項($L$-term)と呼ぶ．
 \end{definition}
 
-\todo[inline]{$R$は$n$変数述語記号とする，のように書くべき．$R \in L$のような書き方を避けるべき．}
+$f^\mathcal{M}$, $R^\mathcal{M}$, $c^\mathcal{M}$を，
+それぞれ$f \in \mathcal{F}$, $R \in \mathcal{R}$, $c \in \mathcal{C}$の解釈(interpretation)と呼ぶ，
 
-\begin{definition}[論理式の定義]
-     言語$L$に対して，原子論理式(atomic formula)を，次のいずれかの形をした記号列で定義する．
+$\mathcal{L}$構造の性質を表す論理式を定義する．
+
+論理式は，言語$\mathcal{L}$の記号と，
+変数記号
+\footnote{変数記号は，$a, b, \dots, x, y, z, x_1, x_2, \dots$などの記号も含むとする．}
+(variable symbol)$v_1, v_2, \dots$, 
+等号(equality symbol) $=$,
+論理記号(logic symbol) $\lor, \land, \lnot, \exists, \forall$
+および括弧$(, )$からなる文字列である．
+
+\begin{definition}
+     $\mathcal{L}$項($\mathcal{L}$-term)の集合とは，次を満たす最小の集合$\mathcal{T}$である．
      \begin{enumerate}
-          \item $t_1, t_2$を項として，$(t_1=t_2)$.
-          \item $R \in L$を$n$変数述語記号，$t_1, \dots, t_n$を項として，$(R(t_1, \dots, t_n))$.
+          \item 定数記号$c \in \mathcal{C}$に対し，$c \in \mathcal{T}$である．
+          \item 変数記号$v_i$, $i=1, 2, \dots$, に対し，$v_i \in \mathcal{T}$である．
+          \item 関数記号$f \in \mathcal{F}$および$t_1, \dots, t_{n_f} \in \mathcal{T}$に対し，$f(t_1, \dots, t_{n_f}) \in \mathcal{T}$である．
      \end{enumerate}
-     
-     また，原子論理式$\phi$またはその否定$(\lnot \phi)$を，リテラル(literal)と呼ぶ．
-     さらに，言語$L$に対して，論理式(formula)が帰納的に定義される．
-     \begin{enumerate}
-          \item 原子論理式は論理式である．
-          \item $\phi$が論理式であるとすると，$(\lnot \phi)$は論理式である．
-          \item $\phi$,$\psi$が論理式であるとすると，$(\phi \lor \psi)$, $(\phi \land \psi)$, $(\phi \rightarrow \psi)$はいずれも論理式である．
-          \item $\phi$が論理式であるとすると，任意の変数記号$x$に対して$(\forall x \phi)$, $(\exists x \phi)$は論理式である．
-          \item 以上の規則により定まる記号列のみが論理式である．
-     \end{enumerate}
-     言語$L$の論理式であることを強調したいときは，$L$論理式($L$-formula)と呼ぶ．
 \end{definition}
+
+$\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変数記号が高々$v_{i_1}, \dots, v_{i_m}$であるとする．
+このとき，$t$を写像$\map{t^\mathcal{M}}{M^m}{M}$として解釈したい．
+そこで，$\bar{a} = (a_{i_1}, \dots, a_{i_m}) \in M^m$に対し，$t^\mathcal{M}(\bar{a})$を，以下のように帰納的に定義する．
+
+\begin{enumerate}
+     \item 定数記号$c \in \mathcal{C}$に対し，$c^\mathcal{M}(\bar{a}) := c^\mathcal{M}$とする．
+     \item 変数記号$v_{i_j}$, $j=1, \dots, m$, に対し，$v_{i_j}(\bar{a}) := a_{i_j}$とする．
+     \item 
+     関数記号$f \in \mathcal{F}$とする．
+     さらに$t_1, \dots, t_{n_f}$を，文字列に含む変数記号が高々$v_{i_1}, \dots, v_{i_m}$である$\mathcal{L}$項で，
+     それぞれ$t_i^\mathcal{M}(\bar{a})$が定義されているとする．
+     このとき，$t = f(t_1, \dots, t_{n_f})$に対し，
+     \begin{equation}
+          t^\mathcal{M}(\bar{a}):= f^\mathcal{M}(t_1^\mathcal{M}(\bar{a}), \dots, t_{n_f}^\mathcal{M}(\bar{a}))
+     \end{equation}
+     と定義する．
+\end{enumerate}
+
+\begin{definition}
+     まず，$\mathcal{L}$原子論理式(atomic $\mathcal{L}$-formula)を，次のいずれかの形をした記号列で定義する．
+     \begin{enumerate}
+          \item $t_1, t_2$を$\mathcal{L}$項として，$(t_1 = t_2)$.
+          \item $R \in \mathcal{R}$を述語記号，$t_1, \dots, t_{n_R}$を$\mathcal{L}$項として，$(R(t_1, \dots, t_{n_R}))$.
+     \end{enumerate}
+
+     次に，$\mathcal{L}$論理式($\mathcal{L}$-formula)の集合を，以下を満たす最小の集合$\mathcal{W}$で定義する．
+     \begin{enumerate}
+          \item $\mathcal{W}$は，全ての$\mathcal{L}原子論理式$を含む．
+          \item $\phi \in \mathcal{W}$ならば，$(\lnot \phi) \in \mathcal{W}$である．
+          \item $\phi, \psi \in \mathcal{W}$ならば，$(\phi \lor \psi), (\phi \land \psi) \in \mathcal{W}$である．
+          \item $\phi \in \mathcal{W}$ならば，任意の変数記号$v_i$に対し$(\forall v_i \phi), (\exists v_i \phi) \in \mathcal{W}$である．
+     \end{enumerate}
+\end{definition}
+
+\todo[inline]{ここまで書いた．}
 
 論理式$\phi := \forall x (x^2 + y > 0)$について観察する．ここで，$x,y$はいずれも変数記号である．
 
