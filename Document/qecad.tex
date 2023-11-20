@@ -497,17 +497,30 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
           \item 
           定数記号$1$の$p$個の和$1+(1 + (\dots (1 + 1)))$の省略として$p$を用いる．
           \item 
-          項$t, t'$に対し，$t>t'$および$t'<t$を，$t - t'>0$の省略とする．
+          項$t, t'$に対し，$t>t'$および$t'<t$を，$t + (- t')>0$の省略とする．
           また，$t\geq t'$,$t \leq t'$を，それぞれ$(t>t') \lor (t=t')$，$(t<t') \lor (t=t')$の省略とする．
      \end{itemize}
 \end{remark}
 
 
-順序環の言語$L_{\mathrm{OR}}$において，$L_\mathrm{OR}$構造$\R=(\R,0,1,-,+,\cdot,>0)$や$\Ralg=(\Ralg,0,1,-,+,\cdot,>0)$は，
+順序環の言語$\mathcal{L}_{\mathrm{OR}}$において，$\mathcal{L}_\mathrm{OR}$構造$\R=(\R,0,1,-,+,\cdot,>0)$や$\Ralg=(\Ralg,0,1,-,+,\cdot,>0)$は，
 \begin{equation}
      \R \models \RCF, \quad \Ralg \models \RCF
 \end{equation}
 であり，構造$\R$,$\Ralg$はいずれも実閉体の理論$\RCF$のモデルである．
+
+\begin{definition}[{\cite[Definition 1.2.12]{MR1924282}}]
+     $T$を$\mathcal{L}$理論とし，$\phi$を$\mathcal{L}$文とする．
+     $\phi$が$T$の論理的帰結(logical consequence)であるとは，任意の$T$のモデル$\mathcal{M}$に対し，
+     $\mathcal{M} \models \phi$であることと定義する．
+     $\phi$が$T$の論理的帰結であるとき，$T \models \phi$とかく．
+\end{definition}
+
+$\mathcal{L}$論理式$\phi$に現れる自由変数が高々$v_1, \dots, v_n$であるとき，
+$T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つとき，
+同様に$\mathcal{L}$論理式$\phi$は$\mathcal{L}$理論$T$の論理的帰結であるといい，$T \models \phi$と表す．
+
+\todo[inline]{ここで，次の節のために冠頭標準形に帰着可能であることと，boolean combinationは標準形に直せること(Exc.1.4.2)は後程用いるのでここで示した方が良さそう．}
 
 \section{量化記号消去}
 
@@ -540,11 +553,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
 
 
 \begin{definition}
-$T$を言語$L$上の理論とし，$\phi$を$L$上の論理式とする．
-全ての$T$のモデル$\M$に対して$\M \models \phi$が成り立つとき，$\phi$は$T$の帰結(consequence)であるといい，$T \models \phi$とかく．
-
-\todo[inline]{理論$T$が量化記号消去を「持つ」と書くべきか？ 検討する．以降の表現も気を付ける．}
-理論$T$で量化記号消去(quantifier elimination)ができるとは，
+理論$T$で量化記号消去(quantifier elimination)を持つとは，
 $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号のない論理式$\psi(x_1,\dots, x_n)$が存在し，
 \begin{equation}
      T \models \forall x_1 \dots \forall x_n(\phi(x_1,\dots,x_n) \leftrightarrow \psi(x_1, \dots, x_n))
@@ -560,7 +569,6 @@ $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号のな�
      実閉体の理論$\RCF$は量化記号消去ができる．
 \end{theorem}
 
-\todo[inline]{「以降この節は」「この節の残りでは」等に直すべき．でもそれも砕けすぎている．}
 以降この節は\cref{theorem:Tarski}の証明を述べる．
 
 この定理の証明および後々の議論のため，言語$L_\mathrm{OR} = \{<, +, \cdot, 1, 0\}$上の原子論理式について注意をしておく．
@@ -617,7 +625,7 @@ $\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意してお�
           をみたす．
      \end{enumerate}
      実際，任意に与えられた量化記号のない論理式$\phi(X, Y_1, \dots, Y_n)$は，多項式$f_{i,j} \in \Z[X, Y_1, \dots, Y_n]$($i=1, \dots, k, j=1, \dots, l_i$)
-     と$\map{\sigma_i}{\{1, \dots, l_i\}}{P}$を用いて，和積標準形\todo[inline]{ 「を用いて，表す」は違和感ない．和関標準形は定義していない．}
+     と$\map{\sigma_i}{\{1, \dots, l_i\}}{P}$を用いて，和積標準形\todo[inline]{ 「を用いて，表す」は違和感ない．和積標準形は定義していない．}
      \begin{equation}
           \phi(X, Y_1, \dots, Y_n) \leftrightarrow \bigvee_i \bigwedge_j (\sign(f_{i,j}(X, Y_1, \dots, Y_n)) = \sigma_i(j))
      \end{equation}
