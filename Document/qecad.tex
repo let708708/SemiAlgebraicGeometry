@@ -273,7 +273,8 @@ $\Ralg$の元を実代数的数という．
 
 \cite{MR1924282}に従って一階述語論理についてまとめる．
 
-\begin{definition}
+\begin{definition}[{\cite[Definition 1.1.1
+     ]{MR1924282}}]
      以下のデータの組$\mathcal{L}$を言語(Language)という．
      \begin{enumerate}
           \item 関数記号(function symbol)の集合$\mathcal{F}$と，各$f \in \mathcal{F}$に対し正整数$n_f$を対応させる写像．
@@ -286,7 +287,7 @@ $\Ralg$の元を実代数的数という．
 
 次に，言語$\mathcal{L}$が与えられたときの構造について定義する．
 
-\begin{definition}
+\begin{definition}[{\cite[Definition 1.1.2]{MR1924282}}]
      以下のデータの組$\mathcal{M}$を$\mathcal{L}$構造($\mathcal{L}$-structure)という．
      \begin{enumerate}
           \item 空でない集合$M$. 
@@ -299,15 +300,14 @@ $\Ralg$の元を実代数的数という．
 $f^\mathcal{M}$, $R^\mathcal{M}$, $c^\mathcal{M}$を，
 それぞれ$f \in \mathcal{F}$, $R \in \mathcal{R}$, $c \in \mathcal{C}$の解釈(interpretation)と呼ぶ，
 
-$\mathcal{L}$構造の性質を表す論理式を定義する．
-
-論理式は，言語$\mathcal{L}$の記号と，
+次に，
+言語$\mathcal{L}$の記号のほかに，
 変数記号(variable symbol)$v_1, v_2, \dots$, 
 等号(equality symbol) $=$,
 論理記号(logic symbol) $\lor, \land, \lnot, \exists, \forall$
-および括弧$(, )$からなる文字列である．
+および括弧$(, )$を用いて，項と論理式を定義する．
 
-\begin{definition}
+\begin{definition}[{\cite[Definition 1.1.4]{MR1924282}}]
      $\mathcal{L}$項($\mathcal{L}$-term)の集合とは，次を満たす最小の集合$\mathcal{T}$である．
      \begin{enumerate}
           \item 定数記号$c \in \mathcal{C}$に対し，$c \in \mathcal{T}$である．
@@ -334,7 +334,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
      と定義する．
 \end{enumerate}
 
-\begin{definition}
+\begin{definition}[{\cite[Definition 1.1.5]{MR1924282}}]
      まず，$\mathcal{L}$原子論理式(atomic $\mathcal{L}$-formula)を，次のいずれかの形をした記号列で定義する．
      \begin{enumerate}
           \item $t_1, t_2$を$\mathcal{L}$項として，$(t_1 = t_2)$.
@@ -359,7 +359,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
 
 厳密には，次のように定義する．
 
-\begin{definition}[自由変数の定義]
+\begin{definition}
      $\mathcal{L}$を言語とする．
      $\mathcal{L}$項$t$に登場する全ての変数記号を$\Var(t)$で表す．
 
@@ -389,7 +389,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
 
 \todo[inline]{ここから改めて書き始める．}
 
-\begin{definition}
+\begin{definition}[{\cite[Definition 1.1.6]{MR1924282}}]
      $\mathcal{M}$を$\mathcal{L}$構造とする．
      $\mathcal{L}$論理式$\phi$が$\bar{v} = (v_{i_1}, \dots, v_{i_m})$を自由変数に持つとし，$\bar{a} = (a_{i_1}, \dots, a_{i_m}) \in M^m$とする．
      このとき，帰納的に$\mathcal{M} \models \phi(\bar{a})$を定義する．
@@ -444,7 +444,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
           \end{itemize}
 \end{remark}
 
-\begin{definition}
+\begin{definition}[{\cite[Section 1.2]{MR1924282}}]
      $\mathcal{L}$を言語とする．
      $\mathcal{L}$文からなる集合$T$を，$\mathcal{L}$理論($\mathcal{L}$-theory)という．
      さらに，$\mathcal{L}$構造$\mathcal{M}$が，任意の$\phi \in T$に対し
@@ -462,7 +462,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
           \item 2変数関数記号 $+$, $\cdot$.
           \item 1変数関係記号 $>0$.
      \end{itemize}
-     このとき，言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$を，次のように定義する．
+     このとき，言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$を，次の$\mathcal{L}_\mathrm{OR}$文からなる集合で定義する．
 
           \begin{enumerate}
                \item $\forall x \forall y \forall z(x + (y + z) = (x + y) + z)$
