@@ -26,7 +26,7 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Ralg}{\mathbb{R}_\mathrm{alg}}
 \newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Qua}{\mathfrak{Q}}
+\newcommand{\Qua}{\mathcal{Q}}
 \newcommand{\M}{\mathfrak{M}}
 \newcommand{\calL}{\mathcal{L}}
 \newcommand{\calS}{\mathcal{S}}
@@ -350,6 +350,8 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
      \end{enumerate}
 \end{definition}
 
+$\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル($\mathcal{L}$-literal)とよぶ．
+
 \todo[inline]{自由変数の定義のみ，正しい定義ではなかった．そのため，あまり修正していない．}
 
 ここで，論理式$\phi := \forall x (x^2 + y > 0)$について観察する．ここで，$x,y$はいずれも変数記号である．
@@ -424,7 +426,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
           全ての$b \in \mathcal{M}$に対して
           $\mathcal{M} \models \psi(\bar{a},b)$であることにより定義する．
      \end{enumerate}
-     $\mathcal{M} \models \phi(\bar{a})$であるとき，$\mathcal{L}$構造は$\phi(\bar{a})$を満たすという．
+     $\mathcal{M} \models \phi(\bar{a})$であるとき，$\mathcal{L}$構造$\mathcal{M}$は$\phi(\bar{a})$を満たすという．
 \end{definition}
 
 \begin{remark}
@@ -444,69 +446,6 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
           \end{itemize}
 \end{remark}
 
-ここで，以下の2つの命題を示す．
-
-\begin{proposition}
-     任意の量化記号のない$\mathcal{L}$論理式$\phi$に対して，有限個の$\mathcal{L}$論理式$L_{i,j}$が存在して次を満たす．
-     \begin{itemize}
-          \item 
-          各$L_{i,j}$は，原子論理式$\psi$または原子論理式の否定$\lnot \psi$である．
-          \item
-          任意の$\mathcal{L}$構造$\mathcal{M}$に対して$\mathcal{M} \models \phi \leftrightarrow \bigvee_{i=1}^n \bigwedge_{j=1}^{m_i} L_{i,j}$ を満たす．
-     \end{itemize}
-\end{proposition}
-
-\begin{proof}
-     $\phi$に含まれる論理記号の数に関する帰納法で証明する．
-     
-     まず，$\phi$が原子論理式の場合，$\mathcal{M} \models \phi \leftrightarrow \phi$であるから命題は成り立つ．
-
-     次に，論理記号の数が$k$個以下である場合に命題が成り立つと仮定して，論理記号の数が$k+1$個の論理式$\phi$の場合にも命題が成り立つことを示す．
-     \begin{itemize}
-          \item
-          $\phi = \psi \lor \psi'$または$\phi = \psi \land \psi'$の場合，帰納法の仮定より，
-          \begin{align}
-               \mathcal{M} \models \psi \leftrightarrow \bigvee_{i} \bigwedge_j L_{i,j},\\
-               \mathcal{M} \models \psi' \leftrightarrow \bigvee_{i'} \bigwedge_{j'} L'_{i',j'}
-          \end{align}
-          であるように原子論理式またはその否定からなる有限個の論理式$L_{i,j}$および$L'_{i,j}$を取ることができる．
-          このとき，
-          \begin{align}
-               \mathcal{M} \models \psi \lor  \psi' \leftrightarrow \left( \bigvee_i \bigwedge_j L_{i,j} \right) \vee \left( \bigvee_{i'} \bigwedge_{j'} L'_{i',j'}\right)\\
-               \mathcal{M} \models \psi \land \psi' \leftrightarrow \bigvee_{i, i'} \left(\bigwedge_j L_{i,j} \wedge \bigwedge_{j'} L'_{i',j'}\right)
-          \end{align}
-          であるから，$\phi$についても命題が成り立つ．
-
-          \item
-          $\phi = \lnot \psi$の場合，帰納法の仮定より，
-          \begin{equation}
-               \mathcal{M} \models \psi \leftrightarrow \bigvee_{i} \bigwedge_j L_{i,j},
-          \end{equation}
-          であるように原子論理式またはその否定からなる有限個の論理式$L_{i,j}$を取ることができる．
-          このとき，
-          \begin{equation}
-               \mathcal{M} \models \lnot \psi \leftrightarrow \bigvee_{j_1, \dots, j_n} \bigwedge_i \overline{L}_{i,j_i}
-          \end{equation}
-          が成り立つ．
-          ただし，$\overline{L}_{i,j}$は$L_{i,j}$が原子論理式$\theta$のときは$\overline{L}_{i,j}:=\lnot \theta$，
-          $L_{i,j}$が原子論理式の否定$\lnot \theta$のときは$\overline{L}_{i,j}:=\theta$である．
-     \end{itemize}
-     したがって，帰納法により命題が示された．
-\end{proof}
-
-
-\begin{proposition}
-     任意の$\mathcal{L}$論理式$\phi(w_1, \dots, w_n)$に対し，ある量化記号のない論理式$\psi(v_1, \dots, v_m, w_1, \dots, w_n)$及び量化記号$\Qua_1, \dots, \Qua_m \in \{\forall, \exists\}$が存在して，
-     任意の$\mathcal{L}$構造$\mathcal{M}$に対し
-     \begin{equation}
-          \mathcal{M} \models \phi(w_1, \dots, w_n) \leftrightarrow \Qua_1 v_1 \dots \Qua_m v_m \psi(v_1, \dots, v_m, w_1, \dots, w_n)
-     \end{equation}
-     を満たす．$\Qua_1 v_1 \dots \Qua_m v_m \psi(v_1, \dots, v_m, w_1, \dots, w_n)$のような形の論理式を冠頭標準形の論理式という．
-\end{proposition}
-
-\begin{proof}
-     後で書く．\todo{後で書く．}
-\end{proof}
 
 \begin{definition}[{\cite[Section 1.2]{MR1924282}}]
      $\mathcal{L}$を言語とする．
@@ -574,11 +513,118 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
      $\phi$が$T$の論理的帰結(logical consequence)であるとは，任意の$T$のモデル$\mathcal{M}$に対し，
      $\mathcal{M} \models \phi$であることと定義する．
      $\phi$が$T$の論理的帰結であるとき，$T \models \phi$とかく．
+
+     特に，$T = \emptyset$の場合，全ての$\mathcal{L}$構造は$T$のモデルである．$\phi$が$T=\emptyset$の論理的帰結であることを，
+     $\models \phi$と表す．
 \end{definition}
 
 $\mathcal{L}$論理式$\phi$に現れる自由変数が高々$v_1, \dots, v_n$であるとする．
 $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つとき，
 同様に$\mathcal{L}$論理式$\phi$は$\mathcal{L}$理論$T$の論理的帰結であるといい，$T \models \phi$と表す．
+
+最後に，以下の2つの命題を示す．
+
+\begin{proposition}\label{proposition:nnt}
+     任意の$\mathcal{L}$論理式$\phi$に対し，
+     $\mathcal{L}$リテラルから論理記号$\forall$, $\exists$, $\lor$, $\land$のみによって生成される$\mathcal{L}$論理式$\psi$が存在し，
+     \begin{equation}
+          \models \phi \leftrightarrow \psi
+     \end{equation}
+     である．このような$\mathcal{L}$論理式$\psi$を否定標準形(negation normal form)の論理式という．
+\end{proposition}
+\begin{proof}
+     De Morganの法則
+     \begin{align}
+          &\models \lnot (\theta_1 \lor \theta_2) \leftrightarrow (\lnot \theta_1 \land \lnot \theta_2)\\
+          &\models \lnot (\theta_1 \land \theta_2) \leftrightarrow (\lnot \theta_1 \lor \lnot \theta_2)\\
+          &\models \lnot \forall x \theta \leftrightarrow \exists x \lnot \theta\\
+          &\models \lnot \exists x \theta \leftrightarrow \forall x \lnot \theta
+     \end{align}
+     と，二重否定の除去
+     \begin{equation}
+          \models \lnot \lnot \theta \leftrightarrow \theta
+     \end{equation}
+     を用いて，否定記号$\lnot$を括弧の内側に入れていくことで示される．
+\end{proof}
+
+\begin{proposition}\label{proposition:dnf}
+     任意の量化記号のない$\mathcal{L}$論理式$\phi$に対して，有限個の$\mathcal{L}$リテラル$L_{i,j}$が存在して
+     \begin{equation}
+          \models \phi \leftrightarrow \bigvee_{i=1}^n \bigwedge_{j=1}^{m_i} L_{i,j}
+     \end{equation}
+     を満たす．$\bigvee_{i=1}^n \bigwedge_{j=1}^{m_i} L_{i,j}$の形をした論理式を，和積標準形(disjunctive normal form)の論理式という．
+\end{proposition}
+
+\begin{proof}
+
+     \cref{proposition:dnf}より，$\mathcal{L}$論理式$\phi$が否定標準形の論理式の場合に命題が成り立つことを示せばよい．
+     この場合，$\phi$は量化記号のない論理式であるから，$\phi$に含まれる論理記号は$\lor$, $\land$のみであることに注意する．
+     
+     $\phi$に含まれる論理記号の数に関する帰納法で証明する．
+
+     まず，$\phi$が原子論理式の場合は明らかである．
+
+     次に，論理記号の数が$k$個以下である場合に命題が成り立つと仮定して，論理記号の数が$k+1$個の論理式$\phi$の場合にも命題が成り立つことを示す．
+     このとき，$\phi = \psi \lor \psi'$または$\phi = \psi \land \psi'$とかける，
+     帰納法の仮定より，
+     \begin{align}
+          &\models \psi \leftrightarrow \bigvee_{i} \bigwedge_j L_{i,j},\\
+          &\models \psi' \leftrightarrow \bigvee_{i'} \bigwedge_{j'} L'_{i',j'}
+     \end{align}
+     であるように有限個のリテラル$L_{i,j}$および$L'_{i,j}$を取ることができる．
+     このとき，
+     \begin{align}
+          &\models \psi \lor  \psi' \leftrightarrow \left( \bigvee_i \bigwedge_j L_{i,j} \right) \vee \left( \bigvee_{i'} \bigwedge_{j'} L'_{i',j'}\right)\\
+          &\models \psi \land \psi' \leftrightarrow \bigvee_{i, i'} \left(\bigwedge_j L_{i,j} \wedge \bigwedge_{j'} L'_{i',j'}\right)
+     \end{align}
+     であるから，論理式$\phi$についても命題が成り立つ．
+     したがって，帰納法により命題が示された．
+\end{proof}
+
+\begin{proposition}
+     任意の$\mathcal{L}$論理式$\phi$に対し，ある量化記号のない$\mathcal{L}$論理式$\psi$及び量化記号$\Qua_1, \dots, \Qua_m \in \{\forall, \exists\}$が存在して，
+     \begin{equation}
+          \models \phi \leftrightarrow \Qua_1 v_1 \dots \Qua_m v_m \psi
+     \end{equation}
+     を満たす．$\Qua_1 v_1 \dots \Qua_m v_m \psi$の形をした論理式を冠頭標準形(prenex normal form)の論理式という．
+\end{proposition}
+\begin{proof}
+     \cref{proposition:dnf}より，$\mathcal{L}$論理式$\phi$が否定標準形の論理式の場合に命題が成り立つことを示せばよい．
+     
+     $\phi$に含まれる論理記号の数に関する帰納法で証明する．
+     
+     まず，$\phi$が原子論理式の場合は明らかである．
+     次に，論理記号の数が$k$個以下である場合に命題が成り立つと仮定して，論理記号の数が$k+1$個の論理式$\phi$の場合にも命題が成り立つことを示す．
+     \begin{itemize}
+          \item
+               $\phi = \forall x \psi$または$\phi = \exists x \psi$の場合，
+               帰納法の仮定より，ある量化記号のない論理式$\theta$および量化記号$\Qua_1, \dots, \Qua_m \in \{\forall, \exists\}$を用いて
+               \begin{equation}
+                    \models \psi \leftrightarrow \Qua_1 v_1, \dots, \Qua_m v_m \theta
+               \end{equation}
+               が成り立つ．よって，
+               \begin{align}
+                    &\models \forall x \psi  \leftrightarrow \forall x \Qua_1 v_1, \dots, \Qua_m v_m \theta\\
+                    &\models \exists x \psi  \leftrightarrow \exists x \Qua_1 v_1, \dots, \Qua_m v_m \theta
+               \end{align}
+               より，論理式$\phi$についても命題が成り立つ．
+          \item
+               $\phi = \psi \land \psi'$または$\phi = \psi \lor \psi'$の場合，
+               帰納法の仮定より，ある量化記号のない論理式$\theta, \theta'$および量化記号$\Qua_1, \dots, \Qua_m, \Qua'_1, \dots, \Qua'_{m'} \in \{\forall, \exists\}$を用いて
+               \begin{align}
+                    &\models \psi \leftrightarrow \Qua_1 v_1, \dots, \Qua_m v_m \theta\\
+                    &\models \psi' \leftrightarrow \Qua'_1 w_1, \dots, \Qua'_{m'} w_{m'} \theta'
+               \end{align}
+               とできる．必要ならば変数記号を置き換えて，$\psi'$の自由変数に$v_1, \dots, v_m$が現れず，$\psi$の自由変数に$w_1, \dots, w_{m'}$が現れないとしてよい．
+               このとき，
+               \begin{align}
+                    &\models \psi \land \psi' \leftrightarrow \Qua_1 v_1, \dots, \Qua_m v_m \Qua'_1 w_1, \dots, \Qua'_{m'} w_{m'}(\theta \land \theta')\\
+                    &\models \psi \lor \psi' \leftrightarrow \Qua_1 v_1, \dots, \Qua_m v_m \Qua'_1 w_1, \dots, \Qua'_{m'} w_{m'}(\theta \lor \theta')
+               \end{align}
+               より，論理式$\phi$についても命題が成り立つ．
+     \end{itemize}
+     したがって，帰納法により命題が示された．
+\end{proof}
 
 
 \section{量化記号消去}
