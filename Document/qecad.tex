@@ -350,7 +350,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
      \end{enumerate}
 \end{definition}
 
-\todo[inline]{自由変数の定義のみ，正しい定義ではなかった．そのため，現在微修正しかしていない．}
+\todo[inline]{自由変数の定義のみ，正しい定義ではなかった．そのため，あまり修正していない．}
 
 ここで，論理式$\phi := \forall x (x^2 + y > 0)$について観察する．ここで，$x,y$はいずれも変数記号である．
 
@@ -428,7 +428,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
 \end{definition}
 
 \begin{remark}
-     以下の点に注意しておく．
+     以下の点に注意する．
 
      \begin{itemize}
           \item
@@ -443,6 +443,70 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
                変数記号は，$v_1, v_2, \dots, $に加え，他の記号$a, b, c, \dots, x, y, z, x_1, x_2, \dots$等も用いることにする．
           \end{itemize}
 \end{remark}
+
+ここで，以下の2つの命題を示す．
+
+\begin{proposition}
+     任意の量化記号のない$\mathcal{L}$論理式$\phi$に対して，有限個の$\mathcal{L}$論理式$L_{i,j}$が存在して次を満たす．
+     \begin{itemize}
+          \item 
+          各$L_{i,j}$は，原子論理式$\psi$または原子論理式の否定$\lnot \psi$である．
+          \item
+          任意の$\mathcal{L}$構造$\mathcal{M}$に対して$\mathcal{M} \models \phi \leftrightarrow \bigvee_{i=1}^n \bigwedge_{j=1}^{m_i} L_{i,j}$ を満たす．
+     \end{itemize}
+\end{proposition}
+
+\begin{proof}
+     $\phi$に含まれる論理記号の数に関する帰納法で証明する．
+     
+     まず，$\phi$が原子論理式の場合，$\mathcal{M} \models \phi \leftrightarrow \phi$であるから命題は成り立つ．
+
+     次に，論理記号の数が$k$個以下である場合に命題が成り立つと仮定して，論理記号の数が$k+1$個の論理式$\phi$の場合にも命題が成り立つことを示す．
+     \begin{itemize}
+          \item
+          $\phi = \psi \lor \psi'$または$\phi = \psi \land \psi'$の場合，帰納法の仮定より，
+          \begin{align}
+               \mathcal{M} \models \psi \leftrightarrow \bigvee_{i} \bigwedge_j L_{i,j},\\
+               \mathcal{M} \models \psi' \leftrightarrow \bigvee_{i'} \bigwedge_{j'} L'_{i',j'}
+          \end{align}
+          であるように原子論理式またはその否定からなる有限個の論理式$L_{i,j}$および$L'_{i,j}$を取ることができる．
+          このとき，
+          \begin{align}
+               \mathcal{M} \models \psi \lor  \psi' \leftrightarrow \left( \bigvee_i \bigwedge_j L_{i,j} \right) \vee \left( \bigvee_{i'} \bigwedge_{j'} L'_{i',j'}\right)\\
+               \mathcal{M} \models \psi \land \psi' \leftrightarrow \bigvee_{i, i'} \left(\bigwedge_j L_{i,j} \wedge \bigwedge_{j'} L'_{i',j'}\right)
+          \end{align}
+          であるから，$\phi$についても命題が成り立つ．
+
+          \item
+          $\phi = \lnot \psi$の場合，帰納法の仮定より，
+          \begin{equation}
+               \mathcal{M} \models \psi \leftrightarrow \bigvee_{i} \bigwedge_j L_{i,j},
+          \end{equation}
+          であるように原子論理式またはその否定からなる有限個の論理式$L_{i,j}$を取ることができる．
+          このとき，
+          \begin{equation}
+               \mathcal{M} \models \lnot \psi \leftrightarrow \bigvee_{j_1, \dots, j_n} \bigwedge_i \overline{L}_{i,j_i}
+          \end{equation}
+          が成り立つ．
+          ただし，$\overline{L}_{i,j}$は$L_{i,j}$が原子論理式$\theta$のときは$\overline{L}_{i,j}:=\lnot \theta$，
+          $L_{i,j}$が原子論理式の否定$\lnot \theta$のときは$\overline{L}_{i,j}:=\theta$である．
+     \end{itemize}
+     したがって，帰納法により命題が示された．
+\end{proof}
+
+
+\begin{proposition}
+     任意の$\mathcal{L}$論理式$\phi(w_1, \dots, w_n)$に対し，ある量化記号のない論理式$\psi(v_1, \dots, v_m, w_1, \dots, w_n)$及び量化記号$\Qua_1, \dots, \Qua_m \in \{\forall, \exists\}$が存在して，
+     任意の$\mathcal{L}$構造$\mathcal{M}$に対し
+     \begin{equation}
+          \mathcal{M} \models \phi(w_1, \dots, w_n) \leftrightarrow \Qua_1 v_1 \dots \Qua_m v_m \psi(v_1, \dots, v_m, w_1, \dots, w_n)
+     \end{equation}
+     を満たす．$\Qua_1 v_1 \dots \Qua_m v_m \psi(v_1, \dots, v_m, w_1, \dots, w_n)$のような形の論理式を冠頭標準形の論理式という．
+\end{proposition}
+
+\begin{proof}
+     後で書く．\todo{後で書く．}
+\end{proof}
 
 \begin{definition}[{\cite[Section 1.2]{MR1924282}}]
      $\mathcal{L}$を言語とする．
@@ -487,7 +551,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
      ここで，項$t$に対し，$t^p$は$t$の$p$個の積$(t\cdot(t\cdot(\dots \cdot t)))$の省略とする．
 \end{example}
 
-\begin{remark}以下の点に注意しておく．
+\begin{remark}以下の点に注意する．
      \begin{itemize}
           \item 
           定数記号$1$の$p$個の和$(1+(1 + (\dots + 1)))$の省略として$p$を用いる．
@@ -515,32 +579,6 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
 $\mathcal{L}$論理式$\phi$に現れる自由変数が高々$v_1, \dots, v_n$であるとする．
 $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つとき，
 同様に$\mathcal{L}$論理式$\phi$は$\mathcal{L}$理論$T$の論理的帰結であるといい，$T \models \phi$と表す．
-
-\begin{proposition}
-     $\phi_1, \dots \phi_n$を$\mathcal{L}$論理式とし，$\psi$を$\phi_1, \dots, \phi_n$のBoolean combination\todo{未定義}とする．
-     このとき，$\{1, \dots, n\}$の部分集合族$S$が存在し，
-     \begin{equation}
-          \models \psi \leftrightarrow \bigvee_{X \in S}\left( \bigwedge_{i \in X} \phi_i \wedge \bigwedge_{i \not \in X} \lnot \phi_i \right)
-     \end{equation}
-     を満たす．
-\end{proposition}
-
-\begin{proof}
-     後で書く．\todo{後で書く．}
-\end{proof}
-
-
-\begin{proposition}
-     任意の$\mathcal{L}$論理式$\phi(w_1, \dots, w_n)$に対し，ある量化記号のない論理式$\psi(v_1, \dots, v_m, w_1, \dots, w_n)$及び量化記号$\Qua_1, \dots, \Qua_m \in \{\forall, \exists\}$が存在して，
-     \begin{equation}
-          \models \phi(w_1, \dots, w_n) \leftrightarrow \Qua_1 v_1 \dots \Qua_m v_m \psi(v_1, \dots, v_m, w_1, \dots, w_n)
-     \end{equation}
-     を満たす．$\Qua_1 v_1 \dots \Qua_m v_m \psi(v_1, \dots, v_m, w_1, \dots, w_n)$のような形の論理式を冠頭標準形の論理式という．
-\end{proposition}
-
-\begin{proof}
-     後で書く．\todo{後で書く．}
-\end{proof}
 
 
 \section{量化記号消去}
@@ -573,7 +611,7 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
 つまり，$\phi$に登場する量化記号を消去し，自由変数のみの論理式$\psi$で記述できている．このような現象を扱うために，「量化記号を消去する」概念を定義する．
 
 
-\begin{definition}
+\begin{definition}[{\cite[Definition 3.1.1.]{MR1924282}}]
 理論$T$で量化記号消去(quantifier elimination)を持つとは，
 $L$上の任意の論理式$\phi$に対し，量化記号のない論理式$\psi$が存在し，
 \begin{equation}
@@ -585,41 +623,28 @@ $L$上の任意の論理式$\phi$に対し，量化記号のない論理式$\psi
 
 実閉体の理論は量化記号消去ができる．すなわち，次が成り立つ．
 
-\todo[inline]{これは論文を引用するべき．discordに挙げてくれた．}
-\begin{theorem}[Tarski]\label{theorem:Tarski}
+\begin{theorem}[{\cite[Theorem 11]{MR0044472}}]\label{theorem:Tarski}
      言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$は量化記号消去をもつ．
 \end{theorem}
 
 以降この節は\cref{theorem:Tarski}の証明を述べる．
 
-この定理の証明および後々の議論のため，言語$L_\mathrm{OR} = \{<, +, \cdot, 1, 0\}$上の原子論理式について注意をしておく．
+この定理の証明および後々の議論のため，言語$\mathcal{L}_\mathrm{OR} = \{<, +, -, \cdot, 1, 0\}$上の原子論理式について注意をする．
 
-まず，正整数の記号$n$を，$1$の$n$個の和$(1 + (1 + \dots + 1 ))$の省略記号であるとする．
-
-さらに，$x_1, \dots, x_n$を変数記号として，多項式$f \in \Z[x_1, \dots, x_n]$が，$a_1, \dots, a_k, b_1, \dots, b_l$を正整数として，
-\begin{equation}
-     f(x_1, \dots, x_n) = \sum_{i=1}^k a_i x_1^{\alpha_{i,1}} \cdots x_n^{\alpha_{i,n}} - \sum_{j=1}^l b_j x_1^{\beta_{j,1}} \cdots x_n^{\beta_{j,n}}
-\end{equation}
-で与えられているとする．
+さらに，$x_1, \dots, x_n$を変数記号とする．多項式$f \in \Z[x_1, \dots, x_n]$が与えられるとき，$f(x_1, \dots, x_n)$は$\mathcal{L}$項として自然に解釈できる．
 
 このとき，以下のように原子論理式の省略記号を導入する．
 \begin{align}
-     \sign (f(x_1, \dots, x_n)) = 1 &\defiff \sum_{i=1}^k a_i x_1^{\alpha_{i,1}} \cdots x_n^{\alpha_{i,n}} > \sum_{j=1}^l b_j x_1^{\beta_{j,1}} \cdots x_n^{\beta_{j,n}}\\
-     \sign (f(x_1, \dots, x_n)) = 0 &\defiff \sum_{i=1}^k a_i x_1^{\alpha_{i,1}} \cdots x_n^{\alpha_{i,n}} = \sum_{j=1}^l b_j x_1^{\beta_{j,1}} \cdots x_n^{\beta_{j,n}}\\
-     \sign (f(x_1, \dots, x_n)) = -1 &\defiff \sum_{i=1}^k a_i x_1^{\alpha_{i,1}} \cdots x_n^{\alpha_{i,n}} < \sum_{j=1}^l b_j x_1^{\beta_{j,1}} \cdots x_n^{\beta_{j,n}}
+     \sign (f(x_1, \dots, x_n)) = 1 & \defiff f(x_1, \dots, x_n) > 0\\
+     \sign (f(x_1, \dots, x_n)) = 0 & \defiff f(x_1, \dots, x_n) = 0\\
+     \sign (f(x_1, \dots, x_n)) = -1 & \defiff f(x_1, \dots, x_n) < 0
 \end{align}
 
-\todo[inline]{
-     を用いて→に対して\\
-     ～しておくは砕けた表現．注意する，とする，というようにする．
-}
-このとき，$\RCF$において，任意の原子論理式$\phi(x_1, \dots, x_n)$は，ある多項式$f \in \Z[x_1, \dots, x_n]$及び$\sigma \in \{-1, 0, 1\}$を用いて，
-$\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意しておく．
-また，$P = \{-1, 0, 1\}$としておく．
+このとき，$\RCF$において，任意の原子論理式$\phi(x_1, \dots, x_n)$は，ある多項式$f \in \Z[x_1, \dots, x_n]$及び$\sigma \in \{-1, 0, 1\}$に対して，
+$\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意する．
+また，$P = \{-1, 0, 1\}$とする．
 
 それでは，\cref{theorem:Tarski}を示していく．そのために，まずは次の補題を準備する．
-
-\todo[inline]{補題番号をローマ数字にしてフォントをかえる，アルファベットに直すとかが適切です．「1.より」とかはだめ．}
 
 \begin{lemma}\label{lemma:qe_simplify}
      言語$L_\mathrm{OR}$上の理論$\RCF$において，次の主張が成り立てば．理論$\RCF$は量化記号消去できる．
@@ -763,7 +788,7 @@ $\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい．
      この部分列$x_{i_1} < \dots < x_{i_M}$を，$f_1, \dots, f_{s-1}, f_s'$の$R$上の根全体とする．
      この部分列$\{i_k\}_{k=1}^M$は，行列$w$の情報のみから構成できる．
 
-     ここで，$i_0 = 0, i_{M+1} = N+1$としておき，また，$x_0= -\infty, x_{N+1} = \infty$としておく．
+     ここで，$i_0 = 0, i_{M+1} = N+1$としておき，また，$x_0= -\infty, x_{N+1} = \infty$とする．
 
      $\map{\theta}{\{1, \dots, M\}}{\{1, \dots, s\}}$を，
      $\theta(k) \in \{1, \dots, s-1\}$かつ$f_{\theta(k)}(x_{i_k}) = 0$，
@@ -1420,7 +1445,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
           \item 各$i=1, \dots, l_S$および$f \in F'$に対し，多項式$f(x,X_n)$における根$\xi_{S,i}(x)$の重複度は，$x\in S$によらず一定．
      \end{itemize}
      であるようにとれる．
-     また，$\xi_{S,0} := -\infty$, $\xi_{S,l_S} := \infty$としておく．
+     また，$\xi_{S,0} := -\infty$, $\xi_{S,l_S} := \infty$とする．
 
      このとき，
      \begin{align}
@@ -1719,7 +1744,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
           である．ただし，$F_n' = \{f \in F_n \mid \text{$f$は$S$上恒等的に$0$でない}\}$とする．
           \item 各$i=1, \dots, l_S$および$f \in F_n'$に対し，多項式$f(x,X_n)$における根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
      \end{itemize}
-     また，$\xi_{S,0} := -\infty$, $\xi_{S,l_S} := \infty$としておく．
+     また，$\xi_{S,0} := -\infty$, $\xi_{S,l_S} := \infty$とする．
 
      このとき，$S \in \calS_{n-1}$に対し，
      \begin{align}
