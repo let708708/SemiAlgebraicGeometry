@@ -271,7 +271,7 @@ $\Ralg$の元を実代数的数という．
 
 \section{一階述語論理}
 
-\cite{MR1924282}に従って一階述語論理についてまとめる．
+この節では，\cite{MR1924282}に従って一階述語論理についてまとめる．
 
 \begin{definition}[{\cite[Definition 1.1.1
      ]{MR1924282}}]
@@ -440,7 +440,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
                有限個の論理式$\phi_1, \dots, \phi_n$に対して，$\bigvee_{i=1}^n \phi_i$を$\phi_1 \lor \dots \lor \phi_n$の省略とする．
                また，$\bigwedge_{i=1}^n \phi_i$を$\phi_1 \land \dots \land \phi_n$の省略とする．
           \item     
-               変数記号は，$v_1, v_2, \dots, $に加え，$w, x, y, z, \dots$なども用いることにする．
+               変数記号は，$v_1, v_2, \dots, $に加え，他の記号$a, b, c, \dots, x, y, z, x_1, x_2, \dots$等も用いることにする．
           \end{itemize}
 \end{remark}
 
@@ -452,7 +452,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
      $\mathcal{M} \models T$とかく．
 \end{definition}
 
-実閉体の理論$\RCF$を，\cite[Chapter 4, Section V]{MR0219380}に従って定義する．
+ここで，実閉体の理論$\RCF$を，\cite[Section 5.2.1]{C3041}に従って定義する．
 
 \begin{example}[実閉体の理論]
      言語$\mathcal{L}_\mathrm{OR}$を以下で定める．
@@ -460,33 +460,28 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
           \item 定数記号 $0$, $1$.
           \item 1変数関数記号 $-$.
           \item 2変数関数記号 $+$, $\cdot$.
-          \item 1変数関係記号 $>0$.
+          \item 2変数関係記号 $<$.
      \end{itemize}
      このとき，言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$を，次の$\mathcal{L}_\mathrm{OR}$文からなる集合で定義する．
 
           \begin{enumerate}
-               \item $\forall x \forall y \forall z(x + (y + z) = (x + y) + z)$
-               \item $\forall x \forall y (x + y = y + x)$
-               \item $\forall x (x + 0 = y)$
-               \item $\forall x (x + (-x) = 0)$
-               \item $\forall x \forall y \forall z(x \cdot (y \cdot z) = (x \cdot y)\cdot z)$
-               \item $\forall x \forall y (x \cdot y = y \cdot x)$
-               \item $\forall x (x \cdot 1 = x)$
-               \item $\forall x \exists y (x \cdot y = 1)$
-               \item $\forall x \forall y \forall z(x \cdot (y + z) = x \cdot y + x \cdot z)$
-               \item $0 \neq 1$
-          \end{enumerate}
-     
-          \begin{enumerate}\setcounter{enumi}{10}
-               \item $\forall x \forall y (x>0 \land y>0 \rightarrow x+y>0)$
-               \item $\forall x (x = 0 \lor x > 0 \lor -x > 0)$
-               \item $\forall x \lnot(x > 0 \land -x > 0)$
-               \item $\forall x \forall y (x > 0 \land y > 0 \rightarrow x \cdot y>0)$.
-          \end{enumerate}
-     
-          \begin{enumerate}\setcounter{enumi}{14}
+               \item $\forall x \forall y \forall z(x + (y + z) = (x + y) + z)$,
+               \item $\forall x (x + 0 = x)$,
+               \item $\forall x ((x + (-x) = 0)\land((-x) + x = 0))$,
+               \item $\forall x \forall y (x + y = y + x)$,
+               \item $\forall x \forall y (x \cdot y = y \cdot x)$,
+               \item $\forall x \forall y \forall z((x \cdot y) \cdot z = x \cdot (y \cdot z))$,
+               \item $\forall x \forall y \forall z(x \cdot (y + z) = x \cdot y + x \cdot z)$,
+               \item $\forall x (x \cdot 1 = x)$,
+               \item $0 \neq 1$,
+               \item $\forall x \exists y (x \neq 0 \rightarrow x \cdot y = 1)$,
+               \item $\forall x \lnot (x < x)$,
+               \item $\forall x \forall y \forall z(x < y \land y < z \rightarrow x < z)$,
+               \item $\forall x \forall y (x < y \lor x = y \lor y < x)$,
+               \item $\forall x \forall y \forall z(x < y \rightarrow x + z < y + z)$,
+               \item $\forall x \forall y (0 < x \land 0 < y \rightarrow 0 < x \cdot y)$,
                \item $\forall x \exists y (x = y^2 \lor -x = y^2)$
-               \item $\forall y_0 \forall y_1 \dots \forall y_2n \exists x (y_0 + y_1 \cdot x + \cdots + y_{2n}\cdot x^{2n} + x^{2n+1}) = 0$ ( $n \geq 0$ ).
+               \item $\forall x_{2n} \dots \forall x_1 \forall x_0 \exists y (y^{2n+1} + x_{2n} \cdot y^{2n} + \cdots + x_1 \cdot y + x_0 = 0)$ ( $n =  1, 2 , \dots$ ).
           \end{enumerate}
 
      ここで，項$t$に対し，$t^p$は$t$の$p$個の積$(t\cdot(t\cdot(\dots \cdot t)))$の省略とする．
@@ -495,15 +490,16 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
 \begin{remark}以下の点に注意しておく．
      \begin{itemize}
           \item 
-          定数記号$1$の$p$個の和$1+(1 + (\dots (1 + 1)))$の省略として$p$を用いる．
+          定数記号$1$の$p$個の和$(1+(1 + (\dots + 1)))$の省略として$p$を用いる．
           \item 
-          項$t, t'$に対し，$t>t'$および$t'<t$を，$t + (- t')>0$の省略とする．
-          また，$t\geq t'$,$t \leq t'$を，それぞれ$(t>t') \lor (t=t')$，$(t<t') \lor (t=t')$の省略とする．
+          $t \leq t'$を，$(t<t') \lor (t=t')$の省略とする．
+          \item
+          $t > t'$, $t \geq t'$を，それぞれ$t' < t$, $t' \leq t$の省略とする．
      \end{itemize}
 \end{remark}
 
 
-順序環の言語$\mathcal{L}_{\mathrm{OR}}$において，$\mathcal{L}_\mathrm{OR}$構造$\R=(\R,0,1,-,+,\cdot,>0)$や$\Ralg=(\Ralg,0,1,-,+,\cdot,>0)$は，
+順序環の言語$\mathcal{L}_{\mathrm{OR}}$において，$\mathcal{L}_\mathrm{OR}$構造$\R=(\R,0,1,-,+,\cdot,<)$や$\Ralg=(\Ralg,0,1,-,+,\cdot,<)$は，
 \begin{equation}
      \R \models \RCF, \quad \Ralg \models \RCF
 \end{equation}
@@ -516,16 +512,41 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
      $\phi$が$T$の論理的帰結であるとき，$T \models \phi$とかく．
 \end{definition}
 
-$\mathcal{L}$論理式$\phi$に現れる自由変数が高々$v_1, \dots, v_n$であるとき，
+$\mathcal{L}$論理式$\phi$に現れる自由変数が高々$v_1, \dots, v_n$であるとする．
 $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つとき，
 同様に$\mathcal{L}$論理式$\phi$は$\mathcal{L}$理論$T$の論理的帰結であるといい，$T \models \phi$と表す．
 
-\todo[inline]{ここで，次の節のために冠頭標準形に帰着可能であることと，boolean combinationは標準形に直せること(Exc.1.4.2)は後程用いるのでここで示した方が良さそう．}
+\begin{proposition}
+     $\phi_1, \dots \phi_n$を$\mathcal{L}$論理式とし，$\psi$を$\phi_1, \dots, \phi_n$のBoolean combination\todo{未定義}とする．
+     このとき，$\{1, \dots, n\}$の部分集合族$S$が存在し，
+     \begin{equation}
+          \models \psi \leftrightarrow \bigvee_{X \in S}\left( \bigwedge_{i \in X} \phi_i \wedge \bigwedge_{i \not \in X} \lnot \phi_i \right)
+     \end{equation}
+     を満たす．
+\end{proposition}
+
+\begin{proof}
+     後で書く．\todo{後で書く．}
+\end{proof}
+
+
+\begin{proposition}
+     任意の$\mathcal{L}$論理式$\phi(w_1, \dots, w_n)$に対し，ある量化記号のない論理式$\psi(v_1, \dots, v_m, w_1, \dots, w_n)$及び量化記号$\Qua_1, \dots, \Qua_m \in \{\forall, \exists\}$が存在して，
+     \begin{equation}
+          \models \phi(w_1, \dots, w_n) \leftrightarrow \Qua_1 v_1 \dots \Qua_m v_m \psi(v_1, \dots, v_m, w_1, \dots, w_n)
+     \end{equation}
+     を満たす．$\Qua_1 v_1 \dots \Qua_m v_m \psi(v_1, \dots, v_m, w_1, \dots, w_n)$のような形の論理式を冠頭標準形の論理式という．
+\end{proposition}
+
+\begin{proof}
+     後で書く．\todo{後で書く．}
+\end{proof}
+
 
 \section{量化記号消去}
 
 \begin{example}
-     言語$L_\mathrm{OR}$上の次のような論理式を考える．
+     言語$\mathcal{L}_\mathrm{OR}$上の次のような論理式を考える．
      \begin{equation}
           \phi(a) := \forall x (x^2 + ax + a + 3 > 0)
      \end{equation}
@@ -554,9 +575,9 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
 
 \begin{definition}
 理論$T$で量化記号消去(quantifier elimination)を持つとは，
-$L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号のない論理式$\psi(x_1,\dots, x_n)$が存在し，
+$L$上の任意の論理式$\phi$に対し，量化記号のない論理式$\psi$が存在し，
 \begin{equation}
-     T \models \forall x_1 \dots \forall x_n(\phi(x_1,\dots,x_n) \leftrightarrow \psi(x_1, \dots, x_n))
+     T \models \phi \leftrightarrow \psi
 \end{equation}
 が成り立つことと定義する．
 \end{definition}
@@ -566,7 +587,7 @@ $L$上の任意の論理式$\phi(x_1,\dots,x_n)$に対し，量化記号のな�
 
 \todo[inline]{これは論文を引用するべき．discordに挙げてくれた．}
 \begin{theorem}[Tarski]\label{theorem:Tarski}
-     実閉体の理論$\RCF$は量化記号消去ができる．
+     言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$は量化記号消去をもつ．
 \end{theorem}
 
 以降この節は\cref{theorem:Tarski}の証明を述べる．
