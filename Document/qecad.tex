@@ -429,7 +429,7 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
                $\phi \leftrightarrow \psi$を，$(\phi \rightarrow \psi)\land(\psi \rightarrow \phi)$の省略とする．
                また，項$t_1, t_2$に対し，$t_1 \neq t_2$を，$\lnot(t_1 = t_2)$の省略とする．
           \item
-               有限個の論理式$\phi_1, \dots, \phi_n$に対して，$\bigvee_{i=1}^n \phi_i$を$\phi_1 \lor \dots \lor \phi_n$の省略とする．
+               有限個の論理式$\phi_1, \dots, \phi_n$に対して，$\bigvee_{i=1}^n \phi_i$を$\phi_1 \lor \dots \lor \phi_n$\todo{括弧記号}の省略とする．
                また，$\bigwedge_{i=1}^n \phi_i$を$\phi_1 \land \dots \land \phi_n$の省略とする．
           \item     
                変数記号は，$v_1, v_2, \dots, $に加え，他の記号$a, b, c, \dots, x, y, z, x_1, x_2, \dots$等も用いることにする．
@@ -667,18 +667,17 @@ $L$上の任意の論理式$\phi$に対し，量化記号のない論理式$\psi
 
 この定理の証明および後々の議論のため，言語$\mathcal{L}_\mathrm{OR} = \{0, 1,-, +, \cdot, < \}$上の原子論理式について注意をする．
 
-さらに，$x_1, \dots, x_n$を変数記号とする．多項式$f \in \Z[x_1, \dots, x_n]$が与えられるとき，$f(x_1, \dots, x_n)$は$\mathcal{L}$項として自然に解釈できる．
+$X_1, \dots, X_n$を変数記号とする．多項式$f \in \Z[X_1, \dots, X_n]$が与えられるとき，$f(X_1, \dots, X_n)$は$\mathcal{L}$項として自然に解釈できる．
 
 このとき，以下のように原子論理式の省略記号を導入する．
 \begin{align}
-     \sign (f(x_1, \dots, x_n)) = 1 & \defiff f(x_1, \dots, x_n) > 0\\
-     \sign (f(x_1, \dots, x_n)) = 0 & \defiff f(x_1, \dots, x_n) = 0\\
-     \sign (f(x_1, \dots, x_n)) = -1 & \defiff f(x_1, \dots, x_n) < 0
+     \sign (f(X_1, \dots, X_n)) = 1 & \defiff f(X_1, \dots, X_n) > 0\\
+     \sign (f(X_1, \dots, X_n)) = 0 & \defiff f(X_1, \dots, X_n) = 0\\
+     \sign (f(X_1, \dots, X_n)) = -1 & \defiff f(X_1, \dots, X_n) < 0
 \end{align}
 
-このとき，$\RCF$において，任意の原子論理式$\phi(x_1, \dots, x_n)$は，ある多項式$f \in \Z[x_1, \dots, x_n]$及び$\sigma \in \{-1, 0, 1\}$に対して，
-$\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意する．
-また，$P = \{-1, 0, 1\}$とする．
+このとき，$\RCF$において，任意の原子論理式$\phi(X_1, \dots, X_n)$は，ある多項式$f \in \Z[X_1, \dots, X_n]$及び$\sigma \in \{-1, 0, 1\}$に対して，
+$\sign(f(X_1, \dots, X_n)) = \sigma$と同値であることに注意する．
 
 それでは，\cref{theorem:Tarski}を示していく．そのために，まずは次の補題を準備する．
 
@@ -742,19 +741,25 @@ $\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意する．
      以上より，証明が完了した．
 \end{proof}
 
-この補題により，\cref{theorem:Tarski}は，次のように言い換えられる．
+\todo[inline]{ここから\cite{MR1659509}を参照して証明を述べていく．(11/22)}
 
-\begin{theorem}\label{theorem:weak_Tarski}
-     任意の$f_1, \dots, f_s \in \Z[X,Y_1, \dots, Y_n]$および$\map{\sigma}{\{1, \dots, s\}}{P}$に対して，量化記号のない論理式$\theta(Y_1, \dots, Y_s)$が存在して，次を満たす．
+この補題により，\cref{theorem:Tarski}は，次のように言い換えることができる．
 
-     任意の実閉体$R$と，任意の$y_1, \dots, y_n \in R$に対し，次の二つが同値になる．
+\begin{theorem}[{\cite[Theorem 1.4.2.]{MR1659509}}]\label{theorem:weak_Tarski}
+     $\overline{Y} = (Y_1, \dots, Y_n)$と$X$を変数記号とする．任意の$f_1, \dots, f_s \in \Z\left[ \overline{Y},X \right]$および$\map{\sigma}{\{1, \dots, s\}}{\{-1, 0, 1\}}$に対して，
+     量化記号のない論理式$\theta\left(\overline{Y}\right)$が存在して，次を満たす．
+
+     任意の実閉体$R$と，任意の$\overline{y} = (y_1, \dots, y_n) \in R^n$に対し，次の2つが同値になる．
      \begin{enumerate}
-          \item $X$についての方程式$\bigwedge_i (\sign_R(f_i(X,y_1, \dots, y_n)) = \sigma(i))$ が，$R$上解を持つ．
-          \item 実閉体$R$における解釈$\theta^R(y_1, \dots, y_n)$は真．
+          \item 実閉体$R$は$\exists X \bigwedge_{i=1}^s (\sign(f_i(X,\overline{y})) = \sigma(i))$ を満たす．
+          \item 実閉体$R$は$\theta\left(\overline{y}\right)$を満たす．
      \end{enumerate}
 \end{theorem}
 
-ここで，$a \in R$に対して，$\sign_R(a)$は
+よって，\cref{theorem:weak_Tarski}を\cite[Section 1.4]{MR1659509}に従って証明する．
+
+ここで，実閉体$R$において，いくつかの記号を導入する．
+まず，$\map{\sign_R}{R}{\{-1,0,1\}}$を次のように定める．
 \begin{equation}
      \sign_R(a) :=
      \begin{cases}
@@ -763,41 +768,37 @@ $\sign(f(x_1, \dots, x_n)) = \sigma$と同値であることに注意する．
           -1 & a < 0
      \end{cases}
 \end{equation}
-であるとする．これを，$a$の符号と呼ぶ．
 
-さらに，実閉体$R$と，多項式$f_1, \dots, f_s \in R[X]$に対し，
+さらに，多項式$f_1, \dots, f_s \in R[X]$に対し，
 $\SIGN_R(f_1, \dots, f_s)$を次のように定める．
 
 恒等的に0でないような全ての$f_i$の$R$上の根を$x_1< \dots< x_N$とする．
-また，$x_0 = -\infty$, $x_{N+1} = \infty$とする．
-このとき，\cref{proposition:intermediate}より，各$f_i$の符号は，$(x_j, x_{j+1})$上一定である．
+また，$x_0 := -\infty$, $x_{N+1} := \infty$とし，各$k=0, \dots, N$に対し$I_k := (x_k, x_{k+1})$と書く．
+このとき，\cref{proposition:intermediate}より，$x \in I_k$に対し$\sign_R(f(x))$は一定である．これを，$\sign_R(f_i(I_k))$と書く．
 
-この時，$s$行$2N+1$列行列$\SIGN_R(f_1, \dots, f_s) = (c_{i,j})_{i=1, \dots, s, j=1, \dots, 2N+1}$を，
-\begin{align}
-     c_{i,2k} &= \sign_R(f_i(x_k)) \quad k=1, \dots, N\\
-     c_{i,2k+1} &= \sign_R(f_i((x_k, x_{k+1}))) \quad k=0, \dots, N
-\end{align}
-と定める．
+第$i=1, \dots s$行が
+\begin{equation}
+     \sign_R(f_i(I_0)), \sign_R(f_i(x_1)), \sign_R(f_i(I_1)), \dots, \sign(f_i(x_N)), \sign(f_i(I_N))
+\end{equation}
+であるような$s$行$2N+1$列行列を$\SIGN_R(f_1, \dots, f_s)$と書く．$\SIGN_R(f_1, \dots, f_s)$の各成分は$-1, 0, 1$のいずれかであることに注意する．
 
-このとき，正整数$s, m$に対して，$P_{s,m}$を，$P$成分の$s$行$(2l+1)$列行列($0 \leq l \leq sm$)全体を表すとすると，
-$\SIGN_R(f_1, \dots, f_s) \in P_{s,m}$である．
+$m:= \max\{\deg(f_i) \mid i=1, \dots, s\}$とすれば，$N \leq sm$である．
 
-\todo[inline]{fが多変数だったのに，急に1変数になったりして誤解を招いてるかもしれない？
-RealAlgebraicGeometry の1章最後にbibliographicnoteがあるのでそこに書いてある参考文献を引用するべきなのでは}
- 
+また，正整数$s, m$に対して，各成分が$-1,0,1$のいずれかである$s$行$(2l+1)$列行列($0 \leq l \leq sm$)全体を$W_{s,m}$と書く． 
 
-\begin{lemma}\label{lemma:qe_1ststep}
-     与えられた$\map{\sigma}{\{1, \dots, t\}}{P}$に対して，部分集合$P(\sigma) \subset P_{s,m}$を，次を満たすように取れる．
+\begin{lemma}[{\cite[Lemma 1.4.4.]{MR1659509}}]\label{lemma:qe_1ststep}
+     $\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$とする．部分集合$W(\sigma) \subset W_{s,m}$を，次を満たすように取れる．
+
      任意の実閉体$R$と，次数が$m$以下であるような任意の$f_1, \dots, f_s \in R[X]$に対し，以下が同値である．
      \begin{enumerate}
-          \item $\SIGN_R(f_1, \dots, f_s) \in P(\sigma)$
-          \item $\bigwedge_i (\sign_R(f_i(X)) = \sigma(i)$)
+          \item $\SIGN_R(f_1, \dots, f_s) \in W(\sigma)$
+          \item ある$x \in R$において$\bigwedge_i (\sign_R(f_i(x)) = \sigma(i)$)が成り立つ．
      \end{enumerate}
 \end{lemma}
 
 \begin{proof}
      \begin{equation}
-          P(\sigma):=\{A \in P_{s,m} \mid \text{行列$A$のある列が$(\sigma(i))_{i=1}^s$である}\}
+          W(\sigma):=\{A \in P_{s,m} \mid \text{行列$A$のある列が$(\sigma(i))_{i=1}^s$である}\}
      \end{equation}
      とすればよい．
 \end{proof}
@@ -805,12 +806,12 @@ RealAlgebraicGeometry の1章最後にbibliographicnoteがあるのでそこに�
 次の補題は，\cref{theorem:weak_Tarski}の証明の中心となる補題である．
 
 \begin{lemma}\label{lemma:qe_lowering}
-     ある$\map{\phi}{P_{2s,m}}{P_{s,m}}$が存在し，次をみたす．
+     ある写像$\map{\varphi}{W_{2s,m}}{W_{s,m}}$が存在し，次をみたす．
 
-     次数が$m$以下であるような任意の$f_1, \dots, f_s \in R[X]$で，$f_s$は定数でなく，$f_1, \dots, f_{s-1}$は恒等的に$0$でないとする．
+     任意の実閉体$R$と，任意の$f_1, \dots, f_s \in R[X]$について，各$f_i$の次数は$m$以下であり，$f_s$は定数でなく，$f_1, \dots, f_{s-1}$は恒等的に$0$でないとする．
      このとき，$g_1, \dots, g_s \in R[X]$を，それぞれ$f_s$を$f_1, \dots, f_{s-1}$, $f_s'$で割ったあまりとすれば，
      \begin{equation}
-          \SIGN_R(f_1, \dots, f_s) = \phi(\SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s))
+          \SIGN_R(f_1, \dots, f_s) = \varphi(\SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s))
      \end{equation}
      である．
 \end{lemma}
