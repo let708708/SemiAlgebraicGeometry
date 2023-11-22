@@ -87,9 +87,7 @@
 \section{実閉体}
 
 まず，\cite{MR3069467}でArtinとSchreierにより導入された，実閉体の概念についてまとめる．
-実閉体は，実数体を拡張して定義される概念であり，実閉体上でも実数体と類似した解析的な性質が成り立つ．
-
-まず始めに，順序体の定義を述べる．
+始めに，順序体の定義を述べる．
 以下の定義は\cite[Definition 1.1.1.]{MR1659509}に従った．
 
 \begin{definition}[順序体]
@@ -140,7 +138,7 @@
 したがって，$\C$は実体ではない．
 
 有理数体$\Q$は，実体$\Q\left(\sqrt{2}\right)$を代数拡大に持つが，
-実数体$\R$は代数拡大で実体になるものは自分自身のみである．
+実数体$\R$の代数拡大で実体になるものは$\R$自身のみである．
 そのような性質に注目し，実閉体の概念を導入する．
 
 \begin{definition}[{\cite[Section I]{MR3069467}}] \label{definition:RCF}
@@ -278,7 +276,7 @@ $\Ralg$の元を実代数的数という．
      以下のデータの組$\mathcal{L}$を言語(Language)という．
      \begin{enumerate}
           \item 関数記号(function symbol)の集合$\mathcal{F}$と，各$f \in \mathcal{F}$に対し正整数$n_f$を対応させる写像．
-          \item 述語記号(relation symbol)の集合$\mathcal{R}$と，各$R \in \mathcal{R}$に対し正整数$n_R$を対応させる写像．
+          \item 関係記号(relation symbol)の集合$\mathcal{R}$と，各$R \in \mathcal{R}$に対し正整数$n_R$を対応させる写像．
           \item 定数記号(constant symbol)の集合$\mathcal{C}$．
      \end{enumerate}
 \end{definition}
@@ -302,10 +300,10 @@ $f^\mathcal{M}$, $R^\mathcal{M}$, $c^\mathcal{M}$を，
 
 次に，
 言語$\mathcal{L}$の記号のほかに，
-変数記号(variable symbol)$v_1, v_2, \dots$, 
+変数記号(variable symbol) $v_1, v_2, \dots$, 
 等号(equality symbol) $=$,
 論理記号(logic symbol) $\lor, \land, \lnot, \exists, \forall$
-および括弧$(, )$を用いて，項と論理式を定義する．
+および括弧$($, $)$を用いて，項と論理式を定義する．
 
 \begin{definition}[{\cite[Definition 1.1.4]{MR1924282}}]
      $\mathcal{L}$項($\mathcal{L}$-term)の集合とは，次を満たす最小の集合$\mathcal{T}$である．
@@ -335,13 +333,12 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
 \end{enumerate}
 
 \begin{definition}[{\cite[Definition 1.1.5]{MR1924282}}]
-     まず，$\mathcal{L}$原子論理式(atomic $\mathcal{L}$-formula)を，次のいずれかの形をした記号列で定義する．
+     まず，$\mathcal{L}$原子論理式(atomic $\mathcal{L}$-formula)を，次のいずれかの形をした記号列として定義する．
      \begin{enumerate}
           \item $t_1, t_2$を$\mathcal{L}$項として，$(t_1 = t_2)$.
           \item $R \in \mathcal{R}$を述語記号，$t_1, \dots, t_{n_R}$を$\mathcal{L}$項として，$(R(t_1, \dots, t_{n_R}))$.
      \end{enumerate}
-
-     次に，$\mathcal{L}$論理式($\mathcal{L}$-formula)の集合を，以下を満たす最小の集合$\mathcal{W}$で定義する．
+     次に，$\mathcal{L}$論理式($\mathcal{L}$-formula)の集合を，以下を満たす最小の集合$\mathcal{W}$として定義する．
      \begin{enumerate}
           \item $\mathcal{W}$は，全ての$\mathcal{L}原子論理式$を含む．
           \item $\phi \in \mathcal{W}$ならば，$\lnot \phi \in \mathcal{W}$である．
@@ -352,19 +349,14 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
 
 $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル($\mathcal{L}$-literal)とよぶ．
 
-\todo[inline]{自由変数の定義のみ，正しい定義ではなかった．そのため，あまり修正していない．}
-
 ここで，論理式$\phi := \forall x (x^2 + y > 0)$について観察する．ここで，$x,y$はいずれも変数記号である．
-
 これは，「全ての$x$に対して$x^2 + y > 0$が成り立つ」というように読むことができるが，$y$の値は自由に設定することができ，$y$の値が定まらない限りは真であるか偽であるかははっきりしない．
 この$y$のように，自由な状態にある変数記号を論理式$\phi$の自由変数という．
-
 厳密には，次のように定義する．
 
 \begin{definition}
      $\mathcal{L}$を言語とする．
      $\mathcal{L}$項$t$に登場する全ての変数記号を$\Var(t)$で表す．
-
      $\mathcal{L}$論理式$\phi$の自由変数(free variable)全体$\Var(\phi)$を，次のように帰納的に定義する．
      \begin{enumerate}
           \item $t_1, t_2$を項とするとき，$\Var((t_1=t_2)):=\Var(t_1)\cup\Var(t_2)$と定義する．
@@ -388,8 +380,6 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
      また，$\mathcal{L}$論理式$\phi$が自由変数を持たないとき，すなわち$\Var(\phi)=\emptyset$であるとき，
      $\phi$を$\mathcal{L}$閉論理式(closed $\mathcal{L}$-formula)，あるいは$\mathcal{L}$文($\mathcal{L}$-sentense)という．
 \end{definition}
-
-\todo[inline]{ここから改めて書き始める．}
 
 \begin{definition}[{\cite[Definition 1.1.6]{MR1924282}}]
      $\mathcal{M}$を$\mathcal{L}$構造とする．
@@ -458,14 +448,14 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
 ここで，実閉体の理論$\RCF$を，\cite[Section 5.2.1]{C3041}に従って定義する．
 
 \begin{example}[実閉体の理論]
-     言語$\mathcal{L}_\mathrm{OR}$を以下で定める．
+     言語$\mathcal{L}_\mathrm{OR}$を以下で\todo{助詞の検討}定める．
      \begin{itemize}
           \item 定数記号 $0$, $1$.
           \item 1変数関数記号 $-$.
           \item 2変数関数記号 $+$, $\cdot$.
           \item 2変数関係記号 $<$.
      \end{itemize}
-     このとき，言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$を，次の$\mathcal{L}_\mathrm{OR}$文からなる集合で定義する．
+     このとき，言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$を，次の$\mathcal{L}_\mathrm{OR}$文からなる集合で\todo{助詞の検討}定義する．
 
           \begin{enumerate}
                \item $\forall x \forall y \forall z(x + (y + z) = (x + y) + z)$,
@@ -533,7 +523,7 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
      である．このような$\mathcal{L}$論理式$\psi$を否定標準形(negation normal form)の論理式という．
 \end{proposition}
 \begin{proof}
-     De Morganの法則
+     De Morganの法則\todo{?}
      \begin{align}
           &\models \lnot (\theta_1 \lor \theta_2) \leftrightarrow (\lnot \theta_1 \land \lnot \theta_2)\\
           &\models \lnot (\theta_1 \land \theta_2) \leftrightarrow (\lnot \theta_1 \lor \lnot \theta_2)\\
