@@ -816,41 +816,37 @@ $m:= \max\{\deg(f_i) \mid i=1, \dots, s\}$とすれば，$N \leq sm$である．
      である．
 \end{lemma}
 
-この補題は，具体的に多項式$f_1, \dots, f_s \in R[X, Y_1, \dots, Y_s]$が与えられた際に，
-$w:=\SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s)$の行列成分に関する情報のみから
-$\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい． 
+この補題は，多項式$f_1, \dots, f_s \in R[X]$が与えられた際に，
+行列$w:=\SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s)$に関する情報のみから
+$\SIGN_R(f_1, \dots, f_s)$を構成することで示す． 
 
 \begin{proof}
-     まず，$x_1 < \dots < x_N$を，$f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s$のうち恒等的に$0$でないものの$R$上の根全体とする．
-     この部分列$x_{i_1} < \dots < x_{i_M}$を，$f_1, \dots, f_{s-1}, f_s'$の$R$上の根全体とする．
-     この部分列$\{i_k\}_{k=1}^M$は，行列$w$の情報のみから構成できる．
-
-     ここで，$i_0 = 0, i_{M+1} = N+1$としておき，また，$x_0= -\infty, x_{N+1} = \infty$とする．
-
-     $\map{\theta}{\{1, \dots, M\}}{\{1, \dots, s\}}$を，
-     $\theta(k) \in \{1, \dots, s-1\}$かつ$f_{\theta(k)}(x_{i_k}) = 0$，
-     または$\theta(k)=s$かつ$f_{s}'(x_{i_k})=0$であるようにとる．
-     この$\theta$も，行列$w$の情報のみから構成できる．
-
-     この$\theta$に対して，各$k=1, \dots, M$で$f_s(x_{i_k}) = g_\theta(k)(x_{i_k})$が成り立つ．
-
-     これで，各$x_{i_k}$における$f_s(x_{i_k})$の符号については情報が得られた．
-     次に問題になるのは，各$k=1,\dots, k_s$に対し，区間$(x_{i_k},x_{i_{k+1}})$における$f_s(X)$の符号についてである．
-     多項式$f_s(X)$は，区間$(x_{i_k},x_{i_{k+1}})$において$f_s'(X)$の符号が$0$でない一定の符号であることから，\cref{corollary:monotone}より，
-     この区間の上では狭義単調増加または狭義単調減少である．
-     よって，区間$(x_{i_k},x_{i_{k+1}})$上の$f_s(X)$の根の数は高々$1$つである．
-
-     各区間に$f_s(X)$が根を持つことの必要十分条件は，次のように述べれる．
+     $x_1 < \dots < x_N$ ($N \leq 2sm$) を，$f_1, \dots, f_{s-1}, f'_s, g_1, \dots, g_s$のうち，恒等的に0でないような多項式の$R$上の根全体とする．
+     この部分列$x_{i_1} < \dots < x_{i_M}$を，$f_1, \dots, f_{s-1}, f'_s$の$R$上の根全体とする．
+     この列$i_i, \dots, i_M$は，行列$w$の情報にのみ依存する．
+     ここで，$i_0:=0$, $i_{M+1}:=N+1$とし，また，$x_0:= -\infty$, $x_{N+1}:= \infty$とする．
+     各$k=1, \dots, M$に対し，$f_1, \dots, f_{s-1}, f_s'$のいずれかは$x_{i_k}$において$0$になる．
+     従って，$\map{\theta}{\{1,\dots, M\}}{\{1, \dots, s\}}$を，次を満たすようにとれる．
      \begin{itemize}
-          \item $M\neq0$で，$k=1, \dots, M-1$に対して，$f_s(X)$が区間$(x_{i_k}, x_{i_{k+1}})$上に解を持つことの必要十分条件は
+          \item 各$k=1, \dots, M$に対して，$\theta(k) \in \{1, \dots, s-1\}$ならば$f_{\theta(k)}(x_{i_k})=0$
+          \item 各$k=1, \dots, M$に対して，$\theta(k)=s$ならば$f_s'(x_{i_k}) = 0$
+     \end{itemize}
+     この性質を満たす$\theta$は，行列$w$の情報のみを用いて定義できることに注意する．
+     また，この$\theta$に対して，各$k=1, \dots, M$において$f_s(x_{i_k}) = g_{\theta(k)}(x_{i_k})$が成り立つことにも注意する．
+
+     さらに各$k=0, \dots, M$において，$f_s'$は区間$(x_{i_k}, x_{i_{k+1}})$の上で$0$でない一定の符号をもつから，\cref{corollary:monotone}より，
+     $f_s$は区間$(x_{i_k}, x_{i_{k+1}})$上に高々一つの根を持つ．
+     また，$f_s$が根を持つ必要十分条件は次のように述べられる．
+     \begin{itemize}
+          \item $M\neq0$の場合，$k=1, \dots, M-1$に対して，$f_s(X)$が区間$(x_{i_k}, x_{i_{k+1}})$上に解を持つことの必要十分条件は
           \begin{equation}
                \sign_R(g_\theta(k)(x_{i_k}))\sign_R(g_\theta(k+1)(x_{i_{k+1}})) = -1.
           \end{equation}
-          \item $M\neq0$で，$(-\infty, x_1)$に解を持つことの必要条件は，
+          \item $M\neq0$の場合，$(-\infty, x_1)$に解を持つことの必要条件は，
           \begin{equation}
                \sign_R(f_s'((-\infty, x_1))) \sign_R(g_\theta(1)(x_1)) = 1.
           \end{equation}
-          \item $M\neq0$で，$(x_M, \infty)$に解を持つことの必要条件は，
+          \item $M\neq0$の場合，$(x_M, \infty)$に解を持つことの必要条件は，
           \begin{equation}
                \sign_R(f_s'((x_M, \infty))) \sign_R(g_\theta(M)(x_M)) = -1.
           \end{equation}
@@ -858,7 +854,8 @@ $\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい．
      \end{itemize}
      いずれの条件も，行列$w$の情報のみで記述されることに注意する．
 
-     いま，$y_1 < \dots < y_L$を，$f_1, \dots, f_{s-1}, f_s$の$R$上の根とし，$y_0 = -\infty$, $y_0$ = 0とする．
+     さて，ここで$y_1 < \dots < y_L$ ($L \leq sm$) を
+     $f_1, \dots, f_{s-1}, f_s$の$R$上の根全体とし，$y_0 = -\infty$, $y_{L+1} = \infty$とする．
      $\map{\rho}{\{0, \dots, L+1\}}{\{0, \dots, M+1\} \cup \{(k,k+1) \mid k=0, \dots, M\}}$を，
      \begin{equation}
           \rho(l) := \begin{cases} 
@@ -866,22 +863,22 @@ $\SIGN_R(f_1, \dots, f_s)$を構成できることで示せばよい．
                (k, k+1) & y_l \in (x_{i_k}, x_{i_{k+1}})
           \end{cases}
      \end{equation}
-     と定める．$\rho$の定義は，行列$w$の情報だけに依存する．
+     と定める．上記で述べたことより，$\rho$の定義は，行列$w$の情報にのみ依存する．
 
      それでは，$\SIGN_R(f_1, \dots, f_s)$が$w$の情報のみに依存して定まる事を示す．
      
-     まず，$i=1, \dots, s-1$に対しては，
+     まず，$j=1, \dots, s-1$に対しては，
      \begin{equation}
-          \sign_R(f_i(y_l)) = \begin{cases}
+          \sign_R(f_j(y_l)) = \begin{cases}
                \sign_R(f_j(x_{i_k})) & \rho(l) = k,\\
                \sign_R(f_j((x_{i_k}, x_{i_{k+1}}))) & \rho(l) = (k, k+1)
           \end{cases}
      \end{equation}
      であり，また，
      \begin{equation}
-          \sign_R(f_i((y_l,y_{l+1}))) = \sign_R(f_i((x_{i_k}, x_{i_{k+1}}))) \quad \text{$\rho(l)=k$または$\rho(l)=(k,k+1)$}
+          \sign_R(f_j((y_l,y_{l+1}))) = \sign_R(f_j((x_{i_k}, x_{i_{k+1}}))) \quad \text{$\rho(l)=k$または$\rho(l)=(k,k+1)$}
      \end{equation}
-     である．さらに，$i=s$に対しては，
+     である．さらに，$j=s$に対しては，
      \begin{equation}
           \sign_R(f_s(y_l)) = \begin{cases}
                \sign_R(g_{\theta(k)}(x_{i_k})) & \rho(l) = k,\\
