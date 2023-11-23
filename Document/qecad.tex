@@ -741,9 +741,7 @@ $\sign(f(X_1, \dots, X_n)) = \sigma$と同値であることに注意する．
      以上より，証明が完了した．
 \end{proof}
 
-\todo[inline]{ここから\cite{MR1659509}を参照して証明を述べていく．(11/22)}
-
-この補題により，\cref{theorem:Tarski}は，次のように言い換えることができる．
+\cref{lemma:qe_simplify}により，\cref{theorem:Tarski}は，次のように言い換えることができる．
 
 \begin{theorem}[{\cite[Theorem 1.4.2.]{MR1659509}}]\label{theorem:weak_Tarski}
      $\overline{Y} = (Y_1, \dots, Y_n)$と$X$を変数記号とする．任意の$f_1, \dots, f_s \in \Z\left[ \overline{Y},X \right]$および$\map{\sigma}{\{1, \dots, s\}}{\{-1, 0, 1\}}$に対して，
@@ -786,7 +784,7 @@ $m:= \max\{\deg(f_i) \mid i=1, \dots, s\}$とすれば，$N \leq sm$である．
 
 また，正整数$s, m$に対して，各成分が$-1,0,1$のいずれかである$s$行$(2l+1)$列行列($0 \leq l \leq sm$)全体を$W_{s,m}$と書く． 
 
-\begin{lemma}[{\cite[Lemma 1.4.4.]{MR1659509}}]\label{lemma:qe_1ststep}
+\begin{lemma}\label{lemma:qe_1ststep}
      $\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$とする．部分集合$W(\sigma) \subset W_{s,m}$を，次を満たすように取れる．
 
      任意の実閉体$R$と，次数が$m$以下であるような任意の$f_1, \dots, f_s \in R[X]$に対し，以下が同値である．
@@ -809,7 +807,7 @@ $m:= \max\{\deg(f_i) \mid i=1, \dots, s\}$とすれば，$N \leq sm$である．
      ある写像$\map{\varphi}{W_{2s,m}}{W_{s,m}}$が存在し，次をみたす．
 
      任意の実閉体$R$と，任意の$f_1, \dots, f_s \in R[X]$について，各$f_i$の次数は$m$以下であり，$f_s$は定数でなく，$f_1, \dots, f_{s-1}$は恒等的に$0$でないとする．
-     このとき，$g_1, \dots, g_s \in R[X]$を，それぞれ$f_s$を$f_1, \dots, f_{s-1}$, $f_s'$で割ったあまりとすれば，
+     このとき，$g_1, \dots, g_s \in R[X]$を，それぞれ$f_s$を$f_1, \dots, f_{s-1}$, $f_s'$で割った余りとすれば，
      \begin{equation}
           \SIGN_R(f_1, \dots, f_s) = \varphi(\SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s))
      \end{equation}
@@ -896,101 +894,79 @@ $\SIGN_R(f_1, \dots, f_s)$を構成することで示す．
      \end{equation}
      である．
 
-     以上により$\SIGN_R(f_1, \dots, f_s)$が$w$の情報のみに依存して定まることが示せ，よって証明が完了した．
+     以上により$\SIGN_R(f_1, \dots, f_s)$は$w$の情報のみに依存して定まる．よって，証明が完了した．
 \end{proof}
 
 以上の準備をもとに，\cref{theorem:weak_Tarski}を示す．
+\cref{lemma:qe_1ststep}により，\cref{theorem:weak_Tarski}の証明は，次の命題から従う．
 
-\begin{proof}[\cref{theorem:weak_Tarski}の証明]
-     \cref{lemma:qe_1ststep}により，次の主張を示せば十分である．
-     \begin{claim*}
-          任意に$f_1, \dots, f_s \in \Z[X, Y_1, \dots, Y_n]$をとる．
-          $f_i$の$X$についての次数の最大値を$m$とする．任意の$W \subset P_{s,m}$に対し，
-          ある量化記号のない論理式$\theta(Y_1, \dots, Y_n)$が存在して次を満たす．
+\begin{proposition} \label{proposition:weak_Tarski}
+     $\overline{Y}:= (Y_1, \dots, Y_n)$とし，
+     $f_1, \dots, f_s \in \Z\left[X, \overline{Y}\right]$をそれぞれ
+     $f_i \left(X, \overline{Y} \right) = h_{i, m_i}\left( \overline{Y} \right) X^{m_i} + \dots + h_{i, 0}\left(\overline{Y}\right)$ ($i=1, \dots, s$)とする．
+     また，$m:= \max\{m_i \mid i=1, \dots, m\}$とする．
+     任意の$W \subset W_{s,m}$に対し，
+     ある量化記号のない論理式$\theta\left(\overline{Y}\right)$が存在して次を満たす．
 
-          任意の実閉体$R$と，任意の$y_1, \dots, y_n \in R$に対し，以下の二つが同値である．
-          \begin{enumerate}
-               \item $\SIGN_R(f_1, \dots, f_s) \in W$である．
-               \item 実閉体$R$における解釈$\theta^R(y_1, \dots, y_n)$は真．
-          \end{enumerate}
-     \end{claim*}
-     実際，上の主張で$W = P(\sigma)$とすれば，\cref{theorem:weak_Tarski}が従う．
+     任意の実閉体$R$と，任意の$\overline{y} := (y_1, \dots, y_n) \in R^n$に対し，以下の2つが同値である．
+     \begin{enumerate}
+          \item $\SIGN_R(f_1(X, \overline{y}), \dots, f_s(X, \overline{y})) \in W$である．
+          \item 実閉体$R$は$\theta(\overline{y})$を満たす．
+     \end{enumerate}
+\end{proposition}
 
-     まず，$m=0$の場合，すなわち$f_1, \dots, f_s \in \Z[Y_1, \dots, Y_n]$の場合，
-     $W':=\{A = (a_i)_{i=1}^s \in W \mid \text{Aはs行1列の行列}\}$として
-     \begin{equation}
-          \theta(Y_1, \dots, Y_n) := \bigvee_{A \in W'}\bigwedge_{i=1}^s (\sign(f_i(Y_1, \dots, Y_n))=a_i) 
-     \end{equation}
-     とすれば，主張は満たされる．
+実際，\cref{proposition:weak_Tarski}において$W=W(\sigma)$とすれば，\cref{theorem:weak_Tarski}が従う．
 
-     次に，$m \geq 1$の場合を考える．
-     一般性を失わずに，$f_1, \dots, f_s$が恒等的に$0$でないとしてよい．
-     また，順番を並び替えて$f_s$の$X$についての次数が$m$であるとしてよい．
-     このとき，多項式列の次数$f_1, \dots, f_s$の$X$についての次数がそれぞれ$m_1, \dots, m_s$とすれば，
-     \begin{equation}
-          f_i(X,Y_1, \dots, Y_n) = h_{i,m_i}(Y_1, \dots, Y_n)X^m_i + \dots + h_{i,0}(Y_1, \dots, Y_n), \quad i=1, \dots, s
-     \end{equation}
-     とかくことができる．ただし，各$i=1, \dots, m$に対して$h_{i,m_i}(Y_1, \dots, Y_n)$は恒等的に$0$でない．
-
-     $m \geq 1$の場合の証明は，\cref{lemma:qe_lowering}を用いて多項式の$X$についての「次数を下げていく」ことで，
-     最終的に$f_1, \dots, f_s \in \Z[Y_1, \dots, Y_n]$の場合に帰着させることで達成される．
-
-     まず，「次数を下げていく」ことについてより詳しく述べる．
+\begin{proof}[\cref{proposition:weak_Tarski}の証明]
+     一般性を失わずに，各多項式$f_i$は恒等的に$0$でなく，$h_{i, m_i} \neq 0$としてよい．
+     ここで，多項式の列$(f_1, \dots, f_s)$に対して，各多項式の$X$についての次数の列$(m_1, \dots, m_s)$を対応づける．
      非負整数列全体$\{(m_1, \dots, m_s) \mid s \geq 1, m_1, \dots, m_s\}$上の前順序関係
      \begin{equation}
-          (m_1, \dots, m_s) \prec (m_1', \dots, m_t')
+          (m_1, \dots, m_s) \prec (m_1', \dots, m_{s'}')
      \end{equation}
-     を，ある非負整数$p$が存在し，$m_i$が$p$である$i=1, \dots, s$の数が，$m_j'$が$p$である$j=1, \dots, t$の数より少なく，
-     かつ任意の$q>p$に対しては$m_i$が$q$である$i=1, \dots, s$の数と，$m_j'$が$q$である$j=1, \dots, t$の数が等しいことと定義する．
+     を，ある非負整数$p$が存在し，以下の2条件を満たすことと定義する．
+     \begin{itemize}
+          \item $p$に等しい$m_i$ ($i=1, \dots, s$)の数が，$p$に等しい$m'_i$ ($i=1, \dots, s'$)の数より少ない．
+          \item 任意の$q>p$に対して，$q$に等しい$m_i$ ($i=1, \dots, s$)の数が，$q$に等しい$m'_i$ ($i=1, \dots, s'$)の数より少ない．
+     \end{itemize}
+     この前順序関係$\prec$は，非負整数列全体の中に無限降鎖列は存在しない．
+     すなわち，非負整数列の列$\{\mu_i\}_{i \geq 1}$で，$\mu_1 \succ \mu_2 \succ \dots$となるものは存在しない．
+     この前順序関係$\prec$に関する帰納法を用いて，命題を証明をする．
 
-     この前順序関係のもとで，非負整列集合全体の中に無限降鎖列は存在しない事に注意する．
-     すなわち，前順序関係$\prec$による降鎖列を際限なく取っていくと，いつかは$0$だけの列$(0,\dots, 0)$となる．
-
-     多項式列$(f_1, \dots, f_s)$に対しては，$X$についての次数$(m_1, \dots, m_s)$を取ることで非負整数列に対応づく．
-     これで，多項式列についての「次数下げ」を行っていくことができれば，いずれ$X$についての次数が全て$0$である場合に帰着され，証明が完了する．
-
-     では，「次数下げ」の仕組みについて説明する．そのうえで重要なことは，次の主張である．  
-     \begin{claim*}
-          $ f , g \in \Z[X, Y_1, \dots, Y_n]$とし，それぞれの$X$についての次数が$m$, $l$であるとする．ただし，$m \geq l$とし，$g$は恒等的に$0$でないとする．
-          \begin{align}
-               f &= u_m(Y_1, \dots, Y_n)X^m + \dots + u_0(Y_1, \dots, Y_n), \quad u_m(Y_1, \dots, Y_n) \neq 0, \\
-               g &= v_l(Y_1, \dots, Y_n)X^l + \dots + v_0(Y_1, \dots, Y_n), \quad v_l(Y_1, \dots, Y_n) \neq 0
-          \end{align}
-          とすると，$\Z(Y_1, \dots, Y_n)[X]$上$f$を$g$で割った余りを$r \in \Z(Y_1, \dots, Y_n)[X]$とすると，ある正整数$p>0$が存在し，
-          \begin{equation}
-               v_l(Y_1, \dots, Y_n)^p \cdot r(X,Y_1, \dots, Y_n) \in \Z[Y_1, \dots, Y_n][X]
-          \end{equation}
-          が成り立つ．また，この条件は，$p>m-l$であれば必ず満たされる．
-     \end{claim*}
-     この主張は，通常の割り算のアルゴリズムから従う．
-
-     では，「次数下げ」の仕組みについて説明する．
-
-     $y_1, \dots, y_n \in R$が，ある$i=1, \dots, s$に対して$h_{i, m_i}(y_1, \dots, y_n) = 0$となる場合，
-     そのような$i$については$\tilde{f}_i := f_i - h_{i, m_i}X^{m_i}$とし，それ以外の$i$については$\tilde{f}_i := f_i$として得られる多項式列$(\tilde{f}_1, \dots, \tilde{f}_s)$
-     について，
-     \begin{align}
-          &\SIGN_R(f_1(X,y_1, \dots, y_n), \dots, f_s(X,y_1, \dots, y_n)) \in W\\
-          \iff &\SIGN_R(\tilde{f}_1(X,y_1, \dots, y_n), \dots, \tilde{f}_s(X,y_1, \dots, y_n)) \in W
-     \end{align}
-     である．
-
-     また，$y_1, \dots, y_n \in R$が，全ての$i=1, \dots, s$に対して$h_{i, m_i}(y_1, \dots, y_n) \neq 0$となる場合，
-     $r_1, \dots, r_s \in \Z(Y_1, \dots, Y_n)[X]$を，$f_s$をそれぞれ$f_1, \dots, f_{s-1}, f'_s$で割った余りとし，$g_1, \dots, g_s \in \Z[X,Y_1, \dots, Y_n]$を，
+     $m:= \max\{m_1, \dots, m_s\}$とする．$m=0$の場合，すなわち$f_1, \dots, f_s \in \Z\left[\overline{Y}\right]$の場合，
+     $W':=\{(a_i)_{i=1}^s \in W \mid \text{$(a_i)_{i=1}^s$は$s$行$1$列の行列}\}$として
      \begin{equation}
-          g_i = \begin{cases}
-               r_i \cdot h_{i,m_i}^{2(m_s-m_i+1)} & i=1, \dots, s-1\\
-               r_s \cdot (m_s h_{i,m_s})^{2\cdot2} & i=s
-          \end{cases}
+          \theta\left(\overline{Y}\right) := \bigvee_{(a_i)_{i=1}^s \in W'}\bigwedge_{i=1}^s \left(\sign\left(f_i\left(\overline{Y}\right)\right)=a_i\right)
      \end{equation}
-     と定めれば，\cref{lemma:qe_lowering}より，多項式列$(f_1, \dots, f_s', g_1, \dots, g_s)$について，
-     \begin{align}
-          &\SIGN_R(f_1(X,y_1, \dots, y_n), \dots, f_s(X,y_1, \dots, y_n)) \in W\\
-          \iff &\SIGN_R(f_1(X,y_1, \dots, y_n), \dots, f_s'(X,y_1, \dots, y_n),g_1(X,y_1, \dots, y_n), \dots, g_s(X,y_1, \dots, y_n)) \in \phi^{-1}(W)
-     \end{align}
-     が成り立つ．
+     とすれば，命題を満たす．
 
-     いずれの場合も，多項式列の次数を下げることができている．よって，証明が完了した．
+     次に，$m \geq 1$の場合を考える．
+     この場合は，次数を下げていき，最終的に$f_1, \dots, f_s \in \Z\left[\overline{Y}\right]$の場合に帰着させることで示される．
+
+     まず，多項式の順番を並び替えて，$m_s=m$であるとしてよい．
+     \cref{lemma:qe_lowering}で示した$\map{\varphi}{W_{2s,m}}{W_{s,m}}$を取り，
+     $W'':= \varphi^{-1}(W)$とする．
+     \cref{lemma:qe_lowering}より，任意の実閉体$R$と，任意の$\overline{y} = (y_1, \dots, y_s) \in R^n$に対し，
+     各$i=1, \dots, s$に対して$h_{i, m_i}(\overline{y}) \neq 0$であれば以下の2条件は同値である．
+     \begin{itemize}
+          \item $\SIGN_R(f_1(X,\overline{y}), \dots, f_s(X, \overline{y})) \in W$,
+          \item $\SIGN_R(f_1(X,\overline{y}), \dots, f_{s-1}(X, \overline{y}), f_s'(X, \overline{y}), g_1(X,y), \dots, g_s(X,y)) \in W''$,
+     \end{itemize}
+     ここで，$g_1, \dots, g_s$は，それぞれ$f_s$を$f_1, \dots, f_{s-1}$, $f_s'$を$X$に関して割った余りに，
+     $h_{1, m_1}, \dots, h_{s, m_s}$の適切な偶数べき乗を，それぞれの分母が消去できるようにかけて得られる多項式である．
+     このとき，多項式列$f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s$の$X$についての次数は，前順序関係$\prec$に関して$(m_1, \dots, m_s)$よりも小さくなる．
+ 
+     一方，ある$i=1, \dots, s$について$h_{i, m_i}(\overline{y}) = 0$である場合，
+     そのような$i$については$\widetilde{f}_i := f_i - h_{i, m_i}X^{m_i}$とし，
+     それ以外の$i$については$\widetilde{f}_i := f_i$として得られる多項式列$(\widetilde{f}_1, \dots, \widetilde{f}_s)$
+     について，以下の2条件は同値である．
+     \begin{itemize}
+          \item $\SIGN_R(f_1(X,\overline{y}), \dots, f_s(X, \overline{y})) \in W$,
+          \item $\SIGN_R(\widetilde{f}_1(X,\overline{y}), \dots, \widetilde{f}_s(X, \overline{y})) \in W$,
+     \end{itemize}
+     これにより，多項式列$\widetilde{f}_1, \dots, \widetilde{f}_s$の$X$についての次数が，前順序関係$\prec$に関して$(m_1, \dots, m_s)$よりも小さくなる．
+
+     以上により命題の証明が完了した．
 \end{proof}
 
 \section{半代数的集合}
