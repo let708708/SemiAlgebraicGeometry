@@ -352,7 +352,7 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
 ここで，論理式$\phi := \forall x (x^2 + y > 0)$について観察する．ここで，$x,y$はいずれも変数記号である．
 これは，「全ての$x$に対して$x^2 + y > 0$が成り立つ」というように読むことができるが，$y$の値は自由に設定することができ，$y$の値が定まらない限りは真であるか偽であるかははっきりしない．
 この$y$のように，自由な状態にある変数記号を論理式$\phi$の自由変数という．
-厳密には，次のように定義する．
+厳密には，次のように定義する．以下の定義は，\cite[定義 1.5.1]{C3041}を参考にした．
 
 \begin{definition}
      $\mathcal{L}$を言語とする．
@@ -371,14 +371,10 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
           $\Var(\exists x\phi):=\Var(\phi) \setminus \{x\}$
           と定義する．
      \end{enumerate}
-
      自由変数でない変数を，束縛変数(bound variable)という．
-
      $\mathcal{L}$論理式$\phi$に登場する自由変数が高々$x_1, \dots, x_n$である事を明示したいとき，$\phi(x_1, \dots, x_n)$と書く．ただし，登場しない自由変数があっても良い．
-
-     $\mathcal{L}$項$t$が自由変数を持たないとき，すなわち$\Var(t)=\emptyset$であるとき，$t$を閉項(closed term)という．
-     また，$\mathcal{L}$論理式$\phi$が自由変数を持たないとき，すなわち$\Var(\phi)=\emptyset$であるとき，
-     $\phi$を$\mathcal{L}$閉論理式(closed $\mathcal{L}$-formula)，あるいは$\mathcal{L}$文($\mathcal{L}$-sentense)という．
+     $\mathcal{L}$論理式$\phi$が自由変数を持たないとき，すなわち$\Var(\phi)=\emptyset$であるとき，
+     $\phi$を$\mathcal{L}$文($\mathcal{L}$-sentense)という．
 \end{definition}
 
 \begin{definition}[{\cite[Definition 1.1.6]{MR1924282}}]
@@ -429,8 +425,8 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
                $\phi \leftrightarrow \psi$を，$(\phi \rightarrow \psi)\land(\psi \rightarrow \phi)$の省略とする．
                また，項$t_1, t_2$に対し，$t_1 \neq t_2$を，$\lnot(t_1 = t_2)$の省略とする．
           \item
-               有限個の論理式$\phi_1, \dots, \phi_n$に対して，$\bigvee_{i=1}^n \phi_i$を$\phi_1 \lor \dots \lor \phi_n$\todo{括弧記号}の省略とする．
-               また，$\bigwedge_{i=1}^n \phi_i$を$\phi_1 \land \dots \land \phi_n$の省略とする．
+               有限個の論理式$\phi_1, \dots, \phi_n$に対して，$\bigvee_{i=1}^n \phi_i$を$(\phi_1 \lor (\phi_2 \lor (\dots \lor \phi_n)))$の省略とする．
+               また，$\bigwedge_{i=1}^n \phi_i$を$(\phi_1 \land (\phi_2 \land (\dots \land \phi_n)))$の省略とする．
           \item     
                変数記号は，$v_1, v_2, \dots, $に加え，他の記号$a, b, c, \dots, x, y, z, x_1, x_2, \dots$等も用いることにする．
           \end{itemize}
@@ -448,14 +444,14 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
 ここで，実閉体の理論$\RCF$を，\cite[Section 5.2.1]{C3041}に従って定義する．
 
 \begin{example}[実閉体の理論]
-     言語$\mathcal{L}_\mathrm{OR}$を以下で\todo{助詞の検討}定める．
+     言語$\mathcal{L}_\mathrm{OR}$を，以下のデータの組として\todo{助詞の検討}定義する．
      \begin{itemize}
           \item 定数記号 $0$, $1$.
           \item 1変数関数記号 $-$.
           \item 2変数関数記号 $+$, $\cdot$.
           \item 2変数関係記号 $<$.
      \end{itemize}
-     このとき，言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$を，次の$\mathcal{L}_\mathrm{OR}$文からなる集合で\todo{助詞の検討}定義する．
+     このとき，言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$を，次の$\mathcal{L}_\mathrm{OR}$文全体の集合として\todo{助詞の検討}定義する．
 
           \begin{enumerate}
                \item $\forall x \forall y \forall z(x + (y + z) = (x + y) + z)$,
@@ -523,7 +519,7 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
      である．このような$\mathcal{L}$論理式$\psi$を否定標準形(negation normal form)の論理式という．
 \end{proposition}
 \begin{proof}
-     De Morganの法則\todo{?}
+     De Morganの法則\todo{言うらしい}
      \begin{align}
           &\models \lnot (\theta_1 \lor \theta_2) \leftrightarrow (\lnot \theta_1 \land \lnot \theta_2)\\
           &\models \lnot (\theta_1 \land \theta_2) \leftrightarrow (\lnot \theta_1 \lor \lnot \theta_2)\\
@@ -571,7 +567,7 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
      したがって，帰納法により命題が示された．
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\label{proposition:pnf}
      任意の$\mathcal{L}$論理式$\phi$に対し，ある量化記号のない$\mathcal{L}$論理式$\psi$及び量化記号$\Qua_1, \dots, \Qua_m \in \{\forall, \exists\}$が存在して，
      \begin{equation}
           \models \phi \leftrightarrow \Qua_1 v_1 \dots \Qua_m v_m \psi
@@ -656,11 +652,8 @@ $L$上の任意の論理式$\phi$に対し，量化記号のない論理式$\psi
 が成り立つことと定義する．
 \end{definition}
 
-
-実閉体の理論は量化記号消去ができる．すなわち，次が成り立つ．
-
 \begin{theorem}[{\cite[Theorem 11]{MR0044472}}]\label{theorem:Tarski}
-     言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$は量化記号消去をもつ．
+     言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$は量化記号消去を持つ．
 \end{theorem}
 
 以降この節は\cref{theorem:Tarski}の証明を述べる．
@@ -679,65 +672,76 @@ $X_1, \dots, X_n$を変数記号とする．多項式$f \in \Z[X_1, \dots, X_n]$
 このとき，$\RCF$において，任意の原子論理式$\phi(X_1, \dots, X_n)$は，ある多項式$f \in \Z[X_1, \dots, X_n]$及び$\sigma \in \{-1, 0, 1\}$に対して，
 $\sign(f(X_1, \dots, X_n)) = \sigma$と同値であることに注意する．
 
+また，$\lnot(\sign(f(X_1, \dots, X_n)) = \sigma)$は，
+$\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) = \tau)$と同値であることにも注意する．
+
 それでは，\cref{theorem:Tarski}を示していく．そのために，まずは次の補題を準備する．
 
-\begin{lemma}\label{lemma:qe_simplify}\todo{証明未確認}
-     言語$L_\mathrm{OR}$上の理論$\RCF$において，次の主張が成り立てば．理論$\RCF$は量化記号消去できる．
-
+\begin{lemma}\label{lemma:qe_simplify}
+     $\overline{Y} = (Y_1, \dots, Y_n)$とする．
+     言語$\mathcal{L}_\mathrm{OR}$上の理論$\RCF$において，以下は同値である．
      \begin{enumerate}
-          \item \label{qe_1}
-          任意の$f_1, \dots, f_s \in \Z[X, Y_1, \dots, Y_n]$および$\map{\sigma}{\{1,\dots, s\}}{P}$に対して，量化記号のない論理式$\theta(Y_1, \dots, Y_n)$が存在し，
+          \item \label{lemma:qe_simplify_1}
+          理論$\RCF$は量化記号消去を持つ．
+          \item \label{lemma:qe_simplify_2}
+          任意の$f_1, \dots, f_s \in \Z \left[X, \overline{Y}\right]$および$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対して，
+          量化記号のない論理式$\theta\left(\overline{Y}\right)$が存在し，
           \begin{equation}
-               \RCF \models \forall Y_1 \dots \forall Y_n ( \theta(Y_1, \dots, Y_n) \leftrightarrow \exists X(\bigwedge_i (\sign(f_i(X,Y_1, \dots, Y_n))= \sigma(i))) )
+               \RCF \models \theta\left(\overline{Y}\right) \leftrightarrow \exists X \left(\bigwedge_{i=1}^s \left(\sign\left(f_i\left(X,\overline{Y}\right)\right) = \sigma(i)\right)\right)
           \end{equation}
-          を満たす．
+          \item \label{lemma:qe_simplify_3}
+          任意の量化記号のない論理式$\phi\left(X, \overline{Y}\right)$に対し，
+          ある量化記号のない論理式$\theta\left(\overline{Y}\right)$が存在し，
+          \begin{equation}
+               \RCF \models \theta\left(\overline{Y}\right) \leftrightarrow \exists X \phi\left(X, \overline{Y}\right)
+          \end{equation}
      \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-     まず，\ref{qe_1}により次の主張が成り立つことを示す．
-     \begin{enumerate}
-          \setcounter{enumi}{1}
-          \item \label{qe_2}
-          任意の量化記号のない論理式$\phi(X, Y_1, \dots, Y_n)$に対し，ある量化記号のない論理式$\theta(Y_1, \dots, Y_n)$が存在し，
-          \begin{equation}
-               \RCF \models \forall Y_1 \dots \forall Y_n(\theta(Y_1, \dots, Y_n) \leftrightarrow \exists X \phi(X, Y_1, \dots, Y_n))
-          \end{equation}
-          をみたす．
-     \end{enumerate}
-     実際，任意に与えられた量化記号のない論理式$\phi(X, Y_1, \dots, Y_n)$は，多項式$f_{i,j} \in \Z[X, Y_1, \dots, Y_n]$($i=1, \dots, k, j=1, \dots, l_i$)
-     と$\map{\sigma_i}{\{1, \dots, l_i\}}{P}$を用いて，和積標準形\todo[inline]{ 「を用いて，表す」は違和感ない．和積標準形は定義していない．}
-     \begin{equation}
-          \phi(X, Y_1, \dots, Y_n) \leftrightarrow \bigvee_i \bigwedge_j (\sign(f_{i,j}(X, Y_1, \dots, Y_n)) = \sigma_i(j))
-     \end{equation}
-     で表すことができる．このとき，
-     \begin{equation}
-          \exists X \phi(X, Y_1, \dots, Y_n) \leftrightarrow \bigvee_i (\exists X \bigwedge_j (\sign(f_{i,j}(X, Y_1, \dots, Y_n)) = \sigma_i(j)))
-     \end{equation}
-     が成り立つ．ここで，\ref{qe_1}より，各$i=1, \dots, k$に対して，
-     \begin{equation}
-          \exists X \bigwedge_j (\sign(f_{i,j}(X, Y_1, \dots, Y_n)) = \sigma_i(j)) \leftrightarrow \theta_i(Y_1, \dots, Y_n)
-     \end{equation}
-     を満たす量化記号のない論理式$\theta_i(Y_1, \dots, Y_n)$が存在する．
-     \todo[inline]{このしたがってはギャップがある．}
-     したがって，\ref{qe_2}は成り立つ．
+     \ref{lemma:qe_simplify_1}を満たせば\ref{lemma:qe_simplify_2}を満たすことは明らかである．
+     次に，\ref{lemma:qe_simplify_2}を満たせば\ref{lemma:qe_simplify_3}を満たすことを示す．
 
-     次に，\ref{qe_2}より，理論$\RCF$が量化記号消去できることを示す．
-     任意の論理式$\phi$に対し，それと同値となるような量化記号のない論理式$\theta$が存在することを示せばよい．
-     これは，長さに関する帰納法で示す．まず，論理式$\phi$の量化記号が0個，すなわち原子論理式の場合は，すでに量化記号消去できているのでよい．
-     次に，論理記号が$n$個以下の場合に成り立っていると仮定して，論理式$\phi$の量化記号が$(n+1)$個の場合に示す．
+     任意の量化記号のない論理式$\phi(X, \overline{Y})$について，\cref{proposition:dnf}と同様の証明により，
+     多項式$f_{i,j} \in \Z[X, Y_1, \dots, Y_n]$ ($i=1, \dots, k, j=1, \dots, l_i$)
+     と$\map{\sigma_i}{\{1, \dots, l_i\}}{\{-1,0,1\}}$を，
+     \begin{equation}
+          \RCF \models
+          \phi\left(X, \overline{Y}\right) \leftrightarrow 
+          \bigvee_i \bigwedge_j \left(\sign\left(f_{i,j}\left(X, \overline{Y}\right)\right) = \sigma_i(j)\right)
+     \end{equation}
+     を満たすように取れる．このとき，
+     \begin{equation}
+          \RCF \models 
+          \exists X \phi\left(X, \overline{Y}\right) \leftrightarrow  
+          \bigvee_i \left(\exists X \bigwedge_j \left(\sign\left(f_{i,j}\left(X, \overline{Y}\right)\right) = \sigma_i(j)\right)\right)
+     \end{equation}
+     が成り立つ．ここで，\ref{lemma:qe_simplify_2}より，各$i=1, \dots, k$に対して，
+     \begin{equation}
+          \RCF \models
+          \theta_i\left(\overline{Y}\right) \leftrightarrow 
+          \exists X \bigwedge_j \left(\sign\left(f_{i,j}\left(X, \overline{Y}\right)\right) = \sigma_i(j)\right)
+     \end{equation}
+     を満たす量化記号のない論理式$\theta_i\left(\overline{Y}\right)$が存在する．このとき，
+     \begin{equation}
+          \RCF \models
+          \bigvee_i \theta_i\left(\overline{Y}\right)\leftrightarrow
+          \exists X \phi\left(X, \overline{Y}\right) 
+     \end{equation}
+     である．したがって，\ref{lemma:qe_simplify_3}を満たす．
 
-     \begin{itemize}
-          \item $\phi = \lnot \psi$の場合，$\psi$と同値な量化記号のない論理式$\theta$が存在するので，$\phi$は$\lnot \theta$と同値である．
-          \item $\phi$が$\psi_1 \land \psi_2$, $\psi_1 \lor \psi_2$, $\psi_1 \rightarrow \psi_2$のいずれかの場合，否定の場合と同様にして示すことができる．
-          \item $\phi = \exists X \psi$の場合，帰納法の仮定より，$\psi$は量化記号のない論理式$\theta_1$に書き直すことができる．
-          よって，主張\ref{qe_2}より，$\exists X \theta_1$は量化記号のない論理式$\theta_2$に同値である．よって，示された．
-          \item $\phi = \forall X \psi$の場合，まずこの論理式は$\lnot \exists X \lnot \psi$に同値であり，
-          帰納法の仮定より$\psi$は量化記号のない論理式$\theta_1$に書き直すことができる．
-          また，主張\ref{qe_2}より，$\exists X \lnot \theta_1$は量化記号のない論理式$\theta_2$に書き直すことができる．
-          このとき，$\phi$は$\lnot \theta_2$に同値となり，示された．
-     \end{itemize}     
-
+     最後に，\ref{lemma:qe_simplify_3}を満たせば，\ref{lemma:qe_simplify_1}を満たすことを示す．
+     \cref{proposition:pnf}より，任意の量化記号のない論理式$\phi\left(X_1, \dots, X_m, \overline{Y}\right)$および$\Qua_1, \dots, \Qua_m \in \{\forall, \exists\}$に対し，
+     ある量化記号のない論理式$\theta\left(\overline{Y}\right)$が存在し，
+     \begin{equation}
+          \RCF \models 
+          \Qua_1 X_1 \dots\Qua_m X_m \phi\left(X_1, \dots, X_m, \overline{Y}\right) \leftrightarrow \theta\left(\overline{Y}\right)
+     \end{equation}
+     を満たすことを示せばよい．これは，\ref{lemma:qe_simplify_3}と
+     \begin{equation}
+          \models \forall X \psi \leftrightarrow \lnot \exists X \lnot \psi
+     \end{equation}
+     を用いて，$m$に関する帰納法により示される．
      以上より，証明が完了した．
 \end{proof}
 
