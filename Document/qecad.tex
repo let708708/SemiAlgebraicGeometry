@@ -745,7 +745,7 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
      以上より，証明が完了した．
 \end{proof}
 
-\cref{lemma:qe_simplify}により，\cref{theorem:Tarski}は，次のように言い換えることができる．
+\cref{lemma:qe_simplify}の\ref{lemma:qe_simplify_2}により，\cref{theorem:Tarski}は，次のように言い換えることができる．
 
 \begin{theorem}[{\cite[Theorem 1.4.2.]{MR1659509}}]\label{theorem:weak_Tarski}
      $\overline{Y} = (Y_1, \dots, Y_n)$と$X$を変数記号とする．任意の$f_1, \dots, f_s \in \Z\left[ \overline{Y},X \right]$および$\map{\sigma}{\{1, \dots, s\}}{\{-1, 0, 1\}}$に対して，
@@ -956,8 +956,9 @@ $\SIGN_R(f_1, \dots, f_s)$を構成することで示す．
           \item $\SIGN_R(f_1(X,\overline{y}), \dots, f_s(X, \overline{y})) \in W$,
           \item $\SIGN_R(f_1(X,\overline{y}), \dots, f_{s-1}(X, \overline{y}), f_s'(X, \overline{y}), g_1(X,y), \dots, g_s(X,y)) \in W''$,
      \end{itemize}
-     ここで，$g_1, \dots, g_s$は，それぞれ$f_s$を$f_1, \dots, f_{s-1}$, $f_s'$を$X$に関して割った余りに，
-     $h_{1, m_1}, \dots, h_{s, m_s}$の適切な偶数べき乗を，それぞれの分母が消去できるようにかけて得られる多項式である．
+     ここで，$g_1, \dots, g_{s-1}$は，それぞれ$f_s$を$f_1, \dots, f_{s-1}$により$X$に関して割った余りに，
+     $h_{1, m_1}, \dots, h_{s-1, m_{s-1}}$の適切な偶数べき乗を，それぞれの分母が消去できるようにかけて得られる多項式である．
+     また，$g_s$は，$f_s$を$f_s'$により$X$に関して割った余りに，$m_s h_{s,m_s}$の適切な偶数べき乗を，分母が消去できるようにかけて得られる多項式である．
      このとき，多項式列$f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s$の$X$についての次数は，前順序関係$\prec$に関して$(m_1, \dots, m_s)$よりも小さくなる．
  
      一方，ある$i=1, \dots, s$について$h_{i, m_i}(\overline{y}) = 0$である場合，
