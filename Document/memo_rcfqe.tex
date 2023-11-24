@@ -28,239 +28,73 @@
 \newcommand{\map}[3]{{#1}:{#2}\rightarrow{#3}}
 
 \theoremstyle{definition}
-\newtheorem{definition}{定義}[section]
-\crefname{definition}{定義}{定義}%
-\newtheorem{proposition}{命題}[section]
-\crefname{proposition}{命題}{命題}%
-\newtheorem{lemma}{補題}[section]
-\crefname{lemma}{補題}{補題}%
-\newtheorem{theorem}{定理}[section]
-\crefname{theorem}{定理}{定理}%
-\newtheorem{corollary}{系}[section]
-\crefname{corollary}{系}{系}%S
-\newtheorem*{claim*}{主張}
-\newtheorem{remark}{注意}[section]
-\newtheorem{example}{例}[section]
+\newtheorem*{proposition*}{命題}
+\newtheorem*{lemma*}{補題}
+\newtheorem*{example*}{例}
 
 \renewcommand{\proofname}{\textbf{証明}}
 
 \begin{document}
 
-\title{実閉体上の量化記号消去のアルゴリズムに関するメモ}
-\author{富永 直弥}
-\maketitle
+\begin{lemma*}
+    ある写像$\map{\varphi}{W_{2s,m}}{W_{s,m}}$が存在し，次をみたす．
 
-\section{歴史的な経緯のまとめ}
-\subsection{Alfred Tarski, "A Decision Method for Elementary Algebra and Geometry(1951)"}
-\subsection{Seidenberg, "A new Decision Method for Elementary Algebra(1954)"}
-Tarskiは，初等代数学における決定方法(decision method)が与えられた．
-それは，本質的には，所与の多項式の不等式からなる有限集合が，解を持つかどうかを決定するアルゴリズムが与えられたことから達成された．
-
-以下では，Tarskiの結果を別の手法で示す証明を述べる．
-私たちの証明で重要な点は，与えられた有理数体係数2変数多項式$f(x,y) > 0$が，
-実閉体$K$上零点をもつかどうかを決定する方法を示すことで達成される．
-
-この手続きは，\S 2 で行われるが，帰納法のために，$f(x,y)$の係数にパラメータを含む場合の議論も必要である．
-この注意は\S 3 で．この点について十分であることを見る．
-そして，\S 1 では，この問題が等号の決定問題に帰着される．しかし，帰納法が等号だけでは回らない．
-なので，私たちは等号$f(x,y)=0$と不等号$F(x) \neq 0$が同時に成立する系を考慮する．
-もしこの場合に対して決定が成立すれば，帰納法が即座に従う．
-
-その議論は，一様にすべて実閉体$K$で進行する．
-これにより，"Pricnciple of Lefschetz"として知られる原理に類似する実閉体の原理を得る．
-この原理は，ある種の結果を主張する，その結果は，複素数体では自動的に成り立つようなことが，任意の標数0の代数的閉体でも成り立つということだ．
-
-対応する実閉体の原理は，"Principle of Tarski"と呼ぶことにするが，
-それは任意の代数的な基本的文が，一つの実閉体で成り立つのであれば，すべての実閉体で成り立つということである．
-特に，任意の多項式$f(x_1, \dots, x_k) \in K[x_1, \dots, x_k]$,$K$は実閉体，は，任意の$n$次元閉区間の上で最大値と最小値を示すことが示せる．
-
-\S 6(b)では，私たちは，もし実代数多様体が，任意の点の近傍で$K$座標に近似できるとき，そのときそのような点を原点に近似できる事を示すことで，その原理について説明する．
-$\leftarrow$は？
+    任意の実閉体$R$と，任意の$f_1, \dots, f_s \in R[X]$について，各$f_i$の次数は$m$以下であり，$f_s$は定数でなく，$f_1, \dots, f_{s-1}$は恒等的に$0$でないとする．
+    このとき，$g_1, \dots, g_s \in R[X]$を，それぞれ$f_s$を$f_1, \dots, f_{s-1}$, $f_s'$で割った余りとすれば，
+    \begin{equation}
+         \SIGN_R(f_1, \dots, f_s) = \varphi(\SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s))
+    \end{equation}
+    である．
+\end{lemma*}
 
 
-私たちの証明は，実際に決定機(decision machine)を構成することに関係があるだろう．
-この点に関するいくつかの注意が\S 6(e)でなされている．
+\begin{proposition*}
+    $\overline{Y}:= (Y_1, \dots, Y_n)$とし，
+    $f_1, \dots, f_s \in \Z\left[X, \overline{Y}\right]$をそれぞれ
+    $f_i \left(X, \overline{Y} \right) = h_{i, m_i}\left( \overline{Y} \right) X^{m_i} + \dots + h_{i, 0}\left(\overline{Y}\right)$ ($i=1, \dots, s$)とする．
+    また，$m:= \max\{m_i \mid i=1, \dots, m\}$とする．
+    任意の$W \subset W_{s,m}$に対し，
+    ある量化記号のない論理式$\theta\left(\overline{Y}\right)$が存在して次を満たす．
 
-\subsection{George E. Collins, "Quantifier Elimination for Real Closed Fields by Cylindrical Algebraic Decomposition(1975)"}
-
-\section{第一の証明（Bochnask, Coste, Royによる証明）}
-まず第一の方法は，新井敏康「数学基礎論」にて紹介されているアルゴリズムである．
-これは，J.Bochnask, M.Coste and M.-F.Roy, Real Algebraic Geometryによって紹介されている方法と同等であるらしい．
-予想するに，Tarskiによって示された方法と同じなのではないかと思うが，元論文を参照していないので実際のところはよくわからない．
-
-\begin{lemma}[量化子消去の素朴な簡略化] 
-    言語$L$の理論$T$が量化記号消去できることと次の主張が成り立つことは同値：
-
-    $L$-リテラル$L_i(x,\vec{y})$の論理積$\phi(x,\vec{y}) = \bigwedge_i L_i(x,\vec{y})$が任意に与えられたとき，量化記号なしの$L$-論理式$\theta(\vec{y})$で，
-    \[T \models \forall \vec{y} ( \exists x \phi(x,\vec{y}) \leftrightarrow \theta(\vec{y}) )\]
-    を満たすものが存在する．
-
-\end{lemma}
-\begin{proof}
-    まず，主張が成り立てば次のさらに強い主張が成り立つことを示せる：
-    量化記号なしの論理式$\phi(x,\vec{y})$が任意に与えられたら，量化記号なしの論理式$\theta(\vec{y})$が存在し，
-    \[
-        T \models \forall \vec{y} (\theta(\vec{y}) \leftrightarrow \exists x \phi(x, \vec{y}))
-    \]
-    を満たすものが存在する．
-
-    まず，量化記号のない論理式$\phi(x,\vec{y})$は，有限個の$L$-リテラルを用いて，
-    和積標準形$\bigvee \bigwedge L_i(x,\vec{y})$と同値である．
-    \[
-        \exists x \phi(x,\vec{y}) \leftrightarrow \bigvee \exists x  (\bigwedge L_i(x,\vec{y}))
-    \]
-    であるから，弱い主張から強い主張が成り立つ．
-
-    さらに，強い主張から$T$の量化子が消去できることを示す．これは，長さに関する帰納法で示すことができる．
+    任意の実閉体$R$と，任意の$\overline{y} := (y_1, \dots, y_n) \in R^n$に対し，以下の2つが同値である．
     \begin{enumerate}
-        \item 論理記号が0個の，すなわち原子論理式の場合は，すでに量化記号消去できているのでよい．
-        \item 次に，論理記号が$n$個の場合に成り立っていると仮定する．
-        論理記号の数が$n+1$個である任意の$L$-論理式$\psi$をとる．
-        \begin{itemize}
-            \item $\psi = \lnot \psi_1$の場合，$\psi$と同値な量化記号のない論理式$\theta_1$が存在するので，$\psi$は$\lnot\theta_1$と同値となる．
-            \item $\psi = \psi_1 \lor \psi_2$， $\psi = \psi_1 \land \psi_2$ または $\psi = \psi_1 \rightarrow \psi_2$ の場合，同様．
-            \item $\psi = \exists x \psi_1$の場合，帰納法の仮定より$\psi_1$は，量化記号なしの論理式に書き直すことができる．よって，強い主張より成り立つ．
-            \item $\psi = \forall x \psi_1$の場合，まず，この論理式は$\lnot \exists x \lnot \psi_1$に同値であり，
-            また，帰納法の仮定より$\psi_1$は量化子なしの論理式$\theta_1$に書き直すことができる．よって，強い仮定より，
-            $\exists \lnot \psi_1$は量化子なしの論理式$\theta_2$に書き直すことができる．よって，オッケーである．
-        \end{itemize}
+         \item $\SIGN_R(f_1(X, \overline{y}), \dots, f_s(X, \overline{y})) \in W$である．
+         \item 実閉体$R$は$\theta(\overline{y})$を満たす．
     \end{enumerate}
-\end{proof}
+\end{proposition*}
 
-ここからは，実閉体の理論$\RCF$が量化記号消去できることを示す．ここで，次のような省略記号を導入する．
-\begin{align*}
-    \sign(a) = 1 &\defiff a>0\\
-    \sign(a) = 0 &\defiff a=0\\
-    \sign(a) = -1 &\defiff a<0
-\end{align*}
-また，$P:=\{-1,0,1\}$としておく．
+さて，この命題の具体例を挙げる．
 
-実閉体の理論$\RCF$が量化記号消去できることは，補題により，次の主張を示せばよい．
-\begin{claim*}
-    任意の$f_1(X,\vec{Y}), \dots, f_s(X,\vec{Y}) \in \Z[X,\vec{Y}]$および$\map{\epsilon}{\{1,\dots,s\}}{P}$に対して，
-    量化記号のない論理式$\theta(\vec{Y})$が存在し，
-    \[
-        \RCF \models \forall Y (\theta(\vec{Y}) \leftrightarrow \exists X (\bigwedge_i(\sign(f_1(X,\vec{Y}))=\epsilon(i))))
-    \]
-    を満たす．
-\end{claim*}
+\begin{example*}
+$s=1$とし，$f = f_1 := YX^2 + X + Y$とする．
+$W \subset W_{1,2}$を，次で定める．
+\begin{equation}
+    W:=  \bigcup_{k=1,3,5}\{\text{成分が$-1,0,1$のいずれかである$1$行$k$列行列で，ある成分は1である．}\}
+\end{equation}
+このとき，任意の実閉体$R$と$y \in R$に対し，
+$y \neq 0$ならば，
+$f(X,y) = yX^2 + X + y \in R[X]$を$f'(X,y) = 2yX + 1$で割った余りは，
+$h(X,y) = y-1/4y \in R[X]$である．また，$y = 0$ならば，
+$\widetilde{f}(X,Y) := X + Y$とすれば，$f(X,y) = \widetilde{f}(X,y)$である．
 
-まず，つぎのような省略記号を導入する．
-\begin{definition}
-    $1$以上の自然数$s,m$に対して，$P_{s,m}$を，
-    $P$成分の$s$行$l$列行列( $1 \leq l \leq 2sm+1$ )全体を表すとする．
+従って，補題で得られる$\varphi$を用いると，次のことがいえる：
 
-    $X$についての最高次数が高々$n$である多項式列$g_1,\dots,g_t \in \Z[\vec{Y}][X]$と，
-    $t$行$(2N+1)$列行列$A=(a_{i,j}) \in P_{t,n}$($0 \leq N \leq sn$)について，
-    \[
-        \SIGN(g_1, \dots, g_t) = A
-    \]
-    を，以下の事を書き表した論理式の省略であるとする（$A$を$g_1,\dots,g_t$の符号表という．）：
+任意の実閉体$R$と，任意の$y \in R^n$に対し，以下が同値である．
+\begin{itemize}
+    \item $\SIGN_R(f(X,y)) \in W$である．\\
+    \item $y = 0$かつ$\SIGN_R(\widetilde{f}(X,y)) \in W$，または，$y \neq 0$かつ$\SIGN_R(f'(X,y), h(X,y)) \in \varphi^{-1}(W)$である．
+\end{itemize}
 
-    ある$X_1<\dots<X_N$が存在して，
-    \begin{enumerate}
-        \item $\{X_1, \dots, X_N\} = \{X \mid \text{$X$はある$g_i \notin \Z[\vec{Y}]の解$}\}$，
-        \item $X_0 := -\infty$, $X_{N+1} := \infty$として，区間$I_k = (X_k, X_{k+1}) (0 \leq k \leq N)$と$p \in P$に対して，($I_k$上では各$g_i$は定符号であるので)
-        \[
-            \sign(g_i(I_k))=p \defiff \exists x (x \in I_k \land \sign(g_i(x) = p))
-        \]
-        とおく．このとき，どんな$1 \leq i \leq t$と，どんな$0 \leq k \leq N$に対しても
-        \[
-            \sign(g_i(I_k))=a_{i,2k+1} \land (k>0 \rightarrow \sign(g_i(X_k))=a_{i,2k})
-        \]
-        である．
-    \end{enumerate}
-\end{definition}
+ここで，多項式の次数に関して帰納的に証明をするには，$h(X,Y) \in Z[X, Y]$であってほしい．(現在は$h(X,Y) \in Z(Y)[X]$.)
 
-\begin{lemma}\label{simplify}
-    与えられた$\map{\epsilon}{\{1,\dots,s\}}{P}$に対して，
-    部分集合$P(\epsilon) \subset P_{s,m}$を，次を満たすようにとれる：
-    最高次数は高々$m$である任意の多項式列$f_1, \dots, f_s \in \Z[\vec{Y}][X]$にたいし，
-    \[
-    \SIGN(f_1, \dotsm f_s) \in P(\epsilon) 
-    \leftrightarrow \exists X (\bigwedge_i(\sign(f_1(X,\vec{Y}))=\epsilon(i)))
-    \]
-    が成り立つ．
-\end{lemma}
-\begin{proof}
-    $(\epsilon(1),\dots,\epsilon(s))$を列に持つような$P_{s,m}$の部分集合を$P(\epsilon)$とすればよい．
-\end{proof}
-
-ここで一般に，$X$の最高次数が高々$m$である多項式の列
-$\vec{g} = g_1, \dots, g_t \in \Z[\vec{Y}][X]$に対して，
-多項式列$\mathcal{S}(\vec{g})$を次のように定義する．
-
-$\vec{g}$のなかで，$X$の次数が最大なもののなかで，さらに添え字が最大なものを取り，これを$g_s$とする．
-$g_s$を，$g_1, \dots, g_{s-1}, g_s', g_{s+1}, \dots, g_t$のそれぞれで割り算をし，それぞれの余りを$r_1, \dots, r_s, \dots, r_t$とする．
-このとき，
-\[
-    \mathcal{S}(\vec{g}):= g_1, \dots, g_{s-1},g_s',g_{s+1},\dots, g_t, r_1, \dots, r_s, \dots, r_t
-\]
-と定める．
-
-
-ここで，$f \in \Z[\vec{Y}][X]$の$g \in \Z[\vec{Y}][X] \setminus \{0\}$で割った余り$r \in \Z[\vec{Y}][X]$は，次のように定義している：
-$X$の係数環を$\Z(\vec{Y})$と同一視して，$f$を$g$で割った商を$q \in \Z(\vec{Y})$, $r_0 \in \Z(\vec{Y})$とする．
-\[ 
-    f = q g + r_0 \quad \text{$r_0=0$または$\deg_X(g)>\deg_X(r_0)$}
-\]
-このような$r_0 \in \Z(\vec{Y})[X]$は一意的に存在する．$r_0$が
-\[
-    r_0 = \frac{a_m}{b_m} X^m + \dots +\frac{a_1}{b_1}X+ \frac{a_0}{b_0}, \quad a_0,a_1,\dots, a_m,b_0,b_1,\dots, b_m \in \Z[\vec{Y}]
-\]
-であるとき，
-\[
-    r = b_m^2 \cdots  b_1^2 b_0^2 \cdot r
-\]
-と定義する．\footnote{このような$r$は一意性がないが，どのように$b_0,\dots, b_m$を取ってきても，$\sign(r)$には影響を及ぼさない．}
-また，$f \in \Z[\vec{Y}][X]$を$0$で割ったあまりは$r=0$としておく．
-
-
-この$\mathcal{S}(\vec{g})$について，列の長さは$2t$である．
-また，最高次数は$\vec{g}$の最高次数に比べて小さくなっているか，同じであっても最高次数の多項式の数は一つ減っている．
-
-\begin{lemma} \label{main}
-    行列$A \in P_{2t,n}$に対して行列$\mathcal{T}(A) \in P_{t,n}$を返すアルゴリズム$\mathcal{T}$が存在して次を満たす：
-    最高次数が高々$n$である長さ$t$の任意の多項式列$\vec{g}=g_1, \dots, g_t \in \Z[\vec{Y}][X]$に対し，
-    \[
-        \SIGN(\mathcal{S}(\vec{g})) = A \implies \SIGN(\vec{g})=\mathcal{T}(A)
-    \]
-\end{lemma}
-この補題の証明は後に回して，この補題を用いて実閉体上の量化記号消去できることを示す．
-
-まず，任意に与えられた多項式列$\vec{f} = f_1, \dots, f_s \in \Z[\vec{Y}][X]$に対し，
-多項式列の列$\{\vec{f}_k\}_{k\leq M}$を，
-\begin{enumerate}
-    \item $\vec{f}_0 := \vec{f}$
-    \item $k \geq 0$であり，$\vec{f}_k$が全て定数項でないならば$\vec{f}_{k+1}:=\mathcal{S}(\vec{f}_k)$
-\end{enumerate}
-と定義する．これは有限列である．
-\footnote{数列$L(s,k)$を，$L(s,0):=s$, $L(s,k+1):=L(s,k)\cdot 2^L(s,k)$とする．
-    $\vec{f}$の中で最高次数のものが$m$個であるとすると，$M \leq L(s,m)$である．}
-
-与えられた$\map{\epsilon}{\{1,\dots,s\}}{P}$に対し，
-行列の集合列$\{P(k)\}_{k \geq M}$を，次のように作る：
-\begin{enumerate}
-    \item $P(0):= P(\epsilon) \subset P_{s,m}$（ただし，$m$は$\vec{f}$の中での最高次数．）
-    \item $P(k+1):=\{A \in P_{2s,m} \mid \mathcal{T}(A) \in P(k)\}$
-\end{enumerate}
-
-すると，補題\ref{main}より，
-\[
-    \SIGN(\vec{f}_k) \in P(k) \iff \SIGN(\vec{f}_{k+1}) \in P(k+1)
-\]
-従って，補題\ref{simplify}より，
-\[
-    \exists X (\bigwedge_i(\sign(f_1(X,\vec{Y}))=\epsilon(i))) \iff \SIGN(\vec{f}_M) \in P(M)
-\]
-ここで，$\vec{f}_M$は定数項，すなわち$\Z[\vec{Y}]$の元からなる列であるから，右辺は量化記号を含まない論理式でかけている．
-
-従って，実閉体上の量化記号消去ができた．
-
-\begin{proof}[補題\ref{main}の証明]
-    % この証明を読んで考えたこと：
-    % \mathcal{T}は$f_i$の次数を参照している．(\mathcal{S}もだが)．
-    % でも冷静にこれ，次数を参照したほうがよさそう．
-    
-\end{proof}
+ここで，任意の多項式$p(Y)$について，$p(y)>0$である限りは，
+\begin{equation}
+    \SIGN_R(f'(X,y), p(y)\cdot h(X,y)) = \SIGN_R(f'(X,y), p(y)\cdot h(X,y))
+\end{equation}
+である事を用いると，次数と最高次の係数の偶数べき$(2Y)^2$を$h(X,Y)$にかけたもの$g(X.Y) := (2X)^2 h(X,Y)$について，
+\begin{equation}
+    \SIGN_R(f'(X,y), h(X,y)) = \SIGN_R(f'(X,y), g(X,y))
+\end{equation}
+である．よって，$h(X,Y)$を$g(X,Y)$に置き換えることで帰納的に証明をすることができる．
+\end{example*}
 \end{document}
