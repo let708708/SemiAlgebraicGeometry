@@ -49,6 +49,7 @@
 \newcommand{\sign}{\mathrm{sign}}
 \newcommand{\SIGN}{\mathrm{SIGN}}
 \newcommand{\CSIGN}{\mathrm{CSIGN}}
+\DeclareMathOperator{\ROOT}{ROOT}
 \newcommand{\map}[3]{{#1}\colon{#2}\rightarrow{#3}}
 \newcommand{\norm}[1]{\| {#1} \|}
 \newcommand{\true}{\text{true}}
@@ -71,6 +72,7 @@
 \newtheorem*{claim*}{主張}
 \newtheorem{remark}[definition]{注意}
 \newtheorem{example}[definition]{例}
+\crefname{example}{例}{例}
 
 \renewcommand{\proofname}{\textbf{証明}}
 \renewcommand{\theenumi}{(\arabic{enumi})}
@@ -444,15 +446,15 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
 ここで，実閉体の理論$\RCF$を，\cite[Section 5.2.1]{C3041}に従って定義する．
 
 \begin{example}[実閉体の理論]
-     言語$\mathcal{L}_\mathrm{OR}$を，以下のデータの組として\todo{助詞の検討}定義する．
+     言語$\mathcal{L}_\mathrm{OR}$を，以下のデータの組として定義する．
      \begin{itemize}
           \item 定数記号 $0$, $1$.
           \item 1変数関数記号 $-$.
           \item 2変数関数記号 $+$, $\cdot$.
           \item 2変数関係記号 $<$.
      \end{itemize}
-     このとき，言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$を，次の$\mathcal{L}_\mathrm{OR}$文全体の集合として\todo{助詞の検討}定義する．
-
+     更に，言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$を，
+     以下の$\mathcal{L}_\mathrm{OR}$文全体からなる集合として定義する．
           \begin{enumerate}
                \item $\forall x \forall y \forall z(x + (y + z) = (x + y) + z)$,
                \item $\forall x (x + 0 = x)$,
@@ -519,14 +521,17 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
      である．このような$\mathcal{L}$論理式$\psi$を否定標準形(negation normal form)の論理式という．
 \end{proposition}
 \begin{proof}
-     De Morganの法則\todo{言うらしい}
+     De Morganの法則
      \begin{align}
           &\models \lnot (\theta_1 \lor \theta_2) \leftrightarrow (\lnot \theta_1 \land \lnot \theta_2)\\
-          &\models \lnot (\theta_1 \land \theta_2) \leftrightarrow (\lnot \theta_1 \lor \lnot \theta_2)\\
+          &\models \lnot (\theta_1 \land \theta_2) \leftrightarrow (\lnot \theta_1 \lor \lnot \theta_2)
+     \end{align}
+     量化記号の否定
+     \begin{align}
           &\models \lnot \forall x \theta \leftrightarrow \exists x \lnot \theta\\
           &\models \lnot \exists x \theta \leftrightarrow \forall x \lnot \theta
      \end{align}
-     と，二重否定の除去
+     及び二重否定の除去
      \begin{equation}
           \models \lnot \lnot \theta \leftrightarrow \theta
      \end{equation}
@@ -615,19 +620,25 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
 
 \section{量化記号消去}
 
-\begin{example}
+\begin{example} \label{example:quantifier elimination}
      言語$\mathcal{L}_\mathrm{OR}$上の次のような論理式を考える．
-     \begin{equation}
+     \begin{equation} \label{eq:an example of a sentence with a quantifier}
           \phi(a) := \forall x (x^2 + ax + a + 3 > 0)
      \end{equation}
-
-     簡単のため，実閉体のモデルである実数体$\R$をとって考える．すなわち，上記の論理式は次のように言い換えられる．
+     実閉体のモデルである実数体$\R$をとって考えると，
+     論理式\eqref{eq:an example of a sentence with a quantifier}は
+     次のように言い換えられる．
      \begin{equation}
-          \text{全ての実数$x \in \R$に対して$x^2 + ax + a + 3 > 0$をみたす．}  
+          \text{任意の実数$x \in \R$に対して$x^2 + ax + a + 3 > 0$が成り立つ．}  
      \end{equation}
-     これを，変数記号$a$についての条件と解釈すると，2次方程式$x^2 + ax + a + 3 = 0$の判別式が0より大きいことに必要十分であるから，
+     これを変数記号$a$に対する条件と解釈すると，
+     2次方程式$x^2 + ax + a + 3 = 0$の判別式
+     $
+     a^2 - 4 (a+3) = (a+2)(a-6)
+     $
+     が0より小さいことと同値であるから，
      \begin{equation}
-          \psi(a) := (a < -2) \lor (6 < a)
+          \psi(a) := (-2 < a) \land (a < 6)
      \end{equation}
      に同値である．すなわち，次が成り立つ．
      \begin{equation}
@@ -635,92 +646,104 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
      \end{equation}
 \end{example}
 
-上記の例は，実数体$\R$についてのみ考察しているが，実は，全ての$\RCF$のモデル$R$に対して
+\cref{example:quantifier elimination}において，
+実は任意の$\RCF$のモデル$R$に対して
 \begin{equation}
      R \models \forall a (\phi(a) \leftrightarrow \psi(a))
 \end{equation}
 が成り立つ．ここで，$\phi$には束縛変数$x$が現れており，一方で$\psi$に登場する変数記号は全て自由変数である．
-つまり，$\phi$に登場する量化記号を消去し，自由変数のみの論理式$\psi$で記述できている．このような現象を扱うために，「量化記号を消去する」概念を定義する．
+つまり，$\phi$に登場する量化記号を消去し，自由変数のみの論理式$\psi$で記述できている．
+このような現象を扱うために，「量化記号を消去する」という概念を定義する．
 
 
 \begin{definition}[{\cite[Definition 3.1.1.]{MR1924282}}]
-理論$T$で量化記号消去(quantifier elimination)を持つとは，
-$L$上の任意の論理式$\phi$に対し，量化記号のない論理式$\psi$が存在し，
+$\mathcal{L}$理論$T$が量化記号消去(quantifier elimination)を持つとは，
+任意の$\mathcal{L}$論理式$\phi$に対し，
+量化記号のない論理式$\psi$が存在して，
 \begin{equation}
      T \models \phi \leftrightarrow \psi
 \end{equation}
-が成り立つことと定義する．
+が成り立つことを指す．
 \end{definition}
 
 \begin{theorem}[{\cite[Theorem 11]{MR0044472}}]\label{theorem:Tarski}
      言語$\mathcal{L}_\mathrm{OR}$上の実閉体の理論$\RCF$は量化記号消去を持つ．
 \end{theorem}
 
-以降この節は\cref{theorem:Tarski}の証明を述べる．
-
-この定理の証明および後々の議論のため，言語$\mathcal{L}_\mathrm{OR} = \{0, 1,-, +, \cdot, < \}$上の原子論理式について注意をする．
-
-$X_1, \dots, X_n$を変数記号とする．多項式$f \in \Z[X_1, \dots, X_n]$が与えられるとき，$f(X_1, \dots, X_n)$は$\mathcal{L}$項として自然に解釈できる．
-
-このとき，以下のように原子論理式の省略記号を導入する．
+これ以降，この節では\cref{theorem:Tarski}の証明を述べる．
+$X_1, \dots, X_n$を変数記号とすると，
+多項式
+$
+f(X_1, \dots, X_n) \in \Z[X_1, \dots, X_n]
+$
+は自然に$\mathcal{L}$項とみなせる．
+原子論理式の表記法
 \begin{align}
      \sign (f(X_1, \dots, X_n)) = 1 & \defiff f(X_1, \dots, X_n) > 0\\
      \sign (f(X_1, \dots, X_n)) = 0 & \defiff f(X_1, \dots, X_n) = 0\\
      \sign (f(X_1, \dots, X_n)) = -1 & \defiff f(X_1, \dots, X_n) < 0
 \end{align}
-
-このとき，$\RCF$において，任意の原子論理式$\phi(X_1, \dots, X_n)$は，ある多項式$f \in \Z[X_1, \dots, X_n]$及び$\sigma \in \{-1, 0, 1\}$に対して，
-$\sign(f(X_1, \dots, X_n)) = \sigma$と同値であることに注意する．
-
+を導入すると，
+任意の原子論理式$\phi(X_1, \dots, X_n)$は，
+ある多項式$f(X_1,\dots,X_n) \in \Z[X_1, \dots, X_n]$
+及び$\sigma \in \{-1, 0, 1\}$を用いて
+$\sign(f(X_1, \dots, X_n)) = \sigma$と書ける．
 また，$\lnot(\sign(f(X_1, \dots, X_n)) = \sigma)$は，
-$\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) = \tau)$と同値であることにも注意する．
-
-それでは，\cref{theorem:Tarski}を示していく．そのために，まずは次の補題を準備する．
+$\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) = \tau)$
+と同値である．
 
 \begin{lemma}\label{lemma:qe_simplify}
-     $\overline{Y} = (Y_1, \dots, Y_n)$とする．
-     言語$\mathcal{L}_\mathrm{OR}$上の理論$\RCF$において，以下は同値である．
+     
+     以下は同値である．
      \begin{enumerate}
           \item \label{lemma:qe_simplify_1}
-          理論$\RCF$は量化記号消去を持つ．
+          $\mathcal{L}_\mathrm{OR}$理論$\RCF$は量化記号消去を持つ．
           \item \label{lemma:qe_simplify_2}
-          任意の$f_1, \dots, f_s \in \Z \left[X, \overline{Y}\right]$および$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対して，
-          量化記号のない論理式$\theta\left(\overline{Y}\right)$が存在し，
+          任意の正の整数$n$に対して，
+          変数$Y_1, \dots, Y_n$をまとめて$\overline{Y}$と書くと，
+          任意の正の整数$s$と
+          任意の$f_1, \dots, f_s \in \Z \left[X, \overline{Y}\right]$
+          および任意の写像$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対して，
+          量化記号のない論理式$\theta\left(\overline{Y}\right)$が存在して，
           \begin{equation}
                \RCF \models \theta\left(\overline{Y}\right) \leftrightarrow \exists X \left(\bigwedge_{i=1}^s \left(\sign\left(f_i\left(X,\overline{Y}\right)\right) = \sigma(i)\right)\right)
           \end{equation}
+          が成り立つ．
           \item \label{lemma:qe_simplify_3}
           任意の量化記号のない論理式$\phi\left(X, \overline{Y}\right)$に対し，
-          ある量化記号のない論理式$\theta\left(\overline{Y}\right)$が存在し，
+          ある量化記号のない論理式$\theta\left(\overline{Y}\right)$が存在して，
           \begin{equation}
                \RCF \models \theta\left(\overline{Y}\right) \leftrightarrow \exists X \phi\left(X, \overline{Y}\right)
           \end{equation}
+          が成り立つ．
      \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-     \ref{lemma:qe_simplify_1}を満たせば\ref{lemma:qe_simplify_2}を満たすことは明らかである．
-     次に，\ref{lemma:qe_simplify_2}を満たせば\ref{lemma:qe_simplify_3}を満たすことを示す．
+     \ref{lemma:qe_simplify_1}から\ref{lemma:qe_simplify_2}が従うことは明らかである．
 
-     任意の量化記号のない論理式$\phi(X, \overline{Y})$について，\cref{proposition:dnf}と同様の証明により，
+     \ref{lemma:qe_simplify_2}から\ref{lemma:qe_simplify_3}が従うことを示す．
+     \cref{proposition:dnf}から，
+     任意の量化記号のない論理式$\phi(X, \overline{Y})$に対して，
      多項式$f_{i,j} \in \Z[X, Y_1, \dots, Y_n]$ ($i=1, \dots, k, j=1, \dots, l_i$)
-     と$\map{\sigma_i}{\{1, \dots, l_i\}}{\{-1,0,1\}}$を，
+     と$\map{\sigma_i}{\{1, \dots, l_i\}}{\{-1,0,1\}}$が存在して，
      \begin{equation}
           \RCF \models
           \phi\left(X, \overline{Y}\right) \leftrightarrow 
-          \bigvee_i \bigwedge_j \left(\sign\left(f_{i,j}\left(X, \overline{Y}\right)\right) = \sigma_i(j)\right)
+          \bigvee_{i=1}^k \bigwedge_{j=1}^{l_i} \left(\sign\left(f_{i,j}\left(X, \overline{Y}\right)\right) = \sigma_i(j)\right)
      \end{equation}
-     を満たすように取れる．このとき，
+     が成り立つ．このとき，
      \begin{equation}
           \RCF \models 
           \exists X \phi\left(X, \overline{Y}\right) \leftrightarrow  
-          \bigvee_i \left(\exists X \bigwedge_j \left(\sign\left(f_{i,j}\left(X, \overline{Y}\right)\right) = \sigma_i(j)\right)\right)
+          \bigvee_{i=1}^k \left(\exists X \bigwedge_{j=1}^{l_i} \left(\sign\left(f_{i,j}\left(X, \overline{Y}\right)\right) = \sigma_i(j)\right)\right)
      \end{equation}
-     が成り立つ．ここで，\ref{lemma:qe_simplify_2}より，各$i=1, \dots, k$に対して，
+     が成り立つ．ここで，\ref{lemma:qe_simplify_2}より，
+     各$i=1, \dots, k$に対して，
      \begin{equation}
           \RCF \models
           \theta_i\left(\overline{Y}\right) \leftrightarrow 
-          \exists X \bigwedge_j \left(\sign\left(f_{i,j}\left(X, \overline{Y}\right)\right) = \sigma_i(j)\right)
+          \exists X \bigwedge_{j=1}^{l_i} \left(\sign\left(f_{i,j}\left(X, \overline{Y}\right)\right) = \sigma_i(j)\right)
      \end{equation}
      を満たす量化記号のない論理式$\theta_i\left(\overline{Y}\right)$が存在する．このとき，
      \begin{equation}
@@ -728,9 +751,9 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
           \bigvee_i \theta_i\left(\overline{Y}\right)\leftrightarrow
           \exists X \phi\left(X, \overline{Y}\right) 
      \end{equation}
-     である．したがって，\ref{lemma:qe_simplify_3}を満たす．
+     である．従って，\ref{lemma:qe_simplify_3}が成り立つ．
 
-     最後に，\ref{lemma:qe_simplify_3}を満たせば，\ref{lemma:qe_simplify_1}を満たすことを示す．
+     最後に，\ref{lemma:qe_simplify_3}から\ref{lemma:qe_simplify_1}が従うことを示す．
      \cref{proposition:pnf}より，任意の量化記号のない論理式$\phi\left(X_1, \dots, X_m, \overline{Y}\right)$および$\Qua_1, \dots, \Qua_m \in \{\forall, \exists\}$に対し，
      ある量化記号のない論理式$\theta\left(\overline{Y}\right)$が存在し，
      \begin{equation}
@@ -745,7 +768,8 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
      以上より，証明が完了した．
 \end{proof}
 
-\cref{lemma:qe_simplify}の\ref{lemma:qe_simplify_2}により，\cref{theorem:Tarski}は，次のように言い換えることができる．
+\cref{lemma:qe_simplify}から，
+\cref{theorem:Tarski}は次のように言い換えることができる．
 
 \begin{theorem}[{\cite[Theorem 1.4.2.]{MR1659509}}]\label{theorem:weak_Tarski}
      $\overline{Y} = (Y_1, \dots, Y_n)$と$X$を変数記号とする．任意の$f_1, \dots, f_s \in \Z\left[ \overline{Y},X \right]$および$\map{\sigma}{\{1, \dots, s\}}{\{-1, 0, 1\}}$に対して，
@@ -758,10 +782,9 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
      \end{enumerate}
 \end{theorem}
 
-よって，\cref{theorem:weak_Tarski}を\cite[Section 1.4]{MR1659509}に従って証明する．
-
-ここで，実閉体$R$において，いくつかの記号を導入する．
-まず，$\map{\sign_R}{R}{\{-1,0,1\}}$を次のように定める．
+これ以降，
+この節では\cref{theorem:weak_Tarski}を\cite[Section 1.4]{MR1659509}に従って証明する．
+まず，写像$\map{\sign_R}{R}{\{-1,0,1\}}$を
 \begin{equation}
      \sign_R(a) :=
      \begin{cases}
@@ -770,37 +793,54 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
           -1 & a < 0
      \end{cases}
 \end{equation}
-
-さらに，多項式$f_1, \dots, f_s \in R[X]$に対し，
-$\SIGN_R(f_1, \dots, f_s)$を次のように定める．
-
-恒等的に0でないような全ての$f_i$の$R$上の根を$x_1< \dots< x_N$とする．
-また，$x_0 := -\infty$, $x_{N+1} := \infty$とし，各$k=0, \dots, N$に対し$I_k := (x_k, x_{k+1})$と書く．
-このとき，\cref{proposition:intermediate}より，$x \in I_k$に対し$\sign_R(f(x))$は一定である．これを，$\sign_R(f_i(I_k))$と書く．
-
-第$i=1, \dots s$行が
+で定める．
+多項式$f \in R[X]$に対し
+\begin{align}
+\ROOT(f) \coloneqq
+\begin{cases}
+     \{ x \in R \mid f(x) = 0 \} & f \ne 0, \\
+     \emptyset & f = 0
+\end{cases}
+\end{align}
+と置き，
+有限個の多項式$f_1, \dots, f_s \in R[X]$に対し
+\begin{align}
+\ROOT(f_1,\ldots,f_s) \coloneqq \bigcup_{i=1}^s \ROOT(f_i)
+\end{align}
+の元を小さなものから順に並べて得られる列を
+$(x_1,\dots,x_N)$と置く．
+$m:= \max\{\deg(f_i) \mid i=1, \dots, s\}$と置くと，$N \leq sm$である．
+また，$x_0 := -\infty$,
+$x_{N+1} := \infty$とし，
+各$k=0, \dots, N$に対し$I_k := (x_k, x_{k+1})$と書く．
+このとき，\cref{proposition:intermediate}より，
+$x \in I_k$に対し$\sign_R(f(x))$は一定であるが，
+これを$\sign_R(f_i(I_k))$と書く．
+第$i$行が
 \begin{equation}
      \sign_R(f_i(I_0)), \sign_R(f_i(x_1)), \sign_R(f_i(I_1)), \dots, \sign(f_i(x_N)), \sign(f_i(I_N))
 \end{equation}
-であるような$s$行$2N+1$列行列を$\SIGN_R(f_1, \dots, f_s)$と書く．$\SIGN_R(f_1, \dots, f_s)$の各成分は$-1, 0, 1$のいずれかであることに注意する．
-
-$m:= \max\{\deg(f_i) \mid i=1, \dots, s\}$とすれば，$N \leq sm$である．
-
-また，正整数$s, m$に対して，各成分が$-1,0,1$のいずれかである$s$行$(2l+1)$列行列($0 \leq l \leq sm$)全体を$W_{s,m}$と書く． 
+であるような$s$行$2N+1$列行列を$\SIGN_R(f_1, \dots, f_s)$と書く．
+$\SIGN_R(f_1, \dots, f_s)$の各成分は$-1, 0, 1$のいずれかであることに注意する．
+また，各成分が$-1,0,1$のいずれかである$s$行$(2l+1)$列行列
+全体のなす集合の
+$l \in \{0, 1, \ldots, sm\}$に関する和集合を
+$W_{s,m}$と書く． 
 
 \begin{lemma}[{\cite[Lemma 1.4.4.]{MR1659509}}]\label{lemma:qe_1ststep}
-     $\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$とする．部分集合$W(\sigma) \subset W_{s,m}$を，次を満たすように取れる．
-
+     任意の正の整数$s, m$と，
+     任意の写像$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対し，
+     ある部分集合$W(\sigma) \subset W_{s,m}$が存在して，
      任意の実閉体$R$と，次数が$m$以下であるような任意の$f_1, \dots, f_s \in R[X]$に対し，以下が同値である．
      \begin{enumerate}
           \item $\SIGN_R(f_1, \dots, f_s) \in W(\sigma)$
-          \item ある$x \in R$において$\bigwedge_i (\sign_R(f_i(x)) = \sigma(i)$)が成り立つ．
+          \item ある$x \in R$が存在して$\bigwedge_{i=1}^s (\sign_R(f_i(x)) = \sigma(i)$)が成り立つ．
      \end{enumerate}
 \end{lemma}
 
 \begin{proof}
      \begin{equation}
-          W(\sigma):=\{A \in P_{s,m} \mid \text{行列$A$のある列が$(\sigma(i))_{i=1}^s$である}\}
+          W(\sigma):=\{A \in W_{s,m} \mid \text{行列$A$のある列が$(\sigma(i))_{i=1}^s$である}\}
      \end{equation}
      とすればよい．
 \end{proof}
@@ -808,9 +848,12 @@ $m:= \max\{\deg(f_i) \mid i=1, \dots, s\}$とすれば，$N \leq sm$である．
 次の補題は，\cref{theorem:weak_Tarski}の証明の中心となる補題である．
 
 \begin{lemma}[{\cite[Lemma 1.4.5.]{MR1659509}}]\label{lemma:qe_lowering}
-     ある写像$\map{\varphi}{W_{2s,m}}{W_{s,m}}$が存在し，次をみたす．
+     ある写像$\map{\varphi}{W_{2s,m}}{W_{s,m}}$が存在して，次をみたす．
 
-     任意の実閉体$R$と，任意の$f_1, \dots, f_s \in R[X]$について，各$f_i$の次数は$m$以下であり，$f_s$は定数でなく，$f_1, \dots, f_{s-1}$は恒等的に$0$でないとする．
+     任意の実閉体$R$と，任意の$f_1, \dots, f_s \in R[X]$に対して，
+     各$f_i$の次数は$m$以下であり，
+     $f_s$は定数でなく，
+     $f_1, \dots, f_{s-1}$はどれも恒等的に$0$ではないとする．
      このとき，$g_1, \dots, g_s \in R[X]$を，それぞれ$f_s$を$f_1, \dots, f_{s-1}$, $f_s'$で割った余りとすれば，
      \begin{equation}
           \SIGN_R(f_1, \dots, f_s) = \varphi(\SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s))
@@ -818,16 +861,32 @@ $m:= \max\{\deg(f_i) \mid i=1, \dots, s\}$とすれば，$N \leq sm$である．
      である．
 \end{lemma}
 
-この補題は，多項式$f_1, \dots, f_s \in R[X]$が与えられた際に，
-行列$w:=\SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s)$に関する情報のみから
-$\SIGN_R(f_1, \dots, f_s)$を構成することで示す． 
+この補題によって、
+$\SIGN_R(f_1, \dots, f_s)$は
+より易しい
+$
+\SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s)
+$
+のみで決まる。
 
 \begin{proof}
-     $x_1 < \dots < x_N$ ($N \leq 2sm$) を，$f_1, \dots, f_{s-1}, f'_s, g_1, \dots, g_s$のうち，恒等的に0でないような多項式の$R$上の根全体とする．
-     この部分列$x_{i_1} < \dots < x_{i_M}$を，$f_1, \dots, f_{s-1}, f'_s$の$R$上の根全体とする．
-     この列$i_i, \dots, i_M$は，行列$w$の情報にのみ依存する．
-     ここで，$i_0:=0$, $i_{M+1}:=N+1$とし，また，$x_0:= -\infty$, $x_{N+1}:= \infty$とする．
-     各$k=1, \dots, M$に対し，$f_1, \dots, f_{s-1}, f_s'$のいずれかは$x_{i_k}$において$0$になる．
+     $\ROOT(f_1, \dots, f_{s-1}, f'_s, g_1, \dots, g_s)$
+     の元を小さいものから順に並べて得られる列を
+     $(x_1, \dots, x_N)$と置き、
+     $\ROOT(f_1,\ldots, f_{s-1}, f'_s)$
+     の元をちいさいものから順に並べて得られる部分列を
+     $(x_{i_1}, \dots, x_{i_M})$と置く．
+     $N \leq 2sm$であることに注意せよ．
+     数列$(i_i, \dots, i_M)$は
+     行列
+     $
+     w \coloneqq
+     \SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s)
+     $
+     のみで決まる．
+     $i_0:=0$, $i_{M+1}:=N+1$, $x_0:= -\infty$, $x_{N+1}:= \infty$と置く．
+     任意の$k \in \{1, \dots, M \}$に対し，
+     $f_1, \dots, f_{s-1}, f_s'$のいずれかは$x_{i_k}$において$0$になる．
      従って，$\map{\theta}{\{1,\dots, M\}}{\{1, \dots, s\}}$を，次を満たすようにとれる．
      \begin{itemize}
           \item 各$k=1, \dots, M$に対して，$\theta(k) \in \{1, \dots, s-1\}$ならば$f_{\theta(k)}(x_{i_k})=0$
