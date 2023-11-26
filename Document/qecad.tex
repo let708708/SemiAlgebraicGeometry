@@ -580,7 +580,8 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
      を満たす．$\Qua_1 v_1 \dots \Qua_m v_m \psi$の形をした論理式を冠頭標準形(prenex normal form)の論理式という．
 \end{proposition}
 \begin{proof}
-     \cref{proposition:dnf}より，$\mathcal{L}$論理式$\phi$が否定標準形の論理式の場合に命題が成り立つことを示せばよい．
+     \cref{proposition:dnf}より，
+     $\mathcal{L}$論理式$\phi$が否定標準形の論理式の場合に命題が成り立つことを示せばよい．
      
      $\phi$に含まれる論理記号の数に関する帰納法で証明する．
      
@@ -723,7 +724,7 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
      \ref{lemma:qe_simplify_1}から\ref{lemma:qe_simplify_2}が従うことは明らかである．
 
      \ref{lemma:qe_simplify_2}から\ref{lemma:qe_simplify_3}が従うことを示す．
-     \cref{proposition:dnf}から，%本来は\cref{proposiiton:dnf}を少しだけ改良したものである．
+     \cref{proposition:dnf}から，%本来は\cref{propositon:dnf}を少しだけ改良したものである．
      任意の量化記号のない論理式$\phi(X, \overline{Y})$に対して，
      多項式$f_{i,j} \in \Z[X, \overline{Y}]$ ($i=1, \dots, k, j=1, \dots, l_i$)
      と$\map{\sigma_i}{\{1, \dots, l_i\}}{\{-1,0,1\}}$が存在して，
@@ -782,18 +783,44 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
      \end{enumerate}
 \end{theorem}
 
-% \cref{theorem:weak_Tarski}により，次の系が成り立つ．
-% \begin{corollary}
-%      $\overline{Y} = (Y_1, \dots, Y_n)$と$X$を変数記号とし，$R$を実閉体とする．
-%      任意の$f_1, \dots, f_s \in R\left[\overline{Y}, X\right]$及び$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対して，
-%      ●●●が存在して，次を満たす．
+\cref{theorem:weak_Tarski}により，次の系が成り立つ．
+\begin{corollary}\label{corollary:weak_Tarski}
+     $\overline{Y} = (Y_1, \dots, Y_n)$と$X$を変数記号とし，$R$を実閉体とする．
+     任意の$f_1, \dots, f_s \in R\left[\overline{Y}, X\right]$及び$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対して，
+     有限個の$g_{i,j} \in R\left[\overline{Y}\right]$及び$\tau_{i,j} \in \{-1, 0, 1\}$, $i=1, \dots, p, j=1, \dots, q_i$, が存在し，次を満たす．
 
-%      任意の$\overline{y} = (y_1, \dots, y_n) \in R^n$に対し，次の2つが同値になる．
-%      \begin{enumerate}
-%           \item ある$x \in R$が存在して，$\bigwedge_{i=1}^s (\sign_R(f_i(x, \overline{y})) = \sigma(i))$を満たす．
-%           \item ●●●を満たす．
-%      \end{enumerate}
-% \end{corollary}
+     任意の$\overline{y} = (y_1, \dots, y_n) \in R^n$に対し，次の2つが同値になる．
+     \begin{enumerate}
+          \item ある$x \in R$が存在して，$\bigwedge_{i=1}^s (\sign_R(f_i(x, \overline{y})) = \sigma(i))$を満たす．
+          \item $\bigvee_{i=1}^p \bigwedge_{j=1}^{q_i} (\sign_R(g_{i,j}(\overline{y})) = \tau_{i,j})$を満たす．
+     \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+     自然数$m$と多項式$F_1, \dots, F_s \in R[X, \overline{Y}, \overline{T}]$を，次を満たすようにとれる．ただし，$\overline{T}$は変数記号$T_1, \dots, T_m$の列である．
+     \begin{itemize}     
+          \item   
+               ある$\overline{a} \in R^m$が存在し，
+               各$i=1, \dots, s$に対して$f_i(X,\overline{Y}) = F_i(X,\overline{Y}, \overline{a})$を満たす．
+     \end{itemize}
+     このとき，\cref{theorem:weak_Tarski}より，量化記号のない論理式$\theta(\overline{Y}, \overline{T})$を，次を満たすように取れる．
+
+     任意の$(\overline{y}, \overline{t}) = (y_1, \dots, y_n, t_1, \dots, t_m) \in R^{n+m}$に対し，次の2つが同値になる．
+     \begin{itemize}
+          \item
+               ある$x \in R$が存在して，$\bigwedge_{i=1}^s (\sign_R(F_i(x,\overline{y}, \overline{t})) = \sigma(i))$ を満たす．
+          \item
+               実閉体$R$は$\theta(\overline{y}, \overline{t})$を満たす．         
+     \end{itemize}
+     さらに，\cref{proposition:dnf}より，% 本来は\cref{proposition:dnf}を改良したものを使っている．
+     多項式$G_{i,j} \in \Z[\overline{Y}, \overline{T}]$ と$\tau_{i,j}$, $i=1, \dots, p, j=1, \dots, q_i$, が存在して，
+     \begin{equation}
+          R \models
+          \bigvee_{i=1}^p \bigwedge_{j=1}^{q_i}(\sign(G_{i,j}(\overline{Y}, \overline{T}))=\tau_{i,j})
+          \leftrightarrow \theta(\overline{Y},\overline{T})
+     \end{equation}
+     を満たす．このとき，$g_{i,j}(\overline{Y}) \coloneqq G_{i,j}(\overline{Y}, \overline{a}) \in R[\overline{Y}]$とすればよい．
+\end{proof}
 
 これ以降，
 この節では\cref{theorem:weak_Tarski}を\cite[Section 1.4]{MR1659509}に従って証明する．
@@ -1055,7 +1082,7 @@ $
           S &= \bigcup_{i=1}^s \bigcap_{j=1}^{l_i} \{\overline{x} \in R^n \mid \sign_R(f_{i,j}(\overline{x})) = \sigma_{i,j}\}\\
             &= \left\{ \overline{x} \in R^n \middle| \bigvee_{i=1}^s \bigwedge_{j=1}^{l_i} \sign_R(f_{i,j}(\overline{x})) = \sigma_{i,j} \right\}
      \end{align}
-     と書けるとき，$S$を$R^n$の半代数的集合という．
+     と書けるとき，$S$を$R^n$の半代数的部分集合(semi-algebraic subset), あるい単に半代数的集合(semi-algebraic set)という．
 \end{definition}
 
 さらに，半代数的集合の位相を定義する．
@@ -1077,11 +1104,11 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
                $R^n$の部分集合$S$が，
                多項式の符号についての条件$\sign_R(f(x)) = \sigma$ ($f \in R[X]$, $\sigma \in \{-1, 0, 1\}$) から
                論理記号$\lnot, \lor, \land$によって生成される条件を満たすとき，
-               $S$は$R^n$の半代数的集合である．
+               $S$は$R^n$の半代数的部分集合である．
           \item 
-               $S \subset R^n$が$R^n$の半代数的集合ならば，$R^n \setminus S$も$R^n$の半代数的集合である．
+               $S \subset R^n$が半代数的集合ならば，$R^n \setminus S$も半代数的集合である．
           \item 
-               $S_1, S_2 \subset R^n$が$R^n$の半代数的集合ならば，$S_1 \cup S_2$, $S_1 \cap S_2$も$R^n$の半代数的集合である．
+               $S_1, S_2 \subset R^n$が半代数的集合ならば，$S_1 \cup S_2$, $S_1 \cap S_2$も半代数的集合である．
      \end{itemize}
 \end{remark}
 
@@ -1091,38 +1118,51 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 \begin{theorem}[{\cite[Theorem 2.2.1.]{MR1659509}}]\label{theorem:Tarski-Seidenberg}
      $R$を実閉体とし，$S \subset R^{n+1}$を半代数的集合とする．$\map{\pi_{n}}{R^{n+1}}{R^n}$を，
      $\pi_{n}(x_1, \dots, x_n, x_{n+1}) = (x_1, \dots, x_n)$により定める．このとき，
-     $\pi_{n}(S)$は$R^n$の半代数的集合である．
+     $\pi_{n}(S)$は$R^n$の半代数的部分集合である．
 \end{theorem}
 
 \begin{proof}
-     $R^{n+1}$の半代数的集合$S$が，
+     $R^{n+1}$の半代数的部分集合$S$が，
      有限個の$f_{i,j} \in R\left[\overline{X}, Y\right]$および$\sigma_{i,j} \in \{-1, 0 ,1\}$, $i=1, \dots, s, j = 1, \dots, l_i$, を用いて，
      \begin{equation}
           S = \bigcup_{i=1}^s \bigcap_{j=1}^{l_i} \{(\overline{x},y) \in R^n \mid \sign_R(f_{i,j}(\overline{x},y)) = \sigma_{i,j}\}
      \end{equation}
      と書けるとする．$S_i \coloneqq \bigcap_{j=1}^{l_i} \{\overline{x} \in R^n \mid \sign_R(f_{i,j}(\overline{x})) = \sigma_{i,j}\}$とすれば，
      $\pi_n(S) = \bigcup_{i=1}^s \pi_n(S_i)$であるから，
-     各$\pi_n(S_i)$が$R^n$の半代数的集合であることを示せばよい．
-     従って，あらかじめ$S$が有限個の$f_j \in R[\overline{X}, Y]$および$\sigma_j \in \{-1, 0, 1\}$, $j=1, \dots, l$, を用いて
+     各$\pi_n(S_i)$が$R^n$の半代数的部分集合であることを示せばよい．
+     従って，あらかじめ$S$が有限個の$f_i \in R[\overline{X}, Y]$および$\sigma_i \in \{-1, 0, 1\}$, $i=1, \dots, l$, を用いて
      \begin{equation}
-          S = \bigcap_{j=1}^{l} \{(\overline{x},y) \in R^n \mid \sign_R(f_j(\overline{x},y)) = \sigma_j\}
+          S = \bigcap_{i=1}^{l} \{(\overline{x},y) \in R^n \mid \sign_R(f_i(\overline{x},y)) = \sigma_i\}
      \end{equation}
-     と書けるとして，$\pi_n(S)$が$R^n$の半代数的集合であることを示せばよい．
+     と書けるとして，$\pi_n(S)$が$R^n$の半代数的部分集合であることを示せばよい．
      
-     \todo[inline]{続きを書く}
+     \cref{corollary:weak_Tarski}により，有限個の$g_{i,j}(\overline{X}) \in R[\overline{X}]$と$\tau_{i,j} \in \{-1, 0, 1\}$ ( $i=1, \dots, l, j=1, \dots, m_i$ ) が存在し，
+     任意の$\overline{x} = (x_1, \dots, x_n) \in R^n$に対して次の二つが同値になるようにとれる．
+     \begin{itemize}
+          \item ある$y \in R$が存在して，$\bigwedge_{i=1}^l (\sign_R(f_i(\overline{x}, y)) = \sigma_i)$を満たす．
+          \item $\bigvee_{i=1}^l \bigwedge_{j=1}^{m_i}(\sign_R(g_{i,j}(\overline{x})) = \tau_{i,j})$を満たす．
+     \end{itemize}
+     このとき，
+     \begin{align}
+          \pi_n(S) 
+          &= \{\overline{x} \in R^n \mid \text{ある$y \in R$が存在して，$(\overline{x}, y) \in S$を満たす．}\}\\
+          &= \left\{\overline{x} \in R^n \middle| \text{ある$y \in R$が存在して，$\bigwedge_{i=1}^l (\sign_R(f_i(\overline{x}, y)) = \sigma_i)$を満たす．}\right\}\\
+          &= \left\{\overline{x} \in R^n \middle| \bigvee_{i=1}^l \bigwedge_{j=1}^{m_i}(\sign_R(g_{i,j}(\overline{x})) = \tau_{i,j})\right\}
+     \end{align}
+     より，$\pi_n(S)$は$R^n$の半代数的部分集合である．以上で命題の証明が完了した．
 \end{proof}
 
 \begin{definition}[{\cite[Definition 2.2.5.]{MR1659509}}]
      $S \subset R^m$, $T \subset R^n$を，半代数的集合とする．
-     写像$\map{f}{S}{T}$が半代数的であるとは，$f$のグラフが$R^{m+n}$の半代数的集合であることと定義する．
+     写像$\map{f}{S}{T}$が半代数的(semi-algebraic)であるとは，$f$のグラフが$R^{m+n}$の半代数的部分集合であることを指す．
 \end{definition}
 
 このとき，次の命題が成り立つ．
 
-\begin{proposition}
+\begin{proposition}\label{proposition:image-preimage}
      $\map{f}{A}{B}$を，半代数的写像であるとする．
-     もし$S \subset A$が半代数的集合であるならば，$f(S)$も半代数的集合である．
-     また，$T \subset B$が半代数的集合であるならば，$f^{-1}(T)$も半代数的集合である．
+     もし$S \subset A$が半代数的部分集合であるならば，$f(S)$も半代数的部分集合である．
+     また，$T \subset B$が半代数的部分集合であるならば，$f^{-1}(T)$も半代数的部分集合である．
 \end{proposition}
 
 \begin{proof}
@@ -1136,17 +1176,16 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      \cref{theorem:Tarski-Seidenberg}より示される．
 \end{proof}
 
-以下の定義は，\cite[Definition 2.4.2.]{MR1659509}を参考にした．
-\begin{definition}
+\begin{definition}[{\cite[Definition 2.4.2.]{MR1659509}}]
      $S \subset R^n$を半代数的集合とする．
      任意の$S$の半代数的閉部分集合$F_1, F_2 \subset S$について，
      $F_1 \cup F_2 = S, F_1 \cap F_2 = \emptyset$ならば，$F_1 = S$または$F_2 = S$を満たすとき，
-     $S$を半代数的連結であると定義する．
+     $S$を半代数的連結(semi-algebraically connected)であると定義する．
 \end{definition}
 
 この定義より，次の命題が成り立つ．
 
-\begin{proposition}
+\begin{proposition}\label{proposition:connectedness}
      $S \subset R^n$を，半代数的連結な半代数的集合とする．
      任意の半代数的開部分集合$U_1, U_2 \subset S$について，
      $U_1 \cup U_2 = S$, $U_1 \cap U_2 = \emptyset$ならば，$U_1 = S$または$U_2 = S$である．
@@ -1159,6 +1198,8 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      したがって，$U_1 \cup U_2 = S$より，$U_1 = S$または$U_2 = S$となり，命題が示された．
 \end{proof}
 
+\cref{proposition:image-preimage}と\cref{proposition:connectedness}より，次の命題が示さされる．
+
 \begin{proposition}{\cite[Proposition 3.9.]{MR2248869}}
      $S$を半代数的連結な半代数的集合とし，半代数的関数$\map{f}{S}{R}$が局所定数，
      すなわち，任意の$x \in S$に対し，ある$x$の開近傍$U$が存在して，
@@ -1169,8 +1210,8 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      $d \in f(S)$をとる．
      $f$が局所定数関数であることから，$U_1\coloneqq f^{-1}(\{d\})$は空でない開集合である．
      さらに，$U_2\coloneqq f^{-1}(f(S) \setminus \{d\})$は開集合である．
-     さらに，$f$は半代数的関数であることから，$U_1, U_2$はいずれも半代数的集合である．
-     $U_1 \cup U_2 = S, U_1 \cap U_2 = \emptyset, U_1 \neq \emptyset$であるから，$S$が半代数的連結であることより，
+     さらに，$f$は半代数的関数であることから，\cref{proposition:image-preimage}より，$U_1, U_2$はいずれも半代数的集合である．
+     $U_1 \cup U_2 = S, U_1 \cap U_2 = \emptyset, U_1 \neq \emptyset$であるから，\cref{proposition:connectedness}より，
      $U_1 = S$となる．したがって，$S = f^{-1}(\{d\})$すなわち$f$は定数関数である．
 \end{proof}
 
