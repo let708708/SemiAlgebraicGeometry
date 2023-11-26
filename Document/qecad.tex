@@ -34,26 +34,26 @@
 \newcommand{\defiff}{ :\Leftrightarrow}
 \newcommand{\RCF}{\mathrm{RCF}}
 \newcommand{\Var}{\mathrm{Var}}
-\newcommand{\psc}{\mathrm{psc}}
-\newcommand{\PSC}{\mathrm{PSC}}
-\newcommand{\Elim}{\mathrm{Elim}}
-\newcommand{\Tru}{\mathrm{Tru}}
-\newcommand{\RED}{\mathrm{RED}}
-\newcommand{\LT}{\mathrm{LT}}
-\newcommand{\LC}{\mathrm{LC}}
-\newcommand{\red}{\mathrm{red}}
-\newcommand{\PROJ}{\mathrm{PROJ}}
-\newcommand{\APROJ}{\mathrm{APROJ}}     
-\newcommand{\Reali}{\mathrm{Reali}}
-\newcommand{\der}{\mathrm{der}}
-\newcommand{\sign}{\mathrm{sign}}
-\newcommand{\SIGN}{\mathrm{SIGN}}
-\newcommand{\CSIGN}{\mathrm{CSIGN}}
-\DeclareMathOperator{\ROOT}{ROOT}
 \newcommand{\map}[3]{{#1}\colon{#2}\rightarrow{#3}}
 \newcommand{\norm}[1]{\| {#1} \|}
 \newcommand{\true}{\text{true}}
 \newcommand{\false}{\text{false}}
+\DeclareMathOperator{\psc}{psc}
+\DeclareMathOperator{\PSC}{PSC}
+\DeclareMathOperator{\Elim}{Elim}
+\DeclareMathOperator{\Tru}{Tru}
+\DeclareMathOperator{\RED}{RED}
+\DeclareMathOperator{\LT}{LT}
+\DeclareMathOperator{\LC}{LC}
+\DeclareMathOperator{\red}{red}
+\DeclareMathOperator{\PROJ}{PROJ}
+\DeclareMathOperator{\APROJ}{APROJ}     
+\DeclareMathOperator{\Reali}{Reali}
+\DeclareMathOperator{\der}{der}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\SIGN}{SIGN}
+\DeclareMathOperator{\CSIGN}{CSIGN}
+\DeclareMathOperator{\ROOT}{ROOT}
 
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
@@ -161,7 +161,7 @@ $\Ralg$の元を実代数的数という．
                     \item 任意の$x \in F$に対し, $x>0$ならば$x = y^2$を満たす$y \in F$が存在する．
                     \item 奇数次数の$F$係数$1$変数多項式は，$F$において少なくとも$1$つの根を持つ．
                \end{itemize}
-          \item $F\left[\sqrt{-1}\right] := F[X]/(X^2 + 1)$は代数的閉体である．
+          \item $F\left[\sqrt{-1}\right] \coloneqq F[X]/(X^2 + 1)$は代数的閉体である．
      \end{enumerate}
 \end{theorem}
 
@@ -170,7 +170,7 @@ $\Ralg$の元を実代数的数という．
 
 以下では，実閉体$R$上の区間を，
 \begin{equation}
-     [a,b]:=\{x \in R \mid a \leq x \leq b\}, \quad (a,b):=\{x \in R \mid a < x < b\}
+     [a,b]\coloneqq\{x \in R \mid a \leq x \leq b\}, \quad (a,b)\coloneqq\{x \in R \mid a < x < b\}
 \end{equation}
 のようにかくことにする．
 
@@ -321,15 +321,15 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
 そこで，$\bar{a} = (a_{i_1}, \dots, a_{i_m}) \in M^m$に対し，$t^\mathcal{M}(\bar{a})$を，以下のように帰納的に定義する．
 
 \begin{enumerate}
-     \item 定数記号$c \in \mathcal{C}$に対し，$c^\mathcal{M}(\bar{a}) := c^\mathcal{M}$とする．
-     \item 変数記号$v_{i_j}$, $j=1, \dots, m$, に対し，$v_{i_j}(\bar{a}) := a_{i_j}$とする．
+     \item 定数記号$c \in \mathcal{C}$に対し，$c^\mathcal{M}(\bar{a}) \coloneqq c^\mathcal{M}$とする．
+     \item 変数記号$v_{i_j}$, $j=1, \dots, m$, に対し，$v_{i_j}(\bar{a}) \coloneqq a_{i_j}$とする．
      \item 
      関数記号$f \in \mathcal{F}$とする．
      さらに$t_1, \dots, t_{n_f}$を，文字列に含む変数記号が高々$v_{i_1}, \dots, v_{i_m}$である$\mathcal{L}$項で，
      それぞれ$t_i^\mathcal{M}(\bar{a})$が定義されているとする．
      このとき，$t = f(t_1, \dots, t_{n_f})$に対し，
      \begin{equation}
-          t^\mathcal{M}(\bar{a}):= f^\mathcal{M}(t_1^\mathcal{M}(\bar{a}), \dots, t_{n_f}^\mathcal{M}(\bar{a}))
+          t^\mathcal{M}(\bar{a})\coloneqq f^\mathcal{M}(t_1^\mathcal{M}(\bar{a}), \dots, t_{n_f}^\mathcal{M}(\bar{a}))
      \end{equation}
      と定義する．
 \end{enumerate}
@@ -351,7 +351,7 @@ $\mathcal{M}$を$\mathcal{L}$構造とする．$\mathcal{L}$項$t$が含む変�
 
 $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル($\mathcal{L}$-literal)とよぶ．
 
-ここで，論理式$\phi := \forall x (x^2 + y > 0)$について観察する．ここで，$x,y$はいずれも変数記号である．
+ここで，論理式$\phi \coloneqq \forall x (x^2 + y > 0)$について観察する．ここで，$x,y$はいずれも変数記号である．
 これは，「全ての$x$に対して$x^2 + y > 0$が成り立つ」というように読むことができるが，$y$の値は自由に設定することができ，$y$の値が定まらない限りは真であるか偽であるかははっきりしない．
 この$y$のように，自由な状態にある変数記号を論理式$\phi$の自由変数という．
 厳密には，次のように定義する．以下の定義は，\cite[定義 1.5.1]{C3041}を参考にした．
@@ -361,16 +361,16 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
      $\mathcal{L}$項$t$に登場する全ての変数記号を$\Var(t)$で表す．
      $\mathcal{L}$論理式$\phi$の自由変数(free variable)全体$\Var(\phi)$を，次のように帰納的に定義する．
      \begin{enumerate}
-          \item $t_1, t_2$を項とするとき，$\Var((t_1=t_2)):=\Var(t_1)\cup\Var(t_2)$と定義する．
-          \item $R \in L$を$n$変数述語記号，$t_1, \dots, t_n$を項とするとき，$\Var(R(t_1, \dots, t_n)):= \bigcup_{i=1}^n \Var(t_i)$と定義する．
-          \item 論理式$\phi$に対して$\Var(\phi)$が定義されているとき，$\Var(\lnot \phi):=\Var(\phi)$と定義する．
+          \item $t_1, t_2$を項とするとき，$\Var((t_1=t_2))\coloneqq\Var(t_1)\cup\Var(t_2)$と定義する．
+          \item $R \in L$を$n$変数述語記号，$t_1, \dots, t_n$を項とするとき，$\Var(R(t_1, \dots, t_n))\coloneqq \bigcup_{i=1}^n \Var(t_i)$と定義する．
+          \item 論理式$\phi$に対して$\Var(\phi)$が定義されているとき，$\Var(\lnot \phi)\coloneqq\Var(\phi)$と定義する．
           \item 論理式$\phi, \psi$に対して$\Var(\phi), \Var(\psi)$が定義されているとき，
-          $\Var((\phi \lor \psi)):=\Var(\phi)\cup\Var(\psi)$,
-          $\Var((\phi \land \psi)):=\Var(\phi)\cup\Var(\psi)$,
+          $\Var((\phi \lor \psi))\coloneqq\Var(\phi)\cup\Var(\psi)$,
+          $\Var((\phi \land \psi))\coloneqq\Var(\phi)\cup\Var(\psi)$,
           と定義する．
           \item 論理式$\phi$に対して，$\Var(\phi)$が定義されているとき，変数記号$x$に対して
-          $\Var(\forall x\phi):=\Var(\phi) \setminus \{x\}$,
-          $\Var(\exists x\phi):=\Var(\phi) \setminus \{x\}$
+          $\Var(\forall x\phi)\coloneqq\Var(\phi) \setminus \{x\}$,
+          $\Var(\exists x\phi)\coloneqq\Var(\phi) \setminus \{x\}$
           と定義する．
      \end{enumerate}
      自由変数でない変数を，束縛変数(bound variable)という．
@@ -623,7 +623,7 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
 \begin{example} \label{example:quantifier elimination}
      言語$\mathcal{L}_\mathrm{OR}$上の次のような論理式を考える．
      \begin{equation} \label{eq:an example of a sentence with a quantifier}
-          \phi(a) := \forall x (x^2 + ax + a + 3 > 0)
+          \phi(a) \coloneqq \forall x (x^2 + ax + a + 3 > 0)
      \end{equation}
      実閉体のモデルである実数体$\R$をとって考えると，
      論理式\eqref{eq:an example of a sentence with a quantifier}は
@@ -638,7 +638,7 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
      $
      が0より小さいことと同値であるから，
      \begin{equation}
-          \psi(a) := (-2 < a) \land (a < 6)
+          \psi(a) \coloneqq (-2 < a) \land (a < 6)
      \end{equation}
      に同値である．すなわち，次が成り立つ．
      \begin{equation}
@@ -723,9 +723,9 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
      \ref{lemma:qe_simplify_1}から\ref{lemma:qe_simplify_2}が従うことは明らかである．
 
      \ref{lemma:qe_simplify_2}から\ref{lemma:qe_simplify_3}が従うことを示す．
-     \cref{proposition:dnf}から，
+     \cref{proposition:dnf}から，%本来は\cref{proposiiton:dnf}を少しだけ改良したものである．
      任意の量化記号のない論理式$\phi(X, \overline{Y})$に対して，
-     多項式$f_{i,j} \in \Z[X, Y_1, \dots, Y_n]$ ($i=1, \dots, k, j=1, \dots, l_i$)
+     多項式$f_{i,j} \in \Z[X, \overline{Y}]$ ($i=1, \dots, k, j=1, \dots, l_i$)
      と$\map{\sigma_i}{\{1, \dots, l_i\}}{\{-1,0,1\}}$が存在して，
      \begin{equation}
           \RCF \models
@@ -782,11 +782,24 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
      \end{enumerate}
 \end{theorem}
 
+% \cref{theorem:weak_Tarski}により，次の系が成り立つ．
+% \begin{corollary}
+%      $\overline{Y} = (Y_1, \dots, Y_n)$と$X$を変数記号とし，$R$を実閉体とする．
+%      任意の$f_1, \dots, f_s \in R\left[\overline{Y}, X\right]$及び$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対して，
+%      ●●●が存在して，次を満たす．
+
+%      任意の$\overline{y} = (y_1, \dots, y_n) \in R^n$に対し，次の2つが同値になる．
+%      \begin{enumerate}
+%           \item ある$x \in R$が存在して，$\bigwedge_{i=1}^s (\sign_R(f_i(x, \overline{y})) = \sigma(i))$を満たす．
+%           \item ●●●を満たす．
+%      \end{enumerate}
+% \end{corollary}
+
 これ以降，
 この節では\cref{theorem:weak_Tarski}を\cite[Section 1.4]{MR1659509}に従って証明する．
 まず，写像$\map{\sign_R}{R}{\{-1,0,1\}}$を
 \begin{equation}
-     \sign_R(a) :=
+     \sign_R(a) \coloneqq
      \begin{cases}
           1 & a > 0 \\
           0 & a = 0 \\
@@ -809,10 +822,10 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
 \end{align}
 の元を小さなものから順に並べて得られる列を
 $(x_1,\dots,x_N)$と置く．
-$m:= \max\{\deg(f_i) \mid i=1, \dots, s\}$と置くと，$N \leq sm$である．
-また，$x_0 := -\infty$,
-$x_{N+1} := \infty$とし，
-各$k=0, \dots, N$に対し$I_k := (x_k, x_{k+1})$と書く．
+$m\coloneqq \max\{\deg(f_i) \mid i=1, \dots, s\}$と置くと，$N \leq sm$である．
+また，$x_0 \coloneqq -\infty$,
+$x_{N+1} \coloneqq \infty$とし，
+各$k=0, \dots, N$に対し$I_k \coloneqq (x_k, x_{k+1})$と書く．
 このとき，\cref{proposition:intermediate}より，
 $x \in I_k$に対し$\sign_R(f(x))$は一定であるが，
 これを$\sign_R(f_i(I_k))$と書く．
@@ -840,7 +853,7 @@ $W_{s,m}$と書く．
 
 \begin{proof}
      \begin{equation}
-          W(\sigma):=\{A \in W_{s,m} \mid \text{行列$A$のある列が$(\sigma(i))_{i=1}^s$である}\}
+          W(\sigma)\coloneqq\{A \in W_{s,m} \mid \text{行列$A$のある列が$(\sigma(i))_{i=1}^s$である}\}
      \end{equation}
      とすればよい．
 \end{proof}
@@ -884,7 +897,7 @@ $
      \SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s)
      $
      のみで決まる．
-     $i_0:=0$, $i_{M+1}:=N+1$, $x_0:= -\infty$, $x_{N+1}:= \infty$と置く．
+     $i_0\coloneqq 0$, $i_{M+1}\coloneqq N+1$, $x_0\coloneqq -\infty$, $x_{N+1}\coloneqq \infty$と置く．
      任意の$k \in \{1, \dots, M \}$に対し，
      $f_1, \dots, f_{s-1}, f_s'$のいずれかは$x_{i_k}$において$0$になる．
      従って，$\map{\theta}{\{1,\dots, M\}}{\{1, \dots, s\}}$を，次を満たすようにとれる．
@@ -919,7 +932,7 @@ $
      $f_1, \dots, f_{s-1}, f_s$の$R$上の根全体とし，$y_0 = -\infty$, $y_{L+1} = \infty$とする．
      $\map{\rho}{\{0, \dots, L+1\}}{\{0, \dots, M+1\} \cup \{(k,k+1) \mid k=0, \dots, M\}}$を，
      \begin{equation}
-          \rho(l) := \begin{cases} 
+          \rho(l) \coloneqq \begin{cases} 
                k & y_l = x_{i_k},\\
                (k, k+1) & y_l \in (x_{i_k}, x_{i_{k+1}})
           \end{cases}
@@ -964,14 +977,14 @@ $
 \cref{lemma:qe_1ststep}により，\cref{theorem:weak_Tarski}の証明は，次の命題から従う．
 
 \begin{proposition}[{\cite[Proposition 1.4.6.]{MR1659509}}] \label{proposition:weak_Tarski}
-     $\overline{Y}:= (Y_1, \dots, Y_n)$とし，
+     $\overline{Y}\coloneqq (Y_1, \dots, Y_n)$とし，
      $f_1, \dots, f_s \in \Z\left[X, \overline{Y}\right]$をそれぞれ
      $f_i \left(X, \overline{Y} \right) = h_{i, m_i}\left( \overline{Y} \right) X^{m_i} + \dots + h_{i, 0}\left(\overline{Y}\right)$ ($i=1, \dots, s$)とする．
-     また，$m:= \max\{m_i \mid i=1, \dots, m\}$とする．
+     また，$m\coloneqq \max\{m_i \mid i=1, \dots, m\}$とする．
      任意の$W \subset W_{s,m}$に対し，
      ある量化記号のない論理式$\theta\left(\overline{Y}\right)$が存在して次を満たす．
 
-     任意の実閉体$R$と，任意の$\overline{y} := (y_1, \dots, y_n) \in R^n$に対し，以下の2つが同値である．
+     任意の実閉体$R$と，任意の$\overline{y} \coloneqq (y_1, \dots, y_n) \in R^n$に対し，以下の2つが同値である．
      \begin{enumerate}
           \item $\SIGN_R(f_1(X, \overline{y}), \dots, f_s(X, \overline{y})) \in W$である．
           \item 実閉体$R$は$\theta(\overline{y})$を満たす．
@@ -996,10 +1009,10 @@ $
      すなわち，非負整数列の列$\{\mu_i\}_{i \geq 1}$で，$\mu_1 \succ \mu_2 \succ \dots$となるものは存在しない．
      この前順序関係$\prec$に関する帰納法を用いて，命題を証明をする．
 
-     $m:= \max\{m_1, \dots, m_s\}$とする．$m=0$の場合，すなわち$f_1, \dots, f_s \in \Z\left[\overline{Y}\right]$の場合，
-     $W':=\{(a_i)_{i=1}^s \in W \mid \text{$(a_i)_{i=1}^s$は$s$行$1$列の行列}\}$として
+     $m\coloneqq \max\{m_1, \dots, m_s\}$とする．$m=0$の場合，すなわち$f_1, \dots, f_s \in \Z\left[\overline{Y}\right]$の場合，
+     $W'\coloneqq\{(a_i)_{i=1}^s \in W \mid \text{$(a_i)_{i=1}^s$は$s$行$1$列の行列}\}$として
      \begin{equation}
-          \theta\left(\overline{Y}\right) := \bigvee_{(a_i)_{i=1}^s \in W'}\bigwedge_{i=1}^s \left(\sign\left(f_i\left(\overline{Y}\right)\right)=a_i\right)
+          \theta\left(\overline{Y}\right) \coloneqq \bigvee_{(a_i)_{i=1}^s \in W'}\bigwedge_{i=1}^s \left(\sign\left(f_i\left(\overline{Y}\right)\right)=a_i\right)
      \end{equation}
      とすれば，命題を満たす．
 
@@ -1008,7 +1021,7 @@ $
 
      まず，多項式の順番を並び替えて，$m_s=m$であるとしてよい．
      \cref{lemma:qe_lowering}で示した$\map{\varphi}{W_{2s,m}}{W_{s,m}}$を取り，
-     $W'':= \varphi^{-1}(W)$とする．
+     $W''\coloneqq \varphi^{-1}(W)$とする．
      \cref{lemma:qe_lowering}より，任意の実閉体$R$と，任意の$\overline{y} = (y_1, \dots, y_s) \in R^n$に対し，
      各$i=1, \dots, s$に対して$h_{i, m_i}(\overline{y}) \neq 0$であれば以下の2条件は同値である．
      \begin{itemize}
@@ -1021,8 +1034,8 @@ $
      このとき，多項式列$f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s$の$X$についての次数は，前順序関係$\prec$に関して$(m_1, \dots, m_s)$よりも小さくなる．
  
      一方，ある$i=1, \dots, s$について$h_{i, m_i}(\overline{y}) = 0$である場合，
-     そのような$i$については$\widetilde{f}_i := f_i - h_{i, m_i}X^{m_i}$とし，
-     それ以外の$i$については$\widetilde{f}_i := f_i$として得られる多項式列$(\widetilde{f}_1, \dots, \widetilde{f}_s)$
+     そのような$i$については$\widetilde{f}_i \coloneqq f_i - h_{i, m_i}X^{m_i}$とし，
+     それ以外の$i$については$\widetilde{f}_i \coloneqq f_i$として得られる多項式列$(\widetilde{f}_1, \dots, \widetilde{f}_s)$
      について，以下の2条件は同値である．
      \begin{itemize}
           \item $\SIGN_R(f_1(X,\overline{y}), \dots, f_s(X, \overline{y})) \in W$,
@@ -1034,41 +1047,77 @@ $
 \end{proof}
 
 \section{半代数的集合}
-以下の定義は，\cite[Definition 2.1.4.]{MR1659509}を参考にした．
-
-\todo[inline]{半代数的集合の定義が導入された論文については不明．}
-\begin{definition}
+\begin{definition}[{\cite[Definition 2.1.4.]{MR1659509}}]
      $R$を実閉体とする．集合$S \subset R^n$が，
-     有限個の$f_{i,j} \in R[X_1, \dots, X_n]$および$\sigma_{i,j} \in \{-1, 0 ,1\}$, $i=1, \dots, s, j = 1, \dots, r_i$, をもちいて，
-     \begin{equation}
-          S = \bigcup_{i=1}^s \bigcap_{j=1}^{r_i} \{x \in R^n \mid \sign_R(f_{i,j}) = \sigma_{i,j}\}
-     \end{equation}
+     変数記号の列$X_1, \dots, X_n$を$\overline{X}$と書くことにすると，
+     有限個の$f_{i,j} \in R\left[\overline{X}\right]$および$\sigma_{i,j} \in \{-1, 0 ,1\}$, $i=1, \dots, s, j = 1, \dots, l_i$, をもちいて，
+     \begin{align}
+          S &= \bigcup_{i=1}^s \bigcap_{j=1}^{l_i} \{\overline{x} \in R^n \mid \sign_R(f_{i,j}(\overline{x})) = \sigma_{i,j}\}\\
+            &= \left\{ \overline{x} \in R^n \middle| \bigvee_{i=1}^s \bigwedge_{j=1}^{l_i} \sign_R(f_{i,j}(\overline{x})) = \sigma_{i,j} \right\}
+     \end{align}
      と書けるとき，$S$を$R^n$の半代数的集合という．
 \end{definition}
 
+さらに，半代数的集合の位相を定義する．
+
 $x \in R^n$, $r \in R$, $r>0$に対して，
 \begin{align}
-     \norm{x} &:= \sqrt{x_1^2 + \dots + x_n^2},\\
-     B_n(x,r) &:= \{y \in R^n \mid \norm{y-x} < r\}
+     \norm{x} &\coloneqq \sqrt{x_1^2 + \dots + x_n^2},\\
+     B_n(x,r) &\coloneqq \{y \in R^n \mid \norm{y-x} < r\}
 \end{align}
 と定義する．
 
 このとき，$\{B_n(x,r)\}$を開基として$R^n$に位相を定義できる．
 以降では，$R^n$にはこの位相が入っているものとする．
 
-以下の定理が成り立つ．この定理は，\cite[Theorem 2.2.1]{MR1659509}を参考にした．
-\todo[inline]{この定理(Tarski-Seidenberg Principle)の元論文が何か分からない．}
-\begin{theorem}\label{theorem:Tarski-Seidenberg}
-     $S \subset R^{n+1}$を半代数的部分集合とする．$\map{\pi_{n}}{R^{n+1}}{R^n}$を，
+\begin{remark}
+     以下の点に注意する．
+     \begin{itemize}
+          \item
+               $R^n$の部分集合$S$が，
+               多項式の符号についての条件$\sign_R(f(x)) = \sigma$ ($f \in R[X]$, $\sigma \in \{-1, 0, 1\}$) から
+               論理記号$\lnot, \lor, \land$によって生成される条件を満たすとき，
+               $S$は$R^n$の半代数的集合である．
+          \item 
+               $S \subset R^n$が$R^n$の半代数的集合ならば，$R^n \setminus S$も$R^n$の半代数的集合である．
+          \item 
+               $S_1, S_2 \subset R^n$が$R^n$の半代数的集合ならば，$S_1 \cup S_2$, $S_1 \cap S_2$も$R^n$の半代数的集合である．
+     \end{itemize}
+\end{remark}
+
+半代数的集合は，集合の合併，交叉，補集合を取る操作で閉じている．
+さらに，射影を取る操作でも閉じている．すなわち，次の定理が成り立つ．
+
+\begin{theorem}[{\cite[Theorem 2.2.1.]{MR1659509}}]\label{theorem:Tarski-Seidenberg}
+     $R$を実閉体とし，$S \subset R^{n+1}$を半代数的集合とする．$\map{\pi_{n}}{R^{n+1}}{R^n}$を，
      $\pi_{n}(x_1, \dots, x_n, x_{n+1}) = (x_1, \dots, x_n)$により定める．このとき，
-     $\pi_{n}(S)$は$R^n$の半代数的部分集合である．
+     $\pi_{n}(S)$は$R^n$の半代数的集合である．
 \end{theorem}
 
-以下の定義は，\cite[Definition 2.2.5.]{MR1659509}を参考にした．
-\begin{definition}
+\begin{proof}
+     $R^{n+1}$の半代数的集合$S$が，
+     有限個の$f_{i,j} \in R\left[\overline{X}, Y\right]$および$\sigma_{i,j} \in \{-1, 0 ,1\}$, $i=1, \dots, s, j = 1, \dots, l_i$, を用いて，
+     \begin{equation}
+          S = \bigcup_{i=1}^s \bigcap_{j=1}^{l_i} \{(\overline{x},y) \in R^n \mid \sign_R(f_{i,j}(\overline{x},y)) = \sigma_{i,j}\}
+     \end{equation}
+     と書けるとする．$S_i \coloneqq \bigcap_{j=1}^{l_i} \{\overline{x} \in R^n \mid \sign_R(f_{i,j}(\overline{x})) = \sigma_{i,j}\}$とすれば，
+     $\pi_n(S) = \bigcup_{i=1}^s \pi_n(S_i)$であるから，
+     各$\pi_n(S_i)$が$R^n$の半代数的集合であることを示せばよい．
+     従って，あらかじめ$S$が有限個の$f_j \in R[\overline{X}, Y]$および$\sigma_j \in \{-1, 0, 1\}$, $j=1, \dots, l$, を用いて
+     \begin{equation}
+          S = \bigcap_{j=1}^{l} \{(\overline{x},y) \in R^n \mid \sign_R(f_j(\overline{x},y)) = \sigma_j\}
+     \end{equation}
+     と書けるとして，$\pi_n(S)$が$R^n$の半代数的集合であることを示せばよい．
+     
+     \todo[inline]{続きを書く}
+\end{proof}
+
+\begin{definition}[{\cite[Definition 2.2.5.]{MR1659509}}]
      $S \subset R^m$, $T \subset R^n$を，半代数的集合とする．
      写像$\map{f}{S}{T}$が半代数的であるとは，$f$のグラフが$R^{m+n}$の半代数的集合であることと定義する．
 \end{definition}
+
+このとき，次の命題が成り立つ．
 
 \begin{proposition}
      $\map{f}{A}{B}$を，半代数的写像であるとする．
@@ -1079,7 +1128,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 \begin{proof}
      $A \subset R^m$, $B \subset R^n$とし，
      \begin{equation}
-          \mathrm{Graph}(f) := \{(x,y) \in R^m \times R^n \mid x \in A, f(x) = y\}
+          \mathrm{Graph}(f) \coloneqq \{(x,y) \in R^m \times R^n \mid x \in A, f(x) = y\}
      \end{equation}
      とする．
      $f(S)$は，$(S \times B) \cap \mathrm{Graph}(f)$の射影による像であり，
@@ -1089,7 +1138,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 
 以下の定義は，\cite[Definition 2.4.2.]{MR1659509}を参考にした．
 \begin{definition}
-     $S \subset R^n$を半代数的部分集合とする．
+     $S \subset R^n$を半代数的集合とする．
      任意の$S$の半代数的閉部分集合$F_1, F_2 \subset S$について，
      $F_1 \cup F_2 = S, F_1 \cap F_2 = \emptyset$ならば，$F_1 = S$または$F_2 = S$を満たすとき，
      $S$を半代数的連結であると定義する．
@@ -1098,21 +1147,19 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 この定義より，次の命題が成り立つ．
 
 \begin{proposition}
-     $S \subset R^n$を，半代数的連結な半代数的部分集合とする．
+     $S \subset R^n$を，半代数的連結な半代数的集合とする．
      任意の半代数的開部分集合$U_1, U_2 \subset S$について，
      $U_1 \cup U_2 = S$, $U_1 \cap U_2 = \emptyset$ならば，$U_1 = S$または$U_2 = S$である．
 \end{proposition}
 
 \begin{proof}
-     所与の$U_1, U_2$に対して，各$i=1, 2$に対し$F_i:= S \setminus U_i$とする．
+     所与の$U_1, U_2$に対して，各$i=1, 2$に対し$F_i\coloneqq S \setminus U_i$とする．
      このとき，各$F_i$は半代数的閉部分集合であり，$F_1 \cup F_2 = S$, $F_1 \cap F_2 = \emptyset$をみたす．
      ここで，半代数的連結の定義より$F_1 = S$または$F_2 = S$である．よって，$U_1 = \emptyset$または$U_2 = \emptyset$である．
      したがって，$U_1 \cup U_2 = S$より，$U_1 = S$または$U_2 = S$となり，命題が示された．
 \end{proof}
 
-
-以下の命題は，\cite[Proposition 3.9.]{MR2248869}を参考にした．
-\begin{proposition}
+\begin{proposition}{\cite[Proposition 3.9.]{MR2248869}}
      $S$を半代数的連結な半代数的集合とし，半代数的関数$\map{f}{S}{R}$が局所定数，
      すなわち，任意の$x \in S$に対し，ある$x$の開近傍$U$が存在して，
      任意の$y \in U$に対して$f(y)=f(x)$を満たすとする．
@@ -1120,8 +1167,8 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 \end{proposition}
 \begin{proof}
      $d \in f(S)$をとる．
-     $f$が局所定数関数であることから，$U_1:=f^{-1}(\{d\})$は空でない開集合である．
-     さらに，$U_2:=f^{-1}(f(S) \setminus \{d\})$は開集合である．
+     $f$が局所定数関数であることから，$U_1\coloneqq f^{-1}(\{d\})$は空でない開集合である．
+     さらに，$U_2\coloneqq f^{-1}(f(S) \setminus \{d\})$は開集合である．
      さらに，$f$は半代数的関数であることから，$U_1, U_2$はいずれも半代数的集合である．
      $U_1 \cup U_2 = S, U_1 \cap U_2 = \emptyset, U_1 \neq \emptyset$であるから，$S$が半代数的連結であることより，
      $U_1 = S$となる．したがって，$S = f^{-1}(\{d\})$すなわち$f$は定数関数である．
@@ -1129,13 +1176,11 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 
 ここで，$z \in R\left[ \sqrt{-1} \right]$及び$r \in R$, $r>0$, に対し，
 \begin{equation}
-     D(z, r):= \{w \in R\left[\sqrt{-1}\right] \mid \norm{z - w} < r\}
+     D(z, r)\coloneqq \{w \in R\left[\sqrt{-1}\right] \mid \norm{z - w} < r\}
 \end{equation}
-とする．ただし，$a,b \in R$に対し$\norm{a + b\sqrt{-1}} := \sqrt{a^2 + b^2}$とする．
+とする．ただし，$a,b \in R$に対し$\norm{a + b\sqrt{-1}} \coloneqq \sqrt{a^2 + b^2}$とする．
 
-以下の定理は，\cite[Theorem 5.12.]{MR2248869}を参考にした．
-
-\begin{theorem} \label{theorem:continuity-of-roots}
+\begin{theorem}[{\cite[Theorem 5.12.]{MR2248869}}] \label{theorem:continuity-of-roots}
      $R$を実閉体とし，$f \in R[X_1, \dots, X_n]$とする．
      また，$S \subset R^{n-1}$を半代数的集合とし，$a \in S$とする．
 
@@ -1147,12 +1192,9 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      非交叉であるような任意の$R$の元$r > 0$に対して，
      $a$の開近傍 $V \subset R^{n-1}$を，任意の$x \in V \cap S$に対して，
      $f(x, X_n)$の根が各$D(z_i, r)$ ($i=1, \dots, j$)の中に（重複度込みで）ちょうど$\mu_i$個であるようにとれる．
-
 \end{theorem}
 
-\begin{proof}
-    証明は，\cite[Theorem 5.12.]{MR2248869}参照してほしい．
-\end{proof}
+\cref{theorem:continuity-of-roots}の証明は，\cite[Theorem 5.12.]{MR2248869}を参照してほしい．
 
 
 \section{柱状代数分解}
@@ -1327,7 +1369,7 @@ $R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$で，
 
 \begin{proof}[{\bf \cref{proposition:del}の証明}]
      各$f \in F$は$S$上恒等的に$0$でないとしてよい．
-     実際，$F' := \{f \in F \mid \text{$f$は$S$上恒等的に$0$でない}\}$とすると，$S$が$F$描画可能であることと$F'$描画可能であることは同値であるから，
+     実際，$F' \coloneqq \{f \in F \mid \text{$f$は$S$上恒等的に$0$でない}\}$とすると，$S$が$F$描画可能であることと$F'$描画可能であることは同値であるから，
      $F'$を$F$として証明すればよい．
      よって以下では，各$f \in F$は$S$上恒等的に$0$でないとして示す．
 
@@ -1451,7 +1493,7 @@ $\mathrm{R}$を体とし，$A(x), B(x) \in \mathrm{R}[x] \setminus \{0\}$とす�
 
 $f \in R[X_1, \dots, X_n]$に対し，$\Tru(f;X_n)$を，
 \begin{equation}
-     \Tru(f;X_n):= \begin{cases}
+     \Tru(f;X_n)\coloneqq \begin{cases}
           \{f\} &  \text{if $\LC(f; X_n) \in R$ or $f \in R[X_1, \dots, X_{n-1}]$} \\
           \{f\} \cup \Tru(f-\LT(f;X_n);X_n) & \text{otherwise}
      \end{cases}
@@ -1460,7 +1502,7 @@ $f \in R[X_1, \dots, X_n]$に対し，$\Tru(f;X_n)$を，
 
 また，有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\Tru(F;X_n)$を，
 \begin{equation}
-     \Tru(F;X_n) := \bigcup_{f \in F} \Tru(f;X_n)
+     \Tru(F;X_n) \coloneqq \bigcup_{f \in F} \Tru(f;X_n)
 \end{equation}
 により定義する．
 
@@ -1475,7 +1517,7 @@ $\Elim_{X_n}(F) \subset R[X_1, \dots, X_{n-1}]$を，以下の集合の合併と
      &\{\LC(A;X_n) \mid A \in \Tru(F;X_n) \},\\
      &\left\{ \psc_j\left(A,\frac{\partial A}{\partial X_n};X_n\right) \middle| A \in \Tru(F;X_n), j= 0, \dots, \deg(A;X_n)-1\right\},\\
      &\{\psc_j(A,B;X_n) \mid A \neq B \in \Tru(F; X_n), j = 0, \dots, \min\{\deg(A;X_n), \deg(B;X_n)\}\}
-     % \PSC(f,g;X_n) := \{\psc_j(f,g;X_n) \mid j = 0, \dots, \min\{\deg(f;X_n), \deg(g;X_n)\}\} \setminus \{0\}   
+     % \PSC(f,g;X_n) \coloneqq \{\psc_j(f,g;X_n) \mid j = 0, \dots, \min\{\deg(f;X_n), \deg(g;X_n)\}\} \setminus \{0\}   
 \end{align}
 \end{definition}
 
@@ -1519,16 +1561,16 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
           \item 各$i=1, \dots, l_S$および$f \in F'$に対し，多項式$f(x,X_n)$における根$\xi_{S,i}(x)$の重複度は，$x\in S$によらず一定．
      \end{itemize}
      であるようにとれる．
-     また，$\xi_{S,0} := -\infty$, $\xi_{S,l_S} := \infty$とする．
+     また，$\xi_{S,0} \coloneqq -\infty$, $\xi_{S,l_S} \coloneqq \infty$とする．
 
      このとき，
      \begin{align}
-          C_{S,2i} &:= \{(x,y) \mid  x \in S, \xi_{S,i}(x) = y \} \quad i = 1,\dots, l_S,\\
-          C_{S,2i+1} &:= \{(x,y) \mid x \in S, \xi_{S,i}(x)<y<\xi_{S,i+1}(x) \} \quad i = 0,1, \dots, l_S 
+          C_{S,2i} &\coloneqq \{(x,y) \mid  x \in S, \xi_{S,i}(x) = y \} \quad i = 1,\dots, l_S,\\
+          C_{S,2i+1} &\coloneqq \{(x,y) \mid x \in S, \xi_{S,i}(x)<y<\xi_{S,i+1}(x) \} \quad i = 0,1, \dots, l_S 
      \end{align}
      とし，
      \begin{equation}
-          \calS_n := \{C_{S,i} \mid S \in \calS_{n-1}, i=1, \dots, 2l_S+1\}
+          \calS_n \coloneqq \{C_{S,i} \mid S \in \calS_{n-1}, i=1, \dots, 2l_S+1\}
      \end{equation}
      とすれば，$\{\calS_i\}_{i=1}^n$は，$R^n$の$F$適合な柱状代数分解を与える．
 
@@ -1537,16 +1579,16 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 
 % \begin{definition}
 % $ F \subset \mathbb{R}[x_1,\dots,x_n] $ を有限部分集合とする．$ S \subset \mathbb{R}^{n-1} $が$ F $描画可能とする．
-% このとき，$ S $上の$ F $の解を$ f_1(x)< \dots <f_k(x) $とし，$ f_0(x) := -\infty $ , $ f_{k+1}(x) := \infty $とするとき，
+% このとき，$ S $上の$ F $の解を$ f_1(x)< \dots <f_k(x) $とし，$ f_0(x) \coloneqq -\infty $ , $ f_{k+1}(x) \coloneqq \infty $とするとき，
 % \begin{align}
-%   C_{2i} &:= \{(x,y) \mid  x \in S, f_i(x) = y \} \quad i = 1,\dots, k,\\
-%   C_{2i+1} &:= \{(x,y) \mid x \in S, f_{i}(x)<y<f_{i+1}(x) \} \quad i = 0,1, \dots, k 
+%   C_{2i} &\coloneqq \{(x,y) \mid  x \in S, f_i(x) = y \} \quad i = 1,\dots, k,\\
+%   C_{2i+1} &\coloneqq \{(x,y) \mid x \in S, f_{i}(x)<y<f_{i+1}(x) \} \quad i = 0,1, \dots, k 
 % \end{align}
 
 % とすれば，$\{C_j\}_{j=1}^{2k+1}$は$ S \times \mathbb{R} $の$F$符号不変な分割を与える．
 % この$ S \times \mathbb{R} $の分割$ \{C_j\}_{j=1}^{2k+1} $を，$ S $の持ち上げといい，$ \mathfrak{L}(S) $と書く．
 
-% また，$\mathfrak{D}$が$\R^{n-1}$の分割であるとき，$\mathfrak{L}(\mathfrak{D}) := \bigcup_{D \in \mathfrak{D}}\mathfrak{L}(D)$を$\mathfrak{D}$の持ち上げという．
+% また，$\mathfrak{D}$が$\R^{n-1}$の分割であるとき，$\mathfrak{L}(\mathfrak{D}) \coloneqq \bigcup_{D \in \mathfrak{D}}\mathfrak{L}(D)$を$\mathfrak{D}$の持ち上げという．
 % \end{definition}
 
 \section{柱状代数分解による量化記号消去}
@@ -1562,14 +1604,14 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．
 
      まず，$\map{\sign(F)}{R^n}{\{-1, 0, 1\}^F}$を，
-     $\sign(F)(x)(f):= \sign(f(x)), f \in F$により定義する．
+     $\sign(F)(x)(f)\coloneqq \sign(f(x)), f \in F$により定義する．
 
      次に，各$y \in R^i$に対し，$\CSIGN_i(F)(y)$を以下のように定義する．
      \begin{itemize}
-          \item $i=n$のとき，$x \in R^i$に対し，$\CSIGN_n(F)(x):= \sign(F)(x) $とする．
+          \item $i=n$のとき，$x \in R^i$に対し，$\CSIGN_n(F)(x)\coloneqq \sign(F)(x) $とする．
           \item $0 \leq i<n$のとき，$y \in R^i$に対し，
           \begin{equation}
-               \CSIGN_i(F)(y) := \{\CSIGN_{i+1}(F)(x) \mid x \in  R^{i+1}, \pi_i(x) = y\}
+               \CSIGN_i(F)(y) \coloneqq \{\CSIGN_{i+1}(F)(x) \mid x \in  R^{i+1}, \pi_i(x) = y\}
           \end{equation}
           と定める．ここで，$\map{\pi_i}{R^{i+1}}{R^i}$は，$\pi_i(x_1, \dots, x_i, x_{i+1}) = (x_1, \dots, x_i)$で定義される写像とする．
      \end{itemize}
@@ -1597,7 +1639,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      \begin{enumerate}
           \item $\phi(X)$が$(f(X)=0)$, $f \in F$, であるとき，
           \begin{equation}
-               \phi^\star(\sigma):= \begin{cases}
+               \phi^\star(\sigma)\coloneqq \begin{cases}
                     \true  & \text{if $\sigma(f)=0$}\\
                     \false & \text{otherwise}
                \end{cases}
@@ -1605,7 +1647,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
           と定義する．
           \item $\phi(X)$が$(f(X)>0)$, $f \in F$, であるとき，
           \begin{equation}
-               \phi^\star(\sigma):= \begin{cases}
+               \phi^\star(\sigma)\coloneqq \begin{cases}
                     \true  & \text{if $\sigma(f)=1$}\\
                     \false & \text{otherwise}
                \end{cases}
@@ -1613,30 +1655,30 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
           と定義する．
           \item $\phi(X)$が$(f(X)<0)$, $f \in F$, であるとき，
           \begin{equation}
-               \phi^\star(\sigma):= \begin{cases}
+               \phi^\star(\sigma)\coloneqq \begin{cases}
                     \true  & \text{if $\sigma(f)=-1$}\\
                     \false & \text{otherwise}
                \end{cases}
           \end{equation}
           と定義する．
-          \item $\phi(X):=(\phi_1(X) \land \phi_2(X))$であるとき，
+          \item $\phi(X)\coloneqq (\phi_1(X) \land \phi_2(X))$であるとき，
           \begin{equation}
-               \phi^\star(\sigma):= \begin{cases}
+               \phi^\star(\sigma)\coloneqq \begin{cases}
                     \true  & \text{if $\phi_1^\star(\sigma)=\true$ and $\phi_2^\star(\sigma)=\true$}\\
                     \false & \text{otherwise}
                \end{cases}
           \end{equation}
           と定義する．
-          \item $\phi(X):=(\phi_1(X) \lor \phi_2(X))$であるとき，
+          \item $\phi(X)\coloneqq (\phi_1(X) \lor \phi_2(X))$であるとき，
           \begin{equation}
-               \phi^\star(\sigma):= \begin{cases}
+               \phi^\star(\sigma)\coloneqq \begin{cases}
                     \true  & \text{if $\phi_1^\star(\sigma)=\true$ or $\phi_2^\star(\sigma)=\true$}\\
                     \false & \text{otherwise}
                \end{cases}
           \end{equation}
-          \item $\phi(X):=(\lnot \phi_1(X))$であるとき，
+          \item $\phi(X)\coloneqq (\lnot \phi_1(X))$であるとき，
           \begin{equation}
-               \phi^\star(\sigma):= \begin{cases}
+               \phi^\star(\sigma)\coloneqq \begin{cases}
                     \true  & \text{if $\phi_1^\star(\sigma)=\false$}\\
                     \false & \text{otherwise}
                \end{cases}
@@ -1649,7 +1691,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 \begin{proposition}
      $F \subset R[Y_1, \dots, Y_m, X_1, \dots, X_n]$を有限部分集合とし，
      \begin{equation}
-          \Phi(Y):= \Qua_1 X_1 \dots \Qua_n X_n \phi(Y,X)
+          \Phi(Y)\coloneqq \Qua_1 X_1 \dots \Qua_n X_n \phi(Y,X)
      \end{equation}
      とする．ただし，$\phi(Y,X)$は量化記号のない$F$論理式であり，$\Qua_i \in \{\forall, \exists\}$とする．
 
@@ -1668,7 +1710,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 \begin{corollary}
      $F \subset R[Y_1, \dots, Y_m, X_1, \dots, X_n]$を有限部分集合とし，
      \begin{equation}
-          \Phi(Y):= \Qua_1 X_1 \dots \Qua_n X_n \phi(Y,X)
+          \Phi(Y)\coloneqq \Qua_1 X_1 \dots \Qua_n X_n \phi(Y,X)
      \end{equation}
      とする．ただし，$\phi(Y,X)$は量化記号のない$F$論理式であり，$\Qua_i \in \{\forall, \exists\}$とする．
      また，$\{\calS_i\}_{i=1}^{n+m}$を$R^{n+m}$の$F$適合な柱状代数分解とする．
@@ -1703,10 +1745,10 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 
      このとき，$i=1, \dots, n$, $z \in \mathcal{A}_i$に対し，$\CSIGN_i(F, \mathcal{A})(z)$を以下のように定義する．
      \begin{itemize}
-          \item $i=n$のとき，$y \in \mathcal{A}_n$に対し，$\CSIGN_n(F, \mathcal{A})(y):=\sign(F)(y)$とする．
+          \item $i=n$のとき，$y \in \mathcal{A}_n$に対し，$\CSIGN_n(F, \mathcal{A})(y)\coloneqq \sign(F)(y)$とする．
           \item $0 \leq i < n$のとき，$y \in \mathcal{A}_i$に対し，
           \begin{equation}
-               \CSIGN_i(F, \mathcal{A})(y):= \{\CSIGN_{i+1}(F, \mathcal{A})(x) \mid x \in \mathcal{A}_{i+1}, \pi_i(x) = y\}
+               \CSIGN_i(F, \mathcal{A})(y)\coloneqq \{\CSIGN_{i+1}(F, \mathcal{A})(x) \mid x \in \mathcal{A}_{i+1}, \pi_i(x) = y\}
           \end{equation}
           と定める．
      \end{itemize}
@@ -1715,7 +1757,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 このとき，次の命題が成り立つ．以下の命題は，\cite[Proposition 11.9.]{MR2248869}を参照した．
 \begin{proposition}
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$\{\calS_i\}_{i=1}^n$を$R^n$の$F$適合な柱状代数分解とする．
-     また，$\mathcal{A}:= \{\mathcal{A}_{i}\}_{i=1}^n$を$\{\calS_i\}_{i=1}^n$の標本点の柱状集合とする．
+     また，$\mathcal{A}\coloneqq \{\mathcal{A}_{i}\}_{i=1}^n$を$\{\calS_i\}_{i=1}^n$の標本点の柱状集合とする．
      このとき，各$i=0, \dots, n$に対して
      \begin{equation}
           \CSIGN_i(F) = \CSIGN_i(F, \mathcal{A})
@@ -1732,7 +1774,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 多項式の有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\map{\sigma}{F}{\{-1,0,1\}}$を，$F$の符号条件(sign condition)という．
 さらに，$F$の符号条件$\sigma$が与えられたとき，
 \begin{equation}
-     \Reali(\sigma):= \{x \in R^k \mid \bigwedge_{f \in F} \sign(f(x)) = \sigma(f)\}
+     \Reali(\sigma)\coloneqq \{x \in R^k \mid \bigwedge_{f \in F} \sign(f(x)) = \sigma(f)\}
 \end{equation}
 により定義される$\Reali(\sigma)$を，符号条件$\sigma$の実現(realization)という．
 
@@ -1760,11 +1802,11 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      任意に$\map{\sigma}{F}{\{-1,0,1\}}$をとる．
      $\map{\sigma_0}{F \setminus \{f_{s+1}\}}{\{-1,0,1\}}$を$\sigma$の制限，すなわち
      \begin{equation}
-          \sigma_0(f_i) := \sigma(f_i), \quad i=1, \dots, s
+          \sigma_0(f_i) \coloneqq \sigma(f_i), \quad i=1, \dots, s
      \end{equation}
      とする．
 
-     このとき，$F_0 := \{f_1, \dots, f_{s}\}$は微分について閉じているので，帰納法の仮定より，
+     このとき，$F_0 \coloneqq \{f_1, \dots, f_{s}\}$は微分について閉じているので，帰納法の仮定より，
      $\Reali(\sigma_0)$は，空集合，一点からなる集合，開区間のいずれかである．
 
      $\Reali(\sigma) = \Reali({\sigma_0}) \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(f_{s+1})\}$であるから，
@@ -1791,9 +1833,9 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
           \item 各$i=1, \dots, n-1$に対して，$\Elim_{X_{i+1}}(F_{i+1}) \subset F_i$を満たす．
      \end{itemize}
 
-     このとき，$F_{\leq i}:=\cup_{j \leq i} F_j$として，各$i=1, \dots, n$に対し
+     このとき，$F_{\leq i}\coloneqq \cup_{j \leq i} F_j$として，各$i=1, \dots, n$に対し
      \begin{equation}
-          \calS_i := \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq i}}{\{-1,0,1\}}\} \setminus \{\emptyset\}
+          \calS_i \coloneqq \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq i}}{\{-1,0,1\}}\} \setminus \{\emptyset\}
      \end{equation}          
      と定義すると，$\{\calS_i\}_{i=1}^n$は$F$適合な柱状代数分解である．
 \end{theorem}
@@ -1818,21 +1860,21 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
           である．ただし，$F_n' = \{f \in F_n \mid \text{$f$は$S$上恒等的に$0$でない}\}$とする．
           \item 各$i=1, \dots, l_S$および$f \in F_n'$に対し，多項式$f(x,X_n)$における根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
      \end{itemize}
-     また，$\xi_{S,0} := -\infty$, $\xi_{S,l_S} := \infty$とする．
+     また，$\xi_{S,0} \coloneqq -\infty$, $\xi_{S,l_S} \coloneqq \infty$とする．
 
      このとき，$S \in \calS_{n-1}$に対し，
      \begin{align}
-          C_{S,2i} &:= \{(x,y) \mid  x \in S, \xi_{S,i}(x) = y \} \quad i = 1,\dots, l_S,\\
-          C_{S,2i+1} &:= \{(x,y) \mid x \in S, \xi_{S,i}(x)<y<\xi_{S,i+1}(x) \} \quad i = 0,1, \dots, l_S 
+          C_{S,2i} &\coloneqq \{(x,y) \mid  x \in S, \xi_{S,i}(x) = y \} \quad i = 1,\dots, l_S,\\
+          C_{S,2i+1} &\coloneqq \{(x,y) \mid x \in S, \xi_{S,i}(x)<y<\xi_{S,i+1}(x) \} \quad i = 0,1, \dots, l_S 
      \end{align}
      とし，
      \begin{equation}
-          \widetilde{\calS}_n := \{C_{S,i} \mid S \in \calS_{n-1}, i=1, \dots, 2l_S+1 \}
+          \widetilde{\calS}_n \coloneqq \{C_{S,i} \mid S \in \calS_{n-1}, i=1, \dots, 2l_S+1 \}
      \end{equation}
      と定義すれば，$\{\calS_i\}_{i=1}^{n-1} \cup \{\widetilde{\calS}_n\}$は$F_n$適合な柱状代数分解を与える．
 
      そこで，$\widetilde{\calS}_n = \calS_n$となることを示す．
-     そのために，$S:=\Reali(\widetilde{\sigma}) \neq \emptyset$である$\map{\widetilde{\sigma}}{F_{\leq n-1}}{\{-1,0,1\}}$を任意にとり，
+     そのために，$S\coloneqq \Reali(\widetilde{\sigma}) \neq \emptyset$である$\map{\widetilde{\sigma}}{F_{\leq n-1}}{\{-1,0,1\}}$を任意にとり，
      \begin{equation}
           \{C_{S,i} \mid i=1, \dots, 2l_S + 1\} = \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq n}}{\{-1,0,1\}}, \sigma|_{F_{\leq n-1}} = \widetilde{\sigma}\} \setminus \{\emptyset\}
      \end{equation}
