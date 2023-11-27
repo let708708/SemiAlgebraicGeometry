@@ -1514,8 +1514,8 @@ $j$次符号付部分終結式係数($j$-th subresultant coefficient) $\sRes_j(P
 
 このとき，次が成り立つ．
 
-\begin{theorem}[{\cite[Proposition 4.25.]{MR2248869}}] \label{theorem:psc}
-     $\mathcal{R}$を整域とし，$P(x), Q(x) \in \mathcal{R}[x] \setminus \{0\}$を，$\deg P(X) = p$, $\deg Q(X) = q$ ( $p>q$ ) とする．
+\begin{theorem}[{\cite[Proposition 4.25.]{MR2248869}}] \label{theorem:psc} \todo{証明確認}
+     $\mathcal{R}$を整域とし，$P(X), Q(X) \in \mathcal{R}[X] \setminus \{0\}$を，$\deg P(X) = p$, $\deg Q(X) = q$ ( $p>q$ ) とする．
      このとき，各$j = 0, \dots, q$に対し，次の2つが同値になる．
      \begin{enumerate}
           \item $\deg(\gcd(P,Q)) = j$である．
@@ -1525,9 +1525,8 @@ $j$次符号付部分終結式係数($j$-th subresultant coefficient) $\sRes_j(P
 
 証明は，\cite[Proposition 4.25.]{MR2248869}を参照してほしい．
 
-\subsection{符号不変な柱状代数分解の存在}
-この節では，\cref{theorem:cad}を証明する．
-
+\subsection{符号不変な柱状代数分解の存在}\todo{ここから}
+それでは，\cref{theorem:cad}を証明する．
 まず，次のような記号を定義する．
 
 $f \in R[X_1, \dots, X_n]$に対し，$\Tru(f;X_n)$を，
@@ -1545,7 +1544,7 @@ $f \in R[X_1, \dots, X_n]$に対し，$\Tru(f;X_n)$を，
 \end{equation}
 により定義する．
 
-以下の定義は，\cite[Section 3]{MR0764184}, \cite[Notation 5.15.]{MR2248869}
+以下の定義は，\cite[Notation 5.15.]{MR2248869}
 を参考にしているが，元々は\cite[Theorem 4]{MR0403962}で定義されたものである．
 
 
@@ -1638,8 +1637,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 
 \subsection{量化記号消去と柱状代数分解の関係}
 まず，記号について定義する．
-以下の定義は，\cite[Notation 11.7.]{MR2248869}を参考にした．
-\begin{definition}
+\begin{definition}[{\cite[Notation 11.7.]{MR2248869}}]
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．
 
      まず，$\map{\sign(F)}{R^n}{\{-1, 0, 1\}^F}$を，
