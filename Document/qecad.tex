@@ -2,6 +2,7 @@
 
 \usepackage{amsmath,amssymb,mathtools}
 \usepackage{amsthm}
+\usepackage{mathdots}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{cleveref}
@@ -53,6 +54,8 @@
 \DeclareMathOperator{\SIGN}{SIGN}
 \DeclareMathOperator{\CSIGN}{CSIGN}
 \DeclareMathOperator{\ROOT}{ROOT}
+\DeclareMathOperator{\SyHa}{SyHa}
+\DeclareMathOperator{\sRes}{sRes}
 
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
@@ -1461,61 +1464,66 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
 一方，条件\ref{corollary:del-2}, \ref{corollary:del-3}を満たすような$R^{n-1}$の分解を与えるのは，条件\ref{corollary:del-1}に比べて少し難しい．
 条件\ref{corollary:del-2}, \ref{corollary:del-3}も満たすような$R^{n-1}$の分解を与えることができるよう，次の節で準備をする．
 
-\subsection{主部分終結式係数}
-\begin{definition}[{\cite[Definition 7.7.1]{MR1239443}}]
-$\mathcal{R}$を可換環とし，$A(X), B(X) \in \mathcal{R}[X] \setminus \{0\}$ を，$\deg A(X) = m$, $\deg B(X) = n$ とする．
-また，$A(X)$, $B(X)$は次のように書けるとする．
+\subsection{部分終結式係数}
+\begin{definition}[{\cite[Notation 4.21.]{MR2248869}}]
+$\mathcal{R}$を可換環とし，$P(X), Q(X) \in \mathcal{R}[X] \setminus \{0\}$ を，$\deg P(X) = p$, $\deg Q(X) = q$ ( $p > q$ ) とする．
+また，$P(X)$, $Q(X)$は次のように書けるとする．
 \begin{align}
-     A(X) = a_m X^m + \dots + a_1 X + a_0, \\
-     B(X) = b_n X^n + \dots + b_1 X + b_0.
+     P(X) = a_p X^p + \dots + a_1 X + a_0, \\
+     Q(X) = b_q X^q + \dots + b_1 X + b_0.
 \end{align}
-このとき，$0 \leq j \leq \min\{n,m\}$に対し，$\mathcal{R}$係数$(m+n-2j)$行$(m+n-j)$列行列$M_j(A, B)$を，
+このとき，$0 \leq j \leq q$に対し，$j$次Sylvester-Habicht行列$\SyHa_j(P, Q)$を，
 \begin{equation}
-     M_j(A, B) \coloneqq
+     \SyHa_j(P, Q) \coloneqq
      \begin{pmatrix}
           a_m    & \cdots & \cdots & \cdots & \cdots & a_0    & 0      & \cdots & 0      \\
           0      & \ddots &        &        &        &        & \ddots & \ddots & \vdots \\
           \vdots & \ddots & \ddots &        &        &        &        & \ddots & 0      \\
           0      & \cdots & 0      & a_m    & \cdots & \cdots & \cdots & \cdots & a_0    \\
-          b_n    & \cdots & \cdots & \cdots & b_0    & 0      & \cdots & \cdots & 0      \\
-          0      & \ddots &        &        &        & \ddots & \ddots &        & \vdots \\
-          \vdots & \ddots & \ddots &        &        &        & \ddots & \ddots & \vdots \\
-          \vdots &        & \ddots & \ddots &        &        &        & \ddots & 0      \\
-          0      & \cdots & \cdots & 0      & b_n    & \cdots & \cdots & \cdots & b_0        
+          0      & \cdots & \cdots & 0      & b_q    & \cdots & \cdots & \cdots & b_0    \\
+          \vdots &        & \iddots& \iddots&        &        &        & \iddots& 0      \\
+          \vdots & \iddots& \iddots&        &        &        & \iddots& \iddots& \vdots \\
+          0      & b_q    & \cdots & \cdots & \cdots & b_0    & 0      & \cdots & 0      \\
+          b_q    & \cdots & \cdots & \cdots & b_0    & 0      & 0      & \cdots & 0      
      \end{pmatrix}
 \end{equation}
-で定義する．ただし，各行はそれぞれ多項式
+で定義する．
+$\SyHa_j(P,Q)$は$\mathcal{R}$係数$(p+q-2j)$行$(p+q-j)$列行列であり，
+各行は多項式
 \begin{equation}
-     X^{n-j-1}A(X), \dots, A(X), X^{m-j-1}B(X), \dots, B(X)
+     X^{q-j-1}P(X), \dots, P(X), Q(X), \dots, X^{p-j-1}Q(X)
 \end{equation}
-の$X^{n+m-j-1}, \dots, X, 1$の係数を順に並べたものである．
-ただし，$n=0$または$m=0$の場合も許すものとする．
+の$X^{p+q-j-1}, \dots, X, 1$の係数を順に並べたものである．
 
-次に，$0 \leq i \leq j \leq \min\{n,m\}$に対し，
-$\mathcal{R}$係数$(n+m-2j)$行$(n+m-2j)$列行列$M_{j,i}(A,B)$を，
-$M_j(A,B)$の第$1, 2,\dots, (n+m-2j-1)$列と第$(n+m-i-j)$列からなる行列とする．
+また，$\SyHa_{j,j}(P,Q)$を，$\SyHa_j(P,Q)$の初めの$p+q-2j$列により得られる$(p+q-2j)$行$(p+q-2j)$列行列とし，
+$j$次符号付部分終結式係数($j$-th subresultant coefficient) $\sRes_j(P,Q)$ を
+\begin{equation}
+     \sRes_j(P,Q) \coloneqq \det(\SyHa_{j,j}(P,Q))
+\end{equation}
+と定義する．
 
-
-最後に，$0 \leq j \leq \min\{n, m\}$に対し，
+また，$q < j \leq p$に対しても，
 \begin{align}
-S_j(A, B) \coloneqq \sum_{i=0}^j \det (M_{j, i}(A,B)) \cdot X^i 
+     \sRes_p(P,Q) &\coloneqq \sign(a_p),\\
+     \sRes_j(P,Q) &\coloneqq 0, \quad q < j < p
 \end{align}
-を多項式$A(x)$, $B(x)$の$j$次部分終結式($j$-th subresultant)という．
-ここで．$0$行$0$列行列$N$に対しては，$\det(N)=0$とみなす．
-
-この$j$次部分終結式の先頭項係数$\det (M_{j,j}(A,B))$を，$\psc_j(A,B)$とかき，多項式$A(x)$, $B(x)$の$j$次主部分終結式係数($j$-th principal subresultant coefficient)という．
+と，$\sRes_j(P,Q)$の定義を拡張しておく．
 \end{definition}
 
-主部分終結式係数は，多項式$A(x)$, $B(x)$の係数，及び次数に依存して定まることに注意する．
+主部分終結式係数は，多項式$P(X)$, $Q(X)$の係数，及び次数に依存して定まることに注意する．
 
-\begin{theorem}\label{theorem:psc}
-     $\mathcal{R}$を一意分解整域とし，$A(x), B(x) \in \mathcal{R}[x] \setminus \{0\}$を，$\deg A(X) = m$, $\deg B(X) = n$とする．
-     このとき，
-     \begin{align}
-          \deg(\gcd(A, B)) = \min \{ j  \in \{0,1, \dots, \min\{n,m\}\}\mid \psc_j(A,B) \neq 0\}
-     \end{align}
-     が成り立つ．
+このとき，次が成り立つ．
+
+\begin{theorem}[{\cite[Proposition 4.25.]{MR2248869}}] \label{theorem:psc}
+     $\mathcal{R}$を整域とし，$P(x), Q(x) \in \mathcal{R}[x] \setminus \{0\}$を，$\deg P(X) = p$, $\deg Q(X) = q$ ( $p>q$ ) とする．
+     このとき，各$j = 0, \dots, q$に対し，次の2つが同値になる．
+     \begin{enumerate}
+          \item $\deg(\gcd(P,Q)) = j$である．
+          \item $\sRes_0(P,Q) = \cdots = \sRes_{j-1}(P,Q) = 0$, $\sRes_j(P,Q) \neq 0$である．
+     \end{enumerate}
 \end{theorem}
+
+証明は，\cite[Proposition 4.25.]{MR2248869}を参照してほしい．
 
 \subsection{符号不変な柱状代数分解の存在}
 この節では，\cref{theorem:cad}を証明する．
