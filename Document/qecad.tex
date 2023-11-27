@@ -29,7 +29,6 @@
 \newcommand{\Qua}{\mathcal{Q}}
 \newcommand{\M}{\mathfrak{M}}
 \newcommand{\calL}{\mathcal{L}}
-\newcommand{\calS}{\mathcal{S}}
 \newcommand{\calP}{\mathcal{P}}
 \newcommand{\defiff}{ :\Leftrightarrow}
 \newcommand{\RCF}{\mathrm{RCF}}
@@ -1200,7 +1199,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 
 \cref{proposition:image-preimage}と\cref{proposition:connectedness}より，次の命題が示さされる．
 
-\begin{proposition}{\cite[Proposition 3.9.]{MR2248869}}
+\begin{proposition}[{\cite[Proposition 3.9.]{MR2248869}}]
      $S$を半代数的連結な半代数的集合とし，半代数的関数$\map{f}{S}{R}$が局所定数，
      すなわち，任意の$x \in S$に対し，ある$x$の開近傍$U$が存在して，
      任意の$y \in U$に対して$f(y)=f(x)$を満たすとする．
@@ -1242,23 +1241,23 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 
 $R$を実閉体とする．
 
-集合$X$の部分集合族$\calS$が，
+集合$X$の部分集合族$\mathcal{S}$が，
 \begin{enumerate}
-     \item $X = \bigcup_{S \in \calS} S$,
-     \item 任意の$S_1, S_2 \in \calS$に対し，$S_1 \neq S_2$ならば$S_1 \cap S_2 = \emptyset$.
+     \item $X = \bigcup_{S \in \mathcal{S}} S$,
+     \item 任意の$S_1, S_2 \in \mathcal{S}$に対し，$S_1 \neq S_2$ならば$S_1 \cap S_2 = \emptyset$.
 \end{enumerate}
-を満たすとき，部分集合族$\calS$を$X$の分解(decomposition)と呼ぶ．
+を満たすとき，部分集合族$\mathcal{S}$を$X$の分解(decomposition)と呼ぶ．
 
-まず始めに，$R^n$の柱状代数分解を定義する．この定義は，\cite{MR0764184}\cite[Definition 5.1]{MR2248869}を参考にしているが，
+まず始めに，$R^n$の柱状代数分解を定義する．この定義は，\cite{MR0764184}, \cite[Definition 5.1.]{MR2248869}を参考にしているが，
 基本的な概念が現れたのは$\cite{MR0403962}$である．
 
 \begin{definition} \label{definition:cad}
-     $i=1, \dots, n$に対し，$\calS_i$を$R^i$の分解とする．
-     $\{\calS_i\}_{i=1}^n$が$R^n$の柱状代数分解(cylindrical algebraic decomposition)であるとは，
+     $i=1, \dots, n$に対し，$\mathcal{S}_i$を$R^i$の分解とする．
+     $\{\mathcal{S}_i\}_{i=1}^n$が$R^n$の柱状代数分解(cylindrical algebraic decomposition)であるとは，
      以下の条件を満たすことをいう．
      \begin{enumerate}
-          \item $S \in \calS_1$は，$R$上の点か，開区間かのいずれかである．
-          \item $n\geq 2$の場合，任意の$i=1, \dots, n-1$と任意の$S \in \calS_i$に対し，
+          \item $S \in \mathcal{S}_1$は，$R$上の点か，開区間かのいずれかである．
+          \item $n\geq 2$の場合，任意の$i=1, \dots, n-1$と任意の$S \in \mathcal{S}_i$に対し，
           有限個の連続な半代数的関数
           \begin{equation}
                \map{\xi_{S,1}< \dots <\xi_{S,l_S}}{S}{R}
@@ -1269,36 +1268,35 @@ $R$を実閉体とする．
                \begin{equation}
                     \{(x,x_{i+1}) \mid x \in S, \xi_{S,j}(x)=x_{i+1} \} \subset R^{i+1}
                \end{equation}
-               は，$\calS_{i+1}$の元である．
+               は，$\mathcal{S}_{i+1}$の元である．
                \item $\xi_{S,0}=-\infty$, $\xi_{S,l_S+1}=\infty$とするとき，各$j=0, \dots, l_S$に対し，\label{cad_condition1}
                \begin{equation}
                     \{(x,x_{i+1}) \mid x \in S, \xi_{S,j}(x)<x_{i+1}<\xi_{S,j+1} \} \subset R^{i+1}
                \end{equation}
-               は，$\calS_{i+1}$の元である．
+               は，$\mathcal{S}_{i+1}$の元である．
           \end{itemize}
      \end{enumerate}
 \end{definition}
 
-定義より，任意の$k=1, \dots, n$に対して，$\{\calS_i\}_{i=1}^k$は$R^k$の柱状代数分解である．
-逆に，$R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$が与えられているとき，各$S \in \calS_{n-1}$に対して
+定義より，任意の$k=1, \dots, n$に対して，$\{\mathcal{S}_i\}_{i=1}^k$は$R^k$の柱状代数分解である．
+逆に，$R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$が与えられているとき，各$S \in \mathcal{S}_{n-1}$に対して
 \cref{definition:cad}の条件\ref{cad_condition1}を満たすような有限個の連続半代数関数$\xi_{S,1}<\dots<\xi_{S,l_S}$が与えられれば，
-$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を構成することができる．
+$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を構成することができる．
 
 このように，柱状代数分解は再帰的な構造である．
 
-以下の定義は，\cite[Definition 5.5]{MR2248869}を参照した．
-\begin{definition}
-     $F \subset R[X_1, \dots, x_n]$を有限部分集合とする．
+\begin{definition}[{\cite[Definition 5.5.]{MR2248869}}]
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．
      \begin{enumerate}
-          \item 部分集合$S \subset \R^n$が$F$符号不変($F$-invariant)であるとは，
+          \item 部分集合$S \subset R^n$が$F$符号不変($F$-invariant)であるとは，
           任意の$f \in F$及び任意の$x,y \in S$に対し$\sign(f(x))=\sign(f(y))$であることと定義する．
 
-          \item $R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$が$F$に適合している(adapted to $F$)とは，
-          任意の$C \in \calS_n$が$F$符号不変であることと定義する．
+          \item $R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が$F$に適合している(adapted to $F$)とは，
+          任意の$C \in \mathcal{S}_n$が$F$符号不変であることと定義する．
      \end{enumerate}
 \end{definition}
 
-この節の目的は，次の定理を示すことである．以下の定理は\cite[Theorem 5.6]{MR2248869}を参照した．
+以下の定理は\cite[Theorem 5.6]{MR2248869}を参照した．
 基本的なが概念が現れたのは，\cite{MR0403962}である．
 \begin{theorem} \label{theorem:cad}
      任意の有限部分集合$F \subset R[X_1, \dots, X_n]$に対して，
@@ -1310,9 +1308,8 @@ $R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を構成することができる
 それを基に順に$R^2, R^3, \dots, R^n$の柱状代数分解を構成していく．
 
 \subsection{描画可能}
-$F$に適合した$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を$R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$から構成するとき，
-各$S \in \calS_{n-1}$は次に定義する性質を満たしてほしい．
-
+$F$に適合した$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を$R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$から構成するとき，
+各$S \in \mathcal{S}_{n-1}$は次に定義する性質を満たしてほしい．
 なお，次の定義はCollins\cite{MR0403962}によって導入されたものである．
 \footnote{
      Collins\cite{MR0403962}による描画可能性の定義は，$R=\R$, $F$が$1$元集合になる場合のみの定義であったが，
@@ -1323,26 +1320,25 @@ $F$に適合した$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を$R^{n-1}$の
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結な半代数的集合とする．
      $S$が$F$描画可能($F$-delineable)であるとは，$k$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_k}{S}{R}$が存在し，次を満たすことと定義する．
      \begin{itemize}
-          \item 任意の$ x \in S $に対し，
+          \item 任意の$ x = (x_1, \dots, x_{n-1}) \in S $に対し，
           \begin{equation}
-               \{\xi_i(x)\}_{i=1}^k = \{y \in R \mid \prod_{f \in F'}f(x,y)=0\}
+               \{\xi_i(x)\}_{i=1}^k = \bigcup_{f \in F'}\{y \in R \mid f(x,y)=0\}
           \end{equation}
-          である．ただし，$F' = \{f \in F \mid \text{$f$は$S$上恒等的に$0$でない}\}$とする．
-          \item 各$i=1, \dots, k$および$f \in F'$に対し，多項式$f(x,X_n)$における根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
+          である．ただし，$F' = \{f \in F \mid \text{ある$x \in S$が存在し，$f(x) \neq 0$. }\}$とする．
+          \item 各$i=1, \dots, k$および$f \in F'$に対し，$X_n$に関する多項式$f(x,X_n)$の根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
      \end{itemize}
 \end{definition}
 
-$R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$で，
-各$S \in \calS_{n-1}$が$F$描画可能であるとき，定義より得られる連続な半代数関数$\map{\xi_1<\dots<\xi_k}{S}{R}$を
-各$S$に対して取ることにより，$F$適合な$R^n$の柱状代数分解$\{\calS_i\}_{i=1}^n$を得ることができる．
+$R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
+各$S \in \mathcal{S}_{n-1}$が$F$描画可能であるとき，定義より得られる連続な半代数関数$\map{\xi_1<\dots<\xi_k}{S}{R}$を
+各$S$に対して取ることにより，$F$適合な$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を得ることができる．
 
 次の命題は，$F$描画可能であることの必要条件を述べている．
-なお，次の命題は，\cite[Proposition 5.14.]{MR2248869}を参照した．
 
-\todo[inline]{以下の命題は条件2.が「相異なる実根」と，少し違った形で述べられている．誤植だと思う．}
+\todo[inline]{以下の命題は条件(2)が「相異なる実根」と，少し違った形で述べられている．誤植だと思う．}
 
 \todo[inline]{以下の命題の証明が，教科書と全く同一ではない．}
-\begin{proposition}\label{proposition:del}
+\begin{proposition}\label{proposition:del}[{\cite[Proposition 5.14.]{MR2248869}}]
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結な半代数的集合とする．
      さらに，以下の条件を満たすとする．
      \begin{enumerate}
@@ -1460,74 +1456,68 @@ $R^{n-1}$の柱状代数分解$\{\calS_i\}_{i=1}^{n-1}$で，
      \end{enumerate}
 \end{corollary}
 
-よって，$F$符号不変な$R^n$の分割を与えるには，\cref{corollary:del}の条件を満たすような$R^{n-1}$の分割を構成すればよい．
-条件\ref{corollary:del-1}を満たすような$R^{n-1}$の分割を与えるには，各$f \in F$について，$X_n$係数が符号不変になるような分割を構成すればよい．
-一方，条件\ref{corollary:del-2}, \ref{corollary:del-3}を満たすような$R^{n-1}$の分割を与えるのは，条件\ref{corollary:del-1}に比べて少し難しい．
-条件\ref{corollary:del-2}, \ref{corollary:del-3}も満たすような$R^{n-1}$の分割を与えることができるよう，次の節で準備をする．
+よって，$F$符号不変な$R^n$の分解を与えるには，\cref{corollary:del}の条件を満たすような$R^{n-1}$の分解を構成すればよい．
+条件\ref{corollary:del-1}を満たすような$R^{n-1}$の分解を与えるには，各$f \in F$について，$X_n$係数が符号不変になるような分解を構成すればよい．
+一方，条件\ref{corollary:del-2}, \ref{corollary:del-3}を満たすような$R^{n-1}$の分解を与えるのは，条件\ref{corollary:del-1}に比べて少し難しい．
+条件\ref{corollary:del-2}, \ref{corollary:del-3}も満たすような$R^{n-1}$の分解を与えることができるよう，次の節で準備をする．
 
 \subsection{主部分終結式係数}
-
-\todo[inline]{この節を書くのは後回しにする．理由は，適切な参考文献を見つけていないこと，証明を書くのが大変そうなのでやりたくないから．}
-
-\begin{definition}
-$\mathrm{R}$を可換環とし，$A(x), B(x) \in \mathrm{R}[x]$ を，$\deg A(x) = m$, $\deg B(x) = n$ とする．ただし，$\deg 0 = 0$と解釈する．
-
-$j = 0, \dots, \min\{n, m\}$に対し，多項式$A(x)$, $B(x)$の$j$次部分終結式($j$-th subresultant) $S_j(A, B)$を次のように定義する．
+\begin{definition}[{\cite[Definition 7.7.1]{MR1239443}}]
+$\mathcal{R}$を可換環とし，$A(X), B(X) \in \mathcal{R}[X] \setminus \{0\}$ を，$\deg A(X) = m$, $\deg B(X) = n$ とする．
+また，$A(X)$, $B(X)$は次のように書けるとする．
 \begin{align}
-A(x) = a_m x^m + \dots + a_1 x + a_0, \\
-B(x) = b_n x^n + \dots + b_1 x + b_0 
+     A(X) = a_m X^m + \dots + a_1 X + a_0, \\
+     B(X) = b_n X^n + \dots + b_1 X + b_0.
 \end{align}
-として，$j = 0, \dots, \min\{n,m\}$に対し，
-\begin{align}
-M_j = 
-\begin{pmatrix}
-a_m & a_{m-1} & \cdots & a_1 & a_0 &    &  \\
-     &  a_m     & \cdots & a_2 & a_1& a_0 &  \\
-     &   & \ddots &  & & \\
-b_n & b_{n-1} & \cdots & b_1 & b_0 &    & \\
-     &  b_n     & \cdots & b_2 & b_1& b_0 & \\
-     &   & \ddots &  & & 
-\end{pmatrix}
-\in \mathrm{M}_{m+n-2j, m+n-j}(\mathrm{R})
-\end{align}
-とする．ここで，行列の空白部分はすべて$0$であり，また，行列の上側は$n-j$行，行列の下側は$m-j$行である．
+このとき，$0 \leq j \leq \min\{n,m\}$に対し，$\mathcal{R}$係数$(m+n-2j)$行$(m+n-j)$列行列$M_j(A, B)$を，
+\begin{equation}
+     M_j(A, B) \coloneqq
+     \begin{pmatrix}
+          a_m    & \cdots & \cdots & \cdots & \cdots & a_0    & 0      & \cdots & 0      \\
+          0      & \ddots &        &        &        &        & \ddots & \ddots & \vdots \\
+          \vdots & \ddots & \ddots &        &        &        &        & \ddots & 0      \\
+          0      & \cdots & 0      & a_m    & \cdots & \cdots & \cdots & \cdots & a_0    \\
+          b_n    & \cdots & \cdots & \cdots & b_0    & 0      & \cdots & \cdots & 0      \\
+          0      & \ddots &        &        &        & \ddots & \ddots &        & \vdots \\
+          \vdots & \ddots & \ddots &        &        &        & \ddots & \ddots & \vdots \\
+          \vdots &        & \ddots & \ddots &        &        &        & \ddots & 0      \\
+          0      & \cdots & \cdots & 0      & b_n    & \cdots & \cdots & \cdots & b_0        
+     \end{pmatrix}
+\end{equation}
+で定義する．ただし，各行はそれぞれ多項式
+\begin{equation}
+     X^{n-j-1}A(X), \dots, A(X), X^{m-j-1}B(X), \dots, B(X)
+\end{equation}
+の$X^{n+m-j-1}, \dots, X, 1$の係数を順に並べたものである．
+ただし，$n=0$または$m=0$の場合も許すものとする．
 
-また，$j = 0, \dots, \min\{m,n\}$, $i = 0, \dots, j$に対し，
-\begin{align}
-M_{j,i} = (\text{$M_j$の第$1$列}, \text{$M_j$の第$2$列}, \dots ,\text{$M_j$の第$m+n-2j-1$列}, \text{$M_j$の第$m+n-i-j$列})
-\in \mathrm{M}_{m+n-2j, m+n-2j}(\mathrm{R})
-\end{align}
-とする．$j = 0, \dots, \min\{n, m\}$に対し，
-\begin{align}
-S_j(A, B) = \sum_{i=0}^j \det M_{j, i} \cdot x^i 
-\end{align}
-を多項式$A(x)$, $B(x)$の$j$次部分終結式$S_j(A, B)$という．
+次に，$0 \leq i \leq j \leq \min\{n,m\}$に対し，
+$\mathcal{R}$係数$(n+m-2j)$行$(n+m-2j)$列行列$M_{j,i}(A,B)$を，
+$M_j(A,B)$の第$1, 2,\dots, (n+m-2j-1)$列と第$(n+m-i-j)$列からなる行列とする．
 
-この$j$次部分終結式の先頭項係数を，$\psc_j(A,B)$とかき，多項式$A(x)$, $B(x)$の$j$次主部分終結式係数($j$-th principal subresultant coefficient)という．
+
+最後に，$0 \leq j \leq \min\{n, m\}$に対し，
+\begin{align}
+S_j(A, B) \coloneqq \sum_{i=0}^j \det (M_{j, i}(A,B)) \cdot X^i 
+\end{align}
+を多項式$A(x)$, $B(x)$の$j$次部分終結式($j$-th subresultant)という．
+ここで．$0$行$0$列行列$N$に対しては，$\det(N)=0$とみなす．
+
+この$j$次部分終結式の先頭項係数$\det (M_{j,j}(A,B))$を，$\psc_j(A,B)$とかき，多項式$A(x)$, $B(x)$の$j$次主部分終結式係数($j$-th principal subresultant coefficient)という．
 \end{definition}
 
+主部分終結式係数は，多項式$A(x)$, $B(x)$の係数，及び次数に依存して定まることに注意する．
 
-主部分終結式係数は，多項式$A(x)$, $B(x)$の係数，及び次数に依存して定まる．
+\begin{theorem}\label{theorem:psc}
+     $\mathcal{R}$を一意分解整域とし，$A(x), B(x) \in \mathcal{R}[x] \setminus \{0\}$を，$\deg A(X) = m$, $\deg B(X) = n$とする．
+     このとき，
+     \begin{align}
+          \deg(\gcd(A, B)) = \min \{ j  \in \{0,1, \dots, \min\{n,m\}\}\mid \psc_j(A,B) \neq 0\}
+     \end{align}
+     が成り立つ．
+\end{theorem}
 
-\begin{remark}
-$m$, $n$のどちらかが$0$のとき，
-$S_0(A,B) = 0$, $\psc_0(A,B) = 0$とする．
-
-また，$\psc_0(A,B)$は，多項式$A(x)$, $B(x)$の終結式に一致する．
-\end{remark}
-
-\begin{proposition}\label{proposition:psc}
-$\mathrm{R}$を体とし，$A(x), B(x) \in \mathrm{R}[x] \setminus \{0\}$とすると，次が成立する．
-\begin{align}
-\deg(\gcd(A, B)) = \min \{ j  \in \{0,1, \dots, \min\{n,m\}\}\mid \psc_j(A,B) \neq 0\}
-\end{align}
-\end{proposition}
-
-\begin{proof}
-\todo[inline]{後で書く．方針： 部分終結式がユークリッドの互除法で出てくる多項式の列の定数倍になることが分かる．}
-\end{proof}
-
-\subsection{符号不変な柱状代数分割の存在}
+\subsection{符号不変な柱状代数分解の存在}
 この節では，\cref{theorem:cad}を証明する．
 
 まず，次のような記号を定義する．
@@ -1572,7 +1562,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 
 \begin{proof}
 \todo[inline]{詳細に証明を書く．}
-\cref{proposition:del}及び\cref{proposition:psc}から従う．
+\cref{proposition:del}及び\cref{theorem:psc}から従う．
 \end{proof}
 
 それでは，\cref{definition:cad}の証明を述べる．
@@ -1583,16 +1573,16 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      $n=1$の場合，$F$の$R$上の根を$a_1 < \dots < a_k$とする．
      $a_0 = -\infty$, $a_{k+1} = \infty$とすれば，
      \begin{equation}
-          \calS_1 = \{(a_i, a_{i+1})\}_{i=0}^k \cup \{a_i\}_{i=1}^k
+          \mathcal{S}_1 = \{(a_i, a_{i+1})\}_{i=0}^k \cup \{a_i\}_{i=1}^k
      \end{equation}
      が$F$-適合な柱状代数分解を与える．よって，定理は成り立つ．
 
      $n\geq 2$の場合，$n-1$までで主張が成り立つとする．
-     このとき，帰納法の仮定により$\Elim_{X_n}(F)$適合な$R^{n-1}$の柱状代数分解を$\{\calS_i\}_{i=1}^{n-1}$がとれる．
+     このとき，帰納法の仮定により$\Elim_{X_n}(F)$適合な$R^{n-1}$の柱状代数分解を$\{\mathcal{S}_i\}_{i=1}^{n-1}$がとれる．
 
-     ここで，各$S \in \calS_{n-1}$は$\Elim_{X_n}(F)$符号不変であるから，\cref{corollary:inv-deline}より，$S$は$F$描画可能である．
+     ここで，各$S \in \mathcal{S}_{n-1}$は$\Elim_{X_n}(F)$符号不変であるから，\cref{corollary:inv-deline}より，$S$は$F$描画可能である．
 
-     従って，各$S \in \calS_{n-1}$に対して，有限個の連続な半代数的関数$\map{\xi_{S,1}< \dots < \xi_{S,l_S}}{S}{R}$が存在し，
+     従って，各$S \in \mathcal{S}_{n-1}$に対して，有限個の連続な半代数的関数$\map{\xi_{S,1}< \dots < \xi_{S,l_S}}{S}{R}$が存在し，
      \begin{itemize}
           \item 任意の$ x \in S $に対し，
           \begin{equation}
@@ -1611,9 +1601,9 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      \end{align}
      とし，
      \begin{equation}
-          \calS_n \coloneqq \{C_{S,i} \mid S \in \calS_{n-1}, i=1, \dots, 2l_S+1\}
+          \mathcal{S}_n \coloneqq \{C_{S,i} \mid S \in \mathcal{S}_{n-1}, i=1, \dots, 2l_S+1\}
      \end{equation}
-     とすれば，$\{\calS_i\}_{i=1}^n$は，$R^n$の$F$適合な柱状代数分解を与える．
+     とすれば，$\{\mathcal{S}_i\}_{i=1}^n$は，$R^n$の$F$適合な柱状代数分解を与える．
 
      よって，帰納法により示された．
 \end{proof}
@@ -1626,10 +1616,10 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 %   C_{2i+1} &\coloneqq \{(x,y) \mid x \in S, f_{i}(x)<y<f_{i+1}(x) \} \quad i = 0,1, \dots, k 
 % \end{align}
 
-% とすれば，$\{C_j\}_{j=1}^{2k+1}$は$ S \times \mathbb{R} $の$F$符号不変な分割を与える．
-% この$ S \times \mathbb{R} $の分割$ \{C_j\}_{j=1}^{2k+1} $を，$ S $の持ち上げといい，$ \mathfrak{L}(S) $と書く．
+% とすれば，$\{C_j\}_{j=1}^{2k+1}$は$ S \times \mathbb{R} $の$F$符号不変な分解を与える．
+% この$ S \times \mathbb{R} $の分解$ \{C_j\}_{j=1}^{2k+1} $を，$ S $の持ち上げといい，$ \mathfrak{L}(S) $と書く．
 
-% また，$\mathfrak{D}$が$\R^{n-1}$の分割であるとき，$\mathfrak{L}(\mathfrak{D}) \coloneqq \bigcup_{D \in \mathfrak{D}}\mathfrak{L}(D)$を$\mathfrak{D}$の持ち上げという．
+% また，$\mathfrak{D}$が$\R^{n-1}$の分解であるとき，$\mathfrak{L}(\mathfrak{D}) \coloneqq \bigcup_{D \in \mathfrak{D}}\mathfrak{L}(D)$を$\mathfrak{D}$の持ち上げという．
 % \end{definition}
 
 \section{柱状代数分解による量化記号消去}
@@ -1660,8 +1650,8 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 
 上記の記号の元で，以下が成り立つ．
 \begin{proposition}
-     $F \subset R[X_1, \dots, X_n]$とし，$\{\calS_i\}_{i=1}^n$を$R^n$の$F$適合な柱状代数分解とする．
-     このとき，任意の$i=1, \dots, n$, $S \in \calS_i$に対し，$\CSIGN_i(y)$は$y \in S$に対して一定である．
+     $F \subset R[X_1, \dots, X_n]$とし，$\{\mathcal{S}_i\}_{i=1}^n$を$R^n$の$F$適合な柱状代数分解とする．
+     このとき，任意の$i=1, \dots, n$, $S \in \mathcal{S}_i$に対し，$\CSIGN_i(y)$は$y \in S$に対して一定である．
 \end{proposition}
 
 \begin{proof}
@@ -1754,13 +1744,13 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
           \Phi(Y)\coloneqq \Qua_1 X_1 \dots \Qua_n X_n \phi(Y,X)
      \end{equation}
      とする．ただし，$\phi(Y,X)$は量化記号のない$F$論理式であり，$\Qua_i \in \{\forall, \exists\}$とする．
-     また，$\{\calS_i\}_{i=1}^{n+m}$を$R^{n+m}$の$F$適合な柱状代数分解とする．
+     また，$\{\mathcal{S}_i\}_{i=1}^{n+m}$を$R^{n+m}$の$F$適合な柱状代数分解とする．
 
      このとき，
      \begin{equation}
           \Qua_1 \sigma_1 \in \CSIGN_m(F)(S) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_n \sigma_n \in \sigma_{n-1}(\phi^\star(\sigma_n) = \true)
      \end{equation}
-     が成り立つような$S \in \calS_m$の合併は，$\{y \in R^m \mid \Phi(y)\}$に一致する．
+     が成り立つような$S \in \mathcal{S}_m$の合併は，$\{y \in R^m \mid \Phi(y)\}$に一致する．
 \end{corollary}
 
 \begin{proof}
@@ -1771,12 +1761,12 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 有限部分集合$F \subset R[X_1, \dots, X_n]$に対して，$\CSIGN_i(F)$を計算する方法について説明する．
 
 \begin{definition}
-     $\{\calS_i\}_{i=1}^n$を$R^n$の柱状代数分解とする．
+     $\{\mathcal{S}_i\}_{i=1}^n$を$R^n$の柱状代数分解とする．
      $\mathcal{A}=\{\mathcal{A}_{i}\}_{i=1}^n$が，$\mathcal{A}_i \subset R^i$, $\pi_i(\mathcal{A}_{i+1}) = \mathcal{A}_i$を満たすとする．
      ただし，$\map{\pi_i}{R^{i+1}}{R^i}$は，$\pi_i(x_1, \dots, x_i, x_{i+1}) = (x_1, \dots, x_i)$により定まる射影とする．
      
-     このとき，$\mathcal{A}$が柱状代数分解$\{\calS_i\}_{i=1}^n$の標本点の柱状集合(cylindrical set of sample points)であるとは，
-     各$i=1, \dots, n$と$S\in \calS_i$に対し，$\mathcal{A}_i\cap S \neq \emptyset$を満たすことと定義する．
+     このとき，$\mathcal{A}$が柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$の標本点の柱状集合(cylindrical set of sample points)であるとは，
+     各$i=1, \dots, n$と$S\in \mathcal{S}_i$に対し，$\mathcal{A}_i\cap S \neq \emptyset$を満たすことと定義する．
 \end{definition}
 
 \begin{definition}
@@ -1797,8 +1787,8 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 
 このとき，次の命題が成り立つ．以下の命題は，\cite[Proposition 11.9.]{MR2248869}を参照した．
 \begin{proposition}
-     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$\{\calS_i\}_{i=1}^n$を$R^n$の$F$適合な柱状代数分解とする．
-     また，$\mathcal{A}\coloneqq \{\mathcal{A}_{i}\}_{i=1}^n$を$\{\calS_i\}_{i=1}^n$の標本点の柱状集合とする．
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$\{\mathcal{S}_i\}_{i=1}^n$を$R^n$の$F$適合な柱状代数分解とする．
+     また，$\mathcal{A}\coloneqq \{\mathcal{A}_{i}\}_{i=1}^n$を$\{\mathcal{S}_i\}_{i=1}^n$の標本点の柱状集合とする．
      このとき，各$i=0, \dots, n$に対して
      \begin{equation}
           \CSIGN_i(F) = \CSIGN_i(F, \mathcal{A})
@@ -1876,9 +1866,9 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 
      このとき，$F_{\leq i}\coloneqq \cup_{j \leq i} F_j$として，各$i=1, \dots, n$に対し
      \begin{equation}
-          \calS_i \coloneqq \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq i}}{\{-1,0,1\}}\} \setminus \{\emptyset\}
+          \mathcal{S}_i \coloneqq \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq i}}{\{-1,0,1\}}\} \setminus \{\emptyset\}
      \end{equation}          
-     と定義すると，$\{\calS_i\}_{i=1}^n$は$F$適合な柱状代数分解である．
+     と定義すると，$\{\mathcal{S}_i\}_{i=1}^n$は$F$適合な柱状代数分解である．
 \end{theorem}
 
 \begin{proof}
@@ -1887,10 +1877,10 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      $n=1$の場合，\cref{proposition:Thom}により主張が従う．
 
      次に，$n>1$の場合について示す．$n-1$で主張が成り立っていると仮定すると，帰納法の仮定より
-     $\{\calS_{i}\}_{i=1}^{n-1}$は$F_{n-1}$適合な柱状代数分解である．
+     $\{\mathcal{S}_{i}\}_{i=1}^{n-1}$は$F_{n-1}$適合な柱状代数分解である．
 
-     $\Elim_{X_n}(F_n) \subset F_{n-1}$であるから，各$S \in \calS_{n-1}$はいずれも$\Elim_{X_n}(F_n)$符号不変である．
-     よって，\cref{corollary:inv-deline}より，各$S \in \calS_{n-1}$は$F_n$描画可能である．
+     $\Elim_{X_n}(F_n) \subset F_{n-1}$であるから，各$S \in \mathcal{S}_{n-1}$はいずれも$\Elim_{X_n}(F_n)$符号不変である．
+     よって，\cref{corollary:inv-deline}より，各$S \in \mathcal{S}_{n-1}$は$F_n$描画可能である．
 
      従って，定義より$l_S$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_{l_S}}{S}{R}$を，次を満たすように取れる．
      \begin{itemize}
@@ -1903,18 +1893,18 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      \end{itemize}
      また，$\xi_{S,0} \coloneqq -\infty$, $\xi_{S,l_S} \coloneqq \infty$とする．
 
-     このとき，$S \in \calS_{n-1}$に対し，
+     このとき，$S \in \mathcal{S}_{n-1}$に対し，
      \begin{align}
           C_{S,2i} &\coloneqq \{(x,y) \mid  x \in S, \xi_{S,i}(x) = y \} \quad i = 1,\dots, l_S,\\
           C_{S,2i+1} &\coloneqq \{(x,y) \mid x \in S, \xi_{S,i}(x)<y<\xi_{S,i+1}(x) \} \quad i = 0,1, \dots, l_S 
      \end{align}
      とし，
      \begin{equation}
-          \widetilde{\calS}_n \coloneqq \{C_{S,i} \mid S \in \calS_{n-1}, i=1, \dots, 2l_S+1 \}
+          \widetilde{\mathcal{S}}_n \coloneqq \{C_{S,i} \mid S \in \mathcal{S}_{n-1}, i=1, \dots, 2l_S+1 \}
      \end{equation}
-     と定義すれば，$\{\calS_i\}_{i=1}^{n-1} \cup \{\widetilde{\calS}_n\}$は$F_n$適合な柱状代数分解を与える．
+     と定義すれば，$\{\mathcal{S}_i\}_{i=1}^{n-1} \cup \{\widetilde{\mathcal{S}}_n\}$は$F_n$適合な柱状代数分解を与える．
 
-     そこで，$\widetilde{\calS}_n = \calS_n$となることを示す．
+     そこで，$\widetilde{\mathcal{S}}_n = \mathcal{S}_n$となることを示す．
      そのために，$S\coloneqq \Reali(\widetilde{\sigma}) \neq \emptyset$である$\map{\widetilde{\sigma}}{F_{\leq n-1}}{\{-1,0,1\}}$を任意にとり，
      \begin{equation}
           \{C_{S,i} \mid i=1, \dots, 2l_S + 1\} = \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq n}}{\{-1,0,1\}}, \sigma|_{F_{\leq n-1}} = \widetilde{\sigma}\} \setminus \{\emptyset\}
