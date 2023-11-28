@@ -1496,7 +1496,7 @@ $\SyHa_j(P,Q)$は$\mathcal{R}$係数$(p+q-2j)$行$(p+q-j)$列行列であり，
 の$X^{p+q-j-1}, \dots, X, 1$の係数を順に並べたものである．
 
 また，$\SyHa_{j,j}(P,Q)$を，$\SyHa_j(P,Q)$の初めの$p+q-2j$列により得られる$(p+q-2j)$行$(p+q-2j)$列行列とし，
-$j$次符号付部分終結式係数($j$-th subresultant coefficient) $\sRes_j(P,Q)$ を
+$j$次符号付き部分終結式係数($j$-th subresultant coefficient) $\sRes_j(P,Q)$ を
 \begin{equation}
      \sRes_j(P,Q) \coloneqq \det(\SyHa_{j,j}(P,Q))
 \end{equation}
@@ -1552,11 +1552,12 @@ $f \in R[X_1, \dots, X_n]$に対し，$\Tru(f;X_n)$を，
 $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．ただし，$n \geq 2$とする．
 $\Elim_{X_n}(F) \subset R[X_1, \dots, X_{n-1}]$を，以下の集合の合併として定義する．
 \begin{align} 
-     &\{\LC(A;X_n) \mid A \in \Tru(F;X_n) \},\\
-     &\left\{ \psc_j\left(A,\frac{\partial A}{\partial X_n};X_n\right) \middle| A \in \Tru(F;X_n), j= 0, \dots, \deg(A;X_n)-1\right\},\\
-     &\{\psc_j(A,B;X_n) \mid A \neq B \in \Tru(F; X_n), j = 0, \dots, \min\{\deg(A;X_n), \deg(B;X_n)\}\}
-     % \PSC(f,g;X_n) \coloneqq \{\psc_j(f,g;X_n) \mid j = 0, \dots, \min\{\deg(f;X_n), \deg(g;X_n)\}\} \setminus \{0\}   
+     &\{\LC(A;X_n) \mid A \in \Tru(F;X_n) \} \setminus R,\\
+     &\left\{ \sRes_j\left(A,\frac{\partial A}{\partial X_n};X_n\right) \middle| A \in \Tru(F;X_n), j= 0, \dots, \deg(A;X_n)-2\right\} \setminus R,\\
+     &\{\sRes_j(A,B;X_n) \mid A ,B \in \Tru(F; X_n), \deg(A;X_n) > \deg(B;X_n),   j = 0, \dots, \deg(B;X_n)\} \setminus R,\\
+     &\{\sRes_j(A,\overline{B};X_n) \mid A ,B \in \Tru(F; X_n), \deg(A;X_n) = \deg(B;X_n),   j = 0, \dots, \deg(B;X_n)\} \setminus R,
 \end{align}
+ただし，$\overline{B} \coloneqq LC(A;X_n) B - LC(B;X_n) A$とする．
 \end{definition}
 
 この記号のもとで，次の系が成り立つ．なお，\cite[Theorem 5.16.]{MR2248869}を参考にした．
@@ -1568,8 +1569,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 \end{corollary}
 
 \begin{proof}
-\todo[inline]{詳細に証明を書く．}
-\cref{proposition:del}及び\cref{theorem:psc}から従う．
+     \todo[inline]{証明を書く．}
 \end{proof}
 
 それでは，\cref{definition:cad}の証明を述べる．
@@ -1636,7 +1636,6 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 この節では，柱状代数分解による量化記号消去のアルゴリズムについて示す．
 
 \subsection{量化記号消去と柱状代数分解の関係}
-まず，記号について定義する．
 \begin{definition}[{\cite[Notation 11.7.]{MR2248869}}]
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．
 
@@ -1651,57 +1650,110 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
                \CSIGN_i(F)(y) \coloneqq \{\CSIGN_{i+1}(F)(x) \mid x \in  R^{i+1}, \pi_i(x) = y\}
           \end{equation}
           と定める．ここで，$\map{\pi_i}{R^{i+1}}{R^i}$は，$\pi_i(x_1, \dots, x_i, x_{i+1}) = (x_1, \dots, x_i)$で定義される写像とする．
+          また，
+          \begin{equation}
+               \CSIGN(F) \coloneqq \CSIGN_0(F)(0)
+          \end{equation}
+          と定める．
      \end{itemize}
 \end{definition}
 
 上記の記号の元で，以下が成り立つ．
-\begin{proposition}
+\begin{proposition} \label{proposition:independence-of-CSIGN}
      $F \subset R[X_1, \dots, X_n]$とし，$\{\mathcal{S}_i\}_{i=1}^n$を$R^n$の$F$適合な柱状代数分解とする．
-     このとき，任意の$i=1, \dots, n$, $S \in \mathcal{S}_i$に対し，$\CSIGN_i(y)$は$y \in S$に対して一定である．
+     このとき，任意の$i=1, \dots, n$, $S \in \mathcal{S}_i$に対し，$\CSIGN_i(y)$は$y \in S$に依らず一定である．
 \end{proposition}
 
 \begin{proof}
-     証明を書く．
+     $i$に関する帰納法で示す．
+     $i=n$の場合，$S \in \mathcal{S}_n$は$F$符号不変であるから，各$f \in F$に対して$\sign(f(y))$は$y \in S$に依らず一定である．
+     従って，$\CSIGN_n(F)(y)$は$y \in S$に依らず一定である．
+
+     次に，$i=k+1$において命題が成り立つとして，$i=k$の場合に示す．$S \in \mathcal{S}_k$とする．
+     $\mathcal{C} \coloneqq \{T \in \mathcal{S}_{k+1} \mid \pi_{k}(T) = S\}$とすると，
+     各$T \in \mathcal{C}$において，帰納法の仮定より$\CSIGN_n(F)(x)$は$x \in T$に依らず一定である．
+     このとき，各$y \in S$に対し，
+     \begin{align}
+          \CSIGN_k(F)(y)
+          &= \{\CSIGN_{k+1}(F)(x) \mid x \in R^{i+1}, \pi_{k}(x) = y\}\\
+          &= \bigcup_{T \in \mathcal{C}}\{\CSIGN_{k+1}(F)(x) \mid x \in T \cap \pi_k^{-1}(\{y\})\}\\
+          &= \bigcup_{T \in \mathcal{C}}\{\CSIGN_{k+1}(F)(x) \mid x \in T\}
+     \end{align}
+     であり，これは$y \in S$に依らず一定である．
+     よって，帰納法により命題が示された．
 \end{proof}
 
 \todo[inline]{
-     以下の定義は厳密な定義ではない．まず，$F$論理式が定義されていない．
-     量化記号のない$F$論理式は，$F$に属する多項式の等号不等号，
-     および論理記号$\lor, \lnot, \land(, \rightarrow)$のみで記述された論理式の事である．}
+     ここで，$\CSIGN_i(F)$を計算する方法についても議論する必要があるかもしれない．
+     が，ここでは量化記号消去と柱状代数分解の関係について述べたいため，ひとまず不要としコメントアウトしてある．    
+}
 
-また，次のような記号を定義する．以下の定義は，\cite[Notation 11.12.]{MR2248869}を参照した．
-\begin{definition}
-     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$\map{\sigma}{F}{\{-1, 0, 1\}}$とする．
-     量化記号のない$F$論理式$\phi(X)$に対して，$\phi^\star(\sigma) \in \{\true, \false\}$を以下のように帰納的に定義する．
+% ここで，$\CSIGN_i(F)$を計算する方法について説明しておく．
+
+% \begin{definition}[{\cite[Section 11.2]{MR2248869}}]
+%      $\{\mathcal{S}_i\}_{i=1}^n$を$R^n$の柱状代数分解とする．
+%      $\mathcal{A}=\{\mathcal{A}_{i}\}_{i=1}^n$が，$\mathcal{A}_i \subset R^i$, $\pi_i(\mathcal{A}_{i+1}) = \mathcal{A}_i$を満たすとする．
+%      ただし，$\map{\pi_i}{R^{i+1}}{R^i}$は，$\pi_i(x_1, \dots, x_i, x_{i+1}) = (x_1, \dots, x_i)$により定まる射影とする．
+     
+%      このとき，$\mathcal{A}$が柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$の標本点の柱状集合(cylindrical set of sample points)であるとは，
+%      各$i=1, \dots, n$と$S\in \mathcal{S}_i$に対し，$\mathcal{A}_i\cap S \neq \emptyset$を満たすことと定義する．
+% \end{definition}
+
+% \begin{definition}[{\cite[Section 11.2]{MR2248869}}]
+%      $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．
+%      $\mathcal{A}=\{\mathcal{A}_{i}\}_{i=1}^n$が，$\mathcal{A}_i \subset R^i$, $\pi_i(\mathcal{A}_{i+1}) = \mathcal{A}_i$を満たすとする．
+%      ただし，$\map{\pi_i}{R^{i+1}}{R^i}$は，$\pi_i(x_1, \dots, x_i, x_{i+1}) = (x_1, \dots, x_i)$により定まる射影とする．
+
+%      このとき，$i=1, \dots, n$, $z \in \mathcal{A}_i$に対し，$\CSIGN_i(F, \mathcal{A})(z)$を以下のように定義する．
+%      \begin{itemize}
+%           \item $i=n$のとき，$y \in \mathcal{A}_n$に対し，$\CSIGN_n(F, \mathcal{A})(y)\coloneqq \sign(F)(y)$とする．
+%           \item $0 \leq i < n$のとき，$y \in \mathcal{A}_i$に対し，
+%           \begin{equation}
+%                \CSIGN_i(F, \mathcal{A})(y)\coloneqq \{\CSIGN_{i+1}(F, \mathcal{A})(x) \mid x \in \mathcal{A}_{i+1}, \pi_i(x) = y\}
+%           \end{equation}
+%           と定める．
+%      \end{itemize}
+% \end{definition}
+
+% $\CSIGN_i(F)$は，ある柱状代数分解の標本点の柱状集合が与えられれば計算することができる．
+% すなわち，次の命題が成り立つ．
+
+% \begin{proposition}[{\cite[Proposition 11.9.]{MR2248869}}]
+%      $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$\{\mathcal{S}_i\}_{i=1}^n$を$R^n$の$F$適合な柱状代数分解とする．
+%      また，$\mathcal{A} = \{\mathcal{A}_{i}\}_{i=1}^n$を$\{\mathcal{S}_i\}_{i=1}^n$の標本点の柱状集合とする．
+%      このとき，各$i=0, \dots, n$に対して
+%      \begin{equation}
+%           \CSIGN_i(F) = \CSIGN_i(F, \mathcal{A})
+%      \end{equation}
+%      が成り立つ．
+% \end{proposition}
+
+% \begin{proof}
+%      $i$についての帰納法によって示す．\todo{続きを書く}
+% \end{proof}
+
+それでは，量化記号消去と柱状代数分解の関係について述べる．
+
+$F \subset \Z[X_1, \dots, X_n]$を有限部分集合とする．
+$\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
+論理記号$\land, \lor, \lnot$によって生成される$\mathcal{L}_\mathrm{OR}$論理式を，量化記号のない$F$論理式($F$-quantifier free formula)と呼ぶ．
+
+\begin{definition}[{\cite[Notation 11.12.]{MR2248869}}]
+     $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とし，$\map{\sigma}{F}{\{-1, 0, 1\}}$とする．
+     量化記号のない$F$論理式$\phi(\overline{X})$に対して，$\phi^\star(\sigma) \in \{\true, \false\}$を以下のように帰納的に定義する．
      \begin{enumerate}
-          \item $\phi(X)$が$(f(X)=0)$, $f \in F$, であるとき，
+          \item $\phi(X)$が$\sign_R(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) であるとき，
           \begin{equation}
                \phi^\star(\sigma)\coloneqq \begin{cases}
-                    \true  & \text{if $\sigma(f)=0$}\\
-                    \false & \text{otherwise}
-               \end{cases}
-          \end{equation}
-          と定義する．
-          \item $\phi(X)$が$(f(X)>0)$, $f \in F$, であるとき，
-          \begin{equation}
-               \phi^\star(\sigma)\coloneqq \begin{cases}
-                    \true  & \text{if $\sigma(f)=1$}\\
-                    \false & \text{otherwise}
-               \end{cases}
-          \end{equation}
-          と定義する．
-          \item $\phi(X)$が$(f(X)<0)$, $f \in F$, であるとき，
-          \begin{equation}
-               \phi^\star(\sigma)\coloneqq \begin{cases}
-                    \true  & \text{if $\sigma(f)=-1$}\\
-                    \false & \text{otherwise}
+                    \true  & \sigma(f)=\tau\\
+                    \false & \sigma(f) \neq \tau
                \end{cases}
           \end{equation}
           と定義する．
           \item $\phi(X)\coloneqq (\phi_1(X) \land \phi_2(X))$であるとき，
           \begin{equation}
                \phi^\star(\sigma)\coloneqq \begin{cases}
-                    \true  & \text{if $\phi_1^\star(\sigma)=\true$ and $\phi_2^\star(\sigma)=\true$}\\
+                    \true  & \text{$\phi_1^\star(\sigma)=\true$ かつ $\phi_2^\star(\sigma)=\true$}\\
                     \false & \text{otherwise}
                \end{cases}
           \end{equation}
@@ -1709,103 +1761,111 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
           \item $\phi(X)\coloneqq (\phi_1(X) \lor \phi_2(X))$であるとき，
           \begin{equation}
                \phi^\star(\sigma)\coloneqq \begin{cases}
-                    \true  & \text{if $\phi_1^\star(\sigma)=\true$ or $\phi_2^\star(\sigma)=\true$}\\
+                    \true  & \text{$\phi_1^\star(\sigma)=\true$ または $\phi_2^\star(\sigma)=\true$}\\
                     \false & \text{otherwise}
                \end{cases}
           \end{equation}
+          と定義する．
           \item $\phi(X)\coloneqq (\lnot \phi_1(X))$であるとき，
           \begin{equation}
                \phi^\star(\sigma)\coloneqq \begin{cases}
-                    \true  & \text{if $\phi_1^\star(\sigma)=\false$}\\
+                    \true  & \text{$\phi_1^\star(\sigma)=\false$}\\
                     \false & \text{otherwise}
                \end{cases}
           \end{equation}
+          と定義する．
      \end{enumerate}
 \end{definition}
 
-上記の記号の元で以下が成り立つ．以下の命題は，\cite[Proposition 11.14.]{MR2248869}を参考にした．
-\todo[inline]{以下の命題は，\cite[Proposition 11.14.]{MR2248869}を参考にしているが，全く同一ではなく，QEの問題の場合のために言い換えている．}
-\begin{proposition}
-     $F \subset R[Y_1, \dots, Y_m, X_1, \dots, X_n]$を有限部分集合とし，
-     \begin{equation}
-          \Phi(Y)\coloneqq \Qua_1 X_1 \dots \Qua_n X_n \phi(Y,X)
-     \end{equation}
-     とする．ただし，$\phi(Y,X)$は量化記号のない$F$論理式であり，$\Qua_i \in \{\forall, \exists\}$とする．
+このとき，実閉体$R$において，任意の$x \in R^n$に対して
+実閉体$R$が$\phi(x)$を満たすことと$\phi^\star(\sign(F)(x)) = \true$であることは同値である．
+さらに，次の命題が成り立つ．次の命題は，\cite[Proposition 11.14.]{MR2248869}を参考にした．
 
-     このとき，任意の$y \in R^m$に対し，$\Phi(y)$が成り立つことと，
+\begin{proposition} \label{proposition:qe-cad}
+     $F \subset \Z[Y_1, \dots, Y_m, X_1, \dots, X_n]$を有限部分集合とし，
+     \begin{equation}
+          \Phi(Y_1, \dots, Y_m) \coloneqq \Qua_1 X_1 \dots \Qua_n X_n \phi(Y_1, \dots, Y_m, X_1, \dots, X_n)
+     \end{equation}
+     とする．ただし，$\phi(Y_1, \dots, Y_m, X_1, \dots, X_n)$は量化記号のない$F$論理式であり，$\Qua_i \in \{\forall, \exists\}$とする．
+
+     このとき，任意の$y \in R^n$に対し，実閉体$R$が$\Phi(y)$を満たすことと，
      \begin{equation}
           \Qua_1 \sigma_1 \in \CSIGN_m(F)(y) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_n \sigma_n \in \sigma_{n-1} (\phi^\star(\sigma_n) = \true)
      \end{equation}
-     が同値である．
+     が成り立つことが同値である．
 \end{proposition}
 
 \begin{proof}
-     後で書く．
+     $n$に関する帰納法によって示す．$n-1$において命題が成り立つと仮定する．$y \in R^n$に対して，
+     \begin{align}
+               & R \models \Phi(y)\\
+          \iff & R \models \Qua_1 X_1 \dots \Qua_n X_n \phi(y, X_1, \dots, X_n)
+     \end{align}
+     である，
+     
+     $\Qua_1 = \exists$の場合，
+     \begin{equation}
+          R \models \exists X_1 \Qua_2 X_2 \dots \Qua_n X_n \phi(y, X_1, \dots, X_n)
+     \end{equation}
+     であることの必要十分条件は，ある$x_1 \in R$について 
+     \begin{equation}
+          R \models \Qua_2 X_2 \dots \Qua_n X_n \phi(y, x_1, X_2, \dots, X_n)
+     \end{equation}
+     を満たすことである．さらに，帰納法の仮定より，これはある$x_1 \in R$について
+     \begin{equation}
+          \Qua_2 \sigma_2 \in \CSIGN_{m+1}(F)(y, x_1) \dots \Qua_n \sigma_n \in \sigma_{n-1} (\phi^\star(\sigma_n) = \true)
+     \end{equation}
+     を満たすことに必要十分である．$\CSIGN_m(F)(y) = \{\CSIGN_{m+1}(F)(y, x_1) \mid x_1 \in R\}$であるから，これは
+     \begin{equation}
+          \exists \sigma_1 \in \CSIGN_m(F)(y) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_n \sigma_n \in \sigma_{n-1} (\phi^\star(\sigma_n) = \true)
+     \end{equation}
+     に必要十分である．
+     
+     $\Qua_1 = \forall$の場合も同様に示すことができる．よって，証明が完了した．
 \end{proof}
 
-量化記号消去と柱状代数分解の関係は以下の系のように述べられる．
-\begin{corollary}
-     $F \subset R[Y_1, \dots, Y_m, X_1, \dots, X_n]$を有限部分集合とし，
+\cref{proposition:qe-cad}より，量化記号消去と柱状代数分解の関係は以下の系のように述べられる．
+
+\begin{corollary} \label{corollary:qe-cad}
+     $F \subset \Z[Y_1, \dots, Y_m, X_1, \dots, X_n]$を有限部分集合とし，
      \begin{equation}
           \Phi(Y)\coloneqq \Qua_1 X_1 \dots \Qua_n X_n \phi(Y,X)
      \end{equation}
      とする．ただし，$\phi(Y,X)$は量化記号のない$F$論理式であり，$\Qua_i \in \{\forall, \exists\}$とする．
      また，$\{\mathcal{S}_i\}_{i=1}^{n+m}$を$R^{n+m}$の$F$適合な柱状代数分解とする．
 
-     このとき，
+     このとき，$\mathcal{L} \subset \mathcal{S}_m$を，
      \begin{equation}
           \Qua_1 \sigma_1 \in \CSIGN_m(F)(S) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_n \sigma_n \in \sigma_{n-1}(\phi^\star(\sigma_n) = \true)
      \end{equation}
-     が成り立つような$S \in \mathcal{S}_m$の合併は，$\{y \in R^m \mid \Phi(y)\}$に一致する．
-\end{corollary}
-
-\begin{proof}
-     後で書く．
-\end{proof}
-
-
-有限部分集合$F \subset R[X_1, \dots, X_n]$に対して，$\CSIGN_i(F)$を計算する方法について説明する．
-
-\begin{definition}
-     $\{\mathcal{S}_i\}_{i=1}^n$を$R^n$の柱状代数分解とする．
-     $\mathcal{A}=\{\mathcal{A}_{i}\}_{i=1}^n$が，$\mathcal{A}_i \subset R^i$, $\pi_i(\mathcal{A}_{i+1}) = \mathcal{A}_i$を満たすとする．
-     ただし，$\map{\pi_i}{R^{i+1}}{R^i}$は，$\pi_i(x_1, \dots, x_i, x_{i+1}) = (x_1, \dots, x_i)$により定まる射影とする．
-     
-     このとき，$\mathcal{A}$が柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$の標本点の柱状集合(cylindrical set of sample points)であるとは，
-     各$i=1, \dots, n$と$S\in \mathcal{S}_i$に対し，$\mathcal{A}_i\cap S \neq \emptyset$を満たすことと定義する．
-\end{definition}
-
-\begin{definition}
-     $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．
-     $\mathcal{A}=\{\mathcal{A}_{i}\}_{i=1}^n$が，$\mathcal{A}_i \subset R^i$, $\pi_i(\mathcal{A}_{i+1}) = \mathcal{A}_i$を満たすとする．
-     ただし，$\map{\pi_i}{R^{i+1}}{R^i}$は，$\pi_i(x_1, \dots, x_i, x_{i+1}) = (x_1, \dots, x_i)$により定まる射影とする．
-
-     このとき，$i=1, \dots, n$, $z \in \mathcal{A}_i$に対し，$\CSIGN_i(F, \mathcal{A})(z)$を以下のように定義する．
-     \begin{itemize}
-          \item $i=n$のとき，$y \in \mathcal{A}_n$に対し，$\CSIGN_n(F, \mathcal{A})(y)\coloneqq \sign(F)(y)$とする．
-          \item $0 \leq i < n$のとき，$y \in \mathcal{A}_i$に対し，
-          \begin{equation}
-               \CSIGN_i(F, \mathcal{A})(y)\coloneqq \{\CSIGN_{i+1}(F, \mathcal{A})(x) \mid x \in \mathcal{A}_{i+1}, \pi_i(x) = y\}
-          \end{equation}
-          と定める．
-     \end{itemize}
-\end{definition}
-
-このとき，次の命題が成り立つ．以下の命題は，\cite[Proposition 11.9.]{MR2248869}を参照した．
-\begin{proposition}
-     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$\{\mathcal{S}_i\}_{i=1}^n$を$R^n$の$F$適合な柱状代数分解とする．
-     また，$\mathcal{A}\coloneqq \{\mathcal{A}_{i}\}_{i=1}^n$を$\{\mathcal{S}_i\}_{i=1}^n$の標本点の柱状集合とする．
-     このとき，各$i=0, \dots, n$に対して
+     が成り立つような$S \in \mathcal{S}_m$全体とする．このとき，
      \begin{equation}
-          \CSIGN_i(F) = \CSIGN_i(F, \mathcal{A})
+          \bigcup_{S \in \mathcal{L}} S = \{y \in R^m \mid R \models \Phi(y)\}
      \end{equation}
      が成り立つ．
-\end{proposition}
+\end{corollary}
+
+ただし，\cref{corollary:qe-cad}において，$\CSIGN_m(F)(S)$は$y \in S$を任意にとり，$\CSIGN_m(F)(S) \coloneqq \CSIGN_m(F)(y)$とすることで定義する．
+\cref{proposition:independence-of-CSIGN}より，$\CSIGN_m(F)(y)$は$y \in S$に依存せず一定であるから，この定義はwell-definedである．
 
 \begin{proof}
-     後で書く．
+     \cref{proposition:qe-cad}より明らかである．
 \end{proof}
 
+\cref{corollary:qe-cad}より，各$S \in \mathcal{L}$が量化記号のない$\mathcal{L}_\mathcal{OR}$論理式$\phi_S(Y)$を用いて
+$S = \{y \in R^m \mid R \models \phi_S(y)\} $と書けるとき，
+\begin{equation}
+     R \models \Phi(Y) \leftrightarrow \bigvee_{S \in \mathcal{L}} \phi_S(Y) 
+\end{equation}
+が成り立つ．さらに$\phi_S(\mathcal{L})$が実閉体$R$に依らず定まるのであれば，
+\begin{equation}
+     \RCF \models \Phi(Y) \leftrightarrow \bigvee_{S \in \mathcal{L}} \phi_S(Y) 
+\end{equation}
+が成り立ち，量化記号消去が完了する．
+
+したがって，柱状代数分解を用いて量化記号消去を行うには，
+実閉体$R$の取り方に依存しない$\mathcal{L}_\mathrm{OR}$論理式で定義されるような柱状代数分解を取る必要がある．
+実際，このような柱状代数分解を取ることができることを次に見ていく．
 
 \subsection{柱状代数分解の改良}
 多項式の有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\map{\sigma}{F}{\{-1,0,1\}}$を，$F$の符号条件(sign condition)という．
@@ -1821,13 +1881,12 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 とは，$0 \not \in F$であり，かつ任意の$f \in F$に対して，$f' \in F$または$f'=0$となることと定義する．
 
 
-以下の命題の主張は，\cite[Lemma 5.33.]{MR2248869}を参照した．
 
-\begin{proposition}\label{proposition:Thom}
+\begin{lemma}[{\cite[Lemma 5.33.]{MR2248869}}]\label{lemma:Thom}
      有限部分集合$F \subset R[X]$が，微分について閉じているとする．
      このとき， 任意の$F$の符号条件$\map{\sigma}{F}{\{-1,0,1\}}$に対し，
      $\Reali(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
-\end{proposition}
+\end{lemma}
 
 \begin{proof}
      $F = \{f_1, \dots, f_s\}$として，$s$に関する帰納法で示す．
@@ -1880,7 +1939,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 \begin{proof}
      $n$に関する帰納法で示す．
 
-     $n=1$の場合，\cref{proposition:Thom}により主張が従う．
+     $n=1$の場合，\cref{lemma:Thom}により主張が従う．
 
      次に，$n>1$の場合について示す．$n-1$で主張が成り立っていると仮定すると，帰納法の仮定より
      $\{\mathcal{S}_{i}\}_{i=1}^{n-1}$は$F_{n-1}$適合な柱状代数分解である．
@@ -1920,7 +1979,7 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      任意の$i=1, \dots, 2l_S+1$に対し，$C_{S,i}$は$F_{\leq n}$符号不変であるから，
      $\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす$\map{\sigma}{F_{\leq n}}{\{-1,0,1\}}$がただ一つ存在して，
      $C_{S,i} \subset \Reali(\sigma)$である．
-     また，\cref{proposition:Thom}より，$\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす任意の$\sigma$および
+     また，\cref{lemma:Thom}より，$\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす任意の$\sigma$および
      $i,j \in \{1, \dots, 2l_S + 1\}$に対して，
      $C_{S,i} \subset \Reali(\sigma)$, $C_{S,j} \subset \Reali(\sigma)$ならば，$i=j$である．
 
