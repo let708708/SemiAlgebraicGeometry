@@ -3,7 +3,7 @@
 \usepackage{amsmath,amssymb,mathtools}
 \usepackage{amsthm}
 \usepackage{mathdots}
-\usepackage{algorithm}
+\usepackage[section]{algorithm}
 \usepackage{algorithmic}
 \usepackage{cleveref}
 \usepackage{todonotes}
@@ -20,6 +20,10 @@
 }{
   \popQED\endtrivlist\@endpefalse
 }
+\makeatother
+
+\makeatletter
+\renewcommand{\ALG@name}{アルゴリズム}
 \makeatother
 
 \newcommand{\R}{\mathbb{R}}
@@ -79,6 +83,7 @@
 \renewcommand{\proofname}{\textbf{証明}}
 \renewcommand{\theenumi}{(\arabic{enumi})}
 \renewcommand{\labelenumi}{\theenumi}
+\crefname{algorithm}{アルゴリズム}{アルゴリズム}
 
 \begin{document}
 
@@ -1615,20 +1620,6 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      よって，帰納法により示された．
 \end{proof}
 
-% \begin{definition}
-% $ F \subset \mathbb{R}[x_1,\dots,x_n] $ を有限部分集合とする．$ S \subset \mathbb{R}^{n-1} $が$ F $描画可能とする．
-% このとき，$ S $上の$ F $の解を$ f_1(x)< \dots <f_k(x) $とし，$ f_0(x) \coloneqq -\infty $ , $ f_{k+1}(x) \coloneqq \infty $とするとき，
-% \begin{align}
-%   C_{2i} &\coloneqq \{(x,y) \mid  x \in S, f_i(x) = y \} \quad i = 1,\dots, k,\\
-%   C_{2i+1} &\coloneqq \{(x,y) \mid x \in S, f_{i}(x)<y<f_{i+1}(x) \} \quad i = 0,1, \dots, k 
-% \end{align}
-
-% とすれば，$\{C_j\}_{j=1}^{2k+1}$は$ S \times \mathbb{R} $の$F$符号不変な分解を与える．
-% この$ S \times \mathbb{R} $の分解$ \{C_j\}_{j=1}^{2k+1} $を，$ S $の持ち上げといい，$ \mathfrak{L}(S) $と書く．
-
-% また，$\mathfrak{D}$が$\R^{n-1}$の分解であるとき，$\mathfrak{L}(\mathfrak{D}) \coloneqq \bigcup_{D \in \mathfrak{D}}\mathfrak{L}(D)$を$\mathfrak{D}$の持ち上げという．
-% \end{definition}
-
 \section{柱状代数分解による量化記号消去}
 
 有限部分集合$F \subset R[x_1, \dots, x_n]$が与えられたとき，
@@ -1866,14 +1857,25 @@ $S = \{y \in R^m \mid R \models \phi_S(y)\} $と書けるとき，
 したがって，柱状代数分解を用いて量化記号消去を行うには，
 実閉体$R$の取り方に依存しない$\mathcal{L}_\mathrm{OR}$論理式で定義されるような柱状代数分解を取る必要がある．
 実際，このような柱状代数分解を取ることができることを次に見ていく．
+% \begin{proposition}
+%      $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とする．
+%      このとき，高々$X_1, \dots, X_i$を自由変数に持つ量化記号のない$\mathcal{L}_\mathcal{OR}$論理式の集合$\Psi_i$が存在し．
+%      任意の実閉体$R$に対して，
+%      \begin{equation}
+%           \mathcal{S}_i \coloneqq\{\{(x_1, \dots, x_i) \in R^i \mid R \models \psi_i(x_1, \dots, x_i)\} \mid \psi_i \in \Psi_i \}
+%      \end{equation}
+%      により定義される$\{\mathcal{S}\}_{i=1}^n$は，$F$適合な$R^n$の柱状代数分解となる．
+% \end{proposition}
+
+% この命題は，\cref{theorem:improved-cad}により示される．
 
 \subsection{柱状代数分解の改良}
 多項式の有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\map{\sigma}{F}{\{-1,0,1\}}$を，$F$の符号条件(sign condition)という．
 さらに，$F$の符号条件$\sigma$が与えられたとき，
 \begin{equation}
-     \Reali(\sigma)\coloneqq \{x \in R^k \mid \bigwedge_{f \in F} \sign(f(x)) = \sigma(f)\}
+     \Reali_R(\sigma)\coloneqq \{x \in R^k \mid R \models \bigwedge_{f \in F} \sign(f(x)) = \sigma(f)\}
 \end{equation}
-により定義される$\Reali(\sigma)$を，符号条件$\sigma$の実現(realization)という．
+により定義される$\Reali_R(\sigma)$を，符号条件$\sigma$の実現(realization)という．
 
 \todo[inline]{以下の定義も微妙．$0 \in F$にした方がよいのではないか．}
 また，多項式の有限部分集合$F \subset R[X]$が，
@@ -1885,7 +1887,7 @@ $S = \{y \in R^m \mid R \models \phi_S(y)\} $と書けるとき，
 \begin{lemma}[{\cite[Lemma 5.33.]{MR2248869}}]\label{lemma:Thom}
      有限部分集合$F \subset R[X]$が，微分について閉じているとする．
      このとき， 任意の$F$の符号条件$\map{\sigma}{F}{\{-1,0,1\}}$に対し，
-     $\Reali(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
+     $\Reali_R(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
 \end{lemma}
 
 \begin{proof}
@@ -1903,37 +1905,37 @@ $S = \{y \in R^m \mid R \models \phi_S(y)\} $と書けるとき，
      とする．
 
      このとき，$F_0 \coloneqq \{f_1, \dots, f_{s}\}$は微分について閉じているので，帰納法の仮定より，
-     $\Reali(\sigma_0)$は，空集合，一点からなる集合，開区間のいずれかである．
+     $\Reali_R(\sigma_0)$は，空集合，一点からなる集合，開区間のいずれかである．
 
-     $\Reali(\sigma) = \Reali({\sigma_0}) \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(f_{s+1})\}$であるから，
-     $\Reali({\sigma_0})$が空集合，あるいは一点からなる集合の場合には，$\Reali(\sigma)$は空集合か一点からなる集合になるので主張は成り立つ．
+     $\Reali_R(\sigma) = \Reali_R({\sigma_0}) \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(f_{s+1})\}$であるから，
+     $\Reali_R({\sigma_0})$が空集合，あるいは一点からなる集合の場合には，$\Reali_R(\sigma)$は空集合か一点からなる集合になるので主張は成り立つ．
 
-     したがって，$\Reali({\sigma_0})$が開区間である場合を考える．
-     $f_{s+1}$の微分$f_{s+1}'$は，$f_1, \dots, f_s$のいずれかであるから，$\Reali({\sigma_0})$上符号は一定である．
+     したがって，$\Reali_R({\sigma_0})$が開区間である場合を考える．
+     $f_{s+1}$の微分$f_{s+1}'$は，$f_1, \dots, f_s$のいずれかであるから，$\Reali_R({\sigma_0})$上符号は一定である．
 
-     $f_{s+1}'$の符号が$\Reali({\sigma_0})$上常に$0$である場合，$f_{s+1}$は$\Reali({\sigma_0})$上定数であるから，主張は成り立つ．
+     $f_{s+1}'$の符号が$\Reali_R({\sigma_0})$上常に$0$である場合，$f_{s+1}$は$\Reali_R({\sigma_0})$上定数であるから，主張は成り立つ．
 
-     $f_{s+1}'$の符号が$\Reali({\sigma_0})$上常に$-1$(あるいは$1$)の場合を考える．
-     このとき\cref{corollary:monotone}より，$f$は$\Reali({\sigma_0})$上狭義単調増加(あるいは狭義単調減少)であるから，$\Reali(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
+     $f_{s+1}'$の符号が$\Reali_R({\sigma_0})$上常に$-1$(あるいは$1$)の場合を考える．
+     このとき\cref{corollary:monotone}より，$f$は$\Reali_R({\sigma_0})$上狭義単調増加(あるいは狭義単調減少)であるから，$\Reali_R(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
 
      以上より，主張は示された．
 \end{proof}
 
 次の定理は，\cite[Theorem 5.34.]{MR2248869}を参考にした．
-\begin{theorem}
-     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，
+\begin{theorem}\label{theorem:improved-cad}
+     $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とし，
      $\{F_i\}_{i=1}^n$が以下を満たすとする．
      \begin{itemize}
           \item $F \subset F_n$である．\\
-          \item 各$i=1,\dots, n$に対して，$F_i \subset R[X_1, \dots, X_i]$であり，$F_i$は$X_i$での微分について閉じている．\\
+          \item 各$i=1,\dots, n$に対して，$F_i \subset \Z[X_1, \dots, X_i]$であり，$F_i$は$X_i$での微分について閉じている．\\
           \item 各$i=1, \dots, n-1$に対して，$\Elim_{X_{i+1}}(F_{i+1}) \subset F_i$を満たす．
      \end{itemize}
 
-     このとき，$F_{\leq i}\coloneqq \cup_{j \leq i} F_j$として，各$i=1, \dots, n$に対し
+     $F_{\leq i}\coloneqq \cup_{j \leq i} F_j$とする．このとき，任意の実閉体$R$に対し，
      \begin{equation}
-          \mathcal{S}_i \coloneqq \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq i}}{\{-1,0,1\}}\} \setminus \{\emptyset\}
+          \mathcal{S}_i \coloneqq \{\Reali_R(\sigma) \mid \map{\sigma}{F_{\leq i}}{\{-1,0,1\}}\}, \quad i=1, \dots, n 
      \end{equation}          
-     と定義すると，$\{\mathcal{S}_i\}_{i=1}^n$は$F$適合な柱状代数分解である．
+     と定義すると，$\{\mathcal{S}_i\}_{i=1}^n$は$F$適合な$R^n$の柱状代数分解である．
 \end{theorem}
 
 \begin{proof}
@@ -1970,33 +1972,36 @@ $S = \{y \in R^m \mid R \models \phi_S(y)\} $と書けるとき，
      と定義すれば，$\{\mathcal{S}_i\}_{i=1}^{n-1} \cup \{\widetilde{\mathcal{S}}_n\}$は$F_n$適合な柱状代数分解を与える．
 
      そこで，$\widetilde{\mathcal{S}}_n = \mathcal{S}_n$となることを示す．
-     そのために，$S\coloneqq \Reali(\widetilde{\sigma}) \neq \emptyset$である$\map{\widetilde{\sigma}}{F_{\leq n-1}}{\{-1,0,1\}}$を任意にとり，
+     そのために，$S\coloneqq \Reali_R(\widetilde{\sigma}) \neq \emptyset$である$\map{\widetilde{\sigma}}{F_{\leq n-1}}{\{-1,0,1\}}$を任意にとり，
      \begin{equation}
-          \{C_{S,i} \mid i=1, \dots, 2l_S + 1\} = \{\Reali(\sigma) \mid \map{\sigma}{F_{\leq n}}{\{-1,0,1\}}, \sigma|_{F_{\leq n-1}} = \widetilde{\sigma}\} \setminus \{\emptyset\}
+          \{C_{S,i} \mid i=1, \dots, 2l_S + 1\} = \{\Reali_R(\sigma) \mid \map{\sigma}{F_{\leq n}}{\{-1,0,1\}}, \sigma|_{F_{\leq n-1}} = \widetilde{\sigma}\} \setminus \{\emptyset\}
      \end{equation}
      となることを示す．両辺の集合族は，$S \times R$の非交叉な被覆であることに注意する．
 
      任意の$i=1, \dots, 2l_S+1$に対し，$C_{S,i}$は$F_{\leq n}$符号不変であるから，
      $\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす$\map{\sigma}{F_{\leq n}}{\{-1,0,1\}}$がただ一つ存在して，
-     $C_{S,i} \subset \Reali(\sigma)$である．
+     $C_{S,i} \subset \Reali_R(\sigma)$である．
      また，\cref{lemma:Thom}より，$\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす任意の$\sigma$および
      $i,j \in \{1, \dots, 2l_S + 1\}$に対して，
-     $C_{S,i} \subset \Reali(\sigma)$, $C_{S,j} \subset \Reali(\sigma)$ならば，$i=j$である．
+     $C_{S,i} \subset \Reali_R(\sigma)$, $C_{S,j} \subset \Reali_R(\sigma)$ならば，$i=j$である．
 
-     以上で命題が示された．
+     以上で定理が示された．
 \end{proof}
+
 
 \subsection{柱状代数分解による量化記号消去のアルゴリズム}
 
-柱状代数分解による量化記号消去のアルゴリズムは，次のように述べられる．
+柱状代数分解による量化記号消去のアルゴリズムについて述べる．
+
+
+
 
 \begin{algorithm}
-     \caption{Improved Cylindrical Decomposition}
+     \caption{Improved CAD}\label{Improved CAD}
      \begin{algorithmic}[1]
           \REQUIRE 
                有限部分集合
-               $F \subset R[X_1, \dots, X_n]$
-               および，順序付けられた変数のリスト$X_1, \dots, X_n$
+               $F \subset \Z[X_1, \dots, X_n]$
           \ENSURE
                $\overline{C}_i(F) \subset R[X_1, \dots, X_i]$をみたす有限集合の列$\left\{\overline{C}_i(F)\right\}_{i=1}^n$
           \STATE $\overline{C}_k(F)\leftarrow \{\partial^i f/ \partial X_k^i \mid f \in F, i=0,1,\dots \}$
@@ -2005,16 +2010,11 @@ $S = \{y \in R^m \mid R \models \phi_S(y)\} $と書けるとき，
                \STATE $\overline{C}_i(F) \leftarrow \Elim_{X_{i+1}}(\overline{C}_{i+1}(F))$
                \STATE $\overline{C}_i(F) \leftarrow \{ \partial^i f/ \partial X_i^j \mid f \in  \overline{C_i}(F), j=0,1, \dots\}$
           \ENDFOR
-          \\ \text{Lifting Phase}:
-          \STATE $\overline{C}_1(F)$の各多項式の根と，それらで分離される開区間上の点からなる点のリストを$A_1$とする．
-          \FOR{$i = 2, \dots, k$}
-               \FOR{$x \in A_{i-1}$}
-                    \STATE $L \leftarrow \{P_i(x, X_i) \mid P_i \in \overline{C}_i(F)\}$
-                    \STATE $L$の各多項式の根と，それらで分離される開区間上の点から点のリスト$\widetilde{A}_i$をとる．
-                    \STATE $A_i \leftarrow A_i \cup \{(x, y)\mid y \in \widetilde{A}_i\}$
-               \ENDFOR
+
+          \FOR{$i = 1, \dots, k$}
+               \STATE $\overline{C}_{\leq i}(F) \leftarrow \bigcup_{j=1}^i \overline{C}_j(F)$
           \ENDFOR
-          \RETURN $\{\overline{C}_i(F)\}$, $\{A_i\}$, そして実際に各標本点で成り立っている$\overline{C}_{\leq i}(F)$の符号条件
+          \RETURN $\{\overline{C}_i(F)\}$
      \end{algorithmic}
 \end{algorithm}
 
@@ -2023,36 +2023,23 @@ $S = \{y \in R^m \mid R \models \phi_S(y)\} $と書けるとき，
      \begin{algorithmic}[1]
           \REQUIRE 
                有限部分集合
-               $F \subset R[Y_1, \dots, Y_m][X_1, \dots, X_n]$,
-               および$F$論理式
-               \[\Phi(Y) = (\Qua_1 X_1)(\Qua_2 X_2)\dots(\Qua_n X_n) \phi(Y,X),\]
-               ただし，各$\phi(Y,X)$は量化記号のない$F$論理式とする．
+               $F \subset \Z[Y_1, \dots, Y_m, X_1, \dots, X_n]$,
+               および冠頭標準形の$\mathcal{L}_\mathrm{OR}$論理式
+               \[\Phi(Y) = (\Qua_1 X_1)(\Qua_2 X_2)\dots(\Qua_n X_n) \phi(Y,X).\]
+               ただし，$\phi(Y,X)$は量化記号のない$F$論理式とする．
+
           \ENSURE 
-               $\Phi(Y)$に同値な量化記号のない論理式.
-          \STATE $Y_1, \dots, Y_m, X_1, \dots, X_n$と$F$に対して，Improved Cylindrical Decompositionを適応する．
-          \FOR{$\sigma \in \overline{C}_{\leq m}(F)$}
-               \STATE $\calL \leftarrow \{\}$
-               \IF{$\Reali(\sigma) \neq \emptyset$}
-                    \STATE $\CSIGN_m(F)(\sigma) \leftarrow \CSIGN_m(F)(\Reali(\sigma))$ 
-                    \IF{$ \Qua_1 \mu_1 \in \CSIGN_m(F)(\sigma) \dots \Qua_n \mu_n \in \mu_{n-1} \phi^\star(\mu_n) = \true$}
-                         \STATE $\calL \leftarrow \calL \cup \{\sigma\}$
-                    \ENDIF
+               $\Phi(Y)$に同値な量化記号のない$\mathcal{L}_\mathrm{OR}$論理式.
+          
+          \STATE $\mathcal{L} \leftarrow \{\}$
+          \FOR{$\map{\sigma}{\overline{C}_{\leq m}(F)}{\{-1,0,1\}}$}
+               \IF{$ \Reali_R(\sigma) \neq \emptyset$ \AND $ \Qua_1 \mu_1 \in \CSIGN_m(F)(\Reali_R(\sigma)) \dots \Qua_n \mu_n \in \mu_{n-1} \phi^\star(\mu_n) = \true$}
+                    \STATE $\calL \leftarrow \calL \cup \{\sigma\}$       
                \ENDIF
           \ENDFOR
           \RETURN $\bigvee_{\sigma \in \calL} \bigwedge_{f \in \overline{C}_{\leq m}(F)}f(Y)=\sigma(f)$
      \end{algorithmic}
 \end{algorithm}
-
-% \begin{thebibliography}{99}
-%      \bibitem{Arai} 新井敏康，『数学基礎論』(2016).
-%      \bibitem{Itai} 板井昌典，『モデル理論』(2023).
-%      \bibitem{Anai} 穴井宏和，横山和弘，『QEの計算アルゴリズムとその応用 数式処理による最適化』(2011).
-%      \bibitem{Artin} Artin, E., Schreier, O. Algebraische Konstruktion reeller Körper. Abh.Math.Semin.Univ.Hambg. 5, 85–99 (1927). https://doi.org/10.1007/BF02952512
-%      \bibitem{Bochnak}Jacek Bochnak, Michel Coste, Marie-Fran\c{c}oise Roy, Real Algebraic Geometry, Springer(1998).
-%      \bibitem{Basu} Saugata Basu, Richard Pollack, Marie-Fran\c{c}oise Roy, Algorithms in Real Algebraic Geometry(2003).
-%      \bibitem{Collins} George E. Collins, Quantifier elimination for real closed fields by cylindrical algebraic decomposition(1975).
-% \end{thebibliography}
-
 
 \bibliographystyle{alpha}
 \bibliography{references.bib}
