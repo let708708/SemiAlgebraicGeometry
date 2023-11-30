@@ -59,6 +59,7 @@
 \DeclareMathOperator{\CSIGN}{CSIGN}
 \DeclareMathOperator{\ROOT}{ROOT}
 \DeclareMathOperator{\SyHa}{SyHa}
+\DeclareMathOperator{\Graph}{Graph}
 \DeclareMathOperator{\sRes}{sRes}
 
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
@@ -1082,9 +1083,10 @@ $
 
 \section{半代数的集合}
 \begin{definition}[{\cite[Definition 2.1.4.]{MR1659509}}]
-     $R$を実閉体とする．集合$S \subset R^n$が，
-     変数記号の列$X_1, \dots, X_n$を$\overline{X}$と書くことにすると，
-     有限個の$f_{i,j} \in R\left[\overline{X}\right]$および$\sigma_{i,j} \in \{-1, 0 ,1\}$, $i=1, \dots, s, j = 1, \dots, l_i$, をもちいて，
+     $R$を実閉体とする．
+     変数記号の列$X_1, \dots, X_n$を$\overline{X}$と書くことにする．
+     集合$S \subset R^n$が有限個の$f_{i,j} \in R\left[\overline{X}\right]$
+     および$\sigma_{i,j} \in \{-1, 0 ,1\}$, $i=1, \dots, s, j = 1, \dots, l_i$, をもちいて，
      \begin{align}
           S &= \bigcup_{i=1}^s \bigcap_{j=1}^{l_i} \{\overline{x} \in R^n \mid \sign_R(f_{i,j}(\overline{x})) = \sigma_{i,j}\}\\
             &= \left\{ \overline{x} \in R^n \middle| \bigvee_{i=1}^s \bigwedge_{j=1}^{l_i} \sign_R(f_{i,j}(\overline{x})) = \sigma_{i,j} \right\}
@@ -1104,7 +1106,8 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 このとき，$\{B_n(x,r)\}$を開基として$R^n$に位相を定義できる．
 以降では，$R^n$にはこの位相が入っているものとする．
 
-定義より，$R^n$の半代数的部分集合$S$は，量化記号のない$\mathcal{L}_\mathrm{OR}$論理式$\theta\left( \overline{X}, \overline{T} \right)$を用いて
+定義より，$R^n$の半代数的部分集合$S$は，量化記号のない$\mathcal{L}_\mathrm{OR}$論理式$\theta\left( \overline{X}, \overline{T} \right)$ 
+（ただし，$\overline{T}$は変数記号の列$T_1, \dots, T_k$を表す）と$\overline{t} = (t_1, \dots, t_k) \in R^k$を用いて
 \begin{equation}
      S = \left\{ \overline{x} \in R^n \middle| R \models \theta(\overline{x}, \overline{t}) \right\}
 \end{equation}
@@ -1121,7 +1124,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 \end{proposition}
 
 \begin{proof}
-     \cref{proposition:dnf}より，有限個の$F_{i,j} \in \Z\left[\overline{X}, \overline{T}\right]$および$\sigma_{i,j} \in \{-1, 0 ,1\}$, $i=1, \dots, s, j = 1, \dots, l_i$, が存在して，
+     \cref{proposition:dnf}より，ある有限個の$F_{i,j} \in \Z\left[\overline{X}, \overline{T}\right]$および$\sigma_{i,j} \in \{-1, 0 ,1\}$, $i=1, \dots, s, j = 1, \dots, l_i$, が存在して，
      \begin{equation}
           R \models
           \bigvee_{i=1}^s \bigwedge_{j=1}^{l_i}(\sign(F_{i,j}(\overline{Y}, \overline{T}))=\sigma_{i,j})
@@ -1155,10 +1158,11 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      $\pi_{n}(S)$は$R^n$の半代数的部分集合である．
 \end{theorem}
 
-この定理の証明は，次の命題から従う．
+この定理は，次の命題から従う．
 
 \begin{proposition} \label{proposition:Seidenberg-Tarski-generalization}
-     $R$を実閉体とし，$\phi\left(\overline{X}, \overline{T}\right)$を$\mathcal{L}_\mathrm{OR}$論理式とする．また，$\overline{t} = (y_1, \dots, y_m) \in R^m$とする．
+     $R$を実閉体とし，$\phi\left(\overline{X}, \overline{T}\right)$を$\mathcal{L}_\mathrm{OR}$論理式とする．
+     また，$\overline{t} = (t_1, \dots, t_k) \in R^k$とする．
      このとき，
      \begin{equation}
           S = \left\{\overline{x} \in R^n \middle| R \models \phi\left(\overline{x},\overline{t}\right) \right\}
@@ -1175,25 +1179,29 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      \begin{equation}
           S = \left\{ \overline{x} \in R^n \middle| R \models \theta(\overline{x}, \overline{t}) \right\}
      \end{equation}
-     となり\cref{proposition:semi-algebraic-set}より命題が示された．
+     となり，\cref{proposition:semi-algebraic-set}より命題が示された．
 \end{proof}
 
 \begin{proof}[\cref{theorem:Tarski-Seidenberg}の証明]
      半代数的集合$S \subset R^{n+1}$は，
      ある量化記号のない$\mathcal{L}_\mathrm{OR}$論理式$\theta\left(\overline{X}, \overline{T}\right)$および$\overline{t} \in R^k$を用いて，
      \begin{equation}
-          S = \left\{(x_1, \dots, x_n, x_{n+1}) \middle| R \models \theta\left(x_1, \dots, x_n, x_{n+1}, \overline{t}\right)\right\}
+          S = \left\{(x_1, \dots, x_n, x_{n+1}) \in R^{n+1} \middle| R \models \theta\left(x_1, \dots, x_n, x_{n+1}, \overline{t}\right)\right\}
      \end{equation}
      と表すことができる．このとき，
      \begin{align}
-          \pi_n(S) = \left\{(x_1, \dots, x_n) \middle|  R \models \exists X_{n+1} \theta\left(x_1, \dots, x_n, X_{n+1}, \overline{t}\right)\right\}
+          \pi_n(S) = \left\{(x_1, \dots, x_n) \in R^n \middle|  R \models \exists X_{n+1} \theta\left(x_1, \dots, x_n, X_{n+1}, \overline{t}\right)\right\}
      \end{align}
      であるから，\cref{proposition:Seidenberg-Tarski-generalization}より，定理の主張が従う．
 \end{proof}
 
 \begin{definition}[{\cite[Definition 2.2.5.]{MR1659509}}]
      $S \subset R^m$, $T \subset R^n$を，半代数的集合とする．
-     写像$\map{f}{S}{T}$が半代数的(semi-algebraic)であるとは，$f$のグラフが$R^{m+n}$の半代数的部分集合であることを指す．
+     写像$\map{f}{S}{T}$が半代数的(semi-algebraic)であるとは，$f$のグラフ
+     \begin{equation}
+          \Graph(f) = \{(x, y) \in R^m \times R^n \mid x \in A, f(x) = y\}
+     \end{equation}
+     が$R^{m+n}$の半代数的部分集合であることを指す．
 \end{definition}
 
 このとき，次の命題が成り立つ．
@@ -1205,13 +1213,9 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 \end{proposition}
 
 \begin{proof}
-     $A \subset R^m$, $B \subset R^n$とし，
-     \begin{equation}
-          \mathrm{Graph}(f) \coloneqq \{(x,y) \in R^m \times R^n \mid x \in A, f(x) = y\}
-     \end{equation}
      とする．
-     $f(S)$は，$(S \times B) \cap \mathrm{Graph}(f)$の射影による像であり，
-     $f^{-1}(T)$は，$(A \times T) \cap \mathrm{Graph}(f)$の射影による像であることから，
+     $f(S)$は，$(S \times B) \cap \Graph(f)$の射影による像であり，
+     $f^{-1}(T)$は，$(A \times T) \cap \Graph(f)$の射影による像であることから，
      \cref{theorem:Tarski-Seidenberg}より示される．
 \end{proof}
 
@@ -1225,7 +1229,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 この定義より，次の命題が成り立つ．
 
 \begin{proposition}\label{proposition:connectedness}
-     $S \subset R^n$を，半代数的連結な半代数的集合とする．
+     $S \subset R^n$を，半代数的連結集合とする．
      任意の半代数的開部分集合$U_1, U_2 \subset S$について，
      $U_1 \cup U_2 = S$, $U_1 \cap U_2 = \emptyset$ならば，$U_1 = S$または$U_2 = S$である．
 \end{proposition}
@@ -1240,7 +1244,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 \cref{proposition:image-preimage}と\cref{proposition:connectedness}より，次の命題が示さされる．
 
 \begin{proposition}[{\cite[Proposition 3.9.]{MR2248869}}]\label{proposition:locally-constant}
-     $S$を半代数的連結な半代数的集合とし，半代数的関数$\map{f}{S}{R}$が局所定数，
+     $S$を半代数的連結集合とし，半代数的関数$\map{f}{S}{R}$が局所定数，
      すなわち，任意の$x \in S$に対し，ある$x$の開近傍$U$が存在して，
      任意の$y \in U$に対して$f(y)=f(x)$を満たすとする．
      このとき，$f$は定数関数である．
@@ -1357,7 +1361,7 @@ $F$に適合した$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を$R^{n-
 }
 
 \begin{definition} 
-     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結な半代数的集合とする．
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結集合とする．
      $S$が$F$描画可能($F$-delineable)であるとは，$k$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_k}{S}{R}$が存在し，次を満たすことと定義する．
      \begin{itemize}
           \item 任意の$ x = (x_1, \dots, x_{n-1}) \in S $に対し，
@@ -1378,7 +1382,7 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
 \todo[inline]{以下の命題は条件(2)が「相異なる実根」と，少し違った形で述べられている．誤植だと思う．}
 
 \begin{proposition}[{\cite[Proposition 5.14.]{MR2248869}}]\label{proposition:del}
-     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結な半代数的集合とする．
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結集合とする．
      さらに，以下の条件を満たすとする．
      \begin{enumerate}
           \item \label{proposition:del-1}
