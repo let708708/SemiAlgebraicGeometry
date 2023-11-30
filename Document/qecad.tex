@@ -1092,17 +1092,39 @@ $
      と書けるとき，$S$を$R^n$の半代数的部分集合(semi-algebraic subset), あるい単に半代数的集合(semi-algebraic set)という．
 \end{definition}
 
-さらに，半代数的集合の位相を定義する．
+このとき，次が成り立つ．
 
-$x \in R^n$, $r \in R$, $r>0$に対して，
-\begin{align}
-     \norm{x} &\coloneqq \sqrt{x_1^2 + \dots + x_n^2},\\
-     B_n(x,r) &\coloneqq \{y \in R^n \mid \norm{y-x} < r\}
-\end{align}
-と定義する．
+\begin{proposition}
+     任意の量化記号のない$\mathcal{L}_\mathrm{OR}$論理式$\theta\left( \overline{X}, \overline{T} \right)$
+     及び任意の$\overline{t} \in R^k$について，
+     \begin{equation}
+          S = \left\{ \overline{x} \in R^n \middle| R \models \theta(\overline{x}, \overline{t}) \right\}
+     \end{equation}
+     により定まる集合$S$は$R^n$の半代数的部分集合である．
+\end{proposition}
 
-このとき，$\{B_n(x,r)\}$を開基として$R^n$に位相を定義できる．
-以降では，$R^n$にはこの位相が入っているものとする．
+\begin{proof}
+     \cref{proposition:dnf}より，有限個の$F_{i,j} \in \Z\left[\overline{X}, \overline{T}\right]$および$\sigma_{i,j} \in \{-1, 0 ,1\}$, $i=1, \dots, s, j = 1, \dots, l_i$, が存在して，
+     \begin{equation}
+          R \models
+          \bigvee_{i=1}^s \bigwedge_{j=1}^{l_i}(\sign(F_{i,j}(\overline{Y}, \overline{T}))=\sigma_{i,j})
+          \leftrightarrow \theta(\overline{Y},\overline{T})
+     \end{equation}
+     が成り立つので，
+     \begin{align}
+          S &= \left\{ \overline{x} \in R^n \middle| R \models \bigvee_{i=1}^s \bigwedge_{j=1}^{l_i} \sign(F_{i,j}(\overline{x}, \overline{t})) = \sigma_{i,j} \right\}\\
+            &= \left\{ \right\}
+     \end{align}
+     
+
+\end{proof}
+各多項式$f_{i,j}\left(\overline{X}\right) \in R\left[\overline{X}\right]$について，
+各項の係数も変数とみなせば，ある$F_{i,j}\left(\overline{X}, \overline{T}\right) \in \Z\left[\overline{X}, \overline{T}\right]$及び$\overline{t} \in R^k$が存在して
+$f_{i,j}\left(\overline{X}\right) = F_{i,j}\left(\overline{X}, \overline{t}\right)$を満たす．このとき，
+\begin{equation}
+     S = \left\{ \overline{x} \in R^n \middle| R \models \bigvee_{i=1}^s \bigwedge_{j=1}^{l_i} \sign(F_{i,j}(\overline{x}, \overline{t})) = \sigma_{i,j} \right\}
+\end{equation}
+である．
 
 \begin{remark}
      以下の点に注意する．
@@ -1118,6 +1140,19 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
                $S_1, S_2 \subset R^n$が半代数的集合ならば，$S_1 \cup S_2$, $S_1 \cap S_2$も半代数的集合である．
      \end{itemize}
 \end{remark}
+
+さらに，半代数的集合の位相を定義する．
+
+$x \in R^n$, $r \in R$, $r>0$に対して，
+\begin{align}
+     \norm{x} &\coloneqq \sqrt{x_1^2 + \dots + x_n^2},\\
+     B_n(x,r) &\coloneqq \{y \in R^n \mid \norm{y-x} < r\}
+\end{align}
+と定義する．
+
+このとき，$\{B_n(x,r)\}$を開基として$R^n$に位相を定義できる．
+以降では，$R^n$にはこの位相が入っているものとする．
+
 
 半代数的集合は，集合の合併，交叉，補集合を取る操作で閉じている．
 さらに，射影を取る操作でも閉じている．すなわち，次の定理が成り立つ．
@@ -1158,6 +1193,16 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      \end{align}
      より，$\pi_n(S)$は$R^n$の半代数的部分集合である．以上で命題の証明が完了した．
 \end{proof}
+
+\begin{proposition} \label{proposition: Seidenberg-Tarski-generalization}
+     $\phi(X_1, \dots, X_n, Y_1, \dots, Y_m)$を，$\mathcal{L}_\mathrm{OR}$論理式とする．また，$\overline{y} = (y_1, \dots, y_m) \in R^m$とする．
+     このとき，
+     \begin{equation}
+          \left\{\overline{x} \in R^n \middle| R \models \phi(\overline{x},\overline{y}) \right\}
+     \end{equation}
+     により定まる集合は，$R^n$の半代数的部分集合である．
+
+\end{proposition}
 
 \begin{definition}[{\cite[Definition 2.2.5.]{MR1659509}}]
      $S \subset R^m$, $T \subset R^n$を，半代数的集合とする．
@@ -1207,7 +1252,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 
 \cref{proposition:image-preimage}と\cref{proposition:connectedness}より，次の命題が示さされる．
 
-\begin{proposition}[{\cite[Proposition 3.9.]{MR2248869}}]
+\begin{proposition}[{\cite[Proposition 3.9.]{MR2248869}}]\label{proposition:locally-constant}
      $S$を半代数的連結な半代数的集合とし，半代数的関数$\map{f}{S}{R}$が局所定数，
      すなわち，任意の$x \in S$に対し，ある$x$の開近傍$U$が存在して，
      任意の$y \in U$に対して$f(y)=f(x)$を満たすとする．
@@ -1279,7 +1324,7 @@ $R$を実閉体とする．
                は，$\mathcal{S}_{i+1}$の元である．
                \item $\xi_{S,0}=-\infty$, $\xi_{S,l_S+1}=\infty$とするとき，各$j=0, \dots, l_S$に対し，\label{cad_condition1}
                \begin{equation}
-                    \{(x,x_{i+1}) \mid x \in S, \xi_{S,j}(x)<x_{i+1}<\xi_{S,j+1} \} \subset R^{i+1}
+                    \{(x,x_{i+1}) \mid x \in S, \xi_{S,j}(x)<x_{i+1}<\xi_{S,j+1}(x) \} \subset R^{i+1}
                \end{equation}
                は，$\mathcal{S}_{i+1}$の元である．
           \end{itemize}
@@ -1305,7 +1350,7 @@ $R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を構成することがで
 \end{definition}
 
 以下の定理は\cite[Theorem 5.6]{MR2248869}を参照した．
-基本的なが概念が現れたのは，\cite{MR0403962}である．
+基本的な概念が現れたのは，\cite{MR0403962}である．
 \begin{theorem} \label{theorem:cad}
      任意の有限部分集合$F \subset R[X_1, \dots, X_n]$に対して，
      $F$に適合した$R^n$の柱状代数分解が存在する．
@@ -1315,7 +1360,7 @@ $R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を構成することがで
 まず初めに$R^1$の柱状代数分解を与え，
 それを基に順に$R^2, R^3, \dots, R^n$の柱状代数分解を構成していく．
 
-\subsection{描画可能}
+\subsection{描画可能}Cylindrical 
 $F$に適合した$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を$R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$から構成するとき，
 各$S \in \mathcal{S}_{n-1}$は次に定義する性質を満たしてほしい．
 なお，次の定義はCollins\cite{MR0403962}によって導入されたものである．
@@ -1332,8 +1377,8 @@ $F$に適合した$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を$R^{n-
           \begin{equation}
                \{\xi_i(x)\}_{i=1}^k = \bigcup_{f \in F'}\{y \in R \mid f(x,y)=0\}
           \end{equation}
-          である．ただし，$F' = \{f \in F \mid \text{ある$x \in S$が存在し，$f(x) \neq 0$. }\}$とする．
-          \item 各$i=1, \dots, k$および$f \in F'$に対し，$X_n$に関する多項式$f(x,X_n)$の根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
+          である．ただし，$F' = \{f \in F \mid \text{$f$は$S$上恒等的に$0$でない}\}$とする．
+          \item 各$i=1, \dots, k$および$f \in F'$に対し，$X_n$に関する多項式$f(x,X_n)$の根$\xi_i(x)$の重複度は，$x\in S$によらず一定である．
      \end{itemize}
 \end{definition}
 
@@ -1345,126 +1390,75 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
 
 \todo[inline]{以下の命題は条件(2)が「相異なる実根」と，少し違った形で述べられている．誤植だと思う．}
 
-\todo[inline]{以下の命題の証明が，教科書と全く同一ではない．}
-\begin{proposition}\label{proposition:del}[{\cite[Proposition 5.14.]{MR2248869}}]
+\begin{proposition}[{\cite[Proposition 5.14.]{MR2248869}}]\label{proposition:del}
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結な半代数的集合とする．
      さらに，以下の条件を満たすとする．
      \begin{enumerate}
           \item \label{proposition:del-1}
-          任意の$f \in F$に対し，$S$上$f$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定である．
+          任意の$f \in F$に対し，$\deg(f(x, x_n))$は$x \in S$に依らず一定である．
           \item \label{proposition:del-2}
-          任意の$f \in F$に対し，$S$上$f$の$R[\sqrt{-1}]$上の相異なる根の数は一定である．
+          任意の$f \in F$に対し，$f(x, X_n)$の相異なる$R[\sqrt{-1}]$上の根の数は$x \in S$に依らず一定である．
           \item \label{proposition:del-3}
-          任意の$f, g \in F$に対し，$S$上$f$, $g$に共通する$R[\sqrt{-1}]$上の根の数は重複度込みで一定である．
+          任意の$f, g \in F$に対し，$\deg(\gcd(f(x, X_n), g(x, X_n)))$は$x \in S$に依らず一定である．
      \end{enumerate}
      このとき，$S$は$F$描画可能である．
 \end{proposition}
 
-
-\cref{proposition:del}を示すために，補題を用意する．
-
-\begin{lemma}\label{lemma:del}
-     $S \subset R^{n-1}$を半代数的連結な半代数的集合とし，     
-     $f \in R[x_1, \dots, x_n]$を$S$上恒等的に$0$でない多項式とする．
-     さらに，次を満たすとする．
-     \begin{enumerate}
-          \item \label{lemma:del-1}
-          $S$上$f$の$R[\sqrt{-1}]$上の根の数は重複度込みで一定．
-          \item \label{lemma:del-2}
-          $S$上$f$の$R[\sqrt{-1}]$上の相異なる根の数は一定．
-     \end{enumerate}
-     このとき，$S$は$\{f\}$描画可能である．
-\end{lemma}
-
 \begin{proof}
-     まず，相異なる$R$上の根の個数が，$S$の上で一定であることを示す．
+     $ a \in S$を任意にとる．
+     $z_1, \dots, z_j $を，$\prod_{f \in F'} f(a, X_n)$の$R\left[\sqrt{-1}\right]$上の相異なる根全体とする．
+     各$f \in F'$に対し，$f(a, X_n)$の根としての$z_i$の重複度を$\mu_{i, f}$と定める．
+     このとき，任意の$f \neq g \in F'$に対し，$\gcd(f(a, X_n), g(a, X_n))$の根としての$z_i$の重複度は$\min\{\mu_{i,f}, \mu_{i, g}\}$であり，
+     $\deg(\gcd(f(a, X_n), g(a, X_n))) = \sum_{i=1}^j \min\{\mu_{i,f}, \mu_{i, g}\}$である．
 
-     $\map{N}{S}{R}$を，各$x \in S$に対し，$N(x)$を$f(x,X_n)$の相異なる$R$上の根の数で定める，
-     すると，$N$は半代数的関数である．\footnote{$N$のグラフが1階述語論理式出かけることから従う．}
-     
-     さらに，$N$が局所定数関数であることを示す．
-     $a \in S$を任意にとり，$f(a,X_n)$の$R$上の根を$z_1, \dots, z_s$, それ以外の根を$z_{s+1}, \dots, z_t$とする．
+     ここで，\{$D(z_i, r)\}_{i=1}^j$が非交叉となるような$r$をとる．\cref{theorem:continuity-of-roots}と，
+     各$f \in F'$について相異なる$R\left[\sqrt{-1}\right]$上の根の数は$S$の上で一定であることから，
+     $a \in S$の開近傍$V \subset S$を，任意の$x \in V$に対して，各$f \in F'$に対し，$\mu_{i, f}>0$となる$D(z_i, r)$は$f(x,X_k)$の根をただ一つ含み，
+     かつその根は重複度が$\mu_{i, f}$であるように取れる．
 
-     $R$の元$r > 0$を，$\{D(z_i,r)\}_{i=1}^t$が非交叉になるようにとる．
-     仮定の条件\ref{lemma:del-1}と\cref{theorem:continuity-of-roots}より，
-     ある$a$の開近傍$V$が存在し，各$x \in V \cap S$に対して$f (x, X_n)$ の根が各 $D(z_i, r)$ ($i = 1, \dots , t$) の中に（重複
-     度込みで）ちょうど $\mu_i$ 個であるようにとれる．
-     ここで，仮定の条件\ref{lemma:del-2}より，$\{D(z_i, r)\}_{i=1}^t$は非交叉であること合わせて，
-     各$D(z_i, r)$に含まれる全ての$f(x, X_n)$の根は一致しなければならない．
+     また，各$f \neq g \in F'$に対し，$\deg(\gcd(f(x, X_k), g(x, X_k)))$は$x \in V$に依らず一定であるから，
+     $\min\{\mu_{i, f}, \mu_{i,g}\} > 0$である$D(z_i, r)$は$\gcd(f(x, X_n), g(x, X_n))$の根をただ一つ含み，
+     かつその根の重複度が$\min\{\mu_{i,f}, \mu_{i,g}\}$であるように取れる．
 
-     さらに，各$x \in V \cap S$に対して，$f(x,X_n)$は$R$係数の$1$変数多項式であるから，
-     $D(z_i, r)$ ($i=1, \dots, s$)に含まれるただ一つの根は$R$に値を取らなければならない．
-     なぜなら，もしその根が$\alpha + \beta \sqrt{-1}$である場合，その共役$\alpha - \beta \sqrt{-1}$も根となり，
-     $D(z_i, r)$に含まれる根がすべて一致することから$\beta = 0$となるためである．
+     従って，任意の$x \in V$および任意の$i=1, \dots, j$に対し，$D(z_i, r)$内に$\prod_{f \in F'} f(x, X_n)$の根$\zeta_i(x)$がただ一つ存在し，
+     かつその根$\zeta_i(x)$は各$f \in F'$に対して$f(x, X_n)$の根としての重複度が$\mu_{i,f}$であり，
+     各$f \neq g \in F'$に対して$\gcd(f(x, X_n),g(x, X_n))$の根としての重複度が$\min\{\mu_{i,f}, \mu_{i, g}\}$である．
 
-     これで，各$x \in V \cap S$に対して，$f(x, X_n)$の$R$上の相異なる根の数が一定であることが示せた．
-     すなわち，$N$は局所定数関数である事が示せた．
+     さらに，もし$z_i \in R$であるならば，任意の$x \in V$に対して$\zeta_i(x) \in R$である．
+     なぜならば，仮にある$x \in V$において$\zeta_i(x) \notin R$ならば，その共役$\bar{\zeta}_i(x)$も$\prod_{f \in F'} f(x, X_n)$の根となり，
+     $D(z_i, r)$に含まれる根の唯一性に反するためである． 
+     また，$r$を十分小さく取ることによって，$z_i \notin R$であるならば，任意の$x \in V$に対して$\zeta_i(x) \notin R$であるようにできる．
+     このとき，$\prod_{f \in F'} f(x, X_n)$の相異なる実根の数は，$x \in V$に依存せず一定である．
+     $S$は半代数的連結であるから，\cref{proposition:locally-constant}より，相異なる$\prod_{f \in F'} f(x, X_n)$の$R$上の根の数は，$x \in S$に依らず一定である．
+     これらの根を，昇順に$\xi_1(x) < \dots < \xi_l(x)$と書くことにする．
+     上記と同様の議論によって，十分小さい$r$を用いて関数$\map{\xi_i}{S}{R}$が連続であることがいえる．
+     また，関数$\xi_i$が半代数的であることは，$\xi_i$のグラフが1階述語論理式で書けることから従う．\todo{説明が必要そう}
 
-     よって，$S$が半代数的連結であることと$N$が局所定数な半代数的関数であることから，$N$は定数関数である．
-     したがって，$R$上の相異なる根の個数は$S$上一定である．
-
-     ここで，各$x \in S$に対し，$\xi_1(x) < \dots < \xi_k(x)$を，相異なる$f(x, X_n)$の$R$上の根として定める．
-     このとき，先ほどの議論と同様にして，
-     各$\xi_i$が連続で，多項式$f(x,X_n)$の各根$\xi_i(x)$の重複度は$x \in S$によらず一定であることが示せる．
-
-     さらに，各$\map{\xi_i}{S}{R}$は，各グラフが半代数的集合となることから，いずれも半代数的関数である．
-
-     よって，$S$は$\{f\}$描画可能であることが示された．
+     以上で命題が示された．
 \end{proof}
-
-\begin{proof}[{\bf \cref{proposition:del}の証明}]
-     各$f \in F$は$S$上恒等的に$0$でないとしてよい．
-     実際，$F' \coloneqq \{f \in F \mid \text{$f$は$S$上恒等的に$0$でない}\}$とすると，$S$が$F$描画可能であることと$F'$描画可能であることは同値であるから，
-     $F'$を$F$として証明すればよい．
-     よって以下では，各$f \in F$は$S$上恒等的に$0$でないとして示す．
-
-     \cref{lemma:del}より，各$f \in F$に対して，$S$は$\{f\}$描画可能である．
-     よって，$S$上の連続な半代数的関数$\xi_{1,f}(a) < \dots < \xi_{n_f, f}(a)$を，各$a \in S$で$f(a)(x) \in R[x]$の解であるようにとれる．
-
-     このとき，次の主張が成り立てば証明が完了する．
-
-     \begin{claim*}
-          $f, g \in F$が，$f \neq g$であるとする．
-          ある$a \in S$において$\xi_{k,f}(a) = \xi_{l,g}(a)$であるならば，任意の$a \in S$に対して$\xi_{k,f}(a) = \xi_{l,g}(a)$である．
-     \end{claim*}
-
-     以下ではこの主張を示す．
-     $\xi_{k,f}(a) = \xi_{l, g}(a)$であるような$a \in S$をとり，$a$の開近傍$V$で，
-     任意の$x \in V \cap S$に対して$\xi_{k,f}(x) = \xi_{l,g}(x)$となるようなものが存在することを示せばよい．
-
-     まず，$f_1(a, X_n), f_2(a, X_n)$の相異なる$R\left[\sqrt{-1}\right]$の共通根を，$z_1, \dots, z_j$とする．
-     ただし，$z_1 = \xi_{k,f}(a)=\xi_{l,g}(a)$とする．
-     さらに，\cref{theorem:continuity-of-roots}および仮定の条件\ref{proposition:del-1}, \ref{proposition:del-2}より，
-     十分小さい$R$の元$r>0$と$a$の開近傍$V$を，
-     任意の$x \in V \cap S$に対し，各$D(z_i, r)$に含まれる$f(x, X_n)$, $g(x, X_n)$それぞれの根はちょうど1つであり，
-     根の重複度も$x$によらずに一定であるようにできる．
-
-     ここで，$\xi_{k,f}, \xi_{l, g}$の連続性から，さらに$V$を小さくとれば，任意の$x \in V \cap S$に対し，
-     $f(x, X_n)$の$D(z_1, r)$に含まれる唯一の根は$\xi_{k,f}(x)$であり，
-     $g(x, X_n)$の$D(z_1, r)$に含まれる唯一の根は$\xi_{k,f}(x)$であるように取れる．
-
-     さらに，仮定の条件\ref{proposition:del-3}から，各$D(z_i, r)$に含まれる$f(x, X_n)$, $g(x, X_n)$の唯一の根は一致しなければならない．
-     したがって，任意の$x \in V \cap S$に対して$\xi_{k, f}(x) = \xi_{l, g}(x)$となることが示された．
-
-     よって主張が示され，命題の証明が完了した．
-\end{proof}
-
-\cref{proposition:del}から次の系が成り立つ．
 
 \begin{corollary}\label{corollary:del}
      $S \subset R^{n-1}$を弧状連結部分集合とし，$F \subset R[X_1,\dots, X_n]$を有限部分集合とする．
      次が成り立つとき，$S$は$F$描画可能である．
      \begin{enumerate}
           \item \label{corollary:del-1}
-          任意の$f \in F$に対し，$\deg(f(a,X_n))$が一定（$a \in S$）．
+          任意の$f \in F$に対し，$\deg(f(x, x_n))$は$x \in S$に依らず一定である．
           \item \label{corollary:del-2}
-          任意の$f \in F$に対し，$\deg(\gcd(f(a,X_n), \frac{\partial f}{\partial X_n}(a,X_n)))$が一定（$a \in S$）．
+          任意の$f \in F$に対し，$\deg(\gcd(f(x, X_n), \partial f/ \partial X_n(x, X_n)))$は$x \in S$に依らず一定である．
           \item \label{corollary:del-3}
-          任意の$f, g \in F$に対し，$\deg(\gcd(f(a,X_n), g(a,X_n)))$が一定（$a \in S$）．
+          任意の$f, g \in F$に対し，$\deg(\gcd(f(x, X_n), g(x, X_n)))$は$x \in S$に依らず一定である．
      \end{enumerate}
 \end{corollary}
 
-よって，$F$符号不変な$R^n$の分解を与えるには，\cref{corollary:del}の条件を満たすような$R^{n-1}$の分解を構成すればよい．
+\begin{proof}
+     各$x \in S$に対し，$f(x, X_n)$の相異なる$R[\sqrt{-1}]$上の根の数は
+     \begin{equation}
+          \deg(f(x, X_n)) - \deg(\gcd(f(x, X_n), \partial f/ \partial X_n(x, X_n)))
+     \end{equation}
+     であるから，\cref{proposition:del}より系が成り立つ．
+\end{proof}
+
+よって，$F$符号不変な$R^n$の柱状代数分解を与えるには，\cref{corollary:del}の条件を満たすような$R^{n-1}$の柱状代数分解を構成すればよい．
 条件\ref{corollary:del-1}を満たすような$R^{n-1}$の分解を与えるには，各$f \in F$について，$X_n$係数が符号不変になるような分解を構成すればよい．
 一方，条件\ref{corollary:del-2}, \ref{corollary:del-3}を満たすような$R^{n-1}$の分解を与えるのは，条件\ref{corollary:del-1}に比べて少し難しい．
 条件\ref{corollary:del-2}, \ref{corollary:del-3}も満たすような$R^{n-1}$の分解を与えることができるよう，次の節で準備をする．
