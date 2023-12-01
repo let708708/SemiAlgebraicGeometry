@@ -45,7 +45,6 @@
 \DeclareMathOperator{\psc}{psc}
 \DeclareMathOperator{\PSC}{PSC}
 \DeclareMathOperator{\Elim}{Elim}
-\DeclareMathOperator{\Tru}{Tru}
 \DeclareMathOperator{\RED}{RED}
 \DeclareMathOperator{\LT}{LT}
 \DeclareMathOperator{\LC}{LC}
@@ -58,9 +57,7 @@
 \DeclareMathOperator{\SIGN}{SIGN}
 \DeclareMathOperator{\CSIGN}{CSIGN}
 \DeclareMathOperator{\ROOT}{ROOT}
-\DeclareMathOperator{\SyHa}{SyHa}
 \DeclareMathOperator{\Graph}{Graph}
-\DeclareMathOperator{\sRes}{sRes}
 
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
@@ -1384,7 +1381,7 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
      さらに，以下の条件を満たすとする．
      \begin{enumerate}
           \item \label{proposition:del-1}
-          任意の$f \in F$に対し，$\deg(f(x, x_n))$は$x \in S$に依らず一定である．
+          任意の$f \in F$に対し，$\deg(f(x, X_n))$は$x \in S$に依らず一定である．
           \item \label{proposition:del-2}
           任意の$f \in F$に対し，$f(x, X_n)$の相異なる$R[\sqrt{-1}]$上の根の数は$x \in S$に依らず一定である．
           \item \label{proposition:del-3}
@@ -1436,7 +1433,7 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
      次が成り立つとき，$S$は$F$描画可能である．
      \begin{enumerate}
           \item \label{corollary:del-1}
-          任意の$f \in F$に対し，$\deg(f(x, x_n))$は$x \in S$に依らず一定である．
+          任意の$f \in F$に対し，$\deg(f(x, X_n))$は$x \in S$に依らず一定である．
           \item \label{corollary:del-2}
           任意の$f \in F$に対し，$\deg(\gcd(f(x, X_n), \partial f/ \partial X_n(x, X_n)))$は$x \in S$に依らず一定である．
           \item \label{corollary:del-3}
@@ -1457,115 +1454,135 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
 一方，条件\ref{corollary:del-2}, \ref{corollary:del-3}を満たすような$R^{n-1}$の分解を与えるのは，条件\ref{corollary:del-1}に比べて少し難しい．
 条件\ref{corollary:del-2}, \ref{corollary:del-3}も満たすような$R^{n-1}$の分解を与えることができるよう，次の節で準備をする．
 
-\subsection{部分終結式係数} \todo{金}
-\begin{definition}[{\cite[Notation 4.21]{MR2248869}}]
-$\mathcal{R}$を可換環とし，$P(X), Q(X) \in \mathcal{R}[X] \setminus \{0\}$ を，$\deg P(X) = p$, $\deg Q(X) = q$ ( $p > q$ ) とする．
-また，$P(X)$, $Q(X)$は次のように書けるとする．
-\begin{align}
-     P(X) = a_p X^p + \dots + a_1 X + a_0, \\
-     Q(X) = b_q X^q + \dots + b_1 X + b_0.
-\end{align}
-このとき，$0 \leq j \leq q$に対し，$j$次Sylvester-Habicht行列$\SyHa_j(P, Q)$を，
-\begin{equation}
-     \SyHa_j(P, Q) \coloneqq
-     \begin{pmatrix}
-          a_m    & \cdots & \cdots & \cdots & \cdots & a_0    & 0      & \cdots & 0      \\
-          0      & \ddots &        &        &        &        & \ddots & \ddots & \vdots \\
-          \vdots & \ddots & \ddots &        &        &        &        & \ddots & 0      \\
-          0      & \cdots & 0      & a_m    & \cdots & \cdots & \cdots & \cdots & a_0    \\
-          0      & \cdots & \cdots & 0      & b_q    & \cdots & \cdots & \cdots & b_0    \\
-          \vdots &        & \iddots& \iddots&        &        &        & \iddots& 0      \\
-          \vdots & \iddots& \iddots&        &        &        & \iddots& \iddots& \vdots \\
-          0      & b_q    & \cdots & \cdots & \cdots & b_0    & 0      & \cdots & 0      \\
-          b_q    & \cdots & \cdots & \cdots & b_0    & 0      & 0      & \cdots & 0      
-     \end{pmatrix}
-\end{equation}
-で定義する．
-$\SyHa_j(P,Q)$は$\mathcal{R}$係数$(p+q-2j)$行$(p+q-j)$列行列であり，
-各行は多項式
-\begin{equation}
-     X^{q-j-1}P(X), \dots, P(X), Q(X), \dots, X^{p-j-1}Q(X)
-\end{equation}
-の$X^{p+q-j-1}, \dots, X, 1$の係数を順に並べたものである．
+\subsection{部分終結式係数}
+\begin{definition}[{\cite[Section 2]{MR0403962}}]\todo{元論文}
+     $\mathcal{R}$を可換環とし，$A(X), B(X) \in \mathcal{R}[X] \setminus \{0\}$ を，$\deg A(X) = m$, $\deg B(X) = n$とする．
+     また，$A(X)$, $B(X)$は次のように書けるとする．
+     \begin{align}
+          A(X) = a_m X^m + \dots + a_1 X + a_0, \\
+          B(X) = b_n X^n + \dots + b_1 X + b_0.
+     \end{align}
+     このとき，$0 \leq j \leq \min\{m, n\}$に対し，$j$次行列$M_j(A, B)$を，
+     \begin{equation}
+          M_j(A, B) \coloneqq
+          \begin{pmatrix}
+               a_m    & \cdots & \cdots & \cdots & \cdots & a_0    & 0      & \cdots & 0      \\
+               0      & \ddots &        &        &        &        & \ddots & \ddots & \vdots \\
+               \vdots & \ddots & \ddots &        &        &        &        & \ddots & 0      \\
+               0      & \cdots & 0      & a_m    & \cdots & \cdots & \cdots & \cdots & a_0    \\
+               b_n    & \cdots & \cdots & \cdots & b_0    & 0      & \cdots & \cdots & 0      \\
+               0      & \ddots &        &        &        & \ddots & \ddots &        & \vdots \\
+               \vdots & \ddots & \ddots &        &        &        & \ddots & \ddots & \vdots \\
+               \vdots &        & \ddots & \ddots &        &        &        & \ddots & 0      \\
+               0      & \cdots & \cdots & 0      & b_n    & \cdots & \cdots & \cdots & b_0      
+          \end{pmatrix}
+     \end{equation}
+     で定義する．
+     行列$M_j(A,B)$は$\mathcal{R}$係数$(m+n-2j)$行$(m+n-j)$列行列であり，
+     各行は多項式
+     \begin{equation}
+          X^{n-j-1}A(X), \dots, A(X), X^{m-j-1}B(X), \dots, B(X)
+     \end{equation}
+     の$X^{m+n-j-1}, \dots, X, 1$の係数を順に並べたものである．
 
-また，$\SyHa_{j,j}(P,Q)$を，$\SyHa_j(P,Q)$の初めの$p+q-2j$列により得られる$(p+q-2j)$行$(p+q-2j)$列行列とし，
-$j$次符号付き部分終結式係数($j$-th subresultant coefficient) $\sRes_j(P,Q)$ を
-\begin{equation}
-     \sRes_j(P,Q) \coloneqq \det(\SyHa_{j,j}(P,Q))
-\end{equation}
-と定義する．
-
-また，$q < j \leq p$に対しても，
-\begin{align}
-     \sRes_p(P,Q) &\coloneqq \sign(a_p),\\
-     \sRes_j(P,Q) &\coloneqq 0, \quad q < j < p
-\end{align}
-と，$\sRes_j(P,Q)$の定義を拡張しておく．
+     また，$M_{j,j}(A,B)$を，$M_j(A,B)$の初めの$p+q-2j$列により得られる$(p+q-2j)$行$(p+q-2j)$列行列とし，
+     $j$次主部分終結式係数($j$-th principal subresultant coefficient) $\psc_j(A,B)$ を
+     \begin{equation}
+          \psc_j(A,B) \coloneqq \det(M_{j,j}(A,B))
+     \end{equation}
+     と定義する．ただし，$0$行$0$列行列$N$について，行列式は$\det N = 1$であると解釈する．
 \end{definition}
-
-主部分終結式係数は，多項式$P(X)$, $Q(X)$の係数，及び次数に依存して定まることに注意する．
-
 このとき，次が成り立つ．
 
-\begin{theorem}[{\cite[Proposition 4.25]{MR2248869}}] \label{theorem:psc} \todo{証明確認}
-     $\mathcal{R}$を整域とし，$P(X), Q(X) \in \mathcal{R}[X] \setminus \{0\}$を，$\deg P(X) = p$, $\deg Q(X) = q$ ( $p>q$ ) とする．
-     このとき，各$j = 0, \dots, q$に対し，次の2つが同値になる．
+\begin{theorem}[{\cite[Theorem 2]{MR0403962}}] \label{theorem:psc}
+     $\mathcal{R}$を一意分解整域とし，$A(X), B(X) \in \mathcal{R}[X] \setminus \{0\}$を，$\deg A(X) = m$, $\deg B(X) = n$とする．
+     このとき，$0 \leq j \leq \min\{m,n\}$に対し，次の2つが同値になる．
      \begin{enumerate}
-          \item $\deg(\gcd(P,Q)) = j$である．
-          \item $\sRes_0(P,Q) = \cdots = \sRes_{j-1}(P,Q) = 0$, $\sRes_j(P,Q) \neq 0$である．
+          \item $\deg(\gcd(A,B)) = j$である．
+          \item $\psc_0(A,B) = \cdots = \psc_{j-1}(A,B) = 0$, $\psc_j(A,B) \neq 0$である．
      \end{enumerate}
 \end{theorem}
 
-証明は，\cite[Proposition 4.25]{MR2248869}を参照してほしい．
+\cref{theorem:psc}の証明は，\cite[Theorem 2]{MR0403962}を参照してほしい．\todo{証明チェック}
+また，\cref{theorem:psc}は，$\deg(\gcd(A,B))$が主部分終結式係数$\psc_j(A, B)$により決定することを意味している．
 
-\subsection{符号不変な柱状代数分解の存在}\todo{日}
+\subsection{符号不変な柱状代数分解の存在}
 それでは，\cref{theorem:cad}を証明する．
-まず，次のような記号を定義する．
+まず，以下のように記号を準備する．
 
-$f \in R[X_1, \dots, X_n]$に対し，$\Tru(f;X_n)$を，
+$f \in R[X_1, \dots, X_n]$に対し，$\red(f;X_n)$を，
 \begin{equation}
-     \Tru(f;X_n)\coloneqq \begin{cases}
-          \{f\} &  \text{if $\LC(f; X_n) \in R$ or $f \in R[X_1, \dots, X_{n-1}]$} \\
-          \{f\} \cup \Tru(f-\LT(f;X_n);X_n) & \text{otherwise}
+     \red(f;X_n) \coloneqq \begin{cases}
+          0 &  f = 0 \\
+          f - LT(f;X_n) & f \neq 0
      \end{cases}
 \end{equation}
-により定義する．
-
-また，有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\Tru(F;X_n)$を，
+とする．さらに，$\red^k(f;X_n)$を，$k$に対して帰納的に
+\begin{align}
+     \red^0(f;X_n) &\coloneqq f,\\
+     \red^k(f;X_n) &\coloneqq \red(\red^{k-1}(f;X_n);X_n)
+\end{align}
+とし，
 \begin{equation}
-     \Tru(F;X_n) \coloneqq \bigcup_{f \in F} \Tru(f;X_n)
+     \RED(f;X_n) \coloneqq \{\red^k(f;X_n) \mid 0 \leq k \leq \deg_{X_n}(f), \red^k(f;X_n) \neq 0\}
 \end{equation}
-により定義する．
+と定める．
+さらに，$f, g \in R[X_1, \dots, X_n]$に対し，
+\begin{equation}
+     \PSC(f, g) \coloneqq \begin{cases}
+          \emptyset & \text{$f = 0$または$g = 0$,}\\
+          \{\psc_j(f, g) \mid 0 \geq j \geq n, \psc_j(f, g) \neq 0\} & \text{otherwise}
+     \end{cases}
+\end{equation}
+と定める．
 
-以下の定義は，\cite[Notation 5.15]{MR2248869}
-を参考にしているが，元々は\cite[Theorem 4]{MR0403962}で定義されたものである．
 
-
+次の定義は，\cite[Section 3]{MR0764184}に従っているが，元々は\cite[Section 2]{MR0403962}で定義されている．
 \begin{definition}
 $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．ただし，$n \geq 2$とする．
-$\Elim_{X_n}(F) \subset R[X_1, \dots, X_{n-1}]$を，以下の集合の合併として定義する．
+$\PROJ_{X_n}(F) \subset R[X_1, \dots, X_{n-1}]$を，以下の集合の合併として定義する．
 \begin{align} 
-     &\{\LC(A;X_n) \mid A \in \Tru(F;X_n) \} \setminus R,\\
-     &\left\{ \sRes_j\left(A,\frac{\partial A}{\partial X_n};X_n\right) \middle| A \in \Tru(F;X_n), j= 0, \dots, \deg(A;X_n)-2\right\} \setminus R,\\
-     &\{\sRes_j(A,B;X_n) \mid A ,B \in \Tru(F; X_n), \deg(A;X_n) > \deg(B;X_n),   j = 0, \dots, \deg(B;X_n)\} \setminus R,\\
-     &\{\sRes_j(A,\overline{B};X_n) \mid A ,B \in \Tru(F; X_n), \deg(A;X_n) = \deg(B;X_n),   j = 0, \dots, \deg(B;X_n)\} \setminus R,
+     &  \bigcup_{f \in F} \bigcup_{A \in \RED(f;X_n)} \{\LC(A;X_n)\},\\
+     &  \bigcup_{f \in F} \bigcup_{A \in \RED(f;X_n)} \PSC(A, \partial A / \partial X_n),\\
+     &  \bigcup_{f \neq g \in F} \bigcup_{A \in \RED(f;X_n), B \in \RED(g;X_n)} \PSC(A,B).
 \end{align}
-ただし，$\overline{B} \coloneqq LC(A;X_n) B - LC(B;X_n) A$とする．
 \end{definition}
 
-この記号のもとで，次の系が成り立つ．なお，\cite[Theorem 5.16]{MR2248869}を参考にした．
+この記号のもとで，次の定理が成り立つ．
+なお，次の定理は\cite[Theorem 4]{MR0764184}を参考にしたが，元は\cite[Theorem 5]{MR0403962}で示されたものである．
 
-\begin{corollary}\label{corollary:inv-deline}
+\begin{theorem}[{\cite[Theorem 4]{MR0764184}}]\label{theorem:inv-deline}
 $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数連結な半代数的集合とする．
 
-$S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
-\end{corollary}
+$S$が$\PROJ_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
+\end{theorem}
 
 \begin{proof}
-     \todo[inline]{証明を書く．}
+     \cref{corollary:del}の$3$つの条件を満たすことを示せばよい．
+     各$f \in F$に対し，$S$は$\{\LC(A; X_n) \mid A \in \RED(f;X_n) \}$符号不変であるから，
+     多項式$f$の変数$X_n$に関する係数の符号は，$S$上一定である．
+     よって，$\deg(f(x, X_n))$は$x \in S$に依らず一定である．
+
+     次に，$\deg(\gcd(f(x, X_n), \partial f / \partial X_n(x, X_n)))$が$x \in S$に依らず一定である事を示す．
+     $\deg(f(x, X_n)) \geq 1$が任意の$x \in S$に対して成り立つ場合を考える．
+     $A \in \RED(f;X_n)$を，任意の$x \in S$に対して$f(x, X_n) = A(x,X_n)$, $\LC(A(x,X_n)) \neq 0$であるように取る．
+     このとき，$S$は$\PSC(A, \partial A / \partial X_n)$符号不変であるから，
+     \cref{theorem:psc}より$\deg(\gcd(A(x, X_n), \partial A / \partial X_n(x, X_n)))$は$x\in S$に依らず一定である．
+     従って，$\deg(\gcd(f(x, X_n), \partial f / \partial X_n(x, X_n)))$は$x\in S$に依らず一定である．
+     
+     最後に，各$f \neq g \in F$に対し$\deg(\gcd(f(x, X_n),g(x,X_n)))$が$x \in S$によらず一定であることを示す．
+     $f$, $g$が共に$S$上恒等的に$0$でない場合を考える．
+     $A \in \RED(f;X_n)$, $B \in \RED(g;X_n)$を，任意の$x \in S$に対して
+     \begin{align}
+          f(x, X_n) = A(x,X_n), \LC(A(x,X_n)) \neq 0,\\
+          g(x, X_n) = B(x, X_n), \LC(B(x,X_n)) \neq 0
+     \end{align}
+     であるように取る．このとき，$S$は$\PSC(A, B)$符号不変であるから，
+     \cref{theorem:psc}より$\deg(\gcd(A(x, X_n), B(x, X_n)))$は$x\in S$に依らず一定である．
+     従って，$\deg(\gcd(f(x, X_n), g(x, X_n)))$は$x\in S$に依らず一定である．
 \end{proof}
 
-それでは，\cref{definition:cad}の証明を述べる．
+それでは，\cref{theorem:cad}の証明を述べる．
 
 \begin{proof}[\cref{theorem:cad}の証明]
      $n$についての帰納法によって示す．
@@ -1578,9 +1595,9 @@ $S$が$\Elim_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      が$F$-適合な柱状代数分解を与える．よって，定理は成り立つ．
 
      $n\geq 2$の場合，$n-1$までで主張が成り立つとする．
-     このとき，帰納法の仮定により$\Elim_{X_n}(F)$適合な$R^{n-1}$の柱状代数分解を$\{\mathcal{S}_i\}_{i=1}^{n-1}$がとれる．
+     このとき，帰納法の仮定により$\PROJ_{X_n}(F)$適合な$R^{n-1}$の柱状代数分解を$\{\mathcal{S}_i\}_{i=1}^{n-1}$がとれる．
 
-     ここで，各$S \in \mathcal{S}_{n-1}$は$\Elim_{X_n}(F)$符号不変であるから，\cref{corollary:inv-deline}より，$S$は$F$描画可能である．
+     ここで，各$S \in \mathcal{S}_{n-1}$は$\PROJ_{X_n}(F)$符号不変であるから，\cref{theorem:inv-deline}より，$S$は$F$描画可能である．
 
      従って，各$S \in \mathcal{S}_{n-1}$に対して，有限個の連続な半代数的関数$\map{\xi_{S,1}< \dots < \xi_{S,l_S}}{S}{R}$が存在し，
      \begin{itemize}
@@ -1935,7 +1952,7 @@ $S = \{y \in R^m \mid R \models \phi_S(y)\} $と書けるとき，
      $\{\mathcal{S}_{i}\}_{i=1}^{n-1}$は$F_{n-1}$適合な柱状代数分解である．
 
      $\Elim_{X_n}(F_n) \subset F_{n-1}$であるから，各$S \in \mathcal{S}_{n-1}$はいずれも$\Elim_{X_n}(F_n)$符号不変である．
-     よって，\cref{corollary:inv-deline}より，各$S \in \mathcal{S}_{n-1}$は$F_n$描画可能である．
+     よって，\cref{theorem:inv-deline}より，各$S \in \mathcal{S}_{n-1}$は$F_n$描画可能である．
 
      従って，定義より$l_S$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_{l_S}}{S}{R}$を，次を満たすように取れる．
      \begin{itemize}
