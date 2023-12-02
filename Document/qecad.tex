@@ -58,6 +58,7 @@
 \DeclareMathOperator{\CSIGN}{CSIGN}
 \DeclareMathOperator{\ROOT}{ROOT}
 \DeclareMathOperator{\Graph}{Graph}
+\DeclareMathOperator{\DER}{DER}
 
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
@@ -1289,8 +1290,8 @@ $R$を実閉体とする．
 \end{enumerate}
 を満たすとき，部分集合族$\mathcal{S}$を$X$の分解(decomposition)と呼ぶ．
 
-まず始めに，$R^n$の柱状代数分解を定義する．この定義は，\cite{MR0764184}, \cite[Definition 5.1]{MR2248869}を参考にしているが，
-基本的な概念が現れたのは$\cite{MR0403962}$である．
+まず始めに，$R^n$の柱状代数分解を定義する．この定義は，\cite[Definition 5.1]{MR2248869}を参考にしているが，
+元々は\cite[section 3]{MR0403962}で定義されたものである．
 
 \begin{definition} \label{definition:cad}
      $i=1, \dots, n$に対し，$\mathcal{S}_i$を$R^i$の分解とする．
@@ -1348,7 +1349,7 @@ $R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を構成することがで
 まず初めに$R^1$の柱状代数分解を与え，
 それを基に順に$R^2, R^3, \dots, R^n$の柱状代数分解を構成していく．
 
-\subsection{描画可能}Cylindrical 
+\subsection{描画可能}
 $F$に適合した$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を$R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$から構成するとき，
 各$S \in \mathcal{S}_{n-1}$は次に定義する性質を満たしてほしい．
 なお，次の定義はCollins\cite{MR0403962}によって導入されたものである．
@@ -1548,6 +1549,7 @@ $\PROJ_{X_n}(F) \subset R[X_1, \dots, X_{n-1}]$を，以下の集合の合併と
 \end{align}
 \end{definition}
 
+$\PROJ(F)$は$0$を含まないことに注意する．
 この記号のもとで，次の定理が成り立つ．
 なお，次の定理は\cite[Theorem 4]{MR0764184}を参考にしたが，元は\cite[Theorem 5]{MR0403962}で示されたものである．
 
@@ -1625,11 +1627,184 @@ $S$が$\PROJ_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      よって，帰納法により示された．
 \end{proof}
 
+\subsection{柱状代数分解の改良}
+有限部分集合$F \subset R[X_1, \dots, X_n]$が与えられたとき，
+$F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在することはすでに示したが，
+各$S \in \mathcal{S}_k$の定義式，すなわち，
+\begin{equation}
+     S = \bigcup_{i=1}^s \bigcap_{j=1}^{l_i} \{x \in R^i \mid \sign(g_{i,j}(x)) = \sigma_{i,j}\}
+\end{equation}
+を満たす$g_{i,j} \in R[X_1, \dots, X_k]$, $\sigma_{i,j} \in \{-1, 0, 1\}$, $i=1, \dots, s, j=1, \dots, l_i$, については明らかになっていない．
+
+ここでは，先ほどの$\PROJ_{X_n}$を改良し，定義式まで明らかであるような柱状代数分解を与える．
+
+まず，記号について定義する．
+多項式の有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\map{\sigma}{F}{\{-1,0,1\}}$を，$F$の符号条件(sign condition)という．
+さらに，$F$の符号条件$\sigma$が与えられたとき，
+\begin{equation}
+     \Reali_R(\sigma)\coloneqq \bigcap_{f \in F}\{x \in R^k \mid \sign_R(f(x)) = \sigma(f)\}
+\end{equation}
+により定義される$\Reali_R(\sigma)$を，符号条件$\sigma$の実現(realization)という．
+
+また，多項式の有限部分集合$F \subset R[X]$が，
+微分について閉じている(closed under differentiation)
+とは，$0 \not \in F$であり，かつ任意の$f \in F$に対して，$f' \in F$または$f'=0$となることと定義する．
+
+\begin{lemma}[{\cite[Lemma 5.33]{MR2248869}}]\label{lemma:Thom}
+     有限部分集合$F \subset R[X]$が，微分について閉じているとする．
+     このとき， 任意の$F$の符号条件$\map{\sigma}{F}{\{-1,0,1\}}$に対し，
+     $\Reali_R(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
+\end{lemma}
+
+\begin{proof}
+     $F = \{f_1, \dots, f_s\}$として，$s$に関する帰納法で示す．
+     $s = 0$のときは明らかである．
+     
+     次に，$s$において主張が成り立つとする．
+     $F = \{f_1, \dots, f_{s+1}\}$について，順番を並び替えて$f_{s+1}$の次数が最大であるとする．
+
+     任意に$\map{\sigma}{F}{\{-1,0,1\}}$をとる．
+     $\map{\sigma_0}{F \setminus \{f_{s+1}\}}{\{-1,0,1\}}$を$\sigma$の制限，すなわち
+     \begin{equation}
+          \sigma_0(f_i) \coloneqq \sigma(f_i), \quad i=1, \dots, s
+     \end{equation}
+     とする．
+
+     このとき，$F_0 \coloneqq \{f_1, \dots, f_{s}\}$は微分について閉じているので，帰納法の仮定より，
+     $\Reali_R(\sigma_0)$は，空集合，一点からなる集合，開区間のいずれかである．
+
+     $\Reali_R(\sigma) = \Reali_R({\sigma_0}) \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(f_{s+1})\}$であるから，
+     $\Reali_R({\sigma_0})$が空集合，あるいは一点からなる集合の場合には，$\Reali_R(\sigma)$は空集合か一点からなる集合になるので主張は成り立つ．
+
+     したがって，$\Reali_R({\sigma_0})$が開区間である場合を考える．
+     $f_{s+1}$の微分$f_{s+1}'$は，$f_1, \dots, f_s$のいずれかであるから，$\Reali_R({\sigma_0})$上符号は一定である．
+
+     $f_{s+1}'$の符号が$\Reali_R({\sigma_0})$上常に$0$である場合，$f_{s+1}$は$\Reali_R({\sigma_0})$上定数であるから，主張は成り立つ．
+
+     $f_{s+1}'$の符号が$\Reali_R({\sigma_0})$上常に$-1$(あるいは$1$)の場合を考える．
+     このとき\cref{corollary:monotone}より，$f$は$\Reali_R({\sigma_0})$上狭義単調増加(あるいは狭義単調減少)であるから，$\Reali_R(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
+
+     以上より，主張は示された．
+\end{proof}
+
+このとき，次の定理が成り立つ．
+
+\begin{theorem}[{\cite[Theorem 5.34]{MR2248869}}]\label{theorem:improved-cad}
+     $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とし，
+     $\{F_i\}_{i=1}^n$が以下を満たすとする．
+     \begin{itemize}
+          \item $F \setminus \{0\} \subset F_n$である．\\
+          \item 各$i=1,\dots, n$に対して，$F_i \subset \Z[X_1, \dots, X_i]$であり，$F_i$は$X_i$での微分について閉じている．\\
+          \item 各$i=1, \dots, n-1$に対して，$\Elim_{X_{i+1}}(F_{i+1}) \subset F_i$を満たす．
+     \end{itemize}
+
+     $F_{\leq i}\coloneqq \cup_{j \leq i} F_j$とする．このとき，任意の実閉体$R$に対し，
+     \begin{equation}
+          \mathcal{S}_i \coloneqq \{\Reali_R(\sigma) \mid \map{\sigma}{F_{\leq i}}{\{-1,0,1\}}, \Reali_R(\sigma) \neq \emptyset\}, \quad i=1, \dots, n 
+     \end{equation}          
+     と定義すると，$\{\mathcal{S}_i\}_{i=1}^n$は$F$適合な$R^n$の柱状代数分解である．
+\end{theorem}
+
+\begin{proof}
+     $n$に関する帰納法で示す．
+
+     $n=1$の場合，\cref{lemma:Thom}により主張が従う．
+
+     次に，$n>1$の場合について示す．$n-1$で主張が成り立っていると仮定すると，帰納法の仮定より
+     $\{\mathcal{S}_{i}\}_{i=1}^{n-1}$は$F_{n-1}$適合な柱状代数分解である．
+
+     $\Elim_{X_n}(F_n) \subset F_{n-1}$であるから，各$S \in \mathcal{S}_{n-1}$はいずれも$\Elim_{X_n}(F_n)$符号不変である．
+     よって，\cref{theorem:inv-deline}より，各$S \in \mathcal{S}_{n-1}$は$F_n$描画可能である．
+
+     従って，定義より$l_S$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_{l_S}}{S}{R}$を，次を満たすように取れる．
+     \begin{itemize}
+          \item 任意の$ x \in S $に対し，
+          \begin{equation}
+               \{\xi_i(x)\}_{i=1}^{l_S} = \{y \in R \mid \prod_{f \in F_n'}f(x,y)=0\}
+          \end{equation}
+          である．ただし，$F_n' = \{f \in F_n \mid \text{$f$は$S$上恒等的に$0$でない}\}$とする．
+          \item 各$i=1, \dots, l_S$および$f \in F_n'$に対し，多項式$f(x,X_n)$における根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
+     \end{itemize}
+     また，$\xi_{S,0} \coloneqq -\infty$, $\xi_{S,l_S} \coloneqq \infty$とする．
+
+     このとき，$S \in \mathcal{S}_{n-1}$に対し，
+     \begin{align}
+          C_{S,2i} &\coloneqq \{(x,y) \mid  x \in S, \xi_{S,i}(x) = y \} \quad i = 1,\dots, l_S,\\
+          C_{S,2i+1} &\coloneqq \{(x,y) \mid x \in S, \xi_{S,i}(x)<y<\xi_{S,i+1}(x) \} \quad i = 0,1, \dots, l_S 
+     \end{align}
+     とし，
+     \begin{equation}
+          \widetilde{\mathcal{S}}_n \coloneqq \{C_{S,i} \mid S \in \mathcal{S}_{n-1}, i=1, \dots, 2l_S+1 \}
+     \end{equation}
+     と定義すれば，$\{\mathcal{S}_i\}_{i=1}^{n-1} \cup \{\widetilde{\mathcal{S}}_n\}$は$F_n$適合な柱状代数分解を与える．
+
+     そこで，$\widetilde{\mathcal{S}}_n = \mathcal{S}_n$となることを示す．
+     そのために，$S\coloneqq \Reali_R(\widetilde{\sigma}) \neq \emptyset$である$\map{\widetilde{\sigma}}{F_{\leq n-1}}{\{-1,0,1\}}$を任意にとり，
+     \begin{equation}
+          \{C_{S,i} \mid i=1, \dots, 2l_S + 1\} = \{\Reali_R(\sigma) \mid \map{\sigma}{F_{\leq n}}{\{-1,0,1\}}, \sigma|_{F_{\leq n-1}} = \widetilde{\sigma}\} \setminus \{\emptyset\}
+     \end{equation}
+     となることを示す．両辺の集合族は，$S \times R$の非交叉な被覆であることに注意する．
+
+     任意の$i=1, \dots, 2l_S+1$に対し，$C_{S,i}$は$F_{\leq n}$符号不変であるから，
+     $\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす$\map{\sigma}{F_{\leq n}}{\{-1,0,1\}}$がただ一つ存在して，
+     $C_{S,i} \subset \Reali_R(\sigma)$である．
+     また，\cref{lemma:Thom}より，$\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす任意の$\sigma$および
+     $i,j \in \{1, \dots, 2l_S + 1\}$に対して，
+     $C_{S,i} \subset \Reali_R(\sigma)$, $C_{S,j} \subset \Reali_R(\sigma)$ならば，$i=j$である．
+
+     以上で定理が示された．
+\end{proof}
+
+有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，
+\begin{equation}
+     \DER(F) \coloneqq \{\partial^k f / \partial X_n^k \in R[X_1, \dots, X_n] \mid f \in F, k \geq 0, \partial^k f / \partial X_n^k \neq 0\}
+\end{equation}
+と定める．
+
+\begin{corollary} \label{corollary:improved-cad}
+     $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とし，
+     $\left\{\overline{F}_i\right\}_{i=1}^n$を次で定める．
+     \begin{align}
+          \overline{F}_n & \coloneqq \DER(F),\\
+          \overline{F}_i & \coloneqq \DER\left(\PROJ\left(\overline{F}_{i+1}\right)\right), \quad i=1, \dots, n-1.
+     \end{align}
+
+     また，$\overline{F}_{\leq i}\coloneqq \cup_{j \leq i} \overline{F}_j$とする．このとき，任意の実閉体$R$に対し，
+     \begin{equation}
+          \mathcal{S}_i \coloneqq \left\{\Reali_R(\sigma) \middle| \map{\sigma}{\overline{F}_{\leq i}}{\{-1,0,1\}}, \Reali_R(\sigma) \neq \emptyset\right\}, \quad i=1, \dots, n ,
+     \end{equation}          
+     と定義すると，$\{\mathcal{S}_i\}_{i=1}^n$は$F$適合な$R^n$の柱状代数分解である．
+\end{corollary}
+
+\begin{proof}
+     \cref{theorem:improved-cad}において，$F_i = \overline{F}_i$ ( $i=1, \dots, n$ )とすればよい．
+\end{proof}
+
+\begin{corollary}\label{corollary:trick-of-qecad}
+     $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とする．
+     このとき，各$i=1, \dots, n$に対し，
+     高々$X_1, \dots, X_i$を自由変数に持つ$\mathcal{L}_\mathrm{OR}$論理式の族$\{\phi_{i,j}(X_1, \dots, X_i)\}_{j=1}^{l_i}$が存在し，
+     次を満たす．
+
+     任意の実閉体$R$に対し，
+     \begin{equation}
+          \mathcal{S}_i \coloneqq\{\{(x_1, \dots, x_i) \in R^i \mid R \models \phi_{i,j}(x_1, \dots, x_i)\} \mid j=1, \dots, l_i\}
+     \end{equation}
+     により定まる$\{\mathcal{S}_i\}_{i=1}^n$は，$R^n$の$F$適合な柱状代数分解である．
+\end{corollary}
+
+\begin{proof}
+     各$i=1, \dots, n$及び各$\map{\sigma}{\overline{F}_{\leq i}}{\{-1,0,1\}}$に対し，
+     \begin{equation}
+          \phi_{i, \sigma}(X_1, \dots, X_i) \coloneqq \bigwedge_{f \in \overline{F}_{\leq i}}\sign(f(X_1, \dots, X_i)) = \sigma(f)
+     \end{equation}
+     とすれば，\cref{corollary:improved-cad}より従う．
+\end{proof}
+
+
 \section{柱状代数分解による量化記号消去}\todo{月}
 
-有限部分集合$F \subset R[x_1, \dots, x_n]$が与えられたとき，
-前節では$R^n$の$F$適合な柱状代数分解が存在することを示した．
-この節では，柱状代数分解による量化記号消去のアルゴリズムについて示す．
+Collins\cite{MR0403962}による柱状代数分解を用いて量化記号消去を行うアルゴリズムについて説明する．
 
 \subsection{量化記号消去と柱状代数分解の関係}
 \begin{definition}[{\cite[Notation 11.7]{MR2248869}}]
@@ -1874,127 +2049,7 @@ $S = \{y \in R^m \mid R \models \phi_S(y)\} $と書けるとき，
 
 % この命題は，\cref{theorem:improved-cad}により示される．
 
-\subsection{柱状代数分解の改良}\todo{火}
-多項式の有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\map{\sigma}{F}{\{-1,0,1\}}$を，$F$の符号条件(sign condition)という．
-さらに，$F$の符号条件$\sigma$が与えられたとき，
-\begin{equation}
-     \Reali_R(\sigma)\coloneqq \{x \in R^k \mid R \models \bigwedge_{f \in F} \sign(f(x)) = \sigma(f)\}
-\end{equation}
-により定義される$\Reali_R(\sigma)$を，符号条件$\sigma$の実現(realization)という．
-
-\todo[inline]{以下の定義も微妙．$0 \in F$にした方がよいのではないか．}
-また，多項式の有限部分集合$F \subset R[X]$が，
-微分について閉じている(closed under differentiation)
-とは，$0 \not \in F$であり，かつ任意の$f \in F$に対して，$f' \in F$または$f'=0$となることと定義する．
-
-
-
-\begin{lemma}[{\cite[Lemma 5.33]{MR2248869}}]\label{lemma:Thom}
-     有限部分集合$F \subset R[X]$が，微分について閉じているとする．
-     このとき， 任意の$F$の符号条件$\map{\sigma}{F}{\{-1,0,1\}}$に対し，
-     $\Reali_R(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
-\end{lemma}
-
-\begin{proof}
-     $F = \{f_1, \dots, f_s\}$として，$s$に関する帰納法で示す．
-     $s = 0$のときは明らかである．
-     
-     次に，$s$において主張が成り立つとする．
-     $F = \{f_1, \dots, f_{s+1}\}$について，順番を並び替えて$f_{s+1}$の次数が最大であるとする．
-
-     任意に$\map{\sigma}{F}{\{-1,0,1\}}$をとる．
-     $\map{\sigma_0}{F \setminus \{f_{s+1}\}}{\{-1,0,1\}}$を$\sigma$の制限，すなわち
-     \begin{equation}
-          \sigma_0(f_i) \coloneqq \sigma(f_i), \quad i=1, \dots, s
-     \end{equation}
-     とする．
-
-     このとき，$F_0 \coloneqq \{f_1, \dots, f_{s}\}$は微分について閉じているので，帰納法の仮定より，
-     $\Reali_R(\sigma_0)$は，空集合，一点からなる集合，開区間のいずれかである．
-
-     $\Reali_R(\sigma) = \Reali_R({\sigma_0}) \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(f_{s+1})\}$であるから，
-     $\Reali_R({\sigma_0})$が空集合，あるいは一点からなる集合の場合には，$\Reali_R(\sigma)$は空集合か一点からなる集合になるので主張は成り立つ．
-
-     したがって，$\Reali_R({\sigma_0})$が開区間である場合を考える．
-     $f_{s+1}$の微分$f_{s+1}'$は，$f_1, \dots, f_s$のいずれかであるから，$\Reali_R({\sigma_0})$上符号は一定である．
-
-     $f_{s+1}'$の符号が$\Reali_R({\sigma_0})$上常に$0$である場合，$f_{s+1}$は$\Reali_R({\sigma_0})$上定数であるから，主張は成り立つ．
-
-     $f_{s+1}'$の符号が$\Reali_R({\sigma_0})$上常に$-1$(あるいは$1$)の場合を考える．
-     このとき\cref{corollary:monotone}より，$f$は$\Reali_R({\sigma_0})$上狭義単調増加(あるいは狭義単調減少)であるから，$\Reali_R(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
-
-     以上より，主張は示された．
-\end{proof}
-
-次の定理は，\cite[Theorem 5.34]{MR2248869}を参考にした．
-\begin{theorem}\label{theorem:improved-cad}
-     $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とし，
-     $\{F_i\}_{i=1}^n$が以下を満たすとする．
-     \begin{itemize}
-          \item $F \subset F_n$である．\\
-          \item 各$i=1,\dots, n$に対して，$F_i \subset \Z[X_1, \dots, X_i]$であり，$F_i$は$X_i$での微分について閉じている．\\
-          \item 各$i=1, \dots, n-1$に対して，$\Elim_{X_{i+1}}(F_{i+1}) \subset F_i$を満たす．
-     \end{itemize}
-
-     $F_{\leq i}\coloneqq \cup_{j \leq i} F_j$とする．このとき，任意の実閉体$R$に対し，
-     \begin{equation}
-          \mathcal{S}_i \coloneqq \{\Reali_R(\sigma) \mid \map{\sigma}{F_{\leq i}}{\{-1,0,1\}}\}, \quad i=1, \dots, n 
-     \end{equation}          
-     と定義すると，$\{\mathcal{S}_i\}_{i=1}^n$は$F$適合な$R^n$の柱状代数分解である．
-\end{theorem}
-
-\begin{proof}
-     $n$に関する帰納法で示す．
-
-     $n=1$の場合，\cref{lemma:Thom}により主張が従う．
-
-     次に，$n>1$の場合について示す．$n-1$で主張が成り立っていると仮定すると，帰納法の仮定より
-     $\{\mathcal{S}_{i}\}_{i=1}^{n-1}$は$F_{n-1}$適合な柱状代数分解である．
-
-     $\Elim_{X_n}(F_n) \subset F_{n-1}$であるから，各$S \in \mathcal{S}_{n-1}$はいずれも$\Elim_{X_n}(F_n)$符号不変である．
-     よって，\cref{theorem:inv-deline}より，各$S \in \mathcal{S}_{n-1}$は$F_n$描画可能である．
-
-     従って，定義より$l_S$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_{l_S}}{S}{R}$を，次を満たすように取れる．
-     \begin{itemize}
-          \item 任意の$ x \in S $に対し，
-          \begin{equation}
-               \{\xi_i(x)\}_{i=1}^{l_S} = \{y \in R \mid \prod_{f \in F_n'}f(x,y)=0\}
-          \end{equation}
-          である．ただし，$F_n' = \{f \in F_n \mid \text{$f$は$S$上恒等的に$0$でない}\}$とする．
-          \item 各$i=1, \dots, l_S$および$f \in F_n'$に対し，多項式$f(x,X_n)$における根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
-     \end{itemize}
-     また，$\xi_{S,0} \coloneqq -\infty$, $\xi_{S,l_S} \coloneqq \infty$とする．
-
-     このとき，$S \in \mathcal{S}_{n-1}$に対し，
-     \begin{align}
-          C_{S,2i} &\coloneqq \{(x,y) \mid  x \in S, \xi_{S,i}(x) = y \} \quad i = 1,\dots, l_S,\\
-          C_{S,2i+1} &\coloneqq \{(x,y) \mid x \in S, \xi_{S,i}(x)<y<\xi_{S,i+1}(x) \} \quad i = 0,1, \dots, l_S 
-     \end{align}
-     とし，
-     \begin{equation}
-          \widetilde{\mathcal{S}}_n \coloneqq \{C_{S,i} \mid S \in \mathcal{S}_{n-1}, i=1, \dots, 2l_S+1 \}
-     \end{equation}
-     と定義すれば，$\{\mathcal{S}_i\}_{i=1}^{n-1} \cup \{\widetilde{\mathcal{S}}_n\}$は$F_n$適合な柱状代数分解を与える．
-
-     そこで，$\widetilde{\mathcal{S}}_n = \mathcal{S}_n$となることを示す．
-     そのために，$S\coloneqq \Reali_R(\widetilde{\sigma}) \neq \emptyset$である$\map{\widetilde{\sigma}}{F_{\leq n-1}}{\{-1,0,1\}}$を任意にとり，
-     \begin{equation}
-          \{C_{S,i} \mid i=1, \dots, 2l_S + 1\} = \{\Reali_R(\sigma) \mid \map{\sigma}{F_{\leq n}}{\{-1,0,1\}}, \sigma|_{F_{\leq n-1}} = \widetilde{\sigma}\} \setminus \{\emptyset\}
-     \end{equation}
-     となることを示す．両辺の集合族は，$S \times R$の非交叉な被覆であることに注意する．
-
-     任意の$i=1, \dots, 2l_S+1$に対し，$C_{S,i}$は$F_{\leq n}$符号不変であるから，
-     $\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす$\map{\sigma}{F_{\leq n}}{\{-1,0,1\}}$がただ一つ存在して，
-     $C_{S,i} \subset \Reali_R(\sigma)$である．
-     また，\cref{lemma:Thom}より，$\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす任意の$\sigma$および
-     $i,j \in \{1, \dots, 2l_S + 1\}$に対して，
-     $C_{S,i} \subset \Reali_R(\sigma)$, $C_{S,j} \subset \Reali_R(\sigma)$ならば，$i=j$である．
-
-     以上で定理が示された．
-\end{proof}
-
-
-\subsection{柱状代数分解による量化記号消去のアルゴリズム} \todo{水}
+\subsection{柱状代数分解による量化記号消去のアルゴリズム} \todo{火}
 
 柱状代数分解による量化記号消去のアルゴリズムについて述べる．
 
