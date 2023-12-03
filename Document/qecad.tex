@@ -1193,6 +1193,39 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      であるから，\cref{proposition:Seidenberg-Tarski-generalization}より，定理の主張が従う．
 \end{proof}
 
+\begin{proposition}\label{proposition:Artin-Lang}
+     $R_1$, $R_2$を任意の実閉体とする．
+     $\phi(X_1, \dots, X_n)$を$\mathcal{L}_\mathrm{OR}$論理式とする．
+     このとき，
+     \begin{equation}
+          \{x \in R_1^n \mid R_1 \models \phi(x)\} \neq \emptyset \iff
+          \{x \in R_2^n \mid R_2 \models \phi(x)\} \neq \emptyset
+     \end{equation}
+     が成り立つ．
+\end{proposition}
+\begin{proof}
+     ある$x \in R_1^n$について$R_1 \models \phi(x)$が成り立つことと，
+     \begin{equation}
+          R_1 \models \exists X_1 \dots \exists X_n \phi(X_1, \dots, X_n)
+     \end{equation}
+     が成り立つことは同値．
+     従って，\cref{theorem:Tarski}より，量化記号のない$\mathcal{L}_\mathrm{OR}$論理式$\theta$が存在し，
+     $\theta$は自由変数を持たず，
+     \begin{equation}
+          \RCF \models \exists X_1 \dots \exists X_n \phi(X_1, \dots, X_n) \leftrightarrow \theta
+     \end{equation}
+     であるようにできる．
+     また，\cref{proposition:dnf}より，$\mathcal{L}_\mathrm{OR}$論理式$\theta$は，
+     有限個の$n_{i,j} \in \Z$及び$\sigma_{i,j} \in \{-1, 0, 1\}$を
+     \begin{equation}
+          \RCF \models \theta \leftrightarrow \bigvee_{i=1}^s \bigwedge_{j=1}^{l_i} (\sign(n_{i,j}) = \sigma_{i,j})
+     \end{equation}
+     が成り立つように取れる．
+     これより，$\RCF \models \theta$であるか，$\RCF \models \lnot \theta$のいずれかを満たす．
+     従って，$R_1 \models \theta \iff R_2 \models \theta$である． 
+     よって，$\{x \in R_1^n \mid R_1 \models \phi(x)\} \neq \emptyset \iff \{x \in R_1^n \mid R_2 \models \phi(x)\} \neq \emptyset$である．
+\end{proof}
+
 \begin{definition}[{\cite[Definition 2.2.5]{MR1659509}}]
      $S \subset R^m$, $T \subset R^n$を，半代数的集合とする．
      写像$\map{f}{S}{T}$が半代数的(semi-algebraic)であるとは，$f$のグラフ
@@ -1881,21 +1914,18 @@ Collins\cite{MR0403962}による柱状代数分解を用いて量化記号消去
 
 このとき，次が成り立つ．
 
-\begin{proposition} \todo{重要}
+\begin{proposition}
      任意の実閉体$R$および任意の$x \in S_R(\theta_{i,j})$に対し，
      $\CSIGN_i(F)(x) = \CSIGN_i(F)(\theta_{i,j})$である．
 \end{proposition}
 
-\todo[inline]{
-     まず，任意の量化記号のない論理式$\theta(X)$と，任意の実閉体$R_1, R_2$に対して，
-     $S_{R_1}(\theta) \neq \emptyset \iff S_{R_2}(\theta) \neq \emptyset$である．
-     また，任意の実閉体$R_1 \subset R_2$に対して，
-     $S_{R_1}(\theta) \subset S_{R_2}(\theta)$である．
-     よって，$x \in S_R(\theta_{i,j})$に対し，$y \in S_{\Ralg}(\theta_{i,j})$を取れば，
-     $\CSIGN_i(F)(x) = \CSIGN_i(F)(y)$となり示される．
-
-     この証明が正しければ，このための命題を4節に載せるべきだろう．
-}
+\begin{proof}
+     実閉体$R$について，$\Ralg \subset R$を満たすから，
+     $S_{\Ralg}(\theta_{n,j}) \subset S_R(\theta_{n,j})$である．
+     また，\cref{proposition:Artin-Lang}より，
+     $S_{\Ralg}(\theta_{n,j}) \neq \emptyset \iff S_R(\theta_{n,j}) \neq \emptyset$である．
+     これらの事から帰納的に示される．
+\end{proof}
 
 $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とする．
 $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
