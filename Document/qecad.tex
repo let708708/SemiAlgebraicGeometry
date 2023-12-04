@@ -44,7 +44,6 @@
 \newcommand{\false}{\text{false}}
 \DeclareMathOperator{\psc}{psc}
 \DeclareMathOperator{\PSC}{PSC}
-\DeclareMathOperator{\Elim}{Elim}
 \DeclareMathOperator{\RED}{RED}
 \DeclareMathOperator{\LT}{LT}
 \DeclareMathOperator{\LC}{LC}
@@ -1609,10 +1608,12 @@ $S$が$\PROJ_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      $f$, $g$が共に$S$上恒等的に$0$でない場合を考える．
      $A \in \RED(f;X_n)$, $B \in \RED(g;X_n)$を，任意の$x \in S$に対して
      \begin{align}
-          f(x, X_n) = A(x,X_n), \LC(A(x,X_n)) \neq 0,\\
-          g(x, X_n) = B(x, X_n), \LC(B(x,X_n)) \neq 0
+          f(x, X_n) &= A(x,X_n), \LC(A(x,X_n)) \neq 0,\\
+          g(x, X_n) &= B(x, X_n), \LC(B(x,X_n)) \neq 0
      \end{align}
-     であるように取る．このとき，$S$は$\PSC(A, B)$符号不変であるから，
+     であるように取る．
+     
+     このとき，$S$は$\PSC(A, B)$符号不変であるから，
      \cref{theorem:psc}より$\deg(\gcd(A(x, X_n), B(x, X_n)))$は$x\in S$に依らず一定である．
      従って，$\deg(\gcd(f(x, X_n), g(x, X_n)))$は$x\in S$に依らず一定である．
 \end{proof}
@@ -1728,7 +1729,7 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
      \begin{itemize}
           \item $F \setminus \{0\} \subset F_n$である．\\
           \item 各$i=1,\dots, n$に対して，$F_i \subset \Z[X_1, \dots, X_i]$であり，$F_i$は$X_i$での微分について閉じている．\\
-          \item 各$i=1, \dots, n-1$に対して，$\Elim_{X_{i+1}}(F_{i+1}) \subset F_i$を満たす．
+          \item 各$i=1, \dots, n-1$に対して，$\PROJ_{X_{i+1}}(F_{i+1}) \subset F_i$を満たす．
      \end{itemize}
 
      $F_{\leq i}\coloneqq \cup_{j \leq i} F_j$とする．このとき，任意の実閉体$R$に対し，
@@ -1746,7 +1747,7 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
      次に，$n>1$の場合について示す．$n-1$で主張が成り立っていると仮定すると，帰納法の仮定より
      $\{\mathcal{S}_{i}\}_{i=1}^{n-1}$は$F_{n-1}$適合な柱状代数分解である．
 
-     $\Elim_{X_n}(F_n) \subset F_{n-1}$であるから，各$S \in \mathcal{S}_{n-1}$はいずれも$\Elim_{X_n}(F_n)$符号不変である．
+     $\PROJ_{X_n}(F_n) \subset F_{n-1}$であるから，各$S \in \mathcal{S}_{n-1}$はいずれも$\PROJ_{X_n}(F_n)$符号不変である．
      よって，\cref{theorem:inv-deline}より，各$S \in \mathcal{S}_{n-1}$は$F_n$描画可能である．
 
      従って，定義より$l_S$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_{l_S}}{S}{R}$を，次を満たすように取れる．
@@ -2069,52 +2070,161 @@ $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
      以上で命題が示された．
 \end{proof}
 
-\section{柱状代数分解による量化記号消去のアルゴリズム} \todo{火}
+\section{柱状代数分解による量化記号消去のアルゴリズム} 
 
 柱状代数分解による量化記号消去のアルゴリズムについて述べる．
 
-\begin{algorithm}
-     \caption{Improved CAD}\label{Improved CAD}
+まず，いくつかの補助的な関数について説明する．
+関数$\mathtt{PROJ}$は，有限部分集合$F \subset \Z[X_1, \dots, X_n]$に対し，$\PROJ(F) \subset \Z[X_1, \dots, X_n]$を返す関数である．
+また，関数$\mathtt{DER}$は，有限部分集合$F \subset \Ralg[X_1, \dots, X_n]$に対し，$\DER(F) \subset \Z[X_1, \dots, X_n]$を返す関数である．
+
+さらに，次に定義する関数$\mathtt{ImprovedCAD}$は，有限部分集合$F \subset \Z[X_1, \dots, X_n]$に対し，
+\cref{corollary:improved-cad}の$\{\overline{F}_{\leq i}\}_{i=1}^n$を返す関数である．
+
+\begin{algorithm}[H]
+     \caption {$\mathtt{ImprovedCAD}(F)$}
      \begin{algorithmic}[1]
           \REQUIRE 
                有限部分集合
-               $F \subset \Z[X_1, \dots, X_n]$
-          \ENSURE
-               $\overline{C}_i(F) \subset R[X_1, \dots, X_i]$をみたす有限集合の列$\left\{\overline{C}_i(F)\right\}_{i=1}^n$
-          \STATE $\overline{C}_k(F)\leftarrow \{\partial^i f/ \partial X_k^i \mid f \in F, i=0,1,\dots \}$
-          \\ \text{Elimination Phase}:
-          \FOR{$i = k-1, \dots, 1$}
-               \STATE $\overline{C}_i(F) \leftarrow \Elim_{X_{i+1}}(\overline{C}_{i+1}(F))$
-               \STATE $\overline{C}_i(F) \leftarrow \{ \partial^i f/ \partial X_i^j \mid f \in  \overline{C_i}(F), j=0,1, \dots\}$
+               $F \subset \Ralg[X_1, \dots, X_n]$
+          \ENSURE 
+               $ \overline{F}_{\leq i} \subset \Z[X_1, \dots, X_i]$の列$\{\overline{F}_{\leq i}\}_{i=1}^n$
+
+          \FOR{$i = n, \dots, 1$}
+               \IF{$i=n$}
+                    \STATE $\overline{F}_n \leftarrow \mathtt{DER} (F)$
+               \ELSE
+                    \STATE $\overline{F}_i \leftarrow \mathtt{DER} (\mathtt{PROJ} (\overline{F}_{i-1}))$
+               \ENDIF
           \ENDFOR
 
-          \FOR{$i = 1, \dots, k$}
-               \STATE $\overline{C}_{\leq i}(F) \leftarrow \bigcup_{j=1}^i \overline{C}_j(F)$
+          \FOR{$i=1, \dots, n$}
+               \STATE $\overline{F}_{\leq i} \leftarrow \bigcup_{j=1}^i \overline{F}_j$
           \ENDFOR
-          \RETURN $\{\overline{C}_i(F)\}$
+
+          \RETURN $\{\overline{F}_{\leq i}\}_{i=1}^n$
+     \end{algorithmic}
+
+\end{algorithm}
+
+
+ここで，次のようなデータの組$\beta = (b, C)$を，$n$次元の標本点と呼ぶことにする．
+\begin{itemize}
+     \item $b$は，実代数的数の組$(b_1, \dots, b_n) \in \Ralg^n$である．
+     \item $C$は，$(n+1)$次元の標本点からなる有限集合$\{\beta_1, \dots, \beta_k\}$である．
+\end{itemize}
+ただし，$n=0$も許す．$\Ralg^0 = \{\mathord{*}\}$とする．
+$n$次元の標本点$\beta$に対し，$b$を$\beta.\mathtt{point}$と書き，$C$を$\beta.\mathtt{childs}$と書く．
+また，標本点は再帰的な構造であることに注意する．
+
+そして，有限部分集合$F \subset \Z[X_1, \dots, X_n, X_{n+1}]$と$b=(b_1, \dots, b_n) \in \Ralg^n$に対し，
+$n+1$次元の標本点の集合$\{\beta_1, \dots, \beta_l\}$を返す関数$\mathtt{BASE}$を，次のように定める．
+\begin{algorithm}[H]
+     \caption {$\mathtt{BASE}(F, b)$}
+     \begin{algorithmic}[1]
+          \REQUIRE 
+               有限部分集合
+               $F \subset \Z[X_1, \dots, X_n, X_{n+1}]$
+               及び$b = (b_1, \dots, b_n) \in \Ralg^n$
+          \ENSURE 
+               $(n+1)$次元の標本点の集合$\{\beta_1, \dots, \beta_l\}$
+
+          \STATE $\{x_1 < \dots < x_k\} \leftarrow \{x \mid f \in F, f(b, X_{n+1}) \neq 0,  f(b, x) = 0\}$
+          \STATE $\beta_1 \leftarrow ((b, x_1 - 1), \emptyset)$
+          \FOR{$i=1, \dots, k-1$}
+               \STATE $\beta_{2i} \leftarrow ((b, x_i), \emptyset)$
+               \STATE $\beta_{2i+1} \leftarrow ((b, (x_i+x_{i+1})/2), \emptyset)$
+          \ENDFOR
+          \STATE $\beta_{2k} \leftarrow ((b, x_k), \emptyset)$
+          \STATE $\beta_{2k+1} \leftarrow ((b, x_k+1), \emptyset)$
+     
+          \RETURN $\{\beta_i\}_{i=1}^{2k+1}$
      \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
+さらに，有限部分集合$F_i \subset \Z[X_1, \dots, X_n, Y_1, \dots, Y_i]$ ( $i=1, \dots, m$ ) 
+及び$b=(b_1, \dots, b_n) \in \Ralg^n$に対し，
+$n$次元の標本$\beta$を返す関数$\mathtt{DECOMP}$を，次のように定める．
+
+\begin{algorithm}[H]
+     \caption {$\mathtt{DECOMP}(\{F_i\}_{i=1}^m, b)$}
+     \begin{algorithmic}[1]
+          \REQUIRE 
+               有限部分集合
+               $F_i \subset \Z[X_1, \dots, X_n, Y_1, \dots, Y_i]$
+               の族$\{F_i\}_{i=1}^m$ 
+               及び$b=(b_1, \dots, b_n) \in \Ralg^n$
+          \ENSURE 
+               $n$次元の標本点$\beta$
+
+          $\beta \leftarrow(b, \emptyset)$
+          \IF{$m=0$}
+               \RETURN $\beta$
+          \ENDIF
+               \STATE $\beta.\mathtt{childs} \leftarrow \mathtt{BASE}(F_1, \beta.\mathtt{point})$
+               \FOR{$ \beta' \in \beta.\mathtt{childs}$}
+                    \STATE $\beta'.\mathtt{childs} \leftarrow \mathtt{DECOMP}(\{F_i\}_{i=2}^m, \beta'.\mathtt{point})$
+               \ENDFOR
+          \RETURN $ \beta $
+     \end{algorithmic}
+\end{algorithm}
+
+また，$F \subset R[X_1, \dots, X_n, Y_1, \dots, Y_m]$および$n$次元標本点$\beta = (b, C)$に対し，
+$\CSIGN_n(F)(b)$を，返す関数$\texttt{CSIGN}$を，次のように定める．
+
+\begin{algorithm}[H]
+     \caption {$\mathtt{CSIGN}(F, \beta)$}
+     \begin{algorithmic}[1]
+          \REQUIRE 
+               有限部分集合
+               $F \subset \Z[X_1, \dots, X_n, Y_1, \dots, Y_m]$
+               及び$n$次元標本点$\beta = (b, C)$
+          \ENSURE 
+               $\CSIGN_n(F)(b)$   
+
+          \IF{$m=0$}
+               \RETURN $F \ni f \mapsto \sign_{\Ralg}(f(b)) \in \{-1,0,1\}$
+          \ENDIF
+
+          \RETURN $\bigcup_{\beta' \in \beta.\mathtt{childs}} \{\mathtt{CSIGN}(F, \beta')\}$
+     \end{algorithmic}
+
+\end{algorithm}
+
+
+このとき，量化記号消去のアルゴリズムは次のように記述される．
+
+\begin{algorithm}[H]
      \caption{Cylindrical Quantifier Elimination}
      \begin{algorithmic}[1]
           \REQUIRE 
                有限部分集合
-               $F \subset \Z[Y_1, \dots, Y_m, X_1, \dots, X_n]$,
+               $F \subset \Z[X_1, \dots, X_n, Y_1, \dots, Y_m]$,
                および冠頭標準形の$\mathcal{L}_\mathrm{OR}$論理式
-               \[\Phi(Y) = (\Qua_1 X_1)(\Qua_2 X_2)\dots(\Qua_n X_n) \phi(Y,X).\]
-               ただし，$\phi(Y,X)$は量化記号のない$F$論理式とする．
+               \[\phi(X) = (\Qua_1 Y_1)(\Qua_2 Y_2)\dots(\Qua_m Y_m) \psi(X, Y).\]
+               ただし，$\psi(X, Y)$は量化記号のない$F$論理式とする．
 
           \ENSURE 
-               $\Phi(Y)$に同値な量化記号のない$\mathcal{L}_\mathrm{OR}$論理式.
-          
-          \STATE $\mathcal{L} \leftarrow \{\}$
-          \FOR{$\map{\sigma}{\overline{C}_{\leq m}(F)}{\{-1,0,1\}}$}
-               \IF{$ \Reali_R(\sigma) \neq \emptyset$ \AND $ \Qua_1 \mu_1 \in \CSIGN_m(F)(\Reali_R(\sigma)) \dots \Qua_n \mu_n \in \mu_{n-1} \phi^\star(\mu_n) = \true$}
-                    \STATE $\calL \leftarrow \calL \cup \{\sigma\}$       
+               $\phi(X)$に同値な量化記号のない$\mathcal{L}_\mathrm{OR}$論理式$\theta(X)$.
+     
+          \STATE $\{\overline{F}_{\leq i}\}_{i=1}^n \leftarrow \mathtt{ImprovedCAD}(F)$
+          \STATE $B \leftarrow (\mathord{*}, \emptyset )$
+          \FOR{$i=1, \dots, n$}
+               \STATE $ B \leftarrow \bigcup_{\beta \in B} \mathtt{BASE} (\overline{F}_{\leq i}, \beta.\mathtt{point})$
+          \ENDFOR
+
+          \FOR{$\beta \in B$}
+               \STATE $\beta \leftarrow \mathtt{DECOMP}(\{\overline{F}_{\leq n+i}\}_{i=1}^m, \beta.\mathtt{point}) $
+          \ENDFOR
+
+          \STATE $\Sigma \leftarrow \emptyset$
+          \FOR{$\beta \in B$}
+               \STATE $\sigma \leftarrow (\overline{F}_{\leq n} \ni f \mapsto \sign_{\Ralg}(f(\beta.\texttt{point})) \in \{-1,0,1\})$
+               \IF{$ \Qua_1 \tau_1 \in \mathtt{CSIGN}(F, \beta) \dots \Qua_m \tau_m \in \tau_{m-1} \psi^\star(\tau_m) = \true$}
+                    \STATE $\Sigma \leftarrow \Sigma \cup \{\sigma\}$       
                \ENDIF
           \ENDFOR
-          \RETURN $\bigvee_{\sigma \in \calL} \bigwedge_{f \in \overline{C}_{\leq m}(F)}f(Y)=\sigma(f)$
+          \RETURN $\bigvee_{\sigma \in \Sigma} \bigwedge_{f \in \overline{F}_{\leq n}}f(X)=\sigma(f)$
      \end{algorithmic}
 \end{algorithm}
 
