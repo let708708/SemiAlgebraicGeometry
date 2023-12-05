@@ -644,18 +644,18 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
      $
      が0より小さいことと同値であるから，
      \begin{equation}
-          \psi(a) \coloneqq (-2 < a) \land (a < 6)
+          \theta(a) \coloneqq (-2 < a) \land (a < 6)
      \end{equation}
      に同値である．すなわち，次が成り立つ．
      \begin{equation}
-          \R \models \forall a (\phi(a) \leftrightarrow \psi(a)).
+          \R \models \forall a (\phi(a) \leftrightarrow \theta(a)).
      \end{equation}
 \end{example}
 
 \cref{example:quantifier elimination}において，
 実は任意の$\RCF$のモデル$R$に対して
 \begin{equation}
-     R \models \forall a (\phi(a) \leftrightarrow \psi(a))
+     R \models \forall a (\phi(a) \leftrightarrow \theta(a))
 \end{equation}
 が成り立つ．ここで，$\phi$には束縛変数$x$が現れており，一方で$\psi$に登場する変数記号は全て自由変数である．
 つまり，$\phi$に登場する量化記号を消去し，自由変数のみの論理式$\psi$で記述できている．
@@ -665,9 +665,9 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
 \begin{definition}[{\cite[Definition 3.1.1]{MR1924282}}]
 $\mathcal{L}$理論$T$が量化記号消去(quantifier elimination)を持つとは，
 任意の$\mathcal{L}$論理式$\phi$に対し，
-量化記号のない論理式$\psi$が存在して，
+量化記号のない論理式$\theta$が存在して，
 \begin{equation}
-     T \models \phi \leftrightarrow \psi
+     T \models \phi \leftrightarrow \theta
 \end{equation}
 が成り立つことを指す．
 \end{definition}
@@ -1817,20 +1817,18 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
 \begin{corollary}\label{corollary:trick-of-qecad}
      $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とする．
      このとき，各$i=1, \dots, n$に対し，
-     高々$X_1, \dots, X_i$を自由変数に持つ量化記号のない$\mathcal{L}_\mathrm{OR}$論理式の族$\{\theta_{i,j}(X_1, \dots, X_i)\}_{j=1}^{l_i}$が存在し，
+     高々$X_1, \dots, X_i$を自由変数に持つ量化記号のない$\mathcal{L}_\mathrm{OR}$論理式の族$\Theta_i$が存在し，
      次を満たす．
 
-     任意の実閉体$R$に対し，
-     \begin{equation}
-          \mathcal{S}_i \coloneqq\{\{(x_1, \dots, x_i) \in R^i \mid R \models \theta_{i,j}(x_1, \dots, x_i)\} \mid j=1, \dots, l_i\}
-     \end{equation}
+     任意の実閉体$R$に対し，$\mathcal{S}_i \coloneqq\{S_R(\theta) \mid \theta \in \Theta_i\}$
      により定まる$\{\mathcal{S}_i\}_{i=1}^n$は，$R^n$の$F$適合な柱状代数分解である．
+     ただし，$S_R(\theta) \coloneqq \{(x_1, \dots, x_i) \in R^i \mid R \models \theta(x_1, \dots, x_i)\}$である．
 \end{corollary}
 
 \begin{proof}
-     各$i=1, \dots, n$及び各$\map{\sigma}{\overline{F}_{\leq i}}{\{-1,0,1\}}$に対し，
+     各$i=1, \dots, n$に対し，
      \begin{equation}
-          \theta_{i, \sigma}(X_1, \dots, X_i) \coloneqq \bigwedge_{f \in \overline{F}_{\leq i}}\sign(f(X_1, \dots, X_i)) = \sigma(f)
+          \Theta_i \coloneqq \left\{ \bigwedge_{f \in \overline{F}_{\leq i}}\sign(f(X_1, \dots, X_i)) = \sigma(f) \middle| \map{\sigma}{\overline{F}_{\leq i}}{\{-1,0,1\}} \right\}
      \end{equation}
      とすれば，\cref{corollary:improved-cad}より従う．
 \end{proof}
@@ -1864,15 +1862,15 @@ Collins\cite{MR0403962}による柱状代数分解を用いて量化記号消去
      $R$を実閉体とする．
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．
 
-     まず，$\map{\sign(F)}{R^n}{\{-1, 0, 1\}^F}$を，
-     $\sign(F)(x)(f)\coloneqq \sign(f(x)), f \in F$により定義する．
+     まず，$\map{\sign_R(F)}{R^n}{\{-1, 0, 1\}^F}$を，
+     $\sign_R(F)(y)(f)\coloneqq \sign_R(f(y)), f \in F$により定義する．
 
-     次に，各$y \in R^i$に対し，$\CSIGN_i(F)(y)$を以下のように定義する．
+     次に，各$y \in R^i$に対し，$\CSIGN_{R,i}(F)(y)$を以下のように定義する．
      \begin{itemize}
-          \item $i=n$のとき，$x \in R^i$に対し，$\CSIGN_n(F)(x)\coloneqq \sign(F)(x) $とする．
+          \item $i=n$のとき，$y \in R^n$に対し，$\CSIGN_{R,n}(F)(y)\coloneqq \sign_R(F)(y) $とする．
           \item $0 \leq i<n$のとき，$y \in R^i$に対し，
           \begin{equation}
-               \CSIGN_i(F)(y) \coloneqq \{\CSIGN_{i+1}(F)(x) \mid x \in  R^{i+1}, \pi_i(x) = y\}
+               \CSIGN_{R,i}(F)(y) \coloneqq \{\CSIGN_{R,i+1}(F)(x) \mid x \in  R^{i+1}, \pi_i(x) = y\}
           \end{equation}
           と定める．ここで，$\map{\pi_i}{R^{i+1}}{R^i}$は，$\pi_i(x_1, \dots, x_i, x_{i+1}) = (x_1, \dots, x_i)$で定義される写像とする．
      \end{itemize}
@@ -1880,91 +1878,92 @@ Collins\cite{MR0403962}による柱状代数分解を用いて量化記号消去
 
 \begin{proposition} \label{proposition:independence-of-CSIGN}
      $F \subset R[X_1, \dots, X_n]$とし，$\{\mathcal{S}_i\}_{i=1}^n$を$R^n$の$F$適合な柱状代数分解とする．
-     このとき，任意の$i=1, \dots, n$, $S \in \mathcal{S}_i$に対し，$\CSIGN_i(y)$は$y \in S$に依らず一定である．
+     このとき，任意の$i=1, \dots, n$, $S \in \mathcal{S}_i$に対し，$\CSIGN_{R,i}(y)$は$y \in S$に依らず一定である．
 \end{proposition}
 
 \begin{proof}
      $i$に関する帰納法で示す．
      $i=n$の場合，$S \in \mathcal{S}_n$は$F$符号不変であるから，各$f \in F$に対して$\sign(f(y))$は$y \in S$に依らず一定である．
-     従って，$\CSIGN_n(F)(y)$は$y \in S$に依らず一定である．
+     従って，$\CSIGN_{R,n}(F)(y)$は$y \in S$に依らず一定である．
 
      次に，$i=k+1$において命題が成り立つとして，$i=k$の場合に示す．$S \in \mathcal{S}_k$とする．
      $\mathcal{C} \coloneqq \{T \in \mathcal{S}_{k+1} \mid \pi_{k}(T) = S\}$とすると，
-     各$T \in \mathcal{C}$において，帰納法の仮定より$\CSIGN_n(F)(x)$は$x \in T$に依らず一定である．
+     各$T \in \mathcal{C}$において，帰納法の仮定より$\CSIGN_{R,n}(F)(x)$は$x \in T$に依らず一定である．
      このとき，各$y \in S$に対し，
      \begin{align}
-          \CSIGN_k(F)(y)
-          &= \{\CSIGN_{k+1}(F)(x) \mid x \in R^{i+1}, \pi_{k}(x) = y\}\\
-          &= \bigcup_{T \in \mathcal{C}}\{\CSIGN_{k+1}(F)(x) \mid x \in T \cap \pi_k^{-1}(\{y\})\}\\
-          &= \bigcup_{T \in \mathcal{C}}\{\CSIGN_{k+1}(F)(x) \mid x \in T\}
+          \CSIGN_{R,k}(F)(y)
+          &= \{\CSIGN_{R,k+1}(F)(x) \mid x \in R^{i+1}, \pi_{k}(x) = y\}\\
+          &= \bigcup_{T \in \mathcal{C}}\{\CSIGN_{R,k+1}(F)(x) \mid x \in T \cap \pi_k^{-1}(\{y\})\}\\
+          &= \bigcup_{T \in \mathcal{C}}\{\CSIGN_{R,k+1}(F)(x) \mid x \in T\}
      \end{align}
      であり，これは$y \in S$に依らず一定である．
      よって，帰納法により命題が示された．
 \end{proof}
 
 有限部分集合$F \subset \Z[X_1, \dots, X_n]$に対し，
-高々$X_1, \dots, X_i$を自由変数に持つ量化記号のない$\mathcal{L}_\mathrm{OR}$論理式の族$\{\theta_{i,j}(X_1, \dots, X_i)\}_{j=1}^{l_i}$を，
-任意の実閉体$R$に対し，$\mathcal{S}_i \coloneqq \{S_R(\theta_{i,j})\}_{j=1}^{l_i}$により定まる$\{\mathcal{S}_i\}_{i=1}^n$が$R^n$の$F$適合な柱状代数分解であるように取る．
-ただし，$S_R(\theta_{i,j}) \coloneqq \{(x_1, \dots, x_i) \in R^i \mid R \models \theta_{i,j}(x_1, \dots, x_i)\}$である．
+高々$X_1, \dots, X_i$を自由変数に持つ量化記号のない$\mathcal{L}_\mathrm{OR}$論理式の族$\Theta_i$を，
+任意の実閉体$R$に対し，$\mathcal{S}_i \coloneqq \{S_R(\theta) \mid \theta \in \Theta_i\}$により定まる$\{\mathcal{S}_i\}_{i=1}^n$が$R^n$の$F$適合な柱状代数分解であるように取る．
+ただし，$S_R(\theta) \coloneqq \{(x_1, \dots, x_i) \in R^i \mid R \models \theta(x_1, \dots, x_i)\}$である．
 
-ここで，$\CSIGN_i(F)(\theta_{i,j})$ ( $j=1, \dots, l_i$ ) を，
+ここで，$\CSIGN_i(F)(\theta)$ ( $\theta \in \Theta_i$ ) を，
 \begin{equation}
-     \CSIGN_i(F)(\theta_{i,j}) \coloneqq \CSIGN_i(F)(x), \quad x \in S_{\Ralg}(\theta_{i,j})
+     \CSIGN_i(F)(\theta) \coloneqq \CSIGN_{\Ralg, i}(F)(x), \quad x \in S_{\Ralg}(\theta)
 \end{equation}
-と定める．\cref{proposition:independence-of-CSIGN}より，これは$x \in S_{\Ralg}(\theta_{i,j})$の取り方に依らない．
+と定める．\cref{proposition:independence-of-CSIGN}より，これは$x \in S_{\Ralg}(\theta)$の取り方に依らない．
 
 このとき，次が成り立つ．
 
 \begin{proposition}
-     任意の実閉体$R$および任意の$x \in S_R(\theta_{i,j})$に対し，
-     $\CSIGN_i(F)(x) = \CSIGN_i(F)(\theta_{i,j})$である．
+     任意の実閉体$R$および任意の$x \in S_R(\theta)$に対し，
+     $\CSIGN_i(F)(x) = \CSIGN_i(F)(\theta)$である．
 \end{proposition}
 
 \begin{proof}
+     各$\theta \in \Theta_i$に対し，
      実閉体$R$について，$\Ralg \subset R$を満たすから，
-     $S_{\Ralg}(\theta_{n,j}) \subset S_R(\theta_{n,j})$である．
+     $S_{\Ralg}(\theta) \subset S_R(\theta)$である．
      また，\cref{proposition:Artin-Lang}より，
-     $S_{\Ralg}(\theta_{n,j}) \neq \emptyset \iff S_R(\theta_{n,j}) \neq \emptyset$である．
+     $S_{\Ralg}(\theta) \neq \emptyset \iff S_R(\theta) \neq \emptyset$である．
      これらの事から帰納的に示される．
 \end{proof}
 
 $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とする．
 $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
 論理記号$\land, \lor, \lnot$によって生成される$\mathcal{L}_\mathrm{OR}$論理式を，量化記号のない$F$論理式($F$-quantifier free formula)と呼ぶ．
-任意の量化記号のない$\mathcal{L}_\mathrm{OR}$論理式は，ある$F \subset \Z[X_1, \dots, X_m]$を取ることで，量化記号のない$F$論理式とみなすことができることに注意する．
+任意の量化記号のない$\mathcal{L}_\mathrm{OR}$論理式は，ある$F \subset \Z[X_1, \dots, X_n]$を取ることで，量化記号のない$F$論理式とみなすことができることに注意する．
 
 \begin{definition}[{\cite[Notation 11.12]{MR2248869}}]
      $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とし，$\map{\sigma}{F}{\{-1, 0, 1\}}$とする．
-     量化記号のない$F$論理式$\phi\left(\overline{X}\right)$に対して，$\phi^\star(\sigma) \in \{\true, \false\}$を以下のように帰納的に定義する．
+     量化記号のない$F$論理式$\psi\left(\overline{X}\right)$に対して，$\psi^\star(\sigma) \in \{\true, \false\}$を以下のように帰納的に定義する．
      \begin{enumerate}
-          \item $\phi\left(\overline{X}\right)$が$\sign_R\left(f\left(\overline{X}\right)\right) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) であるとき，
+          \item $\psi\left(\overline{X}\right)$が$\sign_R\left(f\left(\overline{X}\right)\right) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) であるとき，
           \begin{equation}
-               \phi^\star(\sigma)\coloneqq \begin{cases}
+               \psi^\star(\sigma)\coloneqq \begin{cases}
                     \true  & \sigma(f)=\tau\\
                     \false & \sigma(f) \neq \tau
                \end{cases}
           \end{equation}
           と定義する．
-          \item $\phi\left(\overline{X}\right)\coloneqq \phi_1\left(\overline{X}\right) \land \phi_2\left(\overline{X}\right)$であるとき，
+          \item $\psi\left(\overline{X}\right)\coloneqq \psi_1\left(\overline{X}\right) \land \psi_2\left(\overline{X}\right)$であるとき，
           \begin{equation}
-               \phi^\star(\sigma)\coloneqq \begin{cases}
-                    \true  & \text{$\phi_1^\star(\sigma)=\true$ かつ $\phi_2^\star(\sigma)=\true$}\\
+               \psi^\star(\sigma)\coloneqq \begin{cases}
+                    \true  & \text{$\psi_1^\star(\sigma)=\true$ かつ $\psi_2^\star(\sigma)=\true$}\\
                     \false & \text{otherwise}
                \end{cases}
           \end{equation}
           と定義する．
-          \item $\phi\left(\overline{X}\right)\coloneqq \phi_1\left(\overline{X}\right) \lor \phi_2\left(\overline{X}\right)$であるとき，
+          \item $\psi\left(\overline{X}\right)\coloneqq \psi_1\left(\overline{X}\right) \lor \psi_2\left(\overline{X}\right)$であるとき，
           \begin{equation}
-               \phi^\star(\sigma)\coloneqq \begin{cases}
-                    \true  & \text{$\phi_1^\star(\sigma)=\true$ または $\phi_2^\star(\sigma)=\true$}\\
+               \psi^\star(\sigma)\coloneqq \begin{cases}
+                    \true  & \text{$\psi_1^\star(\sigma)=\true$ または $\psi_2^\star(\sigma)=\true$}\\
                     \false & \text{otherwise}
                \end{cases}
           \end{equation}
           と定義する．
-          \item $\phi\left(\overline{X}\right)\coloneqq \lnot \phi_1\left(\overline{X}\right)$であるとき，
+          \item $\psi\left(\overline{X}\right)\coloneqq \lnot \psi_1\left(\overline{X}\right)$であるとき，
           \begin{equation}
-               \phi^\star(\sigma)\coloneqq \begin{cases}
-                    \true  & \text{$\phi_1^\star(\sigma)=\false$}\\
+               \psi^\star(\sigma)\coloneqq \begin{cases}
+                    \true  & \text{$\psi_1^\star(\sigma)=\false$}\\
                     \false & \text{otherwise}
                \end{cases}
           \end{equation}
@@ -1973,7 +1972,7 @@ $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
 \end{definition}
 
 このとき，実閉体$R$において，任意の$x \in R^n$に対して
-実閉体$R$が$\phi(x)$を満たすことと$\phi^\star(\sign(F)(x)) = \true$であることは同値である．
+実閉体$R$が$\psi(x)$を満たすことと$\psi^\star(\sign(F)(x)) = \true$であることは同値である．
 
 
 次の命題は，\cite[Proposition 11.14]{MR2248869}を参考にした．
@@ -1988,7 +1987,7 @@ $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
 
      このとき，任意の実閉体$R$および任意の$x \in R^n$に対し，$R \models \phi(x)$であることと
      \begin{equation}
-          \Qua_1 \sigma_1 \in \CSIGN_n(F)(x) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_m \sigma_m \in \sigma_{m-1} (\psi^\star(\sigma_m) = \true)
+          \Qua_1 \sigma_1 \in \CSIGN_{R,n}(F)(x) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_m \sigma_m \in \sigma_{m-1} (\psi^\star(\sigma_m) = \true)
      \end{equation}
      が成り立つことが同値である．
 \end{proposition}
@@ -1997,25 +1996,25 @@ $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
      $m$に関する帰納法によって示す．$m-1$において命題が成り立つと仮定する．$x \in R^n$に対して，
      \begin{align}
                & R \models \phi(x)\\
-          \iff & R \models \Qua_1 Y_1 \dots \Qua_m Y_m \phi(x, Y_1, \dots, Y_m)
+          \iff & R \models \Qua_1 Y_1 \dots \Qua_m Y_m \psi(x, Y_1, \dots, Y_m)
      \end{align}
      である，
      
      $\Qua_1 = \exists$の場合，
      \begin{equation}
-          R \models \exists Y_1 \Qua_2 Y_2 \dots \Qua_m Y_m \phi(x, Y_1, \dots, Y_m)
+          R \models \exists Y_1 \Qua_2 Y_2 \dots \Qua_m Y_m \psi(x, Y_1, \dots, Y_m)
      \end{equation}
      であることの必要十分条件は，ある$y_1 \in R$について 
      \begin{equation}
-          R \models \Qua_2 Y_2 \dots \Qua_m Y_m \phi(x, y_1, Y_2, \dots, Y_m)
+          R \models \Qua_2 Y_2 \dots \Qua_m Y_m \psi(x, y_1, Y_2, \dots, Y_m)
      \end{equation}
      を満たすことである．さらに，帰納法の仮定より，これはある$y_1 \in R$について
      \begin{equation}
-          \Qua_2 \sigma_2 \in \CSIGN_{n+1}(F)(x, y_1) \dots \Qua_m \sigma_m \in \sigma_{m-1} (\psi^\star(\sigma_m) = \true)
+          \Qua_2 \sigma_2 \in \CSIGN_{R,n+1}(F)(x, y_1) \dots \Qua_m \sigma_m \in \sigma_{m-1} (\psi^\star(\sigma_m) = \true)
      \end{equation}
-     を満たすことに必要十分である．$\CSIGN_n(F)(x) = \{\CSIGN_{n+1}(F)(x, y_1) \mid y_1 \in R\}$であるから，これは
+     を満たすことに必要十分である．$\CSIGN_{R,n}(F)(x) = \{\CSIGN_{R,n+1}(F)(x, y_1) \mid y_1 \in R\}$であるから，これは
      \begin{equation}
-          \exists \sigma_1 \in \CSIGN_n(F)(x) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_m \sigma_m \in \sigma_{m-1} (\psi^\star(\sigma_m) = \true)
+          \exists \sigma_1 \in \CSIGN_{R,n}(F)(x) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_m \sigma_m \in \sigma_{m-1} (\psi^\star(\sigma_m) = \true)
      \end{equation}
      に必要十分である．
      
@@ -2030,18 +2029,17 @@ $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
      とする．ただし，$\psi(X_1, \dots, X_n, Y_1, \dots, Y_m)$は量化記号のない$F$論理式であり，$\Qua_i \in \{\forall, \exists\}$とする．
      ここで，$(Y_1, \dots, Y_m)$を$(X_{n+1}, \dots, X_{n+m})$と同一視する．
      
-     $\{\theta_{i,j}(X_1, \dots, X_i)\}_{j=1}^{l_i}$  ( $i=1, \dots, n+m$ ) を，高々$X_1, \dots, X_i$を変数記号に持つような量化記号のない$\mathcal{L}_{\mathrm{OR}}$論理式の族で，
-     任意の実閉体$R$に対し，$\mathcal{S}_i \coloneqq \{S_R(\theta_{i,j})\}_{j=1}^{l_i}$により定まる$\{\mathcal{S}_i\}_{i=1}^{n+m}$が$R^{n+m}$の$F$適合な柱状代数分解であるように取る．
-     ただし，$S_R(\theta_{i,j}) \coloneqq \{(x_1, \dots, x_i) \in R^i \mid R \models \theta_{i,j}(x_1, \dots, x_i)\}$である．
+     $\Theta_i$  ( $i=1, \dots, n+m$ ) を，高々$X_1, \dots, X_i$を変数記号に持つような量化記号のない$\mathcal{L}_{\mathrm{OR}}$論理式の族で，
+     任意の実閉体$R$に対し，$\mathcal{S}_i \coloneqq \{S_R(\theta)\mid \theta \in \Theta_i\}$により定まる$\{\mathcal{S}_i\}_{i=1}^{n+m}$が$R^{n+m}$の$F$適合な柱状代数分解であるように取る．
+     ただし，$S_R(\theta) \coloneqq \{(x_1, \dots, x_i) \in R^i \mid R \models \theta(x_1, \dots, x_i)\}$である．
      
-
-     このとき，$\Theta \subset \{\theta_{n,j}\}_{j=1}^{l_n}$を，
+     このとき，$\Theta' \subset \Theta_n$を，
      \begin{equation}
-          \Qua_1 \sigma_1 \in \CSIGN_n(F)(\theta_{n,j}) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_m \sigma_m \in \sigma_{m-1}(\psi^\star(\sigma_m) = \true)
+          \Qua_1 \sigma_1 \in \CSIGN_n(F)(\theta) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_m \sigma_m \in \sigma_{m-1}(\psi^\star(\sigma_m) = \true)
      \end{equation}
-     が成り立つような$\theta_{n,j}$全体とすれば，
+     が成り立つような$\theta$全体とすれば，
      \begin{equation}
-          \RCF \models \bigvee_{\theta_{n,j} \in \Theta} \theta_{n,j}(X_1, \dots, X_n) \leftrightarrow \phi(X_1, \dots, X_n)
+          \RCF \models \bigvee_{\theta \in \Theta'} \theta(X_1, \dots, X_n) \leftrightarrow \phi(X_1, \dots, X_n)
      \end{equation}
      が成り立つ．
 \end{proposition}
@@ -2049,24 +2047,24 @@ $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
 \begin{proof}
      任意の実閉体$R$に対して
      \begin{equation}
-          \bigcup_{\theta_{n,j} \in \Theta} \{x \in R^n \mid R \models \theta_{n,j}(x)\} = \{x \in R^n \mid R \models \phi(x)\}
+          \bigcup_{\theta \in \Theta'} \{x \in R^n \mid R \models \theta(x)\} = \{x \in R^n \mid R \models \phi(x)\}
      \end{equation}
      が成り立つことを示せばよい．
-     また，$S_R(\theta_{i,j}) = \{x \in R^n \mid R \models \theta_{n,j}(x)\}$であることに注意する．
+     また，$S_R(\theta) = \{x \in R^n \mid R \models \theta(x)\}$であることに注意する．
 
-     まず，ある$\theta_{n,j} \in \Theta$について$x \in S_R(\theta_{i,j})$
-     であるとき，$\CSIGN_i(F)(x) = \CSIGN_i(F)(\theta_{i,j})$であるから，
-     \cref{proposition:qe-cad-method}より$R \models \phi(x)$を満たす．
+     まず，ある$\theta \in \Theta'$について$x \in S_R(\theta)$
+     であるとき，$\CSIGN_{R,n}(F)(x) = \CSIGN_n(F)(\theta)$であるから，
+     \cref{proposition:qe-cad-propoerty}より$R \models \phi(x)$を満たす．
 
      一方，ある$R \models \phi(x)$を満たす$x \in R^n$を任意とると，
-     $\{\mathcal{S}\}_{i=1}^{n+m}$は柱状代数分解であるから，
-     ある$\theta_{i,j}$に対して$x \in S_R(\theta_{i,j})$である．
-     また，$R \models \phi(x)$であるから，\cref{proposition:qe-cad-method}より
+     $\{\mathcal{S}_i\}_{i=1}^{n+m}$は柱状代数分解であるから，
+     ある$\theta \in \Theta_n$に対して$x \in S_R(\theta)$である．
+     また，$R \models \phi(x)$であるから，\cref{proposition:qe-cad-propoerty}より
      \begin{equation}
-          \Qua_1 \sigma_1 \in \CSIGN_n(F)(x) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_m \sigma_m \in \sigma_{m-1} (\psi^\star(\sigma_m) = \true)
+          \Qua_1 \sigma_1 \in \CSIGN_{R,n}(F)(x) \Qua_2 \sigma_2 \in \sigma_1 \dots \Qua_m \sigma_m \in \sigma_{m-1} (\psi^\star(\sigma_m) = \true)
      \end{equation}
-     を満たす．よって，$\CSIGN_i(F)(x) = \CSIGN_i(F)(\theta_{i,j})$であるから，
-     $\theta_{i,j} \in \Theta$である．
+     を満たす．よって，$\CSIGN_{R,n}(F)(x) = \CSIGN_n(F)(\theta)$であるから，
+     $\theta \in \Theta'$である．
      以上で命題が示された．
 \end{proof}
 
@@ -2086,7 +2084,7 @@ $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
      \begin{algorithmic}[1]
           \REQUIRE 
                有限部分集合
-               $F \subset \Ralg[X_1, \dots, X_n]$
+               $F \subset \Z[X_1, \dots, X_n]$
           \ENSURE 
                $ \overline{F}_{\leq i} \subset \Z[X_1, \dots, X_i]$の列$\{\overline{F}_{\leq i}\}_{i=1}^n$
 
