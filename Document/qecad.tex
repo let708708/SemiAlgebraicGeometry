@@ -73,10 +73,15 @@
 \crefname{theorem}{定理}{定理}
 \newtheorem{corollary}[definition]{系}
 \crefname{corollary}{系}{系}
-\newtheorem*{claim*}{主張}
 \newtheorem{remark}[definition]{注意}
+\crefname{remark}{注意}{注意}
 \newtheorem{example}[definition]{例}
 \crefname{example}{例}{例}
+\newtheorem{question}[definition]{問題}
+\crefname{question}{問題}{問題}
+
+\crefname{section}{第}{第}
+\creflabelformat{section}{#2#1節#3}
 
 \renewcommand{\proofname}{\textbf{証明}}
 \renewcommand{\theenumi}{(\arabic{enumi})}
@@ -91,7 +96,64 @@
 
 \tableofcontents
 
-\section{実閉体}
+\section{導入}\label{section:1}
+     \todo[inline]{
+          量化記号消去を行うモチベーションを書く
+
+     }
+
+     本論文は，Collins\cite{MR0403962}による実閉体上の量化記号消去のアルゴリズムを紹介する総合報告である．
+
+     まず，量化記号消去を，大学入試問題を用いて説明する．
+
+     \begin{question}[東京大学文科2021年数学 大問3(1)]\label{question:ut2021}
+          $a$, $b$を実数とする。座標平面上の放物線$C:y=x^2+ax+b$は放物線$y=-x^2$と$2$つの共有点を持ち，
+          一方の共有点の$x$座標は$-1<x<0$を満たし，他方の共有点の$x$座標は$0<x<1$を満たす。
+          点$(a,b)$のとりうる範囲を座標平面上に図示せよ。
+     \end{question}
+
+     \cref{question:ut2021}において，求めたい領域は，次を満たす集合である．
+     \begin{equation}
+          \{(a,b) \in \R^2 \mid \exists x_1 \exists x_2(-1 < x_1 < 0 \land 0 < x_2 < 1 \land x_1^2+ax_1+b = -x_1^2 \land x_2^2 + ax_2 + b = -x_2^2) \}
+     \end{equation}
+     この領域を図示するためには点$(a,b)$に関する条件
+     \begin{equation}
+          \phi(a,b) \coloneqq \exists x_1 \exists x_2(-1 < x_1 < 0 \land 0 < x_2 < 1 \land x_1^2+ax_1+b = -x_1^2 \land x_2^2 + ax_2 + b = -x_2^2)
+     \end{equation}
+     を，図示可能な条件，すなわち，$\exists x_1 \exists x_2$のない形の条件に書き替える必要があるのである．
+     実際，点$(a,b)$についての条件$\phi(a,b)$の必要十分条件は，
+     \begin{equation}
+          \theta(a,b) \coloneqq b < 0 \land a+b+2>0 \land b-a+2>0
+     \end{equation}
+     であり，このような点$(a,b)$についての条件が求まれば，領域の図示が可能になる．
+     
+     このように，点$(a,b)$に関する条件$\phi(a,b)$（論理式）から，それと同値な
+     $\exists x_1 \exists x_2$のような形のない，図示可能な条件（量化記号のない論理式）に書き替えることを，量化記号消去という．
+
+     このようなことは，任意の論理式について成り立つ．
+     すなわち，任意の論理式から，それと同値な量化記号のない論理式を求めるアルゴリズムが存在する．
+
+     
+     
+
+
+     \todo[inline]{内容構成の説明}
+     本論文の\cref{section:2}では，ArtinとSchreierにより導入された実閉体の概念についてまとめる．
+     \cref{section:3}で一階述語論理の用語を導入し，さらに実閉体の理論を定義する．
+     \cref{section:4}で理論が量化記号消去をもつことを定義し，実閉体の理論が量化記号消去を持つことを示す．
+     \cref{section:5}では，実閉体上の半代数的集合を定義し，その性質についてまとめる．
+     この概念は，\cref{section:6}で定義する柱状代数分解に必要である．
+
+     そして，\cref{section:6}では，
+     実閉体を係数とする多項式の有限部分集合$F$に対し，$F$適合な柱状代数分解について定義してその存在を示す．
+     \cref{section:7}では，\cref{section:9}で述べる量化記号消去のアルゴリズムのために，\cref{section:6}の柱状代数分解を改良する．
+     \cref{section:8}では，柱状代数分解と量化記号消去の関係について述べ，
+     \cref{section:9}で述べるアルゴリズムが実際に任意の論理式の量化記号を消去する事を示す．
+     最後に\cref{section:9}では，柱状代数分解による量化記号消去のアルゴリズムの疑似コードを明示する．
+
+     \todo[inline]{謝辞する}
+       
+\section{実閉体}\label{section:2}
 
 まず，\cite{MR3069467}でArtinとSchreierにより導入された，実閉体の概念についてまとめる．
 始めに，順序体の定義を述べる．
@@ -274,7 +336,7 @@ $\Ralg$の元を実代数的数という．
      この$x \in (a,b)$に対して$f'(x) \leq 0$となる．
 \end{proof}
 
-\section{一階述語論理}
+\section{一階述語論理}\label{section:3}
 
 この節では，\cite{MR1924282}に従って一階述語論理についてまとめる．
 
@@ -450,7 +512,7 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
 
 ここで，実閉体の理論$\RCF$を，\cite[Section 5.2.1]{C3041}に従って定義する．
 
-\begin{example}[実閉体の理論]
+\begin{definition}[実閉体の理論]
      言語$\mathcal{L}_\mathrm{OR}$を，以下のデータの組として定義する．
      \begin{itemize}
           \item 定数記号 $0$, $1$.
@@ -481,7 +543,7 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
           \end{enumerate}
 
      ここで，項$t$に対し，$t^p$は$t$の$p$個の積$(t\cdot(t\cdot(\dots \cdot t)))$の省略とする．
-\end{example}
+\end{definition}
 
 \begin{remark}以下の点に注意する．
      \begin{itemize}
@@ -624,7 +686,7 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
 \end{proof}
 
 
-\section{量化記号消去}
+\section{量化記号消去}\label{section:4}
 
 \begin{example} \label{example:quantifier elimination}
      言語$\mathcal{L}_\mathrm{OR}$上の次のような論理式を考える．
@@ -1078,7 +1140,7 @@ $
      以上により命題の証明が完了した．
 \end{proof}
 
-\section{半代数的集合}
+\section{半代数的集合}\label{section:5}
 \begin{definition}[{\cite[Definition 2.1.4]{MR1659509}}]
      $R$を実閉体とする．
      変数記号の列$X_1, \dots, X_n$を$\overline{X}$と書くことにする．
@@ -1311,7 +1373,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 \cref{theorem:continuity-of-roots}の証明は，\cite[Theorem 5.12]{MR2248869}を参照してほしい．
 
 
-\section{柱状代数分解}
+\section{柱状代数分解}\label{section:6}
 
 $R$を実閉体とする．
 
@@ -1381,7 +1443,6 @@ $R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を構成することがで
 まず初めに$R^1$の柱状代数分解を与え，
 それを基に順に$R^2, R^3, \dots, R^n$の柱状代数分解を構成していく．
 
-\subsection{描画可能}
 $F$に適合した$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を$R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$から構成するとき，
 各$S \in \mathcal{S}_{n-1}$は次に定義する性質を満たしてほしい．
 なお，次の定義はCollins\cite{MR0403962}によって導入されたものである．
@@ -1485,9 +1546,8 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
 よって，$F$符号不変な$R^n$の柱状代数分解を与えるには，\cref{corollary:del}の条件を満たすような$R^{n-1}$の柱状代数分解を構成すればよい．
 条件\ref{corollary:del-1}を満たすような$R^{n-1}$の分解を与えるには，各$f \in F$について，$X_n$係数が符号不変になるような分解を構成すればよい．
 一方，条件\ref{corollary:del-2}, \ref{corollary:del-3}を満たすような$R^{n-1}$の分解を与えるのは，条件\ref{corollary:del-1}に比べて少し難しい．
-条件\ref{corollary:del-2}, \ref{corollary:del-3}も満たすような$R^{n-1}$の分解を与えることができるよう，次の節で準備をする．
+条件\ref{corollary:del-2}, \ref{corollary:del-3}も満たすような$R^{n-1}$の分解を与えるために，次に定義する主部分終結式係数を用いる．
 
-\subsection{部分終結式係数}
 \begin{definition}[{\cite[Section 2]{MR0403962}}]\todo{元論文}
      $\mathcal{R}$を可換環とし，$A(X), B(X) \in \mathcal{R}[X] \setminus \{0\}$ を，$\deg A(X) = m$, $\deg B(X) = n$とする．
      また，$A(X)$, $B(X)$は次のように書けるとする．
@@ -1539,7 +1599,6 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
 \cref{theorem:psc}の証明は，\cite[Theorem 2]{MR0403962}を参照してほしい．\todo{証明チェック}
 また，\cref{theorem:psc}は，$\deg(\gcd(A,B))$が主部分終結式係数$\psc_j(A, B)$により決定することを意味している．
 
-\subsection{符号不変な柱状代数分解の存在}
 それでは，\cref{theorem:cad}を証明する．
 まず，以下のように記号を準備する．
 
@@ -1661,7 +1720,7 @@ $S$が$\PROJ_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      よって，帰納法により示された．
 \end{proof}
 
-\subsection{柱状代数分解の改良}
+\section{柱状代数分解の改良}\label{section:7}
 有限部分集合$F \subset R[X_1, \dots, X_n]$が与えられたとき，
 $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在することはすでに示したが，
 各$S \in \mathcal{S}_k$の定義式，すなわち，
@@ -1834,7 +1893,7 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
 \end{proof}
 
 
-\section{柱状代数分解による量化記号消去}
+\section{柱状代数分解による量化記号消去}\label{section:8}
 
 Collins\cite{MR0403962}による柱状代数分解を用いて量化記号消去を行うアルゴリズムについて説明する．
 
@@ -2068,7 +2127,7 @@ $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
      以上で命題が示された．
 \end{proof}
 
-\section{柱状代数分解による量化記号消去のアルゴリズム} 
+\section{柱状代数分解による量化記号消去のアルゴリズム} \label{section:9}
 
 柱状代数分解による量化記号消去のアルゴリズムについて述べる．
 
