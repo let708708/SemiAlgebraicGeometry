@@ -7,6 +7,7 @@
 \usepackage{algorithmic}
 \usepackage{cleveref}
 \usepackage{todonotes}
+\usepackage{graphicx}
 
 \numberwithin{equation}{section}
 \makeatletter
@@ -87,6 +88,7 @@
 \renewcommand{\theenumi}{(\arabic{enumi})}
 \renewcommand{\labelenumi}{\theenumi}
 \crefname{algorithm}{アルゴリズム}{アルゴリズム}
+\crefname{figure}{図}{図}
 
 \begin{document}
 
@@ -132,15 +134,62 @@
      このように，点$(a,b)$に関する条件（論理式）$\phi(a,b)$から，それと同値な
      $\exists x_1 \exists x_2$のような形のない，図示可能な条件（量化記号のない論理式）$\theta(a,b)$に書き替えることを，量化記号消去という．
 
-     このようなことは，任意の論理式について成り立つ．
-     すなわち，任意の論理式に対して，それと同値な量化記号のない論理式が存在する．
-     さらに，論理式に対してそれと同値な量化記号のない論理式を求めるアルゴリズムが知られている．
-     本論文では，Collins\cite{MR0403962}が考案した，柱状代数分解による量化記号消去のアルゴリズムを紹介することが目的である．
+     このように，任意の論理式に対して，それと同値な量化記号のない論理式が存在し，さらにそのような論理式を求めるアルゴリズムが存在する．
+     それが今回紹介するCollins\cite{MR0403962}の提案した，柱状代数分解によるアルゴリズムである．
 
-
+     \todo[inline]{CADのモチベーションについて説明する．}
      
-     
+     柱状代数分解がどのようなものであり，そしてそれを用いてどのように量化記号消去に役立つか，次の問題を通して説明する．
+     \begin{question}
+          ある実数$x$が存在して
+          $x^2 + a^2 < 1$, $a < x$
+          を満たす実数$a$の範囲を求めよ．          
+     \end{question}
+     $f(x,a) = x^2 + a^2 -1$, $g(x,a) = a-x$とすると，この問題は，次の条件を満たす$a$の範囲を求めることに同値である．
+     \begin{equation}
+          \phi(a) = \exists x (f(x,a)<0 \land g(x,a)<0).
+     \end{equation}
+     まず，$(x, a)$座標平面上に，$2$つのグラフ$f(x,a)=0$, $g(x,a)=0$および領域$f(x,a)<0$, $g(x,a)<0$を描画してみよう．
+     \begin{figure}[H]
+          \centering
+          \caption{$f(x,a)=0, g(x,a)=0$のグラフの描画}
+          \includegraphics[width=0.5\linewidth]{pic/picture1.png}  % ファイル名は実際の画像ファイルの名前に変更する
+          \label{fig:pic1}
+     \end{figure}
+     ただし，領域$f(x,a)<0$, $g(x,a)<0$，図の灰色部分である．
 
+     ここで，条件$\phi(a)$を満たす$a$の範囲を調べる方針として，
+     $a$の値を場合分けし，それぞれの場合において条件を満たすような$x$が存在するかを確かめる方針を取る．
+
+     例えば，条件を満たす$a$の範囲を調べるために，$a$軸の範囲を次のように$9$つの場合に分けて調べていく．
+     \begin{itemize}
+          \item $a < -1$,
+          \item $a = -1$,
+          \item $-1 < a < -1/\sqrt{2}$,
+          \item $a = -1/\sqrt{2}$,
+          \item $-1/\sqrt{2} < a < 1/\sqrt{2}$,
+          \item $a = 1/\sqrt{2}$,
+          \item $1/\sqrt{2} < a < 1$,
+          \item $a = 1$
+          \item $1 < a$.
+     \end{itemize}
+     これらの条件を\cref{fig:pic1}に合わせて描画すると次のようになる．
+
+     \begin{figure}[H]
+          \centering
+          \caption{$a$の場合分けを合わせて描画}
+          \includegraphics[width=0.5\linewidth]{pic/picture2.png}  % ファイル名は実際の画像ファイルの名前に変更する
+          \label{fig:pic2}
+     \end{figure}
+
+     \cref{fig:pic2}を見ると，上記の場合分けの中で条件を満たす$a$は，
+     \begin{itemize}
+          \item $-1/\sqrt{2} < a < 1/\sqrt{2}$,
+          \item $a = 1/\sqrt{2}$,
+          \item $1/\sqrt{2} < a < 1$
+     \end{itemize}
+     である．
+     
 
      \todo[inline]{内容構成の説明}
      本論文の\cref{section:2}では，ArtinとSchreierにより導入された実閉体の概念についてまとめる．
