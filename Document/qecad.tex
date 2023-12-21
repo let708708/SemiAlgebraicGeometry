@@ -99,12 +99,7 @@
 \tableofcontents
 
 \section{導入}\label{section:1}
-     \todo[inline]{
-          量化記号消去を行うモチベーションを書く
-
-     }
-
-     本論文は，Collins\cite{MR0403962}による実閉体上の量化記号消去のアルゴリズムを紹介する総合報告である．
+     本論文は，Collins\cite{MR0403962}による，柱状代数分解を用いた実閉体上の量化記号消去のアルゴリズムを紹介する総合報告である．
 
      まず，量化記号消去を，大学入試問題を用いて説明する．
 
@@ -134,64 +129,102 @@
      このように，点$(a,b)$に関する条件（論理式）$\phi(a,b)$から，それと同値な
      $\exists x_1 \exists x_2$のような形のない，図示可能な条件（量化記号のない論理式）$\theta(a,b)$に書き替えることを，量化記号消去という．
 
-     このように，任意の論理式に対して，それと同値な量化記号のない論理式が存在し，さらにそのような論理式を求めるアルゴリズムが存在する．
+     任意の論理式に対して，それと同値な量化記号のない論理式が存在し，さらにそのような論理式を求めるアルゴリズムが存在する．
      それが今回紹介するCollins\cite{MR0403962}の提案した，柱状代数分解によるアルゴリズムである．
-
-     \todo[inline]{CADのモチベーションについて説明する．}
      
-     柱状代数分解がどのようなものであり，そしてそれを用いてどのように量化記号消去に役立つか，次の問題を通して説明する．
+     それでは，柱状代数分解がどのようなものであり，そしてそれを用いてどのように量化記号消去を行うか，次の問題を通して説明する．
      \begin{question}
           ある実数$x$が存在して
           $x^2 + a^2 < 1$, $a < x$
           を満たす実数$a$の範囲を求めよ．          
      \end{question}
-     $f(x,a) = x^2 + a^2 -1$, $g(x,a) = a-x$とすると，この問題は，次の条件を満たす$a$の範囲を求めることに同値である．
+     まず，$f(x,a) = x^2 + a^2 -1$, $g(x,a) = a-x$とする．
+     この問題は，論理式
      \begin{equation}
-          \phi(a) = \exists x (f(x,a)<0 \land g(x,a)<0).
+          \phi(a) = \exists x (f(x,a)<0 \land g(x,a)<0)
      \end{equation}
+     に同値な，量化記号$\exists x$のない論理式$\theta(a)$を求めることに同値である．
+
      まず，$(x, a)$座標平面上に，$2$つのグラフ$f(x,a)=0$, $g(x,a)=0$および領域$f(x,a)<0$, $g(x,a)<0$を描画してみよう．
      \begin{figure}[H]
           \centering
           \caption{$f(x,a)=0, g(x,a)=0$のグラフの描画}
-          \includegraphics[width=0.5\linewidth]{pic/picture1.png}  % ファイル名は実際の画像ファイルの名前に変更する
+          \includegraphics[width=0.5\linewidth]{pic/picture1.png}
           \label{fig:pic1}
      \end{figure}
-     ただし，領域$f(x,a)<0$, $g(x,a)<0$，図の灰色部分である．
+     
+     ただし，領域$f(x,a)<0$, $g(x,a)<0$は図の灰色部分である．
 
-     ここで，条件$\phi(a)$を満たす$a$の範囲を調べる方針として，
-     $a$の値を場合分けし，それぞれの場合において条件を満たすような$x$が存在するかを確かめる方針を取る．
-
-     例えば，条件を満たす$a$の範囲を調べるために，$a$軸の範囲を次のように$9$つの場合に分けて調べていく．
-     \begin{itemize}
-          \item $a < -1$,
-          \item $a = -1$,
-          \item $-1 < a < -1/\sqrt{2}$,
-          \item $a = -1/\sqrt{2}$,
-          \item $-1/\sqrt{2} < a < 1/\sqrt{2}$,
-          \item $a = 1/\sqrt{2}$,
-          \item $1/\sqrt{2} < a < 1$,
-          \item $a = 1$
-          \item $1 < a$.
-     \end{itemize}
-     これらの条件を\cref{fig:pic1}に合わせて描画すると次のようになる．
+     まず初めに，二つの多項式$f(x,a)$, $g(x,a)$から
+     $f(x,a)$, $g(x,a)$の共有点と，それぞれの$a$方向の微分$\partial f/\partial a(x,a)$, $\partial g/\partial a(x,a)$ 
+     が$0$になるような点$(-1,0)$, $(1,0)$, $(-1/\sqrt{2},-1/\sqrt{2})$, $(1/\sqrt{2},1/\sqrt{2})$を取る．
 
      \begin{figure}[H]
           \centering
-          \caption{$a$の場合分けを合わせて描画}
-          \includegraphics[width=0.5\linewidth]{pic/picture2.png}  % ファイル名は実際の画像ファイルの名前に変更する
+          \caption{4点を描画}
+          \includegraphics[width=0.5\linewidth]{pic/picture2.png}  
           \label{fig:pic2}
      \end{figure}
 
-     \cref{fig:pic2}を見ると，上記の場合分けの中で条件を満たす$a$は，
+     次に，この4点の$a$座標を境界にして，$a$軸を次のような$9$つの開区間及び点$\{S_i\}_{i=1}^9$に分割する．
      \begin{itemize}
-          \item $-1/\sqrt{2} < a < 1/\sqrt{2}$,
-          \item $a = 1/\sqrt{2}$,
-          \item $1/\sqrt{2} < a < 1$
+          \item $S_1 \colon a < -1$,
+          \item $S_2 \colon a = -1$,
+          \item $S_3 \colon -1 < a < -1/\sqrt{2}$,
+          \item $S_4 \colon a = -1/\sqrt{2}$,
+          \item $S_5 \colon -1/\sqrt{2} < a < 1/\sqrt{2}$,
+          \item $S_6 \colon a = 1/\sqrt{2}$,
+          \item $S_7 \colon 1/\sqrt{2} < a < 1$,
+          \item $S_8 \colon a = 1$,
+          \item $S_9 \colon 1 < a$.
      \end{itemize}
-     である．
-     
+     これらの条件を\cref{fig:pic2}に合わせて描画すると次のようになる．
 
-     \todo[inline]{内容構成の説明}
+     \begin{figure}[H]
+          \centering
+          \caption{$\{S_i\}_{i=1}^9$を描画}
+          \includegraphics[width=0.5\linewidth]{pic/picture3.png}  
+          \label{fig:pic3}
+     \end{figure}
+
+     このような$a$軸の分割$\{S_i\}_{i=1}^9$をとると，
+     各$S_i$に対し有限個の連続関数$\map{\xi_{S_i,1} < \dots, \xi_{S_i,l_i}}{S_i}{\R}$が存在して，
+     任意の$a \in S_i$に対し$\{\xi_{S_i,k}(a)\}_{j=1}^{l_i}$は$x$変数の多項式$f(a,x)$, $g(a,x)$の根全体であるようにとれる．
+
+     このとき各$S_i$に対し，$\xi_{S_i,0} = -\infty$, $\xi_{S_i,l_i+1}=\infty$として，
+     \begin{align}
+          C_{S_i, 2j} &= \{(a,\xi_{S_i, j}(a)) \in \R^2 \mid a \in S_i\}, \quad j=1,...,l_i,\\
+          C_{S_i, 2j+1} &= \{(a,x) \in \R^2 \mid a \in S_i, \xi_{S_i,j}(a) < x < \xi_{S_i, j+1}(a)\}, \quad j=0,...,l_i,
+     \end{align}
+     と定めると，各$C_{S_i, k}$の上で$f, g$の符号は一定である．
+
+     このような構成的な分割を，$\R^2$の柱状代数分解という．厳密な定義は\cref{section:6}で行う．
+
+     さて，
+     論理式$\phi(a)$に同値な量化記号のない論理式$\theta(a)$を求めるには，
+     ある$C_{S_i, k}$上で$f<0$, $g<0$となるような$S_i$を集めればよい．
+     
+     \cref{fig:pic3}より，そのような$S_i$全体は
+     \begin{itemize}
+          \item $S_5 \colon -1/\sqrt{2} < a < 1/\sqrt{2}$,
+          \item $S_6 \colon a = 1/\sqrt{2}$,
+          \item $S_7 \colon 1/\sqrt{2} < a < 1$
+     \end{itemize}
+     であるので，
+     \begin{equation}
+          \theta(a) \coloneqq (-1/\sqrt{2} < a < 1/\sqrt{2}) \land (a = 1/\sqrt{2}) \land (1/\sqrt{2} < a < 1)
+     \end{equation}
+     とすれば，これは論理式$\phi(a)$と同値な量化記号のない論理式である．
+
+     上記の例のように，与えられた論理式$\phi(a)$に登場する多項式の集合から，
+     ユークリッド空間の分割$\{S_i\}_{i=1}^9$, $\{C_{S_i,k}\}_{i=1,..,9, k=1,..,2l_i+1}$を構成し，
+     そこから適切な$S_i$を集め，それぞれの$S_i$を定める量化記号のない論理式の論理和をとることで，
+     もとの論理式$\phi(a)$と同値な量化記号のない論理式$\theta(a)$をアルゴリズム的に構成することができる．
+
+     本論文では，このような方法を，実数体を公理化した実閉体上で一般の論理式に対して行う．
+
+     次に，内容構成について述べておく．
+
      本論文の\cref{section:2}では，ArtinとSchreierにより導入された実閉体の概念についてまとめる．
      \cref{section:3}で一階述語論理の用語を導入し，さらに実閉体の理論を定義する．
      \cref{section:4}で理論が量化記号消去をもつことを定義し，実閉体の理論が量化記号消去を持つことを示す．
@@ -205,7 +238,7 @@
      \cref{section:9}で述べるアルゴリズムが実際に任意の論理式の量化記号を消去する事を示す．
      最後に\cref{section:9}では，柱状代数分解による量化記号消去のアルゴリズムの疑似コードを明示する．
 
-     \todo[inline]{謝辞する}
+     最後に，本修士論文の執筆にあたりたくさんの助言をくださった植田一石准教授に感謝の意を表します．
        
 \section{実閉体}\label{section:2}
 
@@ -255,10 +288,10 @@
 
 例えば，実数体$\R$や有理数体$\Q$，有理数体$\Q$に$\sqrt{2}$を添加した体$\Q\left(\sqrt{2}\right)$は，
 通常の全順序構造を入れることにより順序体となる．
-したがって，$\R, \Q, \Q\left(\sqrt{2}\right)$はいずれも実体である．
+従って，$\R, \Q, \Q\left(\sqrt{2}\right)$はいずれも実体である．
 
-また，複素数体$\C$は$\sqrt{-1}^2 = -1$をみたす元$\sqrt{-1}$を持つ．
-したがって，$\C$は実体ではない．
+また，複素数体$\C$は$\sqrt{-1}^2 = -1$を満たす元$\sqrt{-1}$を持つ．
+従って，$\C$は実体ではない．
 
 有理数体$\Q$は，実体$\Q\left(\sqrt{2}\right)$を代数拡大に持つが，
 実数体$\R$の代数拡大で実体になるものは$\R$自身のみである．
@@ -318,7 +351,7 @@ $\Ralg$の元を実代数的数という．
      実際，もしすべての$f(X)$の既約因子$g(X)$について，$g(a)g(b) \geq 0$であれば，$f(a)f(b)\geq0$となり仮定に反する．
      ここで，先に述べた注意から，$g(a)g(b)<0$となるような$f(X)$の既約因子$g(X)$は，$g(X) = X - \alpha$とかける．
      $g(a)g(b) < 0$であることから，$a<\alpha<b$であり，このとき$f(\alpha)=0$である．
-     したがって，命題が示された．
+     従って，命題が示された．
 \end{proof}
 
 \begin{proposition}\label{proposition:Rolle}
@@ -690,7 +723,7 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
           &\models \psi \land \psi' \leftrightarrow \bigvee_{i, i'} \left(\bigwedge_j L_{i,j} \wedge \bigwedge_{j'} L'_{i',j'}\right)
      \end{align}
      であるから，論理式$\phi$についても命題が成り立つ．
-     したがって，帰納法により命題が示された．
+     従って，帰納法により命題が示された．
 \end{proof}
 
 \begin{proposition}\label{proposition:pnf}
@@ -736,7 +769,7 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
                \end{align}
                より，論理式$\phi$についても命題が成り立つ．
      \end{itemize}
-     したがって，帰納法により命題が示された．
+     従って，帰納法により命題が示された．
 \end{proof}
 
 
@@ -1009,7 +1042,7 @@ $W_{s,m}$と書く．
 次の補題は，\cref{theorem:weak_Tarski}の証明の中心となる補題である．
 
 \begin{lemma}[{\cite[Lemma 1.4.5]{MR1659509}}]\label{lemma:qe_lowering}
-     ある写像$\map{\varphi}{W_{2s,m}}{W_{s,m}}$が存在して，次をみたす．
+     ある写像$\map{\varphi}{W_{2s,m}}{W_{s,m}}$が存在して，次を満たす．
 
      任意の実閉体$R$と，任意の$f_1, \dots, f_s \in R[X]$に対して，
      各$f_i$の次数は$m$以下であり，
@@ -1382,9 +1415,9 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 
 \begin{proof}
      所与の$U_1, U_2$に対して，各$i=1, 2$に対し$F_i\coloneqq S \setminus U_i$とする．
-     このとき，各$F_i$は半代数的閉部分集合であり，$F_1 \cup F_2 = S$, $F_1 \cap F_2 = \emptyset$をみたす．
+     このとき，各$F_i$は半代数的閉部分集合であり，$F_1 \cup F_2 = S$, $F_1 \cap F_2 = \emptyset$を満たす．
      ここで，半代数的連結の定義より$F_1 = S$または$F_2 = S$である．よって，$U_1 = \emptyset$または$U_2 = \emptyset$である．
-     したがって，$U_1 \cup U_2 = S$より，$U_1 = S$または$U_2 = S$となり，命題が示された．
+     従って，$U_1 \cup U_2 = S$より，$U_1 = S$または$U_2 = S$となり，命題が示された．
 \end{proof}
 
 \cref{proposition:image-preimage}と\cref{proposition:connectedness}より，次の命題が示さされる．
@@ -1401,7 +1434,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      さらに，$U_2\coloneqq f^{-1}(f(S) \setminus \{d\})$は開集合である．
      さらに，$f$は半代数的関数であることから，\cref{proposition:image-preimage}より，$U_1, U_2$はいずれも半代数的集合である．
      $U_1 \cup U_2 = S, U_1 \cap U_2 = \emptyset, U_1 \neq \emptyset$であるから，\cref{proposition:connectedness}より，
-     $U_1 = S$となる．したがって，$S = f^{-1}(\{d\})$すなわち$f$は定数関数である．
+     $U_1 = S$となる．従って，$S = f^{-1}(\{d\})$すなわち$f$は定数関数である．
 \end{proof}
 
 ここで，$z \in R\left[ \sqrt{-1} \right]$及び$r \in R$, $r>0$, に対し，
@@ -1823,7 +1856,7 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
      $\Reali_R(\sigma) = \Reali_R({\sigma_0}) \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(f_{s+1})\}$であるから，
      $\Reali_R({\sigma_0})$が空集合，あるいは一点からなる集合の場合には，$\Reali_R(\sigma)$は空集合か一点からなる集合になるので主張は成り立つ．
 
-     したがって，$\Reali_R({\sigma_0})$が開区間である場合を考える．
+     従って，$\Reali_R({\sigma_0})$が開区間である場合を考える．
      $f_{s+1}$の微分$f_{s+1}'$は，$f_1, \dots, f_s$のいずれかであるから，$\Reali_R({\sigma_0})$上符号は一定である．
 
      $f_{s+1}'$の符号が$\Reali_R({\sigma_0})$上常に$0$である場合，$f_{s+1}$は$\Reali_R({\sigma_0})$上定数であるから，主張は成り立つ．
