@@ -8,6 +8,8 @@
 \usepackage{cleveref}
 \usepackage{todonotes}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{patterns, positioning, intersections, calc, arrows.meta,math} %tikzのlibrary
 
 \numberwithin{equation}{section}
 \makeatletter
@@ -99,6 +101,7 @@
 \tableofcontents
 
 \section{導入}\label{section:1}
+
      本論文は，Collins\cite{MR0403962}による，柱状代数分解を用いた実閉体上の量化記号消去のアルゴリズムを紹介する総合報告である．
 
      まず，量化記号消去を，大学入試問題を用いて説明する．
@@ -126,7 +129,17 @@
      \begin{figure}[H]
           \centering
           \caption{\cref{question:ut2021}の解答}
-          \includegraphics[width=0.5\linewidth]{pic/picture0.png}
+               \begin{tikzpicture}[scale=1]
+                    \draw[->, >=stealth, semithick] (-3,0)--(3,0) node[right]{$a$};
+                    \draw[->, >=stealth, semithick] (0,-4)--(0,1) node[left]{$b$};
+                    \draw[thick, domain=-3:2] plot(\x,-\x-2);
+                    \draw[thick, domain=-2:3] plot(\x,\x-2);
+                    \draw (0,0) node[below left]{O};
+                    \draw (-2,0) node[below left]{-2};
+                    \draw (2,0) node[below right]{2};
+                    \draw (0,-2) node[right]{-2};
+                    \fill [pattern = north east lines] (-2,0)--(2,0)--(0,-2);
+               \end{tikzpicture}
           \label{fig:pic0}
      \end{figure}
      
@@ -152,8 +165,24 @@
      まず，$(a, x)$座標平面上に，$2$つのグラフ$f(a,x)=0$, $g(a,x)=0$および領域$f(a,x)<0$, $g(a,x)<0$を描画してみよう．
      \begin{figure}[H]
           \centering
+          \begin{tikzpicture}[scale=1.5]
+               \draw[->, >=stealth, semithick] (-2,0)--(2,0) node[right]{$a$};
+               \draw[->, >=stealth, semithick] (0,-2)--(0,2) node[left]{$x$};
+               \draw[thick, domain=-2:2] plot(\x,\x);
+               \draw (0,0) circle(1 and 1);
+               \draw (0,0) node[below right]{O};
+               \draw (-1,0) node[below left]{-1};
+               \draw (1,0) node[below right]{1};
+               \draw (0,1) node[above right]{1};
+               \draw (0,-1) node[below right]{-1};
+               % \draw ({sqrt(1/2)},{sqrt(1/2)}) node[right]{$(1/\sqrt{2},1/\sqrt{2})$};
+               % \draw ({-sqrt(1/2)},{-sqrt(1/2)}) node[left]{$(-1/\sqrt{2},-1/\sqrt{2})$};
+               \begin{scope}
+                    \clip (0,0) circle(1 and 1);
+                    \fill[pattern = north east lines] (-2,-2)--(2,2)--(2,-2);
+               \end{scope}
+          \end{tikzpicture}          
           \caption{$f(x,a)=0, g(x,a)=0$のグラフの描画}
-          \includegraphics[width=0.5\linewidth]{pic/picture1.png}
           \label{fig:pic1}
      \end{figure}
      
@@ -164,8 +193,26 @@
 
      \begin{figure}[H]
           \centering
+          \begin{tikzpicture}[scale=1.5]
+               \draw[->, >=stealth, semithick] (-2,0)--(2,0) node[right]{$a$};
+               \draw[->, >=stealth, semithick] (0,-2)--(0,2) node[left]{$x$};
+               \draw[thick, domain=-2:2] plot(\x,\x);
+               \draw (0,0) circle(1 and 1);
+               \draw (0,0) node[below right]{O};
+               \draw (-1,0) node[below left]{-1};
+               \draw (1,0) node[below right]{1};
+               \draw (0,1) node[above right]{1};
+               \draw (0,-1) node[below right]{-1};
+               \fill (-1,0) circle(0.05 and 0.05);
+               \fill (1,0) circle(0.05 and 0.05);
+               \fill (-{sqrt(1/2)},-{sqrt(1/2)}) circle(0.05 and 0.05);
+               \fill ({sqrt(1/2)},{sqrt(1/2)}) circle(0.05 and 0.05);
+               \begin{scope}
+                    \clip (0,0) circle(1 and 1);
+                    \fill[pattern = north east lines] (-2,-2)--(2,2)--(2,-2);
+               \end{scope}
+          \end{tikzpicture}
           \caption{4点を描画}
-          \includegraphics[width=0.5\linewidth]{pic/picture2.png}  
           \label{fig:pic2}
      \end{figure}
 
@@ -185,8 +232,31 @@
 
      \begin{figure}[H]
           \centering
+          \begin{tikzpicture}[scale=1.5]
+               \draw[->, >=stealth, semithick] (-2,0)--(2,0) node[right]{$a$};
+               \draw[->, >=stealth, semithick] (0,-2)--(0,2) node[left]{$x$};
+               \draw[thick, domain=-2:2] plot(\x,\x);
+               \draw (0,0) circle(1 and 1);
+               \draw (0,0) node[below right]{O};
+               \draw (-1,0) node[below left]{-1};
+               \draw (1,0) node[below right]{1};
+               \draw (0,1) node[above right]{1};
+               \draw (0,-1) node[below right]{-1};
+               \draw (-1,-2)--(-1,2);
+               \draw (-{sqrt(1/2)},-2)--(-{sqrt(1/2)},2);
+               \draw ({sqrt(1/2)},-2)--({sqrt(1/2)},2);
+               \draw (1,-2)--(1,2);
+               \fill (-1,0) circle(0.05 and 0.05);
+               \fill (1,0) circle(0.05 and 0.05);
+               \fill (-{sqrt(1/2)},-{sqrt(1/2)}) circle(0.05 and 0.05);
+               \fill ({sqrt(1/2)},{sqrt(1/2)}) circle(0.05 and 0.05);
+               \begin{scope}
+                    \clip (0,0) circle(1 and 1);
+                    \fill[pattern = north east lines] (-2,-2)--(2,2)--(2,-2);
+               \end{scope}
+          \end{tikzpicture}
+
           \caption{$\{S_i\}_{i=1}^9$を描画}
-          \includegraphics[width=0.5\linewidth]{pic/picture3.png}  
           \label{fig:pic3}
      \end{figure}
 
