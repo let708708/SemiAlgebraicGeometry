@@ -313,6 +313,19 @@
 
      最後に，本修士論文の執筆にあたりたくさんの助言をくださった植田一石准教授に感謝の意を表します．
        
+\section{実閉体上の量化記号消去の背景}
+実閉体上の量化記号消去のアルゴリズムは，初めにTarski\cite{MR0044472}によって述べられた．
+しかし，Tarskiによる量化記号消去の実行時間は，指数関数の有限回の冪で抑えることはできなかった．
+\footnote{"The running time, however, of the method from Tarski (1951) cannot be bounded by any finite tower of exponential functions.\cite{MR0949113}"}
+後に，Collins\cite{MR0403962}は柱状代数分解(CAD)を用いた新しい量化記号消去のアルゴリズムを提案した．
+\cite{MR0949113}によると，Collinsによる量化記号消去のアルゴリズムの計算量は$(Mkd)^{2^{O(n)}}$であった．ここで，
+量化記号消去を行う論理式は冠頭標準形であるとし，その中に現れる多項式は$f_1, \dots, f_k$で，$\max_{i=1,\dots, k}\deg(f_i) \leq d$を満たし，
+さらに各$f_i$の各係数の絶対値が$2^M$で抑えられているとする．
+
+その後の大きな発展は，CollinsとHong\cite{MR1128247}によるPartial CADを用いた量化記号消去の登場である．
+Hongらは，CADの構成を行うアルゴリズムを，量化記号消去において必要な箇所のみ行うように改良したことで
+より高速な量化記号消去が行えるようになった．さらに，HongらはこのアルゴリズムをSACLIB上に$\mathtt{qepcad}$として実装した．
+
 \section{実閉体}\label{section:2}
 
 まず，\cite{MR3069467}でArtinとSchreierにより導入された，実閉体の概念についてまとめる．
