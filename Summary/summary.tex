@@ -1,8 +1,19 @@
 \documentclass[uplatex, dvipdfmx]{jsarticle}
 
+\usepackage{todonotes}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{amsthm}
+\usepackage{cleveref}
+
+\newcommand{\Qua}{\mathcal{Q}}
+\newcommand{\map}[3]{{#1}\colon{#2}\rightarrow{#3}}
+
+\theoremstyle{definition}
+\newtheorem*{definition*}{定義}
+
 \begin{document}
 \begin{center}
-{\LARGE 論文内容の要旨}
+    {\LARGE \centering 論文内容の要旨}
 \end{center}
 
 \vskip\baselineskip
@@ -19,12 +30,60 @@
 
 \vskip\baselineskip
 
-ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．
-ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．
-ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．
-ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．
-ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．
-ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．
-ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．ココが本文．
+本論文は，実閉体の理論が量化記号消去を持つことを述べるTarskiの定理と，
+Collinsによる柱状代数分解を用いた実閉体上の量化記号消去のアルゴリズムを紹介する総合報告である．
+
+実閉体とは，ArtinとSchreierにより導入された，実数体の代数的な性質を公理化して定義される概念である．
+Tarskiは，実数体の理論が量化記号消去を持つことを示した．
+すなわち，実閉体の理論において，任意の論理式はある量化記号のない論理式に同値である．
+
+Tarskiによる証明は構成的であったが，実行時間は指数関数の有限回の合成で抑えることができないことが知られていた．
+後に，Collinsが，柱状代数分解を用いた新しい量化記号消去のアルゴリズムを提案した．
+ここで，柱状代数分解とは，次のように定義される概念である．
+
+\begin{definition*}
+    $R$を実閉体とする．
+    $i=1, \dots, n$に対し，$\mathcal{S}_i$を$R^i$の分解とする．
+    $\{\mathcal{S}_i\}_{i=1}^n$が$R^n$の柱状代数分解(cylindrical algebraic decomposition)であるとは，
+    以下の条件を満たすことをいう．
+    \begin{enumerate}
+         \item $S \in \mathcal{S}_1$は，$R$上の点か，開区間かのいずれかである．
+         \item $n\geq 2$の場合，任意の$i=1, \dots, n-1$と任意の$S \in \mathcal{S}_i$に対し，
+         有限個の連続な半代数的関数
+         \begin{equation}
+              \map{\xi_{S,1}< \dots <\xi_{S,l_S}}{S}{R}
+         \end{equation}
+         が存在し，以下を満たす．（ただし，$l_S$は非負整数とする．）
+         \begin{itemize}
+              \item 各$j=1 \dots, l_S$に対し，$\xi_{S,j}$のグラフ
+              \begin{equation}
+                   \{(x,x_{i+1}) \mid x \in S, \xi_{S,j}(x)=x_{i+1} \} \subset R^{i+1}
+              \end{equation}
+              は，$\mathcal{S}_{i+1}$の元である．
+              \item $\xi_{S,0}=-\infty$, $\xi_{S,l_S+1}=\infty$とするとき，各$j=0, \dots, l_S$に対し，\label{cad_condition1}
+              \begin{equation}
+                   \{(x,x_{i+1}) \mid x \in S, \xi_{S,j}(x)<x_{i+1}<\xi_{S,j+1}(x) \} \subset R^{i+1}
+              \end{equation}
+              は，$\mathcal{S}_{i+1}$の元である．
+         \end{itemize}
+    \end{enumerate}
+
+\end{definition*}
+
+Collinsによるアルゴリズムは，冠頭標準形の論理式
+\begin{equation}
+    \phi(Y) = \Qua_1 X_1 \dots \Qua_1 X_n \psi(X,Y)
+\end{equation}
+を入力とし，$\phi(Y)$に同値な量化記号のない論理式$\theta(Y)$を出力する．
+ただし，$\Qua_1, \dots, \Qua_n \in \{\forall, \exists\}$であり，$\psi(X,Y)$は量化記号のない論理式である．
+
+次に，アルゴリズムの概要について説明する．\todo{どうしよう}
+まず，$\phi(X,Y)$に登場する多項式すべてを$F \subset \mathbb{Z}[X, Y]$とする．
+$F$に属する各多項式が一定となるような，$R^{n+m}$の柱状代数分解を，実閉体$R$に依存せずにとる．
+
+Collinsは，特に実数体$\mathbb{R}$の場合に対して議論していたが，
+任意の実閉体の場合についても同様のアルゴリズムで量化記号消去を行うことができる．
+
+
 
 \end{document}
