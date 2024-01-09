@@ -106,14 +106,14 @@
      Collins \cite{MR0403962}による柱状代数分解を用いた実閉体上の量化記号消去のアルゴリズムを紹介する総合報告である．
 
      Tarski \cite{MR0044472}は，実閉体の理論が量化記号消去をもつことを構成的に示した．
-     しかし，Tarskiの量化記号消去のアルゴリズムの実行時間は，指数関数の有限回の合成で抑えることはできないことが知られていた．
-     後に，Collins \cite{MR0403962}は柱状代数分解を用いた新しい量化記号消去のアルゴリズムを提案した．
-     \cite{MR0949113}によると，Collinsによる量化記号消去のアルゴリズムの計算量は$(Mkd)^{2^{O(n)}}$であった．ここで，
-     量化記号消去を行う論理式は冠頭標準形であるとし，その中に現れる多項式は$f_1, \dots, f_k$で，$\max_{i=1,\dots, k}\deg(f_i) \leq d$を満たし，
+     しかし，Tarskiの量化記号消去のアルゴリズムの実行時間は，指数関数の有限回の合成で抑えることはできないことが知られている．
+     Collins \cite{MR0403962}は柱状代数分解を用いた新しい量化記号消去のアルゴリズムを提案した．
+     Collinsによる量化記号消去のアルゴリズムの計算量は$(Mkd)^{2^{O(n)}}$である\cite{MR0949113}．ここで，
+     量化記号消去を行う論理式は冠頭標準形であるとし，その中に現れる多項式$f_1, \dots, f_k$は，$\max_{i=1,\dots, k}\deg(f_i) \leq d$を満たし，
      さらに各$f_i$の各係数の絶対値が$2^M$で抑えられているとする．
 
-     本論文では，実閉体，量化記号消去の定義を行い，Tarskiの定理の証明を紹介する．
-     そして，Collinsによる柱状代数分解を用いた量化記号消去のアルゴリズムを紹介する．
+     本論文ではまず，実閉体と量化記号消去の定義を行い，Tarskiの定理の証明を紹介した後に，
+     Collinsによる柱状代数分解を用いた量化記号消去のアルゴリズムを紹介する．
 
      この節では，柱状代数分解による量化記号消去のアイデアを例を用いて説明する．
 
@@ -144,8 +144,8 @@
                \begin{tikzpicture}[scale=1]
                     \draw[->, >=stealth, semithick] (-3,0)--(3,0) node[right]{$a$};
                     \draw[->, >=stealth, semithick] (0,-4)--(0,1) node[left]{$b$};
-                    \draw[thick, domain=-3:2] plot(\x,-\x-2);
-                    \draw[thick, domain=-2:3] plot(\x,\x-2);
+                    \draw[very thick, domain=-3:2] plot(\x,-\x-2);
+                    \draw[very thick, domain=-2:3] plot(\x,\x-2);
                     \draw (0,0) node[below left]{O};
                     \draw (-2,0) node[below left]{-2};
                     \draw (2,0) node[below right]{2};
@@ -164,12 +164,11 @@
      このように，点$(a,b)$に関する条件$\phi(a,b)$から，それと同値な，
      量化記号で束縛された変数のない条件$\theta(a,b)$を求めることを，量化記号消去という．
 
-     実数についての任意の条件は，量化記号消去ができるということは，
+     実数についての任意の条件\todo{推敲}は，量化記号消去ができるということは，
      Tarski \cite{MR0044472}によって示されていたが，
      Collins \cite{MR0403962}がより実用的な，柱状代数分解を用いたアルゴリズムを提案した．
 
      Collinsのアルゴリズムのアイデアを，次の問題を通して説明する．
-     \todo[inline]{この辺まではいったん考えた}
      \begin{question}
           ある実数$x$が存在して
           $x^2 + a^2 < 1$, $a < x$
@@ -182,14 +181,14 @@
      \end{equation}
      に同値な，量化記号$\exists$のない条件$\theta(a)$を求めることに同値である．
 
-     まず，$(a, x)$座標平面上に，$2$つのグラフ$f(a,x)=0$, $g(a,x)=0$および領域$f(a,x)<0$, $g(a,x)<0$を描画してみよう．
+     まず，$(a, x)$座標平面上に，$2$つの図形$f(a,x)=0$, $g(a,x)=0$および領域$f(a,x)<0$, $g(a,x)<0$を描画してみよう．
      \begin{figure}[H]
           \centering
           \begin{tikzpicture}[scale=1.5]
                \draw[->, >=stealth, semithick] (-2,0)--(2,0) node[right]{$a$};
                \draw[->, >=stealth, semithick] (0,-2)--(0,2) node[left]{$x$};
-               \draw[thick, domain=-2:2] plot(\x,\x);
-               \draw (0,0) circle(1 and 1);
+               \draw[very thick, domain=-2:2] plot(\x,\x);
+               \draw[very thick] (0,0) circle(1 and 1);
                \draw (0,0) node[below right]{O};
                \draw (-1,0) node[below left]{-1};
                \draw (1,0) node[below right]{1};
@@ -202,7 +201,7 @@
                     \fill[pattern = north west lines] (-2,-2)--(2,2)--(2,-2);
                \end{scope}
           \end{tikzpicture}          
-          \caption{$f(x,a)=0, g(x,a)=0$のグラフの描画}
+          \caption{図形$f(x,a)=0, g(x,a)=0$の描画}
           \label{fig:pic1}
      \end{figure}
      
@@ -216,8 +215,8 @@
           \begin{tikzpicture}[scale=1.5]
                \draw[->, >=stealth, semithick] (-2,0)--(2,0) node[right]{$a$};
                \draw[->, >=stealth, semithick] (0,-2)--(0,2) node[left]{$x$};
-               \draw[thick, domain=-2:2] plot(\x,\x);
-               \draw (0,0) circle(1 and 1);
+               \draw[very thick, domain=-2:2] plot(\x,\x);
+               \draw[very thick] (0,0) circle(1 and 1);
                \draw (0,0) node[below right]{O};
                \draw (-1,0) node[below left]{-1};
                \draw (1,0) node[below right]{1};
@@ -238,34 +237,34 @@
 
      次に，この4点の$a$座標を境界にして，$a$軸を次のような開区間及び$1$点からなる$9$つの集合$\{S_i\}_{i=1}^9$に分割する．
      \begin{itemize}
-          \item $S_1 \colon a < -1$,
-          \item $S_2 \colon a = -1$,
-          \item $S_3 \colon -1 < a < -1/\sqrt{2}$,
-          \item $S_4 \colon a = -1/\sqrt{2}$,
-          \item $S_5 \colon -1/\sqrt{2} < a < 1/\sqrt{2}$,
-          \item $S_6 \colon a = 1/\sqrt{2}$,
-          \item $S_7 \colon 1/\sqrt{2} < a < 1$,
-          \item $S_8 \colon a = 1$,
-          \item $S_9 \colon 1 < a$.
+          \item $S_1 \coloneqq \{a \in \R \mid a < -1\}$,
+          \item $S_2 \coloneqq \{a \in \R \mid a = -1$\},
+          \item $S_3 \coloneqq \{a \in \R \mid -1 < a < -1/\sqrt{2}\}$,
+          \item $S_4 \coloneqq \{a \in \R \mid a = -1/\sqrt{2}\}$,
+          \item $S_5 \coloneqq \{a \in \R \mid -1/\sqrt{2} < a < 1/\sqrt{2}\}$,
+          \item $S_6 \coloneqq \{a \in \R \mid a = 1/\sqrt{2}\}$,
+          \item $S_7 \coloneqq \{a \in \R \mid 1/\sqrt{2} < a < 1\}$,
+          \item $S_8 \coloneqq \{a \in \R \mid a = 1\}$,
+          \item $S_9 \coloneqq \{a \in \R \mid 1 < a\}$.
      \end{itemize}
-     これらの条件を\cref{fig:pic2}に合わせて描画すると次のようになる．
+     これらの集合によって$a$軸を分割し，\cref{fig:pic2}に合わせて描画すると次のようになる．
 
      \begin{figure}[H]
           \centering
           \begin{tikzpicture}[scale=1.5]
                \draw[->, >=stealth, semithick] (-2,0)--(2,0) node[right]{$a$};
                \draw[->, >=stealth, semithick] (0,-2)--(0,2) node[left]{$x$};
-               \draw[thick, domain=-2:2] plot(\x,\x);
-               \draw (0,0) circle(1 and 1);
+               \draw[very thick, domain=-2:2] plot(\x,\x);
+               \draw[very thick] (0,0) circle(1 and 1);
                \draw (0,0) node[below right]{O};
                \draw (-1,0) node[below left]{-1};
                \draw (1,0) node[below right]{1};
                \draw (0,1) node[above right]{1};
                \draw (0,-1) node[below right]{-1};
-               \draw (-1,-2)--(-1,2);
-               \draw (-{sqrt(1/2)},-2)--(-{sqrt(1/2)},2);
-               \draw ({sqrt(1/2)},-2)--({sqrt(1/2)},2);
-               \draw (1,-2)--(1,2);
+               \draw[very thick] (-1,-2)--(-1,2);
+               \draw[very thick] (-{sqrt(1/2)},-2)--(-{sqrt(1/2)},2);
+               \draw[very thick] ({sqrt(1/2)},-2)--({sqrt(1/2)},2);
+               \draw[very thick] (1,-2)--(1,2);
                \fill (-1,0) circle(0.05 and 0.05);
                \fill (1,0) circle(0.05 and 0.05);
                \fill (-{sqrt(1/2)},-{sqrt(1/2)}) circle(0.05 and 0.05);
@@ -274,30 +273,62 @@
                     \clip (0,0) circle(1 and 1);
                     \fill[pattern = north west lines] (-2,-2)--(2,2)--(2,-2);
                \end{scope}
+               
+               \draw[->, >=stealth, semithick] (-2,-3)--(2,-3) node[right]{$a$};
+               \draw[dashed] (-1,-3)--(-1,-2);
+               \draw[dashed] (-{sqrt(1/2)},-3)--(-{sqrt(1/2)},-2);
+               \draw[dashed] ({sqrt(1/2)},-3)--({sqrt(1/2)},-2);
+               \draw[dashed] (1,-3)--(1,-2);
+               \fill (-1,-3) circle(0.05 and 0.05);               
+               \fill (-{sqrt(1/2)},-3) circle(0.05 and 0.05);     
+               \fill ({sqrt(1/2)},-3) circle(0.05 and 0.05);     
+               \fill (1,-3) circle(0.05 and 0.05);
+               % \draw (-1.5, -3) node[above]{$S_1$};
+               % \draw (-1,-3) node[below]{$S_2$};
+               % \draw (-0.85355,-3) node[above]{$S_3$};
+               % \draw (-{sqrt(1/2)},-3) node[below]{$S_4$};
+               % \draw (0, -3) node[above]{$S_5$};
+               % \draw ({sqrt(1/2)},-3) node[below]{$S_6$};
+               % \draw (0.85355,-3) node[above]{$S_7$};
+               % \draw (1,-3) node[below]{$S_8$};
+               % \draw (1.5, -3) node[above]{$S_9$};
           \end{tikzpicture}
 
-          \caption{$\{S_i\}_{i=1}^9$を描画}
+          \caption{$a$軸の分割$\{S_i\}_{i=1}^9$を描画}
           \label{fig:pic3}
      \end{figure}
 
-     このような$a$軸の分割$\{S_i\}_{i=1}^9$をとると，
-     各$S_i$に対し有限個の連続関数$\map{\xi_{S_i,1}, \cdots, \xi_{S_i,l_i}}{S_i}{\R}$を次を満たすようにとれる．
-     \begin{itemize}
-          \item 任意の$a \in S_i$に対し，$\xi_{S_i,1}(a) < \dots < \xi_{S_i,l_i}(a)$である．
-          \item 任意の$a \in S_i$に対し，$\{\xi_{S_i,k}(a)\}_{j=1}^{l_i}$は$x$変数の多項式$f(a,x)$, $g(a,x)$の根全体である．
-     \end{itemize}
-
-     \todo{例}
-
-     このとき各$S_i$に対し，$\xi_{S_i,0} \coloneqq -\infty$, $\xi_{S_i,l_i+1} \coloneqq \infty$として，
+     \cref{fig:pic3}を見ると，
+     各$S_i$において，$S_i \times \R$が図形$f(a,x)=0$, $g(a,x)=0$を境界として柱状に分割されていることが分かる．
+     すなわち，各$S_i$に対し有限個の連続関数$\map{\xi_{S_i,1}, \cdots, \xi_{S_i,l_i}}{S_i}{\R}$を次の$2$条件
+     \begin{enumerate}
+          \item 任意の$a \in S_i$に対し，$\xi_{S_i,1}(a) < \dots < \xi_{S_i,l_i}(a)$である．\label{cad_exa_1}
+          \item 任意の$a \in S_i$に対し，$\{\xi_{S_i,j}(a)\}_{j=1}^{l_i}$は$x$変数の多項式$f(a,x)$, $g(a,x)$の根全体である．\label{cad_exa_2}
+     \end{enumerate}
+     を満たすようにとることができ，このとき
      \begin{align}
-          C_{S_i, 2j} &= \{(a,\xi_{S_i, j}(a)) \in \R^2 \mid a \in S_i\}, \quad j=1,...,l_i,\\
+          C_{S_i, 2j} &= \{(a,\xi_{S_i, j}(a)) \in S_i \times \R \mid a \in S_i\}, \quad j=1,...,l_i,\\
           C_{S_i, 2j+1} &= \{(a,x) \in \R^2 \mid a \in S_i, \xi_{S_i,j}(a) < x < \xi_{S_i, j+1}(a)\}, \quad j=0,...,l_i,
      \end{align}
-     と定めると，各$C_{S_i, k}$の上で$f, g$の符号は一定である．
+     と定めると，$\{C_{S_i,k}\}_{k=1}^{2l_i+1}$は$S_i \times \mathbb{R}$の分割である．
+     ただし，
+     $\xi_{S_i,0} \coloneqq -\infty$, $\xi_{S_i,l_i+1} \coloneqq \infty$である．
 
-     このようにして，$\R^2$の分割$\{C_{S_i,k}\}$を得ることができる．
-     これを，$\R^2$の柱状代数分解という．厳密な定義は\cref{section:6}で行う．
+
+     例えば，$S_5 = \{a \in \R \mid -1/\sqrt{2} < a < 1/\sqrt{2}\}$に対しては，$a \in S_5$に対し
+     \begin{align}
+          \xi_{S_5,1}(a) &\coloneqq -\sqrt{1-a^2},\\
+          \xi_{S_5,2}(a) &\coloneqq a,\\
+          \xi_{S_5,3}(a) &\coloneqq \sqrt{1-a^2}
+     \end{align}
+     とすれば，これらは条件\ref{cad_exa_1}, \ref{cad_exa_2}を満たし，さらに$\{C_{S_i,k}\}_{k=1}^{11}$は$S_5 \times \R$の分割を与える．
+     こうして$\R^2$の分割$\{C_{S_i,k}\}$が得られる．
+     この$\{C_{S_i,k}\}$のように，余次元$1$の部分空間である$a$軸の分割から柱状に構成される分割を，柱状代数分解という．
+     厳密な定義は\cref{section:6}で行う．
+          
+     \todo[inline]{この辺まではいったん考えた}
+
+     さらに，各$C_{S_i, k}$の上で$f, g$の符号は一定である．
 
      さて，
      \todo{推敲の余地}
