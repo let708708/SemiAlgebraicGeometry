@@ -83,7 +83,7 @@
 \newtheorem{question}[definition]{問題}
 \crefname{question}{問題}{問題}
 
-\crefname{section}{第}{第}
+\crefname{section}{}{}
 \creflabelformat{section}{#2#1節#3}
 
 \renewcommand{\proofname}{\textbf{証明}}
@@ -129,15 +129,18 @@
      \begin{equation}
           \{(a,b) \in \R^2 \mid \exists x_1 \exists x_2(-1 < x_1 < 0 \land 0 < x_2 < 1 \land x_1^2+ax_1+b = -x_1^2 \land x_2^2 + ax_2 + b = -x_2^2) \}
      \end{equation}
-     この集合を図示したいのだが，点$(a,b)$に関する条件
+
+     ここで，この集合を定める論理式
      \begin{equation}
           \phi(a,b) \coloneqq \exists x_1 \exists x_2(-1 < x_1 < 0 \land 0 < x_2 < 1 \land x_1^2+ax_1+b = -x_1^2 \land x_2^2 + ax_2 + b = -x_2^2)
      \end{equation}
-     を満たす集合は，そのままでは図示ができない．しかし，この条件$\phi(a,b)$は，条件
+     について考える．
+
+     論理式$\phi(a,b)$を満たす集合は，そのままでは図示ができない．しかし，$\phi(a,b)$は，
      \begin{equation}
           \theta(a,b) \coloneqq b < 0 \land a+b+2>0 \land b-a+2>0
      \end{equation}
-     に必要十分である．このように$\phi(a,b)$を必要十分な条件$\theta(a,b)$に言い換えれば，
+     に必要十分である．このように論理式$\phi(a,b)$を同値な論理式$\theta(a,b)$に言い換えれば，
      求める領域は次のように図示することができる．
      \begin{figure}[H]
           \centering
@@ -156,15 +159,15 @@
           \label{fig:pic0}
      \end{figure}
 
-     条件$\phi(a,b)$のままでは図示できなかったことの要因は，条件$\phi(a,b)$に登場する変数が$a,b$だけでなく，
+     論理式$\phi(a,b)$のままでは図示できなかったことの要因は，論理式$\phi(a,b)$に登場する変数が$a,b$だけでなく，
      量化記号$\exists$で束縛された変数$x_1, x_2$も登場していた事である．
-     条件$\phi(a,b)$を満たす集合を図示するためには，その条件に同値な，
-     量化記号$\exists$で束縛された変数のない条件$\theta(a,b)$を求める必要がある．
+     論理式$\phi(a,b)$を満たす集合を図示するためには，その論理式に同値な，
+     量化記号$\exists$で束縛された変数のない論理式$\theta(a,b)$を求める必要がある．
 
-     このように，点$(a,b)$に関する条件$\phi(a,b)$から，それと同値な，
-     量化記号で束縛された変数のない条件$\theta(a,b)$を求めることを，量化記号消去という．
+     このように，論理式$\phi(a,b)$から，それと同値な，
+     量化記号で束縛された変数のない論理式$\theta(a,b)$を求めることを，量化記号消去という．
 
-     実数についての任意の条件\todo{推敲}は，量化記号消去ができるということは，
+     実数の四則演算と大小関係に関する任意の論理式に対して，量化記号消去ができるということは，
      Tarski \cite{MR0044472}によって示されていたが，
      Collins \cite{MR0403962}がより実用的な，柱状代数分解を用いたアルゴリズムを提案した．
 
@@ -175,11 +178,11 @@
           を満たす実数$a$の範囲を求めよ．          
      \end{question}
      まず，$f(x,a) = x^2 + a^2 -1$, $g(x,a) = a-x$とする．
-     この問題は，$a$についての条件
+     この問題は，論理式
      \begin{equation}
           \phi(a) = \exists x (f(x,a)<0 \land g(x,a)<0)
      \end{equation}
-     に同値な，量化記号$\exists$のない条件$\theta(a)$を求めることに同値である．
+     に同値な，量化記号$\exists$のない論理式$\theta(a)$を求めることに同値である．
 
      まず，$(a, x)$座標平面上に，$2$つの図形$f(a,x)=0$, $g(a,x)=0$および領域$f(a,x)<0$, $g(a,x)<0$を描画してみよう．
      \begin{figure}[H]
@@ -307,10 +310,10 @@
      \end{enumerate}
      を満たすようにとることができ，このとき
      \begin{align}
-          C_{S_i, 2j} &= \{(a,\xi_{S_i, j}(a)) \in S_i \times \R \mid a \in S_i\}, \quad j=1,...,l_i,\\
-          C_{S_i, 2j+1} &= \{(a,x) \in \R^2 \mid a \in S_i, \xi_{S_i,j}(a) < x < \xi_{S_i, j+1}(a)\}, \quad j=0,...,l_i,
+          \label{align:intro-1} C_{S_i, 2j} &\coloneqq \{(a,\xi_{S_i, j}(a)) \in S_i \times \R \mid a \in S_i\}, \quad j=1,...,l_i,\\
+          \label{align:intro-2} C_{S_i, 2j+1} &\coloneqq \{(a,x) \in \R^2 \mid a \in S_i, \xi_{S_i,j}(a) < x < \xi_{S_i, j+1}(a)\}, \quad j=0,...,l_i,
      \end{align}
-     と定めると，$\{C_{S_i,k}\}_{k=1}^{2l_i+1}$は$S_i \times \mathbb{R}$の分割である．
+     と定義すると，$\{C_{S_i,k}\}_{k=1}^{2l_i+1}$は$S_i \times \mathbb{R}$の分割である．
      ただし，
      $\xi_{S_i,0} \coloneqq -\infty$, $\xi_{S_i,l_i+1} \coloneqq \infty$である．
 
@@ -321,32 +324,40 @@
           \xi_{S_5,2}(a) &\coloneqq a,\\
           \xi_{S_5,3}(a) &\coloneqq \sqrt{1-a^2}
      \end{align}
-     とすれば，これらは条件\ref{cad_exa_1}, \ref{cad_exa_2}を満たし，さらに$\{C_{S_i,k}\}_{k=1}^{11}$は$S_5 \times \R$の分割を与える．
+     とすれば，これらは条件\ref{cad_exa_1}, \ref{cad_exa_2}を満たし，
+     さらに式\eqref{align:intro-1}, \eqref{align:intro-2}により定義される
+     $\{C_{S_i,k}\}_{k=1}^{7}$は$S_5 \times \R$の分割を与える．
      こうして$\R^2$の分割$\{C_{S_i,k}\}$が得られる．
      この$\{C_{S_i,k}\}$のように，余次元$1$の部分空間である$a$軸の分割から柱状に構成される分割を，柱状代数分解という．
      厳密な定義は\cref{section:6}で行う．
-          
-     \todo[inline]{この辺まではいったん考えた}
 
-     さらに，各$C_{S_i, k}$の上で$f, g$の符号は一定である．
-
-     さて，
-     \todo{推敲の余地}
-     $a$についての条件$\phi(a)$に同値な量化記号のない条件$\theta(a)$を求めるには，
-     ある$C_{S_i, k}$上で$f<0$, $g<0$となるような$S_i$を集めればよい．
-     \cref{fig:pic3}より，そのような$S_i$全体は
-     \begin{itemize}
-          \item $S_5 \colon -1/\sqrt{2} < a < 1/\sqrt{2}$,
-          \item $S_6 \colon a = 1/\sqrt{2}$,
-          \item $S_7 \colon 1/\sqrt{2} < a < 1$
-     \end{itemize}
-     であるので，
+     さて，上記で得られた$\R^2$の柱状代数分解$\{C_{S_i,k}\}$を用いて，$\phi(a)$の量化記号消去を行おう．
+     この$\{C_{S_i,k}\}$は，各$C_{S_i,k}$上で$f, g$の符号は一定である．
+     すると各$S_i$について，$a \in S_i$が$\phi(a)$を満たすことは，
+     ある$k=0, \dots, 2l_i+1$に対して$C_{S_i,k}$上$f<0, g<0$となることと同値である．
+     すなわち，次の等式が成り立つ．
+     \begin{equation}
+          \{a \in \R \mid \phi(a)\} = \bigcup\{S_i \mid \text{ある$k=0, \dots, 2l_i+1$に対して$C_{S_i,k}$上$f<0, g<0$．}\}
+     \end{equation}
+     ここで，ある$k=0, \dots, 2l_i+1$に対して$C_{S_i,k}$上$f<0, g<0$となるような$S_i$全体は
+     \begin{align}
+          S_5 &= \{a \in \R \mid -1/\sqrt{2} < a < 1/\sqrt{2}\},\\
+          S_6 &= \{a \in \R \mid  a = 1/\sqrt{2}\},\\
+          S_7 &= \{a \in \R \mid  1/\sqrt{2} < a < 1\}
+     \end{align}
+     である．よって，
+     \begin{align}
+          \{a \in \R \mid \phi(a)\} 
+               &= S_5 \cup S_6 \cup S_7\\
+               &= \{a \in R \mid (-1/\sqrt{2} < a < 1/\sqrt{2}) \lor (a = 1/\sqrt{2}) \lor (1/\sqrt{2} < a < 1)\}
+     \end{align}
+     であるため，
      \begin{equation}
           \theta(a) \coloneqq (-1/\sqrt{2} < a < 1/\sqrt{2}) \land (a = 1/\sqrt{2}) \land (1/\sqrt{2} < a < 1)
      \end{equation}
-     とすれば，これは論理式$\phi(a)$と同値な量化記号のない論理式である．
+     とすれば，この論理式$\theta(a)$は論理式$\phi(a)$と同値な量化記号のない論理式である．
 
-     上記の例のように，与えられた論理式$\phi(a)$に登場する多項式の集合${f,g}$から，
+     上記の例のように，与えられた論理式$\phi(a)$に登場する多項式$f,g$から，
      ユークリッド空間の分割$\{S_i\}_{i=1}^9$, $\{C_{S_i,k}\}$を構成し，
      そこから適切な$S_i$を集め，それぞれの$S_i$を定める量化記号のない論理式の論理和をとることで，
      もとの論理式$\phi(a)$と同値な量化記号のない論理式$\theta(a)$を構成することができる．
