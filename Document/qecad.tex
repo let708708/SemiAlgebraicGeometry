@@ -9,6 +9,8 @@
 \usepackage{todonotes}
 \usepackage{graphicx}
 \usepackage{tikz}
+
+
 \usetikzlibrary{patterns, positioning, intersections, calc, arrows.meta,math} %tikzのlibrary
 
 \numberwithin{equation}{section}
@@ -380,13 +382,12 @@
      \section*{記法}
      写像$\map{f}{X}{Y}$のグラフを$\Graph(f) \coloneqq \{(x,y) \in X \times Y \mid f(x) = y\}$で表す．
 
-     また，$\mathcal{R}$を一意分解整域とし，$\mathcal{R}$係数の多項式$f \in R[X]$に対し，
-     次数を$\deg(f;X)$, 先頭項を$\LT(f;X)$, 先頭項係数を$LC(f;X)$で表す．
-     ただし，変数$X$が明らかである場合は，$\deg(f)$, $\LT(f)$, $LC(f)$の書く．
-     最大公約元を$\gcd(f(X), g(X);X)$で表す．
+     $\mathcal{R}$を一意分解整域とする．$f \in R[X]$に対し，
+     次数を$\deg(f;X)$, 先頭項を$\LT(f;X)$, 先頭項係数を$\LC(f;X)$で表す．
+     変数$X$が明らかである場合は，$\deg(f)$, $\LT(f)$, $\LC(f)$の書く．
      また，$f, g \in \mathcal{R}[X]$に対し，
      $f$, $g$の最大公約元を$\gcd(f,g;X)$で表す．
-     同様に，変数$X$が明らかである場合は$\gcd(f,g)$と書く．
+     変数$X$が明らかである場合は$\gcd(f,g)$と書く．
 
      \section*{謝辞}
      本修士論文の執筆にあたりたくさんの助言をくださった植田一石准教授に感謝の意を表します．
@@ -1102,7 +1103,7 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
 \end{corollary}
 
 \begin{proof}
-     自然数$m$と多項式$F_1, \dots, F_s \in R[X, \overline{Y}, \overline{T}]$を，次を満たすようにとれる．ただし，$\overline{T}$は変数記号$T_1, \dots, T_m$の列である．
+     自然数$m$と多項式$F_1, \dots, F_s \in R[X, \overline{Y}, \overline{T}]$を，次を満たすように取れる．ただし，$\overline{T}$は変数記号$T_1, \dots, T_m$の列である．
      \begin{itemize}     
           \item   
                ある$\overline{a} \in R^m$が存在し，
@@ -1232,7 +1233,7 @@ $
      $i_0\coloneqq 0$, $i_{M+1}\coloneqq N+1$, $x_0\coloneqq -\infty$, $x_{N+1}\coloneqq \infty$と置く．
      任意の$k \in \{1, \dots, M \}$に対し，
      $f_1, \dots, f_{s-1}, f_s'$のいずれかは$x_{i_k}$において$0$になる．
-     従って，$\map{\theta}{\{1,\dots, M\}}{\{1, \dots, s\}}$を，次を満たすようにとれる．
+     従って，$\map{\theta}{\{1,\dots, M\}}{\{1, \dots, s\}}$を，次を満たすように取れる．
      \begin{itemize}
           \item 各$k=1, \dots, M$に対して，$\theta(k) \in \{1, \dots, s-1\}$ならば$f_{\theta(k)}(x_{i_k})=0$
           \item 各$k=1, \dots, M$に対して，$\theta(k)=s$ならば$f_s'(x_{i_k}) = 0$
@@ -1599,24 +1600,25 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
      D(z, r)\coloneqq \left\{w \in R\left[\sqrt{-1}\right] \middle \norm{z - w} < r\right\}
 \end{equation}
 とする．ただし，$a,b \in R$に対し$\norm{a + b\sqrt{-1}} \coloneqq \sqrt{a^2 + b^2}$とする．
-$R\left[ \sqrt{-1} \right]$は，$R^2$と同一視して位相が定まることに注意する．
+
+$R\left[ \sqrt{-1} \right]$は$R^2$と同一視することで，
+$R^2$の位相により$R\left[ \sqrt{-1} \right]$の位相が定まる．
 
 \begin{theorem}[{\cite[Theorem 5.12]{MR2248869}}] \label{theorem:continuity-of-roots}
      $R$を実閉体とし，$f \in R[X_1, \dots, X_n]$とする．
      また，$S \subset R^{n-1}$を半代数的集合とし，$a \in S$とする．
 
-     $\deg (f(x,X_n))$は$x \in S$に対して一定で，さらに，
-     $f(a,X_n)$の相異なる$R\left[\sqrt{-1} \right]$上の根が$z_1, \dots, z_j$で，
+     $\deg (f(x,X_n))$は$x \in S$に依らず一定とする．さらに，
+     $f(a,X_n) \in R[X_n]$の相異なる$R\left[\sqrt{-1} \right]$上の根が$z_1, \dots, z_j$で，
      重複度がそれぞれ$\mu_1, \dots, \mu_j$であったとする．
 
-     この時，各$D(z_j, r) \subset R\left[ \sqrt{-1} \right]$ ($i=1, \dots, j$)が
+     このとき，各$D(z_j, r) \subset R\left[ \sqrt{-1} \right]$ ($i=1, \dots, j$)が
      非交叉であるような任意の$R$の元$r > 0$に対して，
      $a$の開近傍 $V \subset R^{n-1}$を，任意の$x \in V \cap S$に対して，
-     $f(x, X_n)$の根が各$D(z_i, r)$ ($i=1, \dots, j$)の中に（重複度込みで）ちょうど$\mu_i$個であるようにとれる．
+     $f(x, X_n)$の根が各$D(z_i, r)$ ($i=1, \dots, j$)の中に（重複度込みで）ちょうど$\mu_i$個であるように取れる．
 \end{theorem}
 
-\cref{theorem:continuity-of-roots}の証明は，\cite[Theorem 5.12]{MR2248869}を参照してほしい．
-
+\cref{theorem:continuity-of-roots}の証明は，ここでは省略する．
 
 \section{柱状代数分解}\label{section:6}
 
@@ -1631,7 +1633,7 @@ $R$を実閉体とする．
 を満たすとき，部分集合族$\mathcal{S}$を$X$の分解(decomposition)と呼ぶ．
 \end{definition}
 
-まず始めに，$R^n$の柱状代数分解を定義する．この定義は，\cite[Definition 5.1]{MR2248869}を参考にしているが，
+始めに，$R^n$の柱状代数分解を定義する．この定義は，\cite[Definition 5.1]{MR2248869}を参考にしているが，
 元々は\cite[section 3]{MR0403962}で定義されたものである．
 
 \begin{definition} \label{definition:cad}
@@ -1639,7 +1641,7 @@ $R$を実閉体とする．
      $\{\mathcal{S}_i\}_{i=1}^n$が$R^n$の柱状代数分解(cylindrical algebraic decomposition)であるとは，
      以下の条件を満たすことをいう．
      \begin{enumerate}
-          \item $S \in \mathcal{S}_1$は，$R$上の点か，開区間かのいずれかである．
+          \item $S \in \mathcal{S}_1$は，$R$上の$1$点からなる集合または$R$上の開区間である．
           \item $n\geq 2$の場合，任意の$i=1, \dots, n-1$と任意の$S \in \mathcal{S}_i$に対し，
           有限個の連続な半代数的関数
           \begin{equation}
@@ -1649,12 +1651,12 @@ $R$を実閉体とする．
           \begin{itemize}
                \item 各$j=1 \dots, l_S$に対し，$\xi_{S,j}$のグラフ
                \begin{equation}
-                    \{(x,x_{i+1}) \mid x \in S, \xi_{S,j}(x)=x_{i+1} \} \subset R^{i+1}
+                    \Graph(\xi_{S,j}) = \{(x,x_{i+1}) \in R^{i+1} \mid x \in S, \xi_{S,j}(x)=x_{i+1} \}
                \end{equation}
                は，$\mathcal{S}_{i+1}$の元である．
                \item $\xi_{S,0}=-\infty$, $\xi_{S,l_S+1}=\infty$とするとき，各$j=0, \dots, l_S$に対し，\label{cad_condition1}
                \begin{equation}
-                    \{(x,x_{i+1}) \mid x \in S, \xi_{S,j}(x)<x_{i+1}<\xi_{S,j+1}(x) \} \subset R^{i+1}
+                    \{(x,x_{i+1}) \in R^{i+1} \mid x \in S, \xi_{S,j}(x)<x_{i+1}<\xi_{S,j+1}(x) \}
                \end{equation}
                は，$\mathcal{S}_{i+1}$の元である．
           \end{itemize}
@@ -1662,17 +1664,16 @@ $R$を実閉体とする．
 \end{definition}
 
 定義より，任意の$k=1, \dots, n$に対して，$\{\mathcal{S}_i\}_{i=1}^k$は$R^k$の柱状代数分解である．
-逆に，$R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$が与えられているとき，各$S \in \mathcal{S}_{n-1}$に対して
-\cref{definition:cad}の条件\ref{cad_condition1}を満たすような有限個の連続半代数関数$\xi_{S,1}<\dots<\xi_{S,l_S}$が与えられれば，
+また，$R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$が与えられているとき，各$S \in \mathcal{S}_{n-1}$に対して
+\cref{definition:cad}の条件\ref{cad_condition1}を満たすような有限個の連続な半代数的関数$\xi_{S,1}<\dots<\xi_{S,l_S}$が与えられれば，
 $R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を構成することができる．
-
 このように，柱状代数分解は再帰的な構造である．
 
 \begin{definition}[{\cite[Definition 5.5]{MR2248869}}]
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．
      \begin{enumerate}
           \item 部分集合$S \subset R^n$が$F$符号不変($F$-invariant)であるとは，
-          任意の$f \in F$及び任意の$x,y \in S$に対し$\sign(f(x))=\sign(f(y))$であることと定義する．
+          任意の$f \in F$及び任意の$x,y \in S$に対し$\sign_R(f(x))=\sign_R(f(y))$であることと定義する．
 
           \item $R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が$F$に適合している(adapted to $F$)とは，
           任意の$C \in \mathcal{S}_n$が$F$符号不変であることと定義する．
@@ -1712,7 +1713,7 @@ $F$に適合した$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を$R^{n-
 \end{definition}
 
 $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
-各$S \in \mathcal{S}_{n-1}$が$F$描画可能であるとき，定義より得られる連続な半代数関数$\map{\xi_1<\dots<\xi_k}{S}{R}$を
+各$S \in \mathcal{S}_{n-1}$が$F$描画可能であるとき，定義より得られる連続な半代数的関数$\map{\xi_1<\dots<\xi_k}{S}{R}$を
 各$S$に対して取ることにより，$F$適合な$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を得ることができる．
 
 次の命題は，$F$描画可能であることの必要条件を述べている．
@@ -1796,7 +1797,7 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
 条件\ref{corollary:del-2}, \ref{corollary:del-3}も満たすような$R^{n-1}$の分解を与えるために，次に定義する主部分終結式係数を用いる．
 
 \begin{definition}[{\cite[Section 2]{MR0403962}}]
-     $\mathcal{R}$を可換環とし，$A(X), B(X) \in \mathcal{R}[X] \setminus \{0\}$ を，$\deg A(X) = m$, $\deg B(X) = n$とする．
+     $\mathcal{R}$を一意分解整域とし，$A(X), B(X) \in \mathcal{R}[X] \setminus \{0\}$ を，$\deg A(X) = m$, $\deg B(X) = n$とする．
      また，$A(X)$, $B(X)$は次のように書けるとする．
      \begin{align}
           A(X) = a_m X^m + \dots + a_1 X + a_0, \\
@@ -1937,7 +1938,7 @@ $S$が$\PROJ_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      が$F$-適合な柱状代数分解を与える．よって，定理は成り立つ．
 
      $n\geq 2$の場合，$n-1$までで主張が成り立つとする．
-     このとき，帰納法の仮定により$\PROJ_{X_n}(F)$適合な$R^{n-1}$の柱状代数分解を$\{\mathcal{S}_i\}_{i=1}^{n-1}$がとれる．
+     このとき，帰納法の仮定により$\PROJ_{X_n}(F)$適合な$R^{n-1}$の柱状代数分解を$\{\mathcal{S}_i\}_{i=1}^{n-1}$が取れる．
 
      ここで，各$S \in \mathcal{S}_{n-1}$は$\PROJ_{X_n}(F)$符号不変であるから，\cref{theorem:inv-deline}より，$S$は$F$描画可能である．
 
@@ -1950,7 +1951,7 @@ $S$が$\PROJ_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
           である．ただし，$F' = \{f \in F \mid \text{$f$は$S$上恒等的に0でない}\}$とする．
           \item 各$i=1, \dots, l_S$および$f \in F'$に対し，多項式$f(x,X_n)$における根$\xi_{S,i}(x)$の重複度は，$x\in S$によらず一定．
      \end{itemize}
-     であるようにとれる．
+     であるように取れる．
      また，$\xi_{S,0} \coloneqq -\infty$, $\xi_{S,l_S} \coloneqq \infty$とする．
 
      このとき，
