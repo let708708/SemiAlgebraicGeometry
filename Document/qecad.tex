@@ -1981,7 +1981,7 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
 \end{equation}
 を満たす$g_{i,j} \in R[X_1, \dots, X_k]$, $\sigma_{i,j} \in \{-1, 0, 1\}$, $i=1, \dots, s, j=1, \dots, l_i$, については明らかになっていない．
 
-ここでは，前節の$\PROJ_{X_n}(F)$を改良し，定義式まで明らかであるような柱状代数分解を与える．
+ここでは，前節で与えた$\PROJ_{X_n}(F)$を改良し，定義式まで明らかであるような柱状代数分解を与える．
 
 まず，記号について定義する．
 多項式の有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\map{\sigma}{F}{\{-1,0,1\}}$を，$F$の符号条件(sign condition)という．
@@ -1991,9 +1991,9 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
 \end{equation}
 により定義される$\Reali_R(\sigma)$を，符号条件$\sigma$の実現(realization)という．
 
-また，多項式の有限部分集合$F \subset R[X]$が，
+また，多項式の有限部分集合$F \subset R[X] \setminus \{0\}$が，
 微分について閉じている(closed under differentiation)
-とは，$0 \not \in F$であり，かつ任意の$f \in F$に対して，$f' \in F$または$f'=0$となることと定義する．
+とは，任意の$f \in F$に対して，$f' \in F$または$f'=0$となることと定義する．
 
 \begin{lemma}[{\cite[Lemma 5.33]{MR2248869}}]\label{lemma:Thom}
      有限部分集合$F \subset R[X]$が，微分について閉じているとする．
@@ -2178,8 +2178,11 @@ Collins\cite{MR0403962}による柱状代数分解を用いて量化記号消去
      $R$を実閉体とする．
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．
 
-     まず，$\map{\sign_R(F)}{R^n}{\{-1, 0, 1\}^F}$を，
-     $\sign_R(F)(y)(f)\coloneqq \sign_R(f(y)), f \in F$により定義する．
+     まず，各$y \in R^n$に対し，$F$の符号$\map{\sign_R(F)(y)}{F}{\{-1,0,1\}}$を
+     \begin{equation}
+          \sign_R(F)(y)(f)\coloneqq \sign_R(f(y)),\quad f \in F
+     \end{equation}
+     により定義する．
 
      次に，各$y \in R^i$に対し，$\CSIGN_{R,i}(F)(y)$を以下のように定義する．
      \begin{itemize}
@@ -2202,9 +2205,13 @@ Collins\cite{MR0403962}による柱状代数分解を用いて量化記号消去
      $i=n$の場合，$S \in \mathcal{S}_n$は$F$符号不変であるから，各$f \in F$に対して$\sign(f(y))$は$y \in S$に依らず一定である．
      従って，$\CSIGN_{R,n}(F)(y)$は$y \in S$に依らず一定である．
 
-     次に，$i=k+1$において命題が成り立つとして，$i=k$の場合に示す．$S \in \mathcal{S}_k$とする．
-     $\mathcal{C} \coloneqq \{T \in \mathcal{S}_{k+1} \mid \pi_{k}(T) = S\}$とすると，
-     各$T \in \mathcal{C}$において，帰納法の仮定より$\CSIGN_{R,n}(F)(x)$は$x \in T$に依らず一定である．
+     次に，$i=k+1$において命題が成り立つとして，$i=k$の場合に示す．
+     $S \in \mathcal{S}_k$を任意に取る．
+     \begin{equation}
+          \mathcal{C} \coloneqq \{T \in \mathcal{S}_{k+1} \mid \pi_{k}(T) = S\}
+     \end{equation}
+     とすると，
+     帰納法の仮定より，各$T \in \mathcal{C}$において$\CSIGN_{R,k+1}(F)(x)$は$x \in T$に依らず一定である．
      このとき，各$y \in S$に対し，
      \begin{align}
           \CSIGN_{R,k}(F)(y)
@@ -2220,39 +2227,51 @@ Collins\cite{MR0403962}による柱状代数分解を用いて量化記号消去
 高々$X_1, \dots, X_i$を自由変数に持つ量化記号のない$\mathcal{L}_\mathrm{OR}$論理式の族$\Theta_i$を，
 任意の実閉体$R$に対し，$\mathcal{S}_i \coloneqq \{S_R(\theta) \mid \theta \in \Theta_i\}$により定まる$\{\mathcal{S}_i\}_{i=1}^n$が$R^n$の$F$適合な柱状代数分解であるように取る．
 ただし，$S_R(\theta) \coloneqq \{(x_1, \dots, x_i) \in R^i \mid R \models \theta(x_1, \dots, x_i)\}$である．
-
-ここで，$\CSIGN_i(F)(\theta)$ ( $\theta \in \Theta_i$ ) を，
-\begin{equation}
-     \CSIGN_i(F)(\theta) \coloneqq \CSIGN_{\Ralg, i}(F)(x), \quad x \in S_{\Ralg}(\theta)
-\end{equation}
-と定める．\cref{proposition:independence-of-CSIGN}より，これは$x \in S_{\Ralg}(\theta)$の取り方に依らない．
+このような$\Theta_i$が存在することは\cref{corollary:trick-of-qecad}より示される．
 
 このとき，次が成り立つ．
 
-\begin{proposition}
-     任意の実閉体$R$および任意の$x \in S_R(\theta)$に対し，
-     $\CSIGN_i(F)(x) = \CSIGN_i(F)(\theta)$である．
+\begin{proposition}\label{proposition:CSIGN}
+     $\theta \in \Theta_i$とする．
+     $\CSIGN_{R,i}(F)(x)$は実閉体$R$および$x \in S_R(\theta)$に依らず一定である．
+     すなわち，任意の実閉体$R_1$, $R_2$及び$x \in S_{R_1}(\theta)$, $y \in S_{R_2}(\theta)$に対し
+     \begin{equation}
+          \CSIGN_{R_1,i}(F)(x) = \CSIGN_{R_2, i}(F)(y)
+     \end{equation}
+     が成り立つ．
 \end{proposition}
 
 \begin{proof}
-     各$\theta \in \Theta_i$に対し，
-     実閉体$R$について，$\Ralg \subset R$を満たすから，
-     $S_{\Ralg}(\theta) \subset S_R(\theta)$である．
-     また，\cref{proposition:Artin-Lang}より，
+     \cref{proposition:independence-of-CSIGN}より，
+     任意の実閉体$R$に対し$\CSIGN_{R,i}(F)(x)$は$x \in S_R(\theta)$に依存せず一定である．
+     また，任意の実閉体$R$は$\Ralg \subset R$であるから，$S_{\Ralg}(\theta) \subset S_R(\theta)$である．
+     さらに，\cref{proposition:Artin-Lang}より，任意の実閉体$R$に対し
      $S_{\Ralg}(\theta) \neq \emptyset \iff S_R(\theta) \neq \emptyset$である．
-     これらの事から帰納的に示される．
+     
+     従って，$y \in S_{\Ralg}(\theta)$を$1$つ取れば，
+     任意の実閉体$R$および任意の$x \in S_R(\theta)$に対して
+     \begin{equation}
+          \CSIGN_{R,i}(F)(x) = \CSIGN_{\Ralg, i}(F)(y)
+     \end{equation}
+     が成り立つ．よって，命題が示された．
 \end{proof}
 
-$F \subset \Z[X_1, \dots, X_n]$を有限部分集合とする．
-$\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
+ここで，$\theta \in \Theta_i$に対し$\CSIGN_i(F)(\theta)$ を，実閉体$R$と$x \in S_R(\theta)$を任意に取り，
+\begin{equation}
+     \CSIGN_i(F)(\theta) \coloneqq \CSIGN_{R, i}(F)(x)
+\end{equation}
+と定める．\cref{proposition:CSIGN}より，これは実閉体$R$および$x \in S_R(\theta)$の取り方に依らない．
+
+$F \subset \Z[X_1, \dots, X_n]$を有限部分集合とする．変数記号の列$X_1, \dots, X_n$を$X$と書く．
+$\sign(f(X)) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
 論理記号$\land, \lor, \lnot$によって生成される$\mathcal{L}_\mathrm{OR}$論理式を，量化記号のない$F$論理式($F$-quantifier free formula)と呼ぶ．
-任意の量化記号のない$\mathcal{L}_\mathrm{OR}$論理式は，ある$F \subset \Z[X_1, \dots, X_n]$を取ることで，量化記号のない$F$論理式とみなすことができることに注意する．
+任意の量化記号のない$\mathcal{L}_\mathrm{OR}$論理式は，ある$F \subset \Z[X_1, \dots, X_n]$を取ることで，量化記号のない$F$論理式とみなせることに注意する．
 
 \begin{definition}[{\cite[Notation 11.12]{MR2248869}}]
      $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とし，$\map{\sigma}{F}{\{-1, 0, 1\}}$とする．
-     量化記号のない$F$論理式$\psi\left(\overline{X}\right)$に対して，$\psi^\star(\sigma) \in \{\true, \false\}$を以下のように帰納的に定義する．
+     量化記号のない$F$論理式$\psi(X)$に対して，$\psi^\star(\sigma) \in \{\true, \false\}$を以下のように帰納的に定義する．
      \begin{enumerate}
-          \item $\psi\left(\overline{X}\right)$が$\sign_R\left(f\left(\overline{X}\right)\right) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) であるとき，
+          \item $\psi(X)$が$\sign_R(f(X)) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) であるとき，
           \begin{equation}
                \psi^\star(\sigma)\coloneqq \begin{cases}
                     \true  & \sigma(f)=\tau\\
@@ -2260,7 +2279,7 @@ $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
                \end{cases}
           \end{equation}
           と定義する．
-          \item $\psi\left(\overline{X}\right)\coloneqq \psi_1\left(\overline{X}\right) \land \psi_2\left(\overline{X}\right)$であるとき，
+          \item $\psi(X)\coloneqq \psi_1(X) \land \psi_2(X)$であるとき，
           \begin{equation}
                \psi^\star(\sigma)\coloneqq \begin{cases}
                     \true  & \text{$\psi_1^\star(\sigma)=\true$ かつ $\psi_2^\star(\sigma)=\true$}\\
@@ -2268,7 +2287,7 @@ $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
                \end{cases}
           \end{equation}
           と定義する．
-          \item $\psi\left(\overline{X}\right)\coloneqq \psi_1\left(\overline{X}\right) \lor \psi_2\left(\overline{X}\right)$であるとき，
+          \item $\psi(X)\coloneqq \psi_1(X) \lor \psi_2(X)$であるとき，
           \begin{equation}
                \psi^\star(\sigma)\coloneqq \begin{cases}
                     \true  & \text{$\psi_1^\star(\sigma)=\true$ または $\psi_2^\star(\sigma)=\true$}\\
@@ -2276,7 +2295,7 @@ $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
                \end{cases}
           \end{equation}
           と定義する．
-          \item $\psi\left(\overline{X}\right)\coloneqq \lnot \psi_1\left(\overline{X}\right)$であるとき，
+          \item $\psi(X)\coloneqq \lnot \psi_1(X)$であるとき，
           \begin{equation}
                \psi^\star(\sigma)\coloneqq \begin{cases}
                     \true  & \text{$\psi_1^\star(\sigma)=\false$}\\
@@ -2389,8 +2408,8 @@ $\sign(f(\overline{X})) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
 柱状代数分解による量化記号消去のアルゴリズムについて述べる．
 
 まず，いくつかの補助的な関数について説明する．
-関数$\mathtt{PROJ}$は，有限部分集合$F \subset \Z[X_1, \dots, X_n]$に対し，$\PROJ(F) \subset \Z[X_1, \dots, X_{n-1}]$を返す関数である．
-また，関数$\mathtt{DER}$は，有限部分集合$F \subset \Z[X_1, \dots, X_n]$に対し，$\DER(F) \subset \Z[X_1, \dots, X_n]$を返す関数である．
+関数$\mathtt{PROJ}$は，有限部分集合$F \subset \Z[X_1, \dots, X_n]$に対し，$\PROJ_{X_n}(F) \subset \Z[X_1, \dots, X_{n-1}]$を返す関数である．
+また，関数$\mathtt{DER}$は，有限部分集合$F \subset \Z[X_1, \dots, X_n]$に対し，$\DER(F;X_n) \subset \Z[X_1, \dots, X_n]$を返す関数である．
 
 さらに，次に定義する関数$\mathtt{ImprovedCAD}$は，有限部分集合$F \subset \Z[X_1, \dots, X_n]$に対し，
 \cref{corollary:improved-cad}の$\{\overline{F}_{\leq i}\}_{i=1}^n$を返す関数である．
