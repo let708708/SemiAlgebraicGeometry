@@ -2152,7 +2152,8 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
 
 Collins\cite{MR0403962}による柱状代数分解を用いて量化記号消去を行うアルゴリズムについて説明する．
 
-まず，$\mathcal{L}_\mathrm{OR}$論理式$\phi(X_1, \dots, X_n)$を任意にとる．
+まず，$\mathcal{L}_\mathrm{OR}$論理式$\phi(X)$を任意にとる．
+ただし，変数記号の列$X_1, \dots, X_n$を$X$と書く．
 
 もし，高々$X_1, \dots, X_n$を変数記号に持つ量化記号のない$\mathcal{L}_\mathrm{OR}$論理式の族$\Theta$が存在し，
 \begin{equation}
@@ -2162,13 +2163,14 @@ Collins\cite{MR0403962}による柱状代数分解を用いて量化記号消去
 \begin{equation}
      \RCF \models \bigvee_{\theta \in \Theta} \theta(X_1, \dots, X_n) \leftrightarrow \phi(X_1, \dots, X_n)
 \end{equation}
-となり，量化記号消去が達成する．
+となり，量化記号消去を達成する．
 この節では，上記を満たす$\Theta$を構成する方法について説明する．
 
-ここでは，$\phi (\overline{X})$ が冠頭標準形，すなわち，
-ある量化記号のない$\mathcal{L}_\mathrm{OR}$論理式$\psi(\overline{X}, Y_1, \dots, Y_m)$と$\Qua_i \in \{\forall, \exists\}$ ( $i=1, \dots, m$ )を用いて
+
+ここでは，$\phi (X)$ が冠頭標準形，すなわち，
+ある量化記号のない$\mathcal{L}_\mathrm{OR}$論理式$\psi(X, Y_1, \dots, Y_m)$と$\Qua_i \in \{\forall, \exists\}$ ( $i=1, \dots, m$ )を用いて
 \begin{equation}
-     \theta(\overline{X}) = \Qua_1 Y_1 \dots \Qua_m Y_m \psi(\overline{X}, Y_1, \dots, Y_m)
+     \theta(X) = \Qua_1 Y_1 \dots \Qua_m Y_m \psi(X, Y_1, \dots, Y_m)
 \end{equation}
 と書ける場合において，上記の$\Theta$を構成する方法を示す．まず，そのための準備を行う．
 
