@@ -355,7 +355,7 @@
      \end{align}
      であるため，
      \begin{equation}
-          \theta(a) \coloneqq (-1/\sqrt{2} < a < 1/\sqrt{2}) \land (a = 1/\sqrt{2}) \land (1/\sqrt{2} < a < 1)
+          \theta(a) \coloneqq (-1/\sqrt{2} < a < 1/\sqrt{2}) \lor (a = 1/\sqrt{2}) \lor (1/\sqrt{2} < a < 1)
      \end{equation}
      とすれば，この論理式$\theta(a)$は論理式$\phi(a)$と同値な量化記号のない論理式である．
 
@@ -379,10 +379,10 @@
      \cref{section:9}で述べるアルゴリズムが実際に任意の論理式の量化記号を消去する事を示す．
      最後に\cref{section:9}では，柱状代数分解による量化記号消去のアルゴリズムの疑似コードを明示する．
 
-     \section*{記法}
+     \section*{表記法}
      写像$\map{f}{X}{Y}$のグラフを$\Graph(f) \coloneqq \{(x,y) \in X \times Y \mid f(x) = y\}$で表す．
 
-     $\mathcal{R}$を一意分解整域とする．$f \in R[X]$に対し，
+     $\mathcal{R}$を一意分解整域とする．$f \in \mathcal{R}[X]$に対し，
      次数を$\deg(f;X)$, 先頭項を$\LT(f;X)$, 先頭項係数を$\LC(f;X)$で表す．
      変数$X$が明らかである場合は，$\deg(f)$, $\LT(f)$, $\LC(f)$の書く．
      また，$f, g \in \mathcal{R}[X]$に対し，
@@ -442,7 +442,7 @@
 通常の全順序構造を入れることにより順序体となる．
 従って，$\R, \Q, \Q\left(\sqrt{2}\right)$はいずれも実体である．
 
-また，複素数体$\C$は$\sqrt{-1}^2 = -1$を満たす元$\sqrt{-1}$を持つ．
+また，複素数体$\C$は$\left(\sqrt{-1}\right)^2 = -1$を満たす元$\sqrt{-1}$を持つ．
 従って，$\C$は実体ではない．
 
 有理数体$\Q$は，実体$\Q\left(\sqrt{2}\right)$を代数拡大に持つが，
@@ -478,7 +478,7 @@ $\Ralg$の元を実代数的数という．
 \begin{equation}
      [a,b]\coloneqq\{x \in R \mid a \leq x \leq b\}, \quad (a,b)\coloneqq\{x \in R \mid a < x < b\}
 \end{equation}
-のようにかくことにする．
+のように書くことにする．
 
 実閉体$R$を係数とする$1$変数多項式に対して，
 実数体$\R$上の連続関数や可微分関数と同様の性質が成り立つ．
@@ -746,7 +746,7 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
      $\mathcal{L}$文からなる集合$T$を，$\mathcal{L}$理論($\mathcal{L}$-theory)という．
      さらに，$\mathcal{L}$構造$\mathcal{M}$が，任意の$\phi \in T$に対し
      $\mathcal{M} \models \phi$を満たすとき，$\mathcal{L}$構造$\mathcal{M}$を$\mathcal{L}$理論$T$のモデル(model)と言い，
-     $\mathcal{M} \models T$とかく．
+     $\mathcal{M} \models T$と書く．
 \end{definition}
 
 ここで，実閉体の理論$\RCF$を，\cite[Section 5.2.1]{C3041}に従って定義する．
@@ -806,7 +806,7 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
      $T$を$\mathcal{L}$理論とし，$\phi$を$\mathcal{L}$文とする．
      $\phi$が$T$の論理的帰結(logical consequence)であるとは，任意の$T$のモデル$\mathcal{M}$に対し，
      $\mathcal{M} \models \phi$であることと定義する．
-     $\phi$が$T$の論理的帰結であるとき，$T \models \phi$とかく．
+     $\phi$が$T$の論理的帰結であるとき，$T \models \phi$と書く．
 
      特に，$T = \emptyset$の場合，全ての$\mathcal{L}$構造は$T$のモデルである．$\phi$が$T=\emptyset$の論理的帰結であることを，
      $\models \phi$と表す．
@@ -1422,7 +1422,8 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 \end{proposition}
 
 \begin{proof}
-     \cref{proposition:dnf}より，ある有限個の$F_{i,j} \in \Z\left[X, T\right]$および$\sigma_{i,j} \in \{-1, 0 ,1\}$, $i=1, \dots, s, j = 1, \dots, l_i$, が存在して，
+     \cref{proposition:dnf}より，ある有限個の$F_{i,j} \in \Z\left[X, T\right]$および$\sigma_{i,j} \in \{-1, 0 ,1\}$, 
+     $i=1, \dots, s, j = 1, \dots, l_i$, が存在して，
      \begin{equation}
           R \models
           \bigvee_{i=1}^s \bigwedge_{j=1}^{l_i}(\sign(F_{i,j}(Y, T))=\sigma_{i,j})
@@ -1563,7 +1564,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 この定義より，次の命題が成り立つ．
 
 \begin{proposition}\label{proposition:connectedness}
-     $S \subset R^n$を，半代数的連結集合とする．
+     $S \subset R^n$を，半代数的連結な半代数的集合とする．
      任意の半代数的開部分集合$U_1, U_2 \subset S$について，
      \begin{equation}
           U_1 \cup U_2 = S, U_1 \cap U_2 = \emptyset \implies \text{$U_1 = S$または$U_2 = S$}
@@ -1581,7 +1582,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 \cref{proposition:image-preimage}と\cref{proposition:connectedness}より，次の命題が示される．
 
 \begin{proposition}[{\cite[Proposition 3.9]{MR2248869}}]\label{proposition:locally-constant}
-     $S$を半代数的連結集合とし，半代数的関数$\map{f}{S}{R}$が局所定数，
+     $S$を半代数的連結な半代数的集合とし，半代数的関数$\map{f}{S}{R}$が局所定数，
      すなわち，任意の$x \in S$に対し，ある$x$の開近傍$U$が存在して，
      任意の$y \in U$に対して$f(y)=f(x)$を満たすとする．
      このとき，$f$は定数関数である．
@@ -1700,7 +1701,7 @@ $F$に適合した$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を$R^{n-
 }
 
 \begin{definition} 
-     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結集合とする．
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結な半代数的集合とする．
      $S$が$F$描画可能($F$-delineable)であるとは，$k$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_k}{S}{R}$が存在し，次を満たすことと定義する．
      \begin{itemize}
           \item 任意の$ x = (x_1, \dots, x_{n-1}) \in S $に対し，
@@ -1708,7 +1709,7 @@ $F$に適合した$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を$R^{n-
                \{\xi_i(x)\}_{i=1}^k = \bigcup_{f \in F'}\{y \in R \mid f(x,y)=0\}
           \end{equation}
           である．ただし，$F' = \{f \in F \mid \text{$f$は$S$上恒等的に$0$でない}\}$とする．
-          \item 各$i=1, \dots, k$および$f \in F'$に対し，$X_n$に関する多項式$f(x,X_n)$の根$\xi_i(x)$の重複度は，$x\in S$によらず一定である．
+          \item 各$i=1, \dots, k$および$f \in F'$に対し，$X_n$に関する多項式$f(x,X_n)$の根$\xi_i(x)$の重複度は，$x\in S$に依らず一定である．
      \end{itemize}
 \end{definition}
 
@@ -1719,7 +1720,7 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
 次の命題は，$F$描画可能であることの必要条件を述べている．
 
 \begin{proposition}\label{proposition:del}
-     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結集合とする．
+     $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結な半代数的集合とする．
      さらに，以下の条件を満たすとする．
      \begin{enumerate}
           \item \label{proposition:del-1}
@@ -1734,11 +1735,12 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
 
 \begin{remark}
      \cite[Proposition 5.14]{MR2248869}では\cref{proposition:del}で条件\ref{proposition:del-2}が「相異なる実根(distinct real roots)」と，
-     少し違った形で述べられているが、誤植だと思われる。
+     少し違った形で述べられているが，誤植だと思われる．
 \end{remark}
 
 \begin{proof}
      $ a \in S$を任意にとる．
+     また，$ F' \coloneqq \{f \in F \mid \text{$f$は恒等的に$0$でない}\}$とする．
      $z_1, \dots, z_j $を，$\prod_{f \in F'} f(a, X_n)$の$R\left[\sqrt{-1}\right]$上の相異なる根全体とする．
      各$f \in F'$に対し，$f(a, X_n)$の根としての$z_i$の重複度を$\mu_{i, f}$と定める．
      このとき，任意の$f \neq g \in F'$に対し，$\gcd(f(a, X_n), g(a, X_n))$の根としての$z_i$の重複度は$\min\{\mu_{i,f}, \mu_{i, g}\}$であり，
@@ -1826,7 +1828,7 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
      \end{equation}
      の$X^{m+n-j-1}, \dots, X, 1$の係数を順に並べたものである．
 
-     また，$M_{j,j}(A,B)$を，$M_j(A,B)$の初めの$p+q-2j$列により得られる$(p+q-2j)$行$(p+q-2j)$列行列とし，
+     また，$M_{j,j}(A,B)$を，$M_j(A,B)$の初めの$m+n-2j$列により得られる$(m+n-2j)$行$(m+n-2j)$列行列とし，
      $j$次主部分終結式係数($j$-th principal subresultant coefficient) $\psc_j(A,B)$ を
      \begin{equation}
           \psc_j(A,B) \coloneqq \det(M_{j,j}(A,B))
@@ -1844,8 +1846,13 @@ $R^{n-1}$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^{n-1}$で，
      \end{enumerate}
 \end{theorem}
 
-\cref{theorem:psc}の証明は，\cite[Theorem 2]{MR0403962}を参照してほしい．
-また，\cref{theorem:psc}は，$\deg(\gcd(A,B))$が主部分終結式係数$\psc_j(A, B)$により決定することを意味している．
+\cref{theorem:psc}は，$\deg(\gcd(A,B))$が主部分終結式係数$\psc_j(A, B)$により決定することを意味している．
+\cref{theorem:psc}の証明は\cite[Theorem 2]{MR0403962}を見よ．
+
+実閉体$R$と$f, g \in R[X_1, \dots, X_n] \setminus \{0\}$に対し，
+$f,g$を$R[X_1, \dots, X_{n-1}]$係数の$X_n$変数多項式とみなすことで
+$f$と$g$の主部分終結式係数$\psc_j(f,g)$が定まる．
+これを$\psc_j(f,g;X_n)$と明示する．
 
 それでは，\cref{theorem:cad}を証明する．
 まず，以下のように記号を準備する．
@@ -1854,7 +1861,7 @@ $f \in R[X_1, \dots, X_n]$に対し，$\red(f;X_n)$を，
 \begin{equation}
      \red(f;X_n) \coloneqq \begin{cases}
           0 &  f = 0 \\
-          f - LT(f;X_n) & f \neq 0
+          f - \LT(f;X_n) & f \neq 0
      \end{cases}
 \end{equation}
 とする．さらに，$\red^k(f;X_n)$を，$k$に対して帰納的に
@@ -1866,25 +1873,21 @@ $f \in R[X_1, \dots, X_n]$に対し，$\red(f;X_n)$を，
 \begin{equation}
      \RED(f;X_n) \coloneqq \{\red^k(f;X_n) \mid 0 \leq k \leq \deg_{X_n}(f), \red^k(f;X_n) \neq 0\}
 \end{equation}
-と定める．
-さらに，$f, g \in R[X_1, \dots, X_n]$に対し，
+と定義する．
+さらに，$f, g \in R[X_1, \dots, X_n] \setminus \{0\}$に対し，$\deg(f;X_n) = m$, $\deg(g;X_n) = n$とするとき，
 \begin{equation}
-     \PSC(f, g) \coloneqq \begin{cases}
-          \emptyset & \text{$f = 0$または$g = 0$,}\\
-          \{\psc_j(f, g) \mid 0 \geq j \geq n, \psc_j(f, g) \neq 0\} & \text{otherwise}
-     \end{cases}
+     \PSC(f,g;X_n) \coloneqq \{ \psc_j(f,g;X_n) \mid 0 \leq j \leq \min\{n,m\}, \psc_j(f,g;X_n) \neq 0\}
 \end{equation}
-と定める．
+と定義する．$f = 0$または$g=0$の場合，$\PSC(f,g;X_n) \coloneqq \emptyset$と定義する．
 
-
-次の定義は，\cite[Section 3]{MR0764184}に従っているが，元々は\cite[Section 2]{MR0403962}で定義されている．
+次の定義は，\cite[Section 3]{MR0764184}, \cite[Section 2]{MR0403962}を参照した．
 \begin{definition}
 $F \subset R[X_1, \dots, X_n]$を有限部分集合とする．ただし，$n \geq 2$とする．
 $\PROJ_{X_n}(F) \subset R[X_1, \dots, X_{n-1}]$を，以下の集合の合併として定義する．
 \begin{align} 
-     &  \bigcup_{f \in F} \bigcup_{A \in \RED(f;X_n)} \{\LC(A;X_n)\},\\
-     &  \bigcup_{f \in F} \bigcup_{A \in \RED(f;X_n)} \PSC(A, \partial A / \partial X_n),\\
-     &  \bigcup_{f \neq g \in F} \bigcup_{A \in \RED(f;X_n), B \in \RED(g;X_n)} \PSC(A,B).
+     &  \bigcup_{\substack{f \in F \\ A \in \RED(f;X_n)}} \{\LC(A;X_n)\},\\
+     &  \bigcup_{\substack{f \in F \\ A \in \RED(f;X_n)}} \PSC(A, \partial A / \partial X_n;X_n),\\
+     &  \bigcup_{\substack{f \neq g \in F \\ A \in \RED(f;X_n) \\ B \in \RED(g;X_n)}} \PSC(A,B;X_n).
 \end{align}
 \end{definition}
 
@@ -1893,7 +1896,7 @@ $\PROJ(F)$は$0$を含まないことに注意する．
 なお，次の定理は\cite[Theorem 4]{MR0764184}を参考にしたが，元は\cite[Theorem 5]{MR0403962}で示されたものである．
 
 \begin{theorem}[{\cite[Theorem 4]{MR0764184}}]\label{theorem:inv-deline}
-$F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数連結な半代数的集合とする．
+$F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結な半代数的集合とする．
 
 $S$が$\PROJ_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 \end{theorem}
@@ -1907,11 +1910,11 @@ $S$が$\PROJ_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      次に，$\deg(\gcd(f(x, X_n), \partial f / \partial X_n(x, X_n)))$が$x \in S$に依らず一定である事を示す．
      $\deg(f(x, X_n)) \geq 1$が任意の$x \in S$に対して成り立つ場合を考える．
      $A \in \RED(f;X_n)$を，任意の$x \in S$に対して$f(x, X_n) = A(x,X_n)$, $\LC(A(x,X_n)) \neq 0$であるように取る．
-     このとき，$S$は$\PSC(A, \partial A / \partial X_n)$符号不変であるから，
+     このとき，$S$は$\PSC(A, \partial A / \partial X_n;X_n)$符号不変であるから，
      \cref{theorem:psc}より$\deg(\gcd(A(x, X_n), \partial A / \partial X_n(x, X_n)))$は$x\in S$に依らず一定である．
      従って，$\deg(\gcd(f(x, X_n), \partial f / \partial X_n(x, X_n)))$は$x\in S$に依らず一定である．
      
-     最後に，各$f \neq g \in F$に対し$\deg(\gcd(f(x, X_n),g(x,X_n)))$が$x \in S$によらず一定であることを示す．
+     最後に，各$f \neq g \in F$に対し$\deg(\gcd(f(x, X_n),g(x,X_n)))$が$x \in S$に依らず一定であることを示す．
      $f$, $g$が共に$S$上恒等的に$0$でない場合を考える．
      $A \in \RED(f;X_n)$, $B \in \RED(g;X_n)$を，任意の$x \in S$に対して
      \begin{align}
@@ -1920,7 +1923,7 @@ $S$が$\PROJ_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
      \end{align}
      であるように取る．
      
-     このとき，$S$は$\PSC(A, B)$符号不変であるから，
+     このとき，$S$は$\PSC(A, B;X_n)$符号不変であるから，
      \cref{theorem:psc}より$\deg(\gcd(A(x, X_n), B(x, X_n)))$は$x\in S$に依らず一定である．
      従って，$\deg(\gcd(f(x, X_n), g(x, X_n)))$は$x\in S$に依らず一定である．
 \end{proof}
@@ -1949,7 +1952,7 @@ $S$が$\PROJ_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
                \{\xi_{S,i}\}_{i=1}^{l_S} = \{y \in R \mid \prod_{f \in F'}f(x,y)=0\}
           \end{equation}
           である．ただし，$F' = \{f \in F \mid \text{$f$は$S$上恒等的に0でない}\}$とする．
-          \item 各$i=1, \dots, l_S$および$f \in F'$に対し，多項式$f(x,X_n)$における根$\xi_{S,i}(x)$の重複度は，$x\in S$によらず一定．
+          \item 各$i=1, \dots, l_S$および$f \in F'$に対し，多項式$f(x,X_n)$における根$\xi_{S,i}(x)$の重複度は，$x\in S$に依らず一定．
      \end{itemize}
      であるように取れる．
      また，$\xi_{S,0} \coloneqq -\infty$, $\xi_{S,l_S} \coloneqq \infty$とする．
@@ -1969,6 +1972,7 @@ $S$が$\PROJ_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 \end{proof}
 
 \section{柱状代数分解の改良}\label{section:7}
+$R$を実閉体とする．
 有限部分集合$F \subset R[X_1, \dots, X_n]$が与えられたとき，
 $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在することはすでに示したが，
 各$S \in \mathcal{S}_k$の定義式，すなわち，
@@ -1977,7 +1981,7 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
 \end{equation}
 を満たす$g_{i,j} \in R[X_1, \dots, X_k]$, $\sigma_{i,j} \in \{-1, 0, 1\}$, $i=1, \dots, s, j=1, \dots, l_i$, については明らかになっていない．
 
-ここでは，先ほどの$\PROJ_{X_n}$を改良し，定義式まで明らかであるような柱状代数分解を与える．
+ここでは，前節の$\PROJ_{X_n}(F)$を改良し，定義式まで明らかであるような柱状代数分解を与える．
 
 まず，記号について定義する．
 多項式の有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，$\map{\sigma}{F}{\{-1,0,1\}}$を，$F$の符号条件(sign condition)という．
@@ -1994,7 +1998,7 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
 \begin{lemma}[{\cite[Lemma 5.33]{MR2248869}}]\label{lemma:Thom}
      有限部分集合$F \subset R[X]$が，微分について閉じているとする．
      このとき， 任意の$F$の符号条件$\map{\sigma}{F}{\{-1,0,1\}}$に対し，
-     $\Reali_R(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
+     $\Reali_R(\sigma)$は空集合，$1$点からなる集合，開区間のいずれかである．
 \end{lemma}
 
 \begin{proof}
@@ -2012,30 +2016,28 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
      とする．
 
      このとき，$F_0 \coloneqq \{f_1, \dots, f_{s}\}$は微分について閉じているので，帰納法の仮定より，
-     $\Reali_R(\sigma_0)$は，空集合，一点からなる集合，開区間のいずれかである．
+     $\Reali_R(\sigma_0)$は，空集合，$1$点からなる集合，開区間のいずれかである．
 
-     $\Reali_R(\sigma) = \Reali_R({\sigma_0}) \cap \{x \in R \mid \sign(f_{s+1}(x)) = \sigma(f_{s+1})\}$であるから，
-     $\Reali_R({\sigma_0})$が空集合，あるいは一点からなる集合の場合には，$\Reali_R(\sigma)$は空集合か一点からなる集合になるので主張は成り立つ．
+     $\Reali_R(\sigma) = \Reali_R({\sigma_0}) \cap \{x \in R \mid \sign_R(f_{s+1}(x)) = \sigma(f_{s+1})\}$であるから，
+     $\Reali_R({\sigma_0})$が空集合，あるいは$1$点からなる集合の場合には，$\Reali_R(\sigma)$は空集合か$1$点からなる集合になるので主張は成り立つ．
 
      従って，$\Reali_R({\sigma_0})$が開区間である場合を考える．
-     $f_{s+1}$の微分$f_{s+1}'$は，$f_1, \dots, f_s$のいずれかであるから，$\Reali_R({\sigma_0})$上符号は一定である．
+     $f_{s+1}$の微分$f_{s+1}'$は，$f_1, \dots, f_s$のいずれかであるから，$\sign_R(f'_{s+1}(x))$は$x \in \Reali_R({\sigma_0})$に依らず一定である．
 
      $f_{s+1}'$の符号が$\Reali_R({\sigma_0})$上常に$0$である場合，$f_{s+1}$は$\Reali_R({\sigma_0})$上定数であるから，主張は成り立つ．
 
      $f_{s+1}'$の符号が$\Reali_R({\sigma_0})$上常に$-1$(あるいは$1$)の場合を考える．
-     このとき\cref{corollary:monotone}より，$f$は$\Reali_R({\sigma_0})$上狭義単調増加(あるいは狭義単調減少)であるから，$\Reali_R(\sigma)$は空集合，一点からなる集合，開区間のいずれかである．
+     このとき\cref{corollary:monotone}より，$f$は$\Reali_R({\sigma_0})$上狭義単調増加(あるいは狭義単調減少)であるから，$\Reali_R(\sigma)$は空集合，$1$点からなる集合，開区間のいずれかである．
 
      以上より，主張は示された．
 \end{proof}
-
-このとき，次の定理が成り立つ．
 
 \begin{theorem}[{\cite[Theorem 5.34]{MR2248869}}]\label{theorem:improved-cad}
      $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とし，
      $\{F_i\}_{i=1}^n$が以下を満たすとする．
      \begin{itemize}
           \item $F \setminus \{0\} \subset F_n$である．\\
-          \item 各$i=1,\dots, n$に対して，$F_i \subset \Z[X_1, \dots, X_i]$であり，$F_i$は$X_i$での微分について閉じている．\\
+          \item 各$i=1,\dots, n$に対して，$F_i \subset \Z[X_1, \dots, X_i]$であり，$F_i$は$X_i$の微分について閉じている．\\
           \item 各$i=1, \dots, n-1$に対して，$\PROJ_{X_{i+1}}(F_{i+1}) \subset F_i$を満たす．
      \end{itemize}
 
@@ -2064,7 +2066,7 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
                \{\xi_i(x)\}_{i=1}^{l_S} = \{y \in R \mid \prod_{f \in F_n'}f(x,y)=0\}
           \end{equation}
           である．ただし，$F_n' = \{f \in F_n \mid \text{$f$は$S$上恒等的に$0$でない}\}$とする．
-          \item 各$i=1, \dots, l_S$および$f \in F_n'$に対し，多項式$f(x,X_n)$における根$\xi_i(x)$の重複度は，$x\in S$によらず一定．
+          \item 各$i=1, \dots, l_S$および$f \in F_n'$に対し，多項式$f(x,X_n)$における根$\xi_i(x)$の重複度は，$x\in S$に依らず一定．
      \end{itemize}
      また，$\xi_{S,0} \coloneqq -\infty$, $\xi_{S,l_S} \coloneqq \infty$とする．
 
@@ -2080,18 +2082,23 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
      と定義すれば，$\{\mathcal{S}_i\}_{i=1}^{n-1} \cup \{\widetilde{\mathcal{S}}_n\}$は$F_n$適合な柱状代数分解を与える．
 
      そこで，$\widetilde{\mathcal{S}}_n = \mathcal{S}_n$となることを示す．
-     そのために，$S\coloneqq \Reali_R(\widetilde{\sigma}) \neq \emptyset$である$\map{\widetilde{\sigma}}{F_{\leq n-1}}{\{-1,0,1\}}$を任意にとり，
+     $S \in \mathcal{S}_{n-1}$を任意に取り，
+     $S = \Reali_R(\widetilde{\sigma})$である$\map{\widetilde{\sigma}}{F_{\leq n-1}}{\{-1,0,1\}}$を取る．
+     このとき，
      \begin{equation}
           \{C_{S,i} \mid i=1, \dots, 2l_S + 1\} = \{\Reali_R(\sigma) \mid \map{\sigma}{F_{\leq n}}{\{-1,0,1\}}, \sigma|_{F_{\leq n-1}} = \widetilde{\sigma}\} \setminus \{\emptyset\}
      \end{equation}
-     となることを示す．両辺の集合族は，$S \times R$の非交叉な被覆であることに注意する．
+     となることを示す．$S \times R$は，両辺の集合族の非交和であることに注意する．
 
      任意の$i=1, \dots, 2l_S+1$に対し，$C_{S,i}$は$F_{\leq n}$符号不変であるから，
      $\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす$\map{\sigma}{F_{\leq n}}{\{-1,0,1\}}$がただ一つ存在して，
      $C_{S,i} \subset \Reali_R(\sigma)$である．
-     また，\cref{lemma:Thom}より，$\sigma|_{F_{\leq n-1}} = \widetilde{\sigma}$を満たす任意の$\sigma$および
-     $i,j \in \{1, \dots, 2l_S + 1\}$に対して，
-     $C_{S,i} \subset \Reali_R(\sigma)$, $C_{S,j} \subset \Reali_R(\sigma)$ならば，$i=j$である．
+     また，このような$\sigma$に対して，\cref{lemma:Thom}より，
+     任意の$i,j \in \{1, \dots, 2l_S + 1\}$について
+     \begin{equation}
+          C_{S,i}, C_{S,j} \subset \Reali_R(\sigma) \implies i=j 
+     \end{equation}
+     である．
 
      以上で定理が示された．
 \end{proof}
@@ -2137,7 +2144,7 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
      \begin{equation}
           \Theta_i \coloneqq \left\{ \bigwedge_{f \in \overline{F}_{\leq i}}\sign(f(X_1, \dots, X_i)) = \sigma(f) \middle| \map{\sigma}{\overline{F}_{\leq i}}{\{-1,0,1\}} \right\}
      \end{equation}
-     とすれば，\cref{corollary:improved-cad}より従う．
+     とすれば，\cref{corollary:improved-cad}より主張が従う．
 \end{proof}
 
 
