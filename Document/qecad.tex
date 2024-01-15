@@ -1211,10 +1211,10 @@ $
      の元を小さいものから順に並べて得られる列を
      $(x_1, \dots, x_N)$と置き，
      $\ROOT(f_1,\ldots, f_{s-1}, f'_s)$
-     の元をちいさいものから順に並べて得られる部分列を
+     の元を小さいものから順に並べて得られる部分列を
      $(x_{i_1}, \dots, x_{i_M})$と置く．
      $N \leq 2sm$であることに注意せよ．
-     数列$(i_i, \dots, i_M)$は
+     数列$(i_1, \dots, i_M)$は
      行列
      $
      w \coloneqq
@@ -1238,15 +1238,15 @@ $
      \begin{itemize}
           \item $M\neq0$の場合，$k=1, \dots, M-1$に対して，$f_s(X)$が区間$(x_{i_k}, x_{i_{k+1}})$上に解を持つことの必要十分条件は
           \begin{equation}
-               \sign_R(g_\theta(k)(x_{i_k}))\sign_R(g_\theta(k+1)(x_{i_{k+1}})) = -1.
+               \sign_R(g_{\theta(k)}(x_{i_k}))\sign_R(g_{\theta(k+1)}(x_{i_{k+1}})) = -1.
           \end{equation}
-          \item $M\neq0$の場合，$(-\infty, x_1)$に解を持つことの必要条件は，
+          \item $M\neq0$の場合，$(-\infty, x_1)$に解を持つことの必要十分条件は，
           \begin{equation}
-               \sign_R(f_s'((-\infty, x_1))) \sign_R(g_\theta(1)(x_1)) = 1.
+               \sign_R(f_s'((-\infty, x_1))) \sign_R(g_{\theta(1)}(x_1)) = 1.
           \end{equation}
-          \item $M\neq0$の場合，$(x_M, \infty)$に解を持つことの必要条件は，
+          \item $M\neq0$の場合，$(x_M, \infty)$に解を持つことの必要十分条件は，
           \begin{equation}
-               \sign_R(f_s'((x_M, \infty))) \sign_R(g_\theta(M)(x_M)) = -1.
+               \sign_R(f_s'((x_M, \infty))) \sign_R(g_{\theta(M)}(x_M)) = -1.
           \end{equation}
           \item $M = 0$の場合は，$(\infty, \infty)$上に必ず解を持つ．
      \end{itemize}
@@ -1320,14 +1320,14 @@ $
 \begin{proof}[\cref{proposition:weak_Tarski}の証明]
      一般性を失わずに，各多項式$f_i$は恒等的に$0$でなく，$h_{i, m_i} \neq 0$としてよい．
      ここで，多項式の列$(f_1, \dots, f_s)$に対して，各多項式の$X$についての次数の列$(m_1, \dots, m_s)$を対応づける．
-     非負整数列全体$\{(m_1, \dots, m_s) \mid s \geq 1, m_1, \dots, m_s\}$上の前順序関係
+     非負整数列全体$\{(m_1, \dots, m_s) \mid s \geq 1, m_1, \dots, m_s \geq 0 \}$上の前順序関係
      \begin{equation}
           (m_1, \dots, m_s) \prec (m_1', \dots, m_{s'}')
      \end{equation}
      を，ある非負整数$p$が存在し，以下の2条件を満たすことと定義する．
      \begin{itemize}
           \item $p$に等しい$m_i$ ($i=1, \dots, s$)の数が，$p$に等しい$m'_i$ ($i=1, \dots, s'$)の数より少ない．
-          \item 任意の$q>p$に対して，$q$に等しい$m_i$ ($i=1, \dots, s$)の数が，$q$に等しい$m'_i$ ($i=1, \dots, s'$)の数より少ない．
+          \item 任意の$q>p$に対して，$q$に等しい$m_i$ ($i=1, \dots, s$)の数と，$q$に等しい$m'_i$ ($i=1, \dots, s'$)の数は等しい．
      \end{itemize}
      この前順序関係$\prec$は，非負整数列全体の中に無限降鎖列は存在しない．
      すなわち，非負整数列の列$\{\mu_i\}_{i \geq 1}$で，$\mu_1 \succ \mu_2 \succ \dots$となるものは存在しない．
