@@ -288,15 +288,6 @@
                \fill (-{sqrt(1/2)},-3) circle(0.05 and 0.05);     
                \fill ({sqrt(1/2)},-3) circle(0.05 and 0.05);     
                \fill (1,-3) circle(0.05 and 0.05);
-               % \draw (-1.5, -3) node[above]{$S_1$};
-               % \draw (-1,-3) node[below]{$S_2$};
-               % \draw (-0.85355,-3) node[above]{$S_3$};
-               % \draw (-{sqrt(1/2)},-3) node[below]{$S_4$};
-               % \draw (0, -3) node[above]{$S_5$};
-               % \draw ({sqrt(1/2)},-3) node[below]{$S_6$};
-               % \draw (0.85355,-3) node[above]{$S_7$};
-               % \draw (1,-3) node[below]{$S_8$};
-               % \draw (1.5, -3) node[above]{$S_9$};
           \end{tikzpicture}
 
           \caption{$a$軸の分割$\{S_i\}_{i=1}^9$を描画}
@@ -433,7 +424,7 @@
      \ref{theorem:real-field-1},
      \ref{theorem:real-field-2},
      \ref{theorem:real-field-3}
-     のいずれか（従って、全て）の条件を満たすとき，
+     のいずれか（従って，全て）の条件を満たすとき，
      $F$を実体(real field)という．
 \end{definition}
 
@@ -557,7 +548,7 @@ $\Ralg$の元を実代数的数という．
 \end{proof}
 
 \begin{corollary}\label{corollary:monotone}
-     $R$を実閉体とし，$f \in R[X]$とする．任意の$a, b \in R$に対して、$a<b$であれば以下が成り立つ．
+     $R$を実閉体とし，$f \in R[X]$とする．任意の$a, b \in R$に対して，$a<b$であれば以下が成り立つ．
      \begin{enumerate}
           \item \label{corollary:monotone-1}
           任意の$x \in (a,b)$に対して$f'(x)>0$ならば，$f(X)$は$[a,b]$上狭義単調増加である．
@@ -571,7 +562,7 @@ $\Ralg$の元を実代数的数という．
      $f(X)$が$[a,b]$上狭義単調増加でないとすると，
      $a \leq x_0 < x_1 \leq b$である$x_0, x_1 \in R$が存在して，$f(x_0) \geq f(x_1)$を満たす．
      このとき，\cref{corollary:mean-value}より，$x_0 < x < x_1$である$x \in (a,b)$が存在して，
-     $f(x_1) - f(x_0) = f'(x)(x_1 - x_0)$を満たすが、
+     $f(x_1) - f(x_0) = f'(x)(x_1 - x_0)$を満たすが，
      この$x \in (a,b)$に対して$f'(x) \leq 0$となる．
 \end{proof}
 
@@ -954,7 +945,7 @@ $T \models \forall v_1 \dots \forall v_n \phi(v_1, \dots, v_n)$が成り立つ�
 \end{example}
 
 \cref{example:quantifier elimination}において，
-実は任意の$\RCF$のモデル$R$に対して
+実は理論$\RCF$の任意のモデル$R$に対して
 \begin{equation}
      R \models \forall a (\phi(a) \leftrightarrow \theta(a))
 \end{equation}
@@ -1031,8 +1022,8 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
 
      \ref{lemma:qe_simplify_2}から\ref{lemma:qe_simplify_3}が従うことを示す．
      \cref{proposition:dnf}から，%本来は\cref{propositon:dnf}を少しだけ改良したものである．
-     任意の量化記号のない論理式$\phi(X, \overline{Y})$に対して，
-     多項式$f_{i,j} \in \Z[X, \overline{Y}]$ ($i=1, \dots, k, j=1, \dots, l_i$)
+     任意の量化記号のない論理式$\phi\left(X, \overline{Y}\right)$に対して，
+     多項式$f_{i,j} \in \Z\left[X, \overline{Y}\right]$ ($i=1, \dots, k, j=1, \dots, l_i$)
      と$\map{\sigma_i}{\{1, \dots, l_i\}}{\{-1,0,1\}}$が存在して，
      \begin{equation}
           \RCF \models
@@ -1089,44 +1080,44 @@ $\bigvee_{\tau \in \{-1,0,1\} \setminus \{\sigma\}} (\sign(f(X_1, \dots, X_n)) =
      \end{enumerate}
 \end{theorem}
 
-\cref{theorem:weak_Tarski}により，次の系が成り立つ．
-\begin{corollary}\label{corollary:weak_Tarski}
-     $\overline{Y} = (Y_1, \dots, Y_n)$と$X$を変数記号とし，$R$を実閉体とする．
-     任意の$f_1, \dots, f_s \in R\left[\overline{Y}, X\right]$及び$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対して，
-     有限個の$g_{i,j} \in R\left[\overline{Y}\right]$及び$\tau_{i,j} \in \{-1, 0, 1\}$, $i=1, \dots, p, j=1, \dots, q_i$, が存在し，次を満たす．
+% \cref{theorem:weak_Tarski}により，次の系が成り立つ．
+% \begin{corollary}\label{corollary:weak_Tarski}
+%      $\overline{Y} = (Y_1, \dots, Y_n)$と$X$を変数記号とし，$R$を実閉体とする．
+%      任意の$f_1, \dots, f_s \in R\left[\overline{Y}, X\right]$及び$\map{\sigma}{\{1, \dots, s\}}{\{-1,0,1\}}$に対して，
+%      有限個の$g_{i,j} \in R\left[\overline{Y}\right]$及び$\tau_{i,j} \in \{-1, 0, 1\}$, $i=1, \dots, p, j=1, \dots, q_i$, が存在し，次を満たす．
 
-     任意の$\overline{y} = (y_1, \dots, y_n) \in R^n$に対し，次の2つが同値になる．
-     \begin{enumerate}
-          \item ある$x \in R$が存在して，$\bigwedge_{i=1}^s (\sign_R(f_i(x, \overline{y})) = \sigma(i))$を満たす．
-          \item $\bigvee_{i=1}^p \bigwedge_{j=1}^{q_i} (\sign_R(g_{i,j}(\overline{y})) = \tau_{i,j})$を満たす．
-     \end{enumerate}
-\end{corollary}
+%      任意の$\overline{y} = (y_1, \dots, y_n) \in R^n$に対し，次の2つが同値になる．
+%      \begin{enumerate}
+%           \item ある$x \in R$が存在して，$\bigwedge_{i=1}^s (\sign_R(f_i(x, \overline{y})) = \sigma(i))$を満たす．
+%           \item $\bigvee_{i=1}^p \bigwedge_{j=1}^{q_i} (\sign_R(g_{i,j}(\overline{y})) = \tau_{i,j})$を満たす．
+%      \end{enumerate}
+% \end{corollary}
 
-\begin{proof}
-     自然数$m$と多項式$F_1, \dots, F_s \in R[X, \overline{Y}, \overline{T}]$を，次を満たすように取れる．ただし，$\overline{T}$は変数記号$T_1, \dots, T_m$の列である．
-     \begin{itemize}     
-          \item   
-               ある$\overline{a} \in R^m$が存在し，
-               各$i=1, \dots, s$に対して$f_i(X,\overline{Y}) = F_i(X,\overline{Y}, \overline{a})$を満たす．
-     \end{itemize}
-     このとき，\cref{theorem:weak_Tarski}より，量化記号のない論理式$\theta(\overline{Y}, \overline{T})$を，次を満たすように取れる．
+% \begin{proof}
+%      自然数$m$と多項式$F_1, \dots, F_s \in R[X, \overline{Y}, \overline{T}]$を，次を満たすように取れる．ただし，$\overline{T}$は変数記号$T_1, \dots, T_m$の列である．
+%      \begin{itemize}     
+%           \item   
+%                ある$\overline{a} \in R^m$が存在し，
+%                各$i=1, \dots, s$に対して$f_i(X,\overline{Y}) = F_i(X,\overline{Y}, \overline{a})$を満たす．
+%      \end{itemize}
+%      このとき，\cref{theorem:weak_Tarski}より，量化記号のない論理式$\theta(\overline{Y}, \overline{T})$を，次を満たすように取れる．
 
-     任意の$(\overline{y}, \overline{t}) = (y_1, \dots, y_n, t_1, \dots, t_m) \in R^{n+m}$に対し，次の2つが同値になる．
-     \begin{itemize}
-          \item
-               ある$x \in R$が存在して，$\bigwedge_{i=1}^s (\sign_R(F_i(x,\overline{y}, \overline{t})) = \sigma(i))$ を満たす．
-          \item
-               実閉体$R$は$\theta(\overline{y}, \overline{t})$を満たす．         
-     \end{itemize}
-     さらに，\cref{proposition:dnf}より，% 本来は\cref{proposition:dnf}を改良したものを使っている．
-     多項式$G_{i,j} \in \Z[\overline{Y}, \overline{T}]$ と$\tau_{i,j}$, $i=1, \dots, p, j=1, \dots, q_i$, が存在して，
-     \begin{equation}
-          R \models
-          \bigvee_{i=1}^p \bigwedge_{j=1}^{q_i}(\sign(G_{i,j}(\overline{Y}, \overline{T}))=\tau_{i,j})
-          \leftrightarrow \theta(\overline{Y},\overline{T})
-     \end{equation}
-     を満たす．このとき，$g_{i,j}(\overline{Y}) \coloneqq G_{i,j}(\overline{Y}, \overline{a}) \in R[\overline{Y}]$とすればよい．
-\end{proof}
+%      任意の$(\overline{y}, \overline{t}) = (y_1, \dots, y_n, t_1, \dots, t_m) \in R^{n+m}$に対し，次の2つが同値になる．
+%      \begin{itemize}
+%           \item
+%                ある$x \in R$が存在して，$\bigwedge_{i=1}^s (\sign_R(F_i(x,\overline{y}, \overline{t})) = \sigma(i))$ を満たす．
+%           \item
+%                実閉体$R$は$\theta(\overline{y}, \overline{t})$を満たす．         
+%      \end{itemize}
+%      さらに，\cref{proposition:dnf}より，% 本来は\cref{proposition:dnf}を改良したものを使っている．
+%      多項式$G_{i,j} \in \Z[\overline{Y}, \overline{T}]$ と$\tau_{i,j}$, $i=1, \dots, p, j=1, \dots, q_i$, が存在して，
+%      \begin{equation}
+%           R \models
+%           \bigvee_{i=1}^p \bigwedge_{j=1}^{q_i}(\sign(G_{i,j}(\overline{Y}, \overline{T}))=\tau_{i,j})
+%           \leftrightarrow \theta(\overline{Y},\overline{T})
+%      \end{equation}
+%      を満たす．このとき，$g_{i,j}(\overline{Y}) \coloneqq G_{i,j}(\overline{Y}, \overline{a}) \in R[\overline{Y}]$とすればよい．
+% \end{proof}
 
 これ以降，
 この節では\cref{theorem:weak_Tarski}を\cite[Section 1.4]{MR1659509}に従って証明する．
@@ -1207,18 +1198,18 @@ $W_{s,m}$と書く．
      である．
 \end{lemma}
 
-この補題によって、
+この補題によって，
 $\SIGN_R(f_1, \dots, f_s)$は
 より易しい
 $
 \SIGN_R(f_1, \dots, f_{s-1}, f_s', g_1, \dots, g_s)
 $
-のみで決まる。
+のみで決まる．
 
 \begin{proof}
      $\ROOT(f_1, \dots, f_{s-1}, f'_s, g_1, \dots, g_s)$
      の元を小さいものから順に並べて得られる列を
-     $(x_1, \dots, x_N)$と置き、
+     $(x_1, \dots, x_N)$と置き，
      $\ROOT(f_1,\ldots, f_{s-1}, f'_s)$
      の元をちいさいものから順に並べて得られる部分列を
      $(x_{i_1}, \dots, x_{i_M})$と置く．
@@ -1523,7 +1514,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
           \RCF \models \theta \leftrightarrow \bigvee_{i=1}^s \bigwedge_{j=1}^{l_i} (\sign(n_{i,j}) = \sigma_{i,j})
      \end{equation}
      が成り立つように取れる．
-     これより，$\RCF \models \theta$であるか，$\RCF \models \lnot \theta$のいずれかを満たす．
+     これより，$\RCF \models \theta$であるか，$\RCF \models \lnot \theta$のいずれか片方のみを満たす．
      従って，$R_1 \models \theta \iff R_2 \models \theta$である． 
      よって，$\{x \in R_1^n \mid R_1 \models \phi(x)\} \neq \emptyset \iff \{x \in R_1^n \mid R_2 \models \phi(x)\} \neq \emptyset$である．
 \end{proof}
@@ -1598,7 +1589,7 @@ $x \in R^n$, $r \in R$, $r>0$に対して，
 
 ここで，$z \in R\left[ \sqrt{-1} \right]$及び$r \in R$, $r>0$, に対し，
 \begin{equation}
-     D(z, r)\coloneqq \left\{w \in R\left[\sqrt{-1}\right] \middle \norm{z - w} < r\right\}
+     D(z, r)\coloneqq \left\{w \in R \left[\sqrt{-1}\right] \middle| \norm{z - w} < r\right\}
 \end{equation}
 とする．ただし，$a,b \in R$に対し$\norm{a + b\sqrt{-1}} \coloneqq \sqrt{a^2 + b^2}$とする．
 
@@ -2411,7 +2402,7 @@ $\sign(f(X)) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
 関数$\mathtt{PROJ}$は，有限部分集合$F \subset \Z[X_1, \dots, X_n]$に対し，$\PROJ_{X_n}(F) \subset \Z[X_1, \dots, X_{n-1}]$を返す関数である．
 また，関数$\mathtt{DER}$は，有限部分集合$F \subset \Z[X_1, \dots, X_n]$に対し，$\DER(F;X_n) \subset \Z[X_1, \dots, X_n]$を返す関数である．
 
-さらに，次に定義する関数$\mathtt{ImprovedCAD}$は，有限部分集合$F \subset \Z[X_1, \dots, X_n]$に対し，
+次に定義する関数$\mathtt{ImprovedCAD}$は，有限部分集合$F \subset \Z[X_1, \dots, X_n]$に対し，
 \cref{corollary:improved-cad}の$\{\overline{F}_{\leq i}\}_{i=1}^n$を返す関数である．
 
 \begin{algorithm}[H]
@@ -2427,7 +2418,7 @@ $\sign(f(X)) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
                \IF{$i=n$}
                     \STATE $\overline{F}_n \leftarrow \mathtt{DER} (F)$
                \ELSE
-                    \STATE $\overline{F}_i \leftarrow \mathtt{DER} (\mathtt{PROJ} (\overline{F}_{i-1}))$
+                    \STATE $\overline{F}_i \leftarrow \mathtt{DER} (\mathtt{PROJ} (\overline{F}_{i+1}))$
                \ENDIF
           \ENDFOR
 
