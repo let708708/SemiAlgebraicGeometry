@@ -107,7 +107,7 @@
      実閉体の理論が量化記号消去を持つことを述べるTarski \cite{MR0044472}の定理と，
      Collins \cite{MR0403962}による柱状代数分解を用いた実閉体上の量化記号消去のアルゴリズムを紹介する総合報告である．
 
-     Tarski \cite{MR0044472}は，実閉体の理論が量化記号消去をもつことを構成的に示した．
+     Tarski \cite{MR0044472}は，実閉体の理論が量化記号消去を持つことを構成的に示した．
      しかし，Tarskiの量化記号消去のアルゴリズムの計算量は，指数関数の有限回の合成で抑えることはできないことが知られている．
      Collins \cite{MR0403962}は柱状代数分解を用いた新しい量化記号消去のアルゴリズムを提案した．
      Collinsによる量化記号消去のアルゴリズムの計算量は$(Mkd)^{2^{O(n)}}$である\cite{MR0949113}．ここで，
@@ -169,9 +169,9 @@
      このように，論理式$\phi(a,b)$からそれと同値な，
      量化記号で束縛された変数のない論理式$\theta(a,b)$を求めることを，量化記号消去という．
 
-     実数の四則演算と大小関係に関する任意の論理式に対して，量化記号消去ができるということは，
+     実数の四則演算と大小関係に関する任意の論理式に対して量化記号消去ができるということは
      Tarski \cite{MR0044472}によって示されていたが，
-     Collins \cite{MR0403962}がより実用的な，柱状代数分解を用いたアルゴリズムを提案した．
+     Collins \cite{MR0403962}がより実用的な柱状代数分解を用いたアルゴリズムを提案した．
 
      Collinsのアルゴリズムのアイデアを，次の問題を通して説明する．
      \begin{question}
@@ -303,12 +303,12 @@
      \end{enumerate}
      を満たすようにとることができ，このとき
      \begin{align}
-          \label{align:intro-1} C_{S_i, 2j} &\coloneqq \{(a,\xi_{S_i, j}(a)) \in S_i \times \R \mid a \in S_i\}, \quad j=1,...,l_i,\\
-          \label{align:intro-2} C_{S_i, 2j+1} &\coloneqq \{(a,x) \in \R^2 \mid a \in S_i, \xi_{S_i,j}(a) < x < \xi_{S_i, j+1}(a)\}, \quad j=0,...,l_i,
+          \label{align:intro-1} C_{S_i, 2j} &\coloneqq \{(a,\xi_{S_i, j}(a)) \in \R^2 \mid a \in S_i\}, \quad j=1,...,l_i,\\
+          \label{align:intro-2} C_{S_i, 2j+1} &\coloneqq \{(a,x) \in \R^2 \mid a \in S_i, \xi_{S_i,j}(a) < x < \xi_{S_i, j+1}(a)\}, \quad j=0,...,l_i
      \end{align}
      と定義すると，$\{C_{S_i,k}\}_{k=1}^{2l_i+1}$は$S_i \times \mathbb{R}$の分割である．
      ただし，
-     $\xi_{S_i,0} \coloneqq -\infty$, $\xi_{S_i,l_i+1} \coloneqq \infty$である．
+     $\xi_{S_i,0} \coloneqq -\infty$, $\xi_{S_i,l_i+1} \coloneqq \infty$と置く．
 
 
      例えば，$S_5 = \{a \in \R \mid -1/\sqrt{2} < a < 1/\sqrt{2}\}$に対しては，$a \in S_5$に対し
@@ -342,7 +342,7 @@
      \begin{align}
           \{a \in \R \mid \phi(a)\} 
                &= S_5 \cup S_6 \cup S_7\\
-               &= \{a \in R \mid (-1/\sqrt{2} < a < 1/\sqrt{2}) \lor (a = 1/\sqrt{2}) \lor (1/\sqrt{2} < a < 1)\}
+               &= \{a \in \R \mid (-1/\sqrt{2} < a < 1/\sqrt{2}) \lor (a = 1/\sqrt{2}) \lor (1/\sqrt{2} < a < 1)\}
      \end{align}
      であるため，
      \begin{equation}
@@ -361,13 +361,13 @@
 
      \cref{section:2}では，ArtinとSchreierにより導入された実閉体の概念についてまとめる．
      \cref{section:3}で一階述語論理の用語を導入し，さらに実閉体の理論を定義する．
-     \cref{section:4}で理論が量化記号消去をもつことを定義し，実閉体の理論が量化記号消去を持つことを示す．
+     \cref{section:4}で理論が量化記号消去を持つことを定義し，実閉体の理論が量化記号消去を持つことを示す．
      
-     そして，\cref{section:5}では，実閉体上の半代数的集合を定義し，その性質についてまとめる．この概念は，\cref{section:6}で定義する柱状代数分解に必要である．
-     \cref{section:6}では，実閉体を係数とする多項式の有限部分集合$F$に対し，$F$適合な柱状代数分解について定義してその存在を示す．
+     そして，\cref{section:5}では，実閉体上の半代数的集合を定義しその性質についてまとめる．この概念は，\cref{section:6}で定義する柱状代数分解に必要である．
+     \cref{section:6}では，実閉体を係数とする多項式の有限部分集合$F$に対し，$F$適合な柱状代数分解を定義してその存在を示す．
      \cref{section:7}では，\cref{section:9}で述べる量化記号消去のアルゴリズムのために，\cref{section:6}の柱状代数分解を改良する．
      \cref{section:8}では，柱状代数分解と量化記号消去の関係について述べ，
-     \cref{section:9}で述べるアルゴリズムが実際に任意の論理式の量化記号を消去する事を示す．
+     \cref{section:9}で述べるアルゴリズムが任意の論理式に対して量化記号消去を行う事を示す．
      最後に\cref{section:9}では，柱状代数分解による量化記号消去のアルゴリズムの疑似コードを明示する．
 
      \section*{表記法}
@@ -403,7 +403,7 @@
      $F$を体とする．このとき，以下は同値である．
      \begin{enumerate}
           \item \label{theorem:real-field-1}
-          $F$が順序体となるような全順序$<$を持つ．
+          $(F,<)$が順序体となるような全順序$<$を持つ．
           \item \label{theorem:real-field-2}
           任意の$x_1, \dots, x_n \in F$に対して
           \begin{equation}
@@ -534,7 +534,7 @@ $\Ralg$の元を実代数的数という．
      $R$を実閉体とし，$f \in R[X]$とする．
      任意の$a, b \in R$に対して，
      $a<b$であれば，
-     ある$c \in (a,b)$が存在して，$f(b)-f(a) = (b-a)f'(c)$を満たす．
+     ある$c \in (a,b)$が存在して$f(b)-f(a) = (b-a)f'(c)$を満たす．
 \end{corollary}
 
 \begin{proof}
@@ -665,13 +665,13 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
           $\Var((\phi \lor \psi))\coloneqq\Var(\phi)\cup\Var(\psi)$,
           $\Var((\phi \land \psi))\coloneqq\Var(\phi)\cup\Var(\psi)$,
           と定義する．
-          \item 論理式$\phi$に対して，$\Var(\phi)$が定義されているとき，変数記号$x$に対して
-          $\Var(\forall x\phi)\coloneqq\Var(\phi) \setminus \{x\}$,
-          $\Var(\exists x\phi)\coloneqq\Var(\phi) \setminus \{x\}$
+          \item 論理式$\phi$に対して，$\Var(\phi)$が定義されているとき，変数記号$v_i$に対して
+          $\Var(\forall v_i\phi)\coloneqq\Var(\phi) \setminus \{v_i\}$,
+          $\Var(\exists v_i\phi)\coloneqq\Var(\phi) \setminus \{v_i\}$
           と定義する．
      \end{enumerate}
      自由変数でない変数を，束縛変数(bound variable)という．
-     $\mathcal{L}$論理式$\phi$に登場する自由変数が高々$x_1, \dots, x_n$である事を明示したいとき，$\phi(x_1, \dots, x_n)$と書く．ただし，登場しない自由変数があっても良い．
+     $\mathcal{L}$論理式$\phi$に登場する自由変数が高々$v_{i_1}, \dots, v_{i_m}$である事を明示したいとき，$\phi(v_{i_1}, \dots, v_{i_m})$と書く．ただし，登場しない自由変数があっても良い．
      $\mathcal{L}$論理式$\phi$が自由変数を持たないとき，すなわち$\Var(\phi)=\emptyset$であるとき，
      $\phi$を$\mathcal{L}$文($\mathcal{L}$-sentense)という．
 \end{definition}
@@ -735,8 +735,8 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
 \begin{definition}[{\cite[Section 1.2]{MR1924282}}]
      $\mathcal{L}$を言語とする．
      $\mathcal{L}$文からなる集合$T$を，$\mathcal{L}$理論($\mathcal{L}$-theory)という．
-     さらに，$\mathcal{L}$構造$\mathcal{M}$が，任意の$\phi \in T$に対し
-     $\mathcal{M} \models \phi$を満たすとき，$\mathcal{L}$構造$\mathcal{M}$を$\mathcal{L}$理論$T$のモデル(model)と言い，
+     さらに，$\mathcal{L}$構造$\mathcal{M}$が任意の$\phi \in T$に対し
+     $\mathcal{M} \models \phi$を満たすとき，$\mathcal{L}$構造$\mathcal{M}$を$\mathcal{L}$理論$T$のモデル(model)といい
      $\mathcal{M} \models T$と書く．
 \end{definition}
 
@@ -768,17 +768,17 @@ $\mathcal{L}$原子論理式およびその否定を，$\mathcal{L}$リテラル
                \item $\forall x \forall y (x < y \lor x = y \lor y < x)$,
                \item $\forall x \forall y \forall z(x < y \rightarrow x + z < y + z)$,
                \item $\forall x \forall y (0 < x \land 0 < y \rightarrow 0 < x \cdot y)$,
-               \item $\forall x \exists y (x = y^2 \lor -x = y^2)$
-               \item $\forall x_{2n} \dots \forall x_1 \forall x_0 \exists y (y^{2n+1} + x_{2n} \cdot y^{2n} + \cdots + x_1 \cdot y + x_0 = 0)$ ( $n =  1, 2 , \dots$ ).
+               \item $\forall x \exists y (x = y^2 \lor -x = y^2)$,
+               \item $\forall x_{2n} \dots \forall x_1 \forall x_0 \exists y (y^{2n+1} + x_{2n} \cdot y^{2n} + \dotsb + x_1 \cdot y + x_0 = 0)$ ( $n =  1, 2 , \dots$ ).
           \end{enumerate}
 
-     ここで，項$t$に対し，$t^p$は$t$の$p$個の積$(t\cdot(t\cdot(\dots \cdot t)))$の省略とする．
+     ここで，項$t$に対し，$t^p$は$t$の$p$個の積$(t\cdot(t\cdot(\dotsb \cdot t)))$の省略とする．
 \end{definition}
 
 \begin{remark}以下の点に注意する．
      \begin{itemize}
           \item 
-          定数記号$1$の$p$個の和$(1+(1 + (\dots + 1)))$の省略として$p$を用いる．
+          定数記号$1$の$p$個の和$(1+(1 + (\dotsb + 1)))$の省略として$p$を用いる．
           \item 
           $t \leq t'$を，$(t<t') \lor (t=t')$の省略とする．
           \item
