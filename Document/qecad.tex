@@ -1714,7 +1714,7 @@ $F$に適合した$R^n$の柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$を$R^{n-
 
 \begin{definition} 
      $F \subset R[X_1, \dots, X_n]$を有限部分集合とし，$S \subset R^{n-1}$を半代数的連結な半代数的集合とする．
-     $S$が$F$描画可能($F$-delineable)であるとは，$k$個の連続な半代数的関数$\map{\xi_1<\dots<\xi_k}{S}{R}$が存在し，次を満たすことと定義する．
+     $S$が$F$描画可能($F$-delineable)であるとは，有限個の連続な半代数的関数$\map{\xi_1<\dots<\xi_k}{S}{R}$が存在し，次を満たすことと定義する．
      \begin{itemize}
           \item 任意の$ x = (x_1, \dots, x_{n-1}) \in S $に対し，
           \begin{equation}
@@ -1883,7 +1883,7 @@ $f \in R[X_1, \dots, X_n]$に対し，$\red(f;X_n)$を，
 \end{align}
 とし，
 \begin{equation}
-     \RED(f;X_n) \coloneqq \{\red^k(f;X_n) \mid 0 \leq k \leq \deg_{X_n}(f), \red^k(f;X_n) \neq 0\}
+     \RED(f;X_n) \coloneqq \{\red^k(f;X_n) \mid 0 \leq k \leq \deg(f;X_n), \red^k(f;X_n) \neq 0\}
 \end{equation}
 と定義する．
 さらに，$f, g \in R[X_1, \dots, X_n] \setminus \{0\}$に対し，$\deg(f;X_n) = m$, $\deg(g;X_n) = n$とするとき，
@@ -1903,7 +1903,7 @@ $\PROJ_{X_n}(F) \subset R[X_1, \dots, X_{n-1}]$を，以下の集合の合併と
 \end{align}
 \end{definition}
 
-$\PROJ(F)$は$0$を含まないことに注意する．
+$\PROJ_{X_n}(F)$は$0$を含まないことに注意する．
 この記号のもとで，次の定理が成り立つ．
 なお，次の定理は\cite[Theorem 4]{MR0764184}を参考にしたが，元は\cite[Theorem 5]{MR0403962}で示されたものである．
 
@@ -1986,7 +1986,7 @@ $S$が$\PROJ_{X_n}(F)$符号不変ならば，$S$は$F$描画可能である．
 \section{柱状代数分解の改良}\label{section:7}
 $R$を実閉体とする．
 有限部分集合$F \subset R[X_1, \dots, X_n]$が与えられたとき，
-$F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在することはすでに示したが，
+$F$適合な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在することはすでに示したが，
 各$S \in \mathcal{S}_k$の定義式，すなわち，
 \begin{equation}
      S = \bigcup_{i=1}^s \bigcap_{j=1}^{l_i} \{x \in R^i \mid \sign_R(g_{i,j}(x)) = \sigma_{i,j}\}
@@ -2117,7 +2117,7 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
 
 有限部分集合$F \subset R[X_1, \dots, X_n]$に対し，
 \begin{equation}
-     \DER(F) \coloneqq \{\partial^k f / \partial X_n^k \in R[X_1, \dots, X_n] \mid f \in F, k \geq 0, \partial^k f / \partial X_n^k \neq 0\}
+     \DER(F;X_n) \coloneqq \{\partial^k f / \partial X_n^k \in R[X_1, \dots, X_n] \mid f \in F, k \geq 0, \partial^k f / \partial X_n^k \neq 0\}
 \end{equation}
 と定める．
 
@@ -2125,8 +2125,8 @@ $F$符号不変な柱状代数分解$\{\mathcal{S}_i\}_{i=1}^n$が存在する�
      $F \subset \Z[X_1, \dots, X_n]$を有限部分集合とし，
      $\left\{\overline{F}_i\right\}_{i=1}^n$を次で定める．
      \begin{align}
-          \overline{F}_n & \coloneqq \DER(F),\\
-          \overline{F}_i & \coloneqq \DER\left(\PROJ\left(\overline{F}_{i+1}\right)\right), \quad i=1, \dots, n-1.
+          \overline{F}_n & \coloneqq \DER(F;X_n),\\
+          \overline{F}_i & \coloneqq \DER\left(\PROJ_{X_{i+1}}\left(\overline{F}_{i+1}\right); X_i\right), \quad i=1, \dots, n-1.
      \end{align}
 
      また，$\overline{F}_{\leq i}\coloneqq \cup_{j \leq i} \overline{F}_j$とする．このとき，任意の実閉体$R$に対し，
@@ -2319,7 +2319,7 @@ $\sign(f(X)) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
 \end{definition}
 
 このとき，実閉体$R$において，任意の$x \in R^n$に対して
-実閉体$R$が$\psi(x)$を満たすことと$\psi^\star(\sign(F)(x)) = \true$であることは同値である．
+実閉体$R$が$\psi(x)$を満たすことと$\psi^\star(\sign_R(F)(x)) = \true$であることは同値である．
 
 
 次の命題は，\cite[Proposition 11.14]{MR2248869}を参考にした．
@@ -2458,7 +2458,7 @@ $\sign(f(X)) = \tau$ ( $f \in F$, $\tau \in \{-1, 0, 1\}$ ) から
      \item $b$は，実代数的数の組$(b_1, \dots, b_n) \in \Ralg^n$である．
      \item $C$は，$(n+1)$次元の標本点からなる有限集合$\{\beta_1, \dots, \beta_k\}$である．
 \end{itemize}
-ただし，$n=0$も許す．$\Ralg^0 = \{\mathord{*}\}$とする．
+ただし，$\Ralg^0 = \{\mathord{*}\}$とみなすことで$n=0$も許す．
 $n$次元の標本点$\beta$に対し，$b$を$\beta.\mathtt{point}$と書き，$C$を$\beta.\mathtt{childs}$と書く．
 また，標本点は再帰的な構造であることに注意する．
 
@@ -2489,7 +2489,7 @@ $n+1$次元の標本点の集合$\{\beta_1, \dots, \beta_l\}$を返す関数$\ma
 
 さらに，有限部分集合$F_i \subset \Z[X_1, \dots, X_n, Y_1, \dots, Y_i]$ ( $i=1, \dots, m$ ) 
 及び$b=(b_1, \dots, b_n) \in \Ralg^n$に対し，
-$n$次元の標本$\beta$を返す関数$\mathtt{DECOMP}$を，次のように定める．
+$n$次元の標本$\beta$を返す関数$\mathtt{DECOMP}$を次のように定める．
 
 \begin{algorithm}[H]
      \caption {$\mathtt{DECOMP}(\{F_i\}_{i=1}^m, b)$}
@@ -2515,7 +2515,7 @@ $n$次元の標本$\beta$を返す関数$\mathtt{DECOMP}$を，次のように�
 \end{algorithm}
 
 また，$F \subset R[X_1, \dots, X_n, Y_1, \dots, Y_m]$および$n$次元標本点$\beta = (b, C)$に対し，
-$\CSIGN_n(F)(b)$を，返す関数$\texttt{CSIGN}$を，次のように定める．
+$\CSIGN_n(F)(b)$を返す関数$\texttt{CSIGN}$を，次のように定める．
 
 \begin{algorithm}[H]
      \caption {$\mathtt{CSIGN}(F, \beta)$}
